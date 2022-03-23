@@ -12,7 +12,7 @@
     "lint": "npm run lint:js && npm run lint:prettier",
     "lintfix": "prettier --write --list-different . && npm run lint:js -- --fix",
     "test": "jest",
-    "heroku-postbuild": "nuxt generate"
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "@chakra-ui/nuxt": "^0.4.2",
