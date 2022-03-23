@@ -89,7 +89,7 @@ export default {
     CModalCloseButton,
     CFlex,
     CHeading,
-    // 
+    //
     CHeader
   },
   inject: ['$chakraColorMode', '$toggleColorMode'],
@@ -133,7 +133,7 @@ export default {
 }
 </script>
 
-<style >
+<style>
 body p {
   font-size: 2rem;
 }

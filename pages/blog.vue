@@ -9,7 +9,7 @@
         </CHeading>
         <br />
 
-        <CText fontSize="lg" text-align="center">
+        <CText font-size="lg" text-align="center">
           - Entry 1. <br />
           - Entry 2. <br />
           - Entry 3. <br />
@@ -36,7 +36,7 @@ export default {
     CBox,
     CHeading,
     CText,
-    // 
+    //
     CHeader
   },
   inject: ['$chakraColorMode', '$toggleColorMode'],

@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [14]
+        node: [16]
 
     steps:
       - name: Checkout 🛎
@@ -40,8 +40,8 @@ jobs:
       - name: Install dependencies 👨🏻‍💻
         run: npm ci --prefer-offline --no-audit
 
-      # - name: Run linter 👀
-      #   run: npm run lint
+      - name: Run linter 👀
+        run: npm run lint
 
       - name: Run tests 🧪
         run: npm run test

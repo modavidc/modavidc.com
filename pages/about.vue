@@ -9,7 +9,7 @@
         </CHeading>
         <br />
 
-        <CText fontSize="lg" text-align="center">
+        <CText font-size="lg" text-align="center">
           Working full time in Laravel, Vue y Bulma, leading the team of <br />
           development of the T-CUida ecosystem. Also experienced with Dart,
           <br />
@@ -23,9 +23,10 @@
         </CHeading>
         <br />
 
-        <CText fontSize="lg" text-align="center">
-          I really like to enjoy coding and thinking about code. <br>
-          I want to create things that are useful to others and that last over time.
+        <CText font-size="lg" text-align="center">
+          I really like to enjoy coding and thinking about code. <br />
+          I want to create things that are useful to others and that last over
+          time.
         </CText>
         <br />
 
@@ -34,7 +35,7 @@
         </CHeading>
         <br />
 
-        <CText fontSize="lg" text-align="center">
+        <CText font-size="lg" text-align="center">
           If you want to work with me just shoot me an email and <br />
           I'll be ready to make it happen.
         </CText>
@@ -43,12 +44,12 @@
         <CHeading as="h3" size="lg" text-align="center"> Skills </CHeading>
         <br />
 
-        <CText fontSize="lg" text-align="center">
+        <CText font-size="lg" text-align="center">
           - PHP. <br />
           - Laravel. <br />
           - Vue. <br />
           - JavaScript. <br />
-          - Etc... <br>
+          - Etc... <br />
         </CText>
       </div>
     </CBox>
@@ -69,7 +70,7 @@ export default {
     CBox,
     CHeading,
     CText,
-    // 
+    //
     CHeader
   },
   inject: ['$chakraColorMode', '$toggleColorMode'],

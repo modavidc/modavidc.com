@@ -9,14 +9,14 @@
         </CHeading>
         <br />
 
-        <CText fontSize="lg" text-align="center">
+        <CText font-size="lg" text-align="center">
           <CIcon name="email" size="32px" color="blue.500" />
           <CIcon name="phone" size="32px" color="blue.500" />
           <CIcon name="whatsapp" size="32px" color="blue.500" />
         </CText>
         <br />
 
-        <CText fontSize="lg" text-align="center"> Here is a form :) </CText>
+        <CText font-size="lg" text-align="center"> Here is a form :) </CText>
         <br />
       </div>
     </CBox>
@@ -39,7 +39,7 @@ export default {
     CHeading,
     CText,
     CIcon,
-    // 
+    //
     CHeader
   },
   inject: ['$chakraColorMode', '$toggleColorMode'],
