@@ -4,7 +4,7 @@
     <a style="margin-right: 0.5rem" href="/about">About</a>
     <a style="margin-right: 0.5rem" href="/contact">Contact</a>
     <a style="margin-right: 0.5rem" href="/blog" class="">Blog</a>
-  </CBox>
+  </CBox> 
 </template>
 
 <script lang="js">
