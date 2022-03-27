@@ -38,7 +38,43 @@ export default {
     '@chakra-ui/nuxt',
     // https://go.nuxtjs.dev/emotion
     '@nuxtjs/emotion',
+    '@nuxtjs/i18n',
+    // '@nuxtjs/i18n',
+    // {
+    //   locales: ['en', 'es'],
+    //   defaultLocale: 'en',
+    //   vueI18n: {
+    //     fallbackLocale: 'en',
+    //     messages: {
+    //       en: {
+    //         greeting: 'Hello world!'
+    //       },
+    //       es: {
+    //         greeting: '¡Hola mundo!'
+    //       }
+    //     }
+    //   }
+    // }
   ],
+  i18n: {
+    locales: ['es', 'en'],
+    defaultLocale: 'es',
+    vueI18n: {
+      fallbackLocale: 'es',
+      messages: {
+        es: {
+          welcome: 'Hola, Vaquero del Espacio! 👋🛸',
+          iam: 'Soy',
+          names: 'Cedeño, Moisés Cedeño.'
+        },
+        en: {
+          welcome: 'Hi, Space Cowboy! 👋🛸',
+          iam: 'I\'m',
+          names: 'Cedeño, Moisés Cedeño.'
+        },
+      }
+    }
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},

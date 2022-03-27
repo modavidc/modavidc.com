@@ -5,13 +5,16 @@
       <CHeader />
 
       <div>
-        <p style="text-align: center">Hi, Space Cowboy! 👋🚀</p>
+        <p style="text-align: center">
+          {{ $i18n.messages[$i18n.locale].welcome }}
+        </p>
         <CHeading text-align="center" mb="2">
-          I'm
-          <span style="color: #1a72ff">Cedeño, Moisés Cedeño.</span></CHeading
+          {{ $i18n.messages[$i18n.locale].iam }}
+          <span style="color: #1a72ff">{{
+            $i18n.messages[$i18n.locale].names
+          }}</span></CHeading
         >
         <p style="text-align: center" mb="4">
-          I'm a Full-Stack Senior Developer with more than five years of
           <br />
           experience in application development.
         </p>

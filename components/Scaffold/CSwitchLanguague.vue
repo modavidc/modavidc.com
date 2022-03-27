@@ -1,11 +1,15 @@
 <template>
   <CBox mb="3">
-    <CButton mr="3" @click="toggleLanguage">
-      <img
-        :src="language === 'ES' ? '/ES.webp' : '/US.webp'"
-        :alt="`Switch to ${language === 'ES' ? 'ES' : 'EN'}`"
-      />
-    </CButton>
+    <nuxt-link v-if="$i18n.locale === 'es'" :to="switchLocalePath('en')">
+      <CButton mr="3">
+        <img src="/US.webp" alt="Cambiar a Inglés" />
+      </CButton>
+    </nuxt-link>
+    <nuxt-link v-if="$i18n.locale === 'en'" :to="switchLocalePath('es')">
+      <CButton mr="3">
+        <img src="/ES.webp" alt="Switch to Spanish" />
+      </CButton>
+    </nuxt-link>
   </CBox>
 </template>
 
@@ -21,18 +25,10 @@ export default {
     CBox,
     CButton,
   },
-  data () {
-    return {
-      language: 'ES',
-      languages: ['ES', 'EN'],
-    }
+  computed: {
+    languageTo () {      
+      return this.$i18n.locale === 'es' ? 'en' : 'es';
+    },
   },
-  methods: {
-    toggleLanguage() {
-      this.language = (this.language === 'ES') ? 'EN': 'ES';
-
-      alert('Language to ' + this.language);
-    }
-  }
 }
 </script>
