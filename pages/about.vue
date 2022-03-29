@@ -1,5 +1,12 @@
 <template>
   <div class="container">
+    <CColorModeProvider>
+      <CBox font-family="body" as="main">
+        <CReset />
+        <Nuxt />
+      </CBox>
+    </CColorModeProvider>
+
     <CBox v-bind="mainStyles[colorMode]" w="100vw" h="100vh" flex-dir="column">
       <CHeader />
 

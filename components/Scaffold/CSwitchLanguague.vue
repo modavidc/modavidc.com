@@ -26,7 +26,7 @@ export default {
     CButton,
   },
   computed: {
-    languageTo () {      
+    languageTo () {
       return this.$i18n.locale === 'es' ? 'en' : 'es';
     },
   },

@@ -29,7 +29,7 @@
               <CAvatarBadge size="1.0em" bg="green.500" />
             </CAvatar>
           </CAvatarGroup>
-          <CButton left-icon="link" variant-color="blue" mt="3">
+          <CButton left-icon="twitter" variant-color="blue" mt="3">
             Connect
           </CButton>
           <CModal :is-open="showModal">

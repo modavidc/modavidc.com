@@ -1,3 +1,10 @@
+import {
+  faGithub,
+  faTwitter,
+  faLinkedin,
+  faStackOverflow,
+} from '@fortawesome/free-brands-svg-icons'
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -39,23 +46,21 @@ export default {
     // https://go.nuxtjs.dev/emotion
     '@nuxtjs/emotion',
     '@nuxtjs/i18n',
-    // '@nuxtjs/i18n',
-    // {
-    //   locales: ['en', 'es'],
-    //   defaultLocale: 'en',
-    //   vueI18n: {
-    //     fallbackLocale: 'en',
-    //     messages: {
-    //       en: {
-    //         greeting: 'Hello world!'
-    //       },
-    //       es: {
-    //         greeting: '¡Hola mundo!'
-    //       }
-    //     }
-    //   }
-    // }
   ],
+  chakra: {
+    icons: {
+      // Here we state that we use `fa`
+      // icons library for Chakra's
+      // internal icon parser
+      iconPack: 'fa',
+      iconSet: {
+        faGithub,
+        faTwitter,
+        faLinkedin,
+        faStackOverflow,
+      },
+    },
+  },
   i18n: {
     locales: ['es', 'en'],
     defaultLocale: 'es',
@@ -65,15 +70,15 @@ export default {
         es: {
           welcome: 'Hola, Vaquero del Espacio! 👋🛸',
           iam: 'Soy',
-          names: 'Cedeño, Moisés Cedeño.'
+          names: 'Cedeño, Moisés Cedeño.',
         },
         en: {
           welcome: 'Hi, Space Cowboy! 👋🛸',
-          iam: 'I\'m',
-          names: 'Cedeño, Moisés Cedeño.'
+          iam: "I'm",
+          names: 'Cedeño, Moisés Cedeño.',
         },
-      }
-    }
+      },
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

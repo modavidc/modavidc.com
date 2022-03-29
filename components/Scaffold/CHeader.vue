@@ -1,7 +1,9 @@
 <template>
   <header v-bind="mainStyles[colorMode]" class="CHeader">
     <CNavBar />
+
     <div style="display: flex">
+      <CSocials />
       <CSwitchDarkMode />
       <CSwitchLanguague />
     </div>
@@ -12,13 +14,15 @@
 import CNavBar from '~/components/Scaffold/CNavBar.vue'
 import CSwitchDarkMode from '~/components/Scaffold/CSwitchDarkMode.vue'
 import CSwitchLanguague from '~/components/Scaffold/CSwitchLanguague.vue'
+import CSocials from '~/components/Scaffold/CSocials.vue'
 
 export default {
   name: 'CHeader',
   components: {
     CNavBar,
     CSwitchDarkMode,
-    CSwitchLanguague
+    CSwitchLanguague,
+    CSocials
   },
   inject: ['$chakraColorMode', '$toggleColorMode'],
    data () {
