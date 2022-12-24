@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prestart": "source $HOME/.nvm/nvm.sh; nvm use 18; next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "nvm": "nvm use 18"
   },
   "dependencies": {
     "@next/font": "13.1.1",
