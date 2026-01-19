@@ -1,0 +1,22 @@
+# Dockerfile.dev
+# Desarrollo Next.js con hot reload (similar al patrón de el_estoico_landing)
+
+FROM node:18-alpine
+
+WORKDIR /app
+
+RUN apk add --no-cache libc6-compat
+
+COPY package.json pnpm-lock.yaml* ./
+
+RUN npm install -g pnpm && pnpm install
+
+COPY . .
+
+EXPOSE 3000
+
+ENV HOSTNAME="0.0.0.0"
+ENV PORT=3000
+
+CMD ["pnpm", "dev", "--hostname", "0.0.0.0", "--port", "3000"]
+

@@ -1,0 +1,27 @@
+# docker-compose.prod.yml
+# Producción: Traefik corre afuera y enruta por labels (arquitectura tipo el_estoico_landing)
+
+networks:
+  web:
+    external: true
+
+services:
+  modavidc-com:
+    build:
+      context: .
+      dockerfile: ${DOCKERFILE:-Dockerfile}
+    container_name: ${CONTAINER_NAME:-modavidc-com}
+    restart: ${RESTART_POLICY:-always}
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+    labels:
+      - "traefik.enable=${TRAEFIK_ENABLE:-true}"
+      - "traefik.docker.network=web"
+      - "traefik.http.routers.modavidc-com.entrypoints=${TRAEFIK_ENTRYPOINT:-websecure}"
+      - "traefik.http.routers.modavidc-com.rule=Host(`${DOMAIN:-modavidc.com}`)"
+      - "traefik.http.routers.modavidc-com.tls.certresolver=${TRAEFIK_CERTRESOLVER:-http-resolv}"
+      - "traefik.http.services.modavidc-com.loadbalancer.server.port=${SERVICE_PORT:-3000}"
+    networks:
+      - web
+

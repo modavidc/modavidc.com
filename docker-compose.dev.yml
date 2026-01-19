@@ -1,0 +1,26 @@
+# docker-compose.dev.yml
+# Desarrollo local con hot reload (sin Traefik embebido)
+
+networks:
+  web:
+    driver: bridge
+
+services:
+  modavidc-com:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: modavidc-com-dev
+    restart: unless-stopped
+    ports:
+      - "${HOST_PORT:-3000}:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+      - NEXT_TELEMETRY_DISABLED=1
+    networks:
+      - web
+
