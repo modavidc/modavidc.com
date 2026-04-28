@@ -1,0 +1,177 @@
+{
+  "fallback": "No tengo datos específicos sobre eso, pero puedo tramitarle la pregunta a Moisés directamente.",
+  "faqs": [
+    {
+      "keywords": ["hola", "hey", "hi", "buenas", "buenas tardes", "buenas noches", "buenos dias", "buenos días", "saludos", "qué tal", "que tal", "como estas", "cómo estás"],
+      "response": "¡Hola! 👋 Soy el asistente de Moisés. Puedo contarte sobre:\n• Su experiencia y proyectos\n• Especialidades: FinOps, Healthcare, SaaS, IoT\n• Stack tecnológico\n• Disponibilidad y cómo contactarlo\n\n¿Qué te gustaría saber?"
+    },
+    {
+      "keywords": ["quien", "quién", "eres", "moises", "moisés", "cedeno", "cedeño", "david", "about", "presentate", "preséntate", "cuéntame", "cuentame", "de qué trata", "de que trata"],
+      "response": "Moisés Cedeño es Solutions Architect con +8 años de experiencia. Se especializa en FinOps, Healthcare y SaaS.\n\nEn números:\n• -58% factura AWS en MediRec\n• -$20k/año en licencias farmacéuticas\n• -70% tiempo de comunicación clínica\n• +400% velocidad en IoT\n\nSu filosofía: arquitecturas que escalan sin depender de quién las creó."
+    },
+    {
+      "keywords": ["donde vive", "dónde vive", "pais", "país", "ubicacion", "ubicación", "zona horaria", "lima", "peru", "perú", "latam", "latinoamerica", "latinoamérica"],
+      "response": "Moisés está basado en Lima, Perú (UTC-5). Trabaja con clientes en LATAM y Estados Unidos (Puerto Rico, Colombia). Disponible para proyectos 100% remotos."
+    },
+    {
+      "keywords": ["finops", "costos", "aws", "cloud", "ahorro", "optimizacion", "optimización", "factura", "reducir", "gasto", "infraestructura"],
+      "response": "Moisés es especialista en FinOps. Casos reales:\n\n• MediRec: -58% factura AWS — rightsizing de EC2, gobernanza con Terraform, reservas inteligentes. $180K ahorrados en el primer año.\n• LexiComp → NLM: -$20k/año en licencias farmacéuticas con cero impacto clínico.\n\nSu enfoque: cada decisión técnica tiene que justificarse en dólares."
+    },
+    {
+      "keywords": ["healthcare", "salud", "medico", "médico", "fhir", "hl7", "clinico", "clínico", "hospital", "interoperabilidad", "laboratorio", "laboratorios", "resultados", "ehr", "historia clinica"],
+      "response": "En Healthcare, Moisés tiene experiencia en:\n• Interoperabilidad: FHIR R4, HL7 v2.x, CCDA, eRx\n• Middleware clínico: conecta sistemas legacy con EHR modernos\n• Seguridad: mTLS para entornos regulados\n• Reducción del tiempo de resultados: de 6h a <90min (-70%)\n\nHa trabajado en plataformas con 20K+ usuarios activos en salud regulada."
+    },
+    {
+      "keywords": ["saas", "multi-tenant", "escalabilidad", "usuarios", "plataforma", "software como servicio"],
+      "response": "Moisés ha diseñado y construido sistemas SaaS multi-tenant para +20K usuarios. Experiencia en:\n• Arquitectura event-driven para múltiples clientes\n• WebSockets para tiempo real (<200ms latencia)\n• Onboarding de devs en 48h mediante ADRs y documentación\n• Despliegue en AWS y DigitalOcean"
+    },
+    {
+      "keywords": ["iot", "wearables", "gps", "sensores", "dispositivos", "tcp", "socket", "bridge", "hardware", "conectividad"],
+      "response": "En IoT, Moisés construyó T-Cuida desde cero:\n• Bridge TCP/IP ↔ WebSocket: +400% throughput sin reemplazar hardware\n• Integración de wearables BLE y GPS en tiempo real\n• Dashboard de emergencias: 3min → 1min de respuesta\n• Protocolo propietario parseado con Node.js + buffer management"
+    },
+    {
+      "keywords": ["tcuida", "t-cuida", "konecta", "seguridad corporativa", "emergencias", "incidencias"],
+      "response": "T-Cuida es una plataforma SaaS de seguridad corporativa. Moisés lideró 100% del desarrollo:\n\n• Ecosistema completo: wearables, GPS, dashboard web, app móvil\n• Bridge TCP/IP-WebSocket: +400% velocidad en dispositivos\n• Dashboard real-time: 3min → 1min de respuesta a emergencias\n• Onboarding de devs nuevos: 48h gracias a ADRs documentados\n• Despliegue en AWS + DigitalOcean"
+    },
+    {
+      "keywords": ["medirec", "puerto rico", "farmacia", "medicamentos", "lexicomp", "nlm", "farmacos", "fármacos", "rxnorm"],
+      "response": "MediRec es una empresa de tech en salud (Puerto Rico) donde Moisés trabaja desde mayo 2020:\n\n• FinOps: -58% factura AWS, $180K ahorrados/año\n• Licencias: migración LexiComp → NLM, -$20k/año\n• Lab Middleware: resultados en <90min vs 6h anteriores\n• App móvil Flutter: App Store + Play Store en 2 meses\n• Gov-Tech: integración con PREIS (Gobierno Puerto Rico)"
+    },
+    {
+      "keywords": ["preis", "gobierno", "gov-tech", "govtech", "inmunizacion", "inmunización", "regulatorio", "compliance", "reportes"],
+      "response": "Moisés desarrolló la API de misión crítica para integrar con PREIS (sistema del Gobierno de Puerto Rico):\n\n• Reportes de inmunización automatizados (antes: 4h manuales en Excel)\n• 100% compliance desde el día uno\n• mTLS para autenticación de ambos lados\n• Audit trail completo para regulación\n• Reportes en tiempo real bajo demanda"
+    },
+    {
+      "keywords": ["stack", "tecnologia", "tecnología", "tecnologias", "tecnologías", "lenguaje", "lenguajes", "herramientas", "tech", "frameworks", "que usa", "qué usa", "con qué trabaja", "con que trabaja"],
+      "response": "Stack de Moisés:\n\nBackend: PHP (Laravel/Lumen), C# (.NET), Node.js\nMobile: Flutter, Dart\nFrontend: Vue.js, React, Next.js\nCloud: AWS (EC2, S3, Route53, Lambda), DigitalOcean\nDB: MySQL, SQL Server, PostgreSQL, Redis\nInfra: Docker, Traefik, CI/CD, Linux\nEspecialidades: WebSockets, TCP/IP, HL7, FHIR R4, mTLS"
+    },
+    {
+      "keywords": ["experiencia", "trabajo", "trabajado", "empresas", "años", "trayectoria", "carrera", "curriculum", "cv", "historial"],
+      "response": "Experiencia profesional:\n\n• MediRec (may 2020 - actualidad) — Ingeniero de Integraciones. Stack: Laravel, C#, Flutter, AWS.\n• T-Cuida (may 2023 - actualidad) — Lead Developer / Tech Lead. Stack: Laravel, Node.js, Vue.js.\n• Freelance (2017 - actualidad) — WordPress, PHP, desarrollo web.\n\nMás de 8 años en el mercado."
+    },
+    {
+      "keywords": ["cuantos años", "cuántos años", "años de experiencia", "experiencia de", "seniority", "senior", "junior", "mid"],
+      "response": "Moisés tiene +8 años de experiencia en desarrollo de software. Nivel Senior/Arquitecto — toma decisiones de arquitectura, lidera equipos técnicos y tiene ownership completo de sistemas en producción con miles de usuarios."
+    },
+    {
+      "keywords": ["proyectos", "portfolio", "casos", "éxito", "exito", "que ha hecho", "qué ha hecho", "logros", "resultados"],
+      "response": "Proyectos destacados:\n\n• -58% AWS (MediRec FinOps)\n• -$20k/año en licencias farmacéuticas\n• API Gov-Tech PREIS — 100% compliance regulatorio\n• Lab Middleware — resultados clínicos en <90min\n• T-Cuida — ecosistema IoT completo desde cero\n• Bridge TCP/IP-WebSocket — +400% throughput\n• App móvil Flutter — App Store + Play en 2 meses\n\nVer todos: modavidc.com/casos-de-exito"
+    },
+    {
+      "keywords": ["disponible", "disponibilidad", "contratar", "freelance", "proyecto", "propuesta", "presupuesto", "cotizacion", "cotización", "cuanto cobra", "cuánto cobra", "precio", "tarifa", "costo del servicio"],
+      "response": "Moisés está disponible para proyectos seleccionados en:\n• FinOps y optimización de costos cloud\n• Arquitecturas Healthcare y SaaS\n• Integraciones complejas y middleware\n• Tech lead / arquitectura de sistemas\n\nRespuesta en menos de 24h. Para hablar de tu proyecto → wa.me/51938804597"
+    },
+    {
+      "keywords": ["contacto", "contactar", "comunicar", "hablar", "mensaje", "escribir", "email", "correo", "whatsapp", "linkedin", "agendar", "reunion", "reunión", "llamada"],
+      "response": "Canales de contacto:\n\n💬 WhatsApp (más rápido): wa.me/51938804597\n📧 Email: hola@modavidc.com\n💼 LinkedIn: linkedin.com/in/modavidc\n\nZona horaria: Lima, Perú (UTC-5). Respuesta en menos de 24h."
+    },
+    {
+      "keywords": ["metodologia", "metodología", "como trabaja", "cómo trabaja", "proceso", "flujo", "forma de trabajar", "enfoque", "approach"],
+      "response": "La metodología de Moisés tiene 3 pilares:\n\n1. Diagnóstico claro — entiende el problema antes de proponer solución\n2. Decisiones documentadas — ADRs desde el día uno para que el equipo pueda mantener sin depender de él\n3. Métricas de impacto — cada entrega tiene un número: %, $, horas ahorradas\n\nObjetivo: que el sistema funcione igual cuando él no está."
+    },
+    {
+      "keywords": ["documentacion", "documentación", "adr", "adrs", "decision", "decisiones", "conocimiento", "onboarding", "transferencia"],
+      "response": "La documentación es un diferenciador clave de Moisés. Escribe ADRs (Architecture Decision Records) desde el primer día.\n\nResultado concreto en T-Cuida: un dev nuevo estuvo productivo en 48 horas gracias a la documentación de arquitectura. Los clientes pueden mantener el sistema sin depender de él."
+    },
+    {
+      "keywords": ["mobile", "movil", "móvil", "app", "flutter", "ios", "android", "app store", "play store", "react native"],
+      "response": "Moisés construyó la primera app móvil de MediRec:\n• Flutter (iOS + Android, una sola base de código)\n• App Store + Play Store en 2 meses desde cero\n• Integración directa con API existente\n• Arquitectura BLoC para mantenibilidad\n• Código tan limpio que el equipo añadió features sin reescribir nada\n\nEn T-Cuida también lideró el ciclo de publicación en ambas tiendas."
+    },
+    {
+      "keywords": ["docker", "traefik", "devops", "cicd", "ci/cd", "deploy", "despliegue", "kubernetes", "contenedor", "infraestructura", "linux", "servidor"],
+      "response": "Moisés maneja DevOps y despliegue:\n• Docker + Traefik para contenedores con SSL automático\n• CI/CD pipelines para automatización de builds\n• AWS (EC2, S3, Lambda, Route53) y DigitalOcean\n• Linux server administration\n• IaC con Terraform para gobernanza\n\nEste portfolio corre en Docker + Traefik en servidor propio."
+    },
+    {
+      "keywords": ["arquitectura", "diseño de sistema", "patron", "patrón", "escalable", "microservicios", "monolito", "event-driven", "distribuido"],
+      "response": "Moisés diseña arquitecturas con un principio: que escalen sin depender de quién las creó.\n\nExperiencia en:\n• Arquitectura event-driven para SaaS multi-tenant\n• Sistemas distribuidos con WebSockets\n• APIs RESTful con seguridad mTLS\n• Bridge entre protocolos legacy y modernos\n• Middleware de transformación HL7 → FHIR"
+    },
+    {
+      "keywords": ["certificacion", "certificación", "certificado", "aws certified", "cloud practitioner", "titulo", "título", "formacion", "formación", "estudio", "universidad"],
+      "response": "Certificaciones y formación:\n• AWS Cloud Practitioner (certificado)\n• +8 años de experiencia práctica en sistemas productivos\n• Inglés: B2 conversacional, C2 en lectura técnica\n\nSu mayor credencial: -58% AWS, -$20k/año en licencias, sistemas con +20K usuarios."
+    },
+    {
+      "keywords": ["ingles", "inglés", "idioma", "idiomas", "bilingue", "bilingüe", "english", "habla ingles"],
+      "response": "Moisés habla inglés a nivel B2 conversacional y C2 en lectura técnica. Ha trabajado con clientes en Puerto Rico, documentado arquitecturas en inglés y manejado documentación técnica compleja en inglés durante toda su carrera."
+    },
+    {
+      "keywords": ["el estoico", "estoico", "filosofia", "filosofía", "blog personal", "estoicismo"],
+      "response": "El Estoico es un side project personal: blog/landing sobre filosofía estoica aplicada a la vida tech moderna.\n\nDato técnico destacado: FCP de 0.8s, Lighthouse 100 en todas las categorías. Deployado con Docker + Traefik.\n\nVer en: elestoico.com"
+    },
+    {
+      "keywords": ["grupero", "grupos whatsapp", "android", "kotlin", "privacidad", "analisis grupos", "análisis grupos"],
+      "response": "Grupero es una app Android que analiza grupos de WhatsApp:\n• 100% offline — los chats nunca salen del dispositivo\n• Identifica participación, inactivos, mejores horarios para publicar\n• Detección de eventos con IA on-device\n• En beta con 12 admins (+47 grupos analizados)\n\nBuilt in Kotlin con procesamiento de 100K+ mensajes en <2 segundos."
+    },
+    {
+      "keywords": ["labs", "side projects", "proyectos personales", "proyectos propios", "open source", "github"],
+      "response": "Side projects activos de Moisés:\n\n• El Estoico (live) — blog filosofía estoica, FCP 0.8s\n• modavidc.com (live) — este portfolio, open source en GitHub\n• Grupero (en progreso) — app Android análisis WhatsApp\n\nTodos en: modavidc.com/labs"
+    },
+    {
+      "keywords": ["testimonios", "referencias", "clientes", "que dicen", "qué dicen", "opiniones", "reviews"],
+      "response": "Testimonios reales de proyectos:\n\n• Director TI, MediRec: \"Documentó cada decisión para que el equipo lo mantuviera sin depender de él.\"\n• Product Owner, T-Cuida: \"Dev nuevo productivo en 48h gracias a la documentación.\"\n• CTO Healthcare: \"Automatizó reportes de 3h semanales. Ahora son real-time.\"\n• Coordinador IoT: \"Pensamos que necesitaríamos hardware nuevo. Encontró la solución en software.\"\n\nVer todos: modavidc.com/testimonials"
+    },
+    {
+      "keywords": ["freelance", "independiente", "consultor", "consultoria", "consultoría", "por proyecto", "contrato"],
+      "response": "Moisés hace freelance desde 2017. Clientes anteriores: gabrielniezenmatos.com, sintrasat.com, fallingawake.com, apoyoconsultivo.com, josedergan.com.\n\nActualmente acepta proyectos seleccionados en FinOps, Healthcare y arquitecturas SaaS/IoT."
+    },
+    {
+      "keywords": ["wordpress", "woocommerce", "landing page", "pagina web", "página web", "cms", "sitio web"],
+      "response": "Sí, Moisés tiene experiencia en WordPress (desde 2017): WooCommerce, membresías, landing pages optimizadas.\n\nSu especialidad principal actualmente es arquitectura de sistemas, FinOps y Healthcare tech. Para proyectos web simples también puede orientarte."
+    },
+    {
+      "keywords": ["performance", "velocidad", "lento", "lighthouse", "core web vitals", "seo tecnico", "seo técnico", "velocidad del sitio"],
+      "response": "Moisés tiene experiencia en optimización de performance:\n• El Estoico: FCP 0.8s, Lighthouse 100 en todas las categorías\n• CSS crítico inline, lazy loading, WebP/AVIF\n• Static site generation con Astro\n• SEO técnico: sitemap, metadata, structured data"
+    },
+    {
+      "keywords": ["react", "next", "nextjs", "next.js", "vue", "vuejs", "vue.js", "frontend", "front-end"],
+      "response": "Frontend de Moisés:\n• Next.js — este portfolio y otros proyectos (App Router, SSR, SSG)\n• Vue.js — dashboard T-Cuida con WebSockets en tiempo real\n• React — proyectos web y dashboards\n\nSu foco principal es backend y arquitectura, pero toma decisiones de stack completas."
+    },
+    {
+      "keywords": ["python", "java", "golang", "go", "rust", "ruby", "django", "spring"],
+      "response": "El stack principal de Moisés es PHP (Laravel), C# (.NET), Node.js y Flutter. Python, Java y otros lenguajes no son su stack habitual.\n\nSi tu proyecto usa alguno, lo mejor es preguntarle directamente — puede evaluar si es un buen fit."
+    },
+    {
+      "keywords": ["base de datos", "database", "mysql", "postgresql", "postgres", "sql server", "mongodb", "redis", "nosql"],
+      "response": "Bases de datos con las que trabaja Moisés:\n• MySQL — principal en proyectos Laravel\n• SQL Server — proyectos .NET / C#\n• PostgreSQL — proyectos Node.js y modernos\n• Redis — caché y colas de mensajes\n\nExperiencia básica en MongoDB."
+    },
+    {
+      "keywords": ["seguridad", "mtls", "autenticacion", "autenticación", "oauth", "jwt", "hipaa", "regulacion", "regulación", "cumplimiento"],
+      "response": "En seguridad, Moisés tiene experiencia en:\n• mTLS — autenticación mutua en APIs Gov-Tech\n• JWT y OAuth para autenticación de usuarios\n• Entornos regulados en Healthcare (adjacent to HIPAA)\n• Audit trails completos para compliance\n• Manejo de datos clínicos sensibles"
+    },
+    {
+      "keywords": ["cuanto demora", "cuánto demora", "plazo", "plazos", "entrega", "rapido", "rápido", "urgente", "tiempo de desarrollo"],
+      "response": "Historial de entregas de Moisés:\n• App móvil completa (iOS + Android): 2 meses\n• Bridge TCP/IP-WebSocket: 1 mes\n• Migración LexiComp → NLM: 2 meses (con validación clínica)\n• API Gov-Tech PREIS: 4 meses (con certificación gubernamental)\n\nPara tu proyecto específico, mejor hablarlo directamente."
+    },
+    {
+      "keywords": ["trabaja solo", "equipo", "team", "colaborar", "colaboracion", "colaboración", "liderazgo"],
+      "response": "Moisés puede trabajar de las dos formas:\n\n• Solo — ownership completo de arquitectura e implementación\n• Como Tech Lead — guiando un equipo, tomando decisiones de arquitectura y documentando para que el equipo continúe\n\nDiferenciador: cuando sale del proyecto, el equipo puede continuar sin él."
+    },
+    {
+      "keywords": ["linkedin", "github", "redes", "social", "perfil", "portfolio", "portafolio", "donde encontrarte", "dónde encontrarte"],
+      "response": "Perfiles de Moisés:\n• Portfolio: modavidc.com\n• LinkedIn: linkedin.com/in/modavidc\n• GitHub: github.com/modavidc\n• Email: hola@modavidc.com\n• WhatsApp: wa.me/51938804597"
+    },
+    {
+      "keywords": ["startup", "pyme", "empresa mediana", "corporacion", "corporación", "multinacional", "tamaño de empresa"],
+      "response": "Moisés ha trabajado con distintos tamaños:\n• MediRec — empresa tech de salud, escala mediana, Puerto Rico\n• T-Cuida / Konecta — plataforma seguridad corporativa, Colombia\n• Clientes freelance — startups y pymes en LATAM\n\nExperiencia: desde MVP hasta sistemas con 20K+ usuarios en producción."
+    },
+    {
+      "keywords": ["remoto", "remote", "presencial", "hibrido", "híbrido", "viaje", "relocation", "trabaja desde donde"],
+      "response": "Moisés trabaja 100% remoto. Basado en Lima, Perú (UTC-5), compatible con clientes en LATAM y EE.UU. Para proyectos con presencia puntual puede evaluarse."
+    },
+    {
+      "keywords": ["gracias", "thank", "genial", "perfecto", "excelente", "chevere", "chévere", "buenisimo", "buenísimo", "muy bien", "ok", "listo"],
+      "response": "¡Con gusto! Si necesitas algo más o quieres hablar con Moisés directamente → wa.me/51938804597 — responde en minutos 🚀"
+    },
+    {
+      "keywords": ["precio", "cuanto cuesta", "cuánto cuesta", "tarifa hora", "tarifa por hora", "valor", "inversión", "inversion"],
+      "response": "Las tarifas de Moisés dependen del alcance y tipo de proyecto. No hay una tarifa fija publicada — prefiere entender el problema antes de cotizar.\n\nPara una estimación → wa.me/51938804597 o hola@modavidc.com. Responde en menos de 24h."
+    },
+    {
+      "keywords": ["contrato", "nda", "confidencialidad", "acuerdo", "terminos", "términos", "legal"],
+      "response": "Sí, Moisés firma NDA cuando el proyecto lo requiere. La mayoría de sus casos de MediRec están bajo NDA (por eso los testimonios usan roles en vez de nombres). Está acostumbrado a trabajar con información sensible en entornos Healthcare regulados."
+    },
+    {
+      "keywords": ["que diferencia", "qué diferencia", "por qué contratar", "por que contratar", "diferenciador", "ventaja", "propuesta de valor", "por qué a ti", "por que a ti"],
+      "response": "3 diferenciadores de Moisés:\n\n1. Métricas reales — no \"mejoré la arquitectura\", sino \"-58% AWS\" o \"-$20k/año\"\n2. Documentación desde el día uno — el equipo no depende de él cuando el proyecto termina\n3. Visión técnica + financiera — entiende tanto el código como el impacto en el negocio\n\n\"Arquitecturas que escalan sin depender de quién las creó.\""
+    }
+  ]
+}

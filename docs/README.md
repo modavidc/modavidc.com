@@ -2,6 +2,12 @@
 
 Portfolio profesional de Moisés Cedeño, Tech Lead y Cloud Infrastructure Engineer especializado en APIs, integraciones y optimización de infraestructura cloud.
 
+## Feedback / evaluación
+
+- Buyer personas y tabla comparativa: `docs/feedback/buyer-personas.md`
+- Status: `docs/STATUS.md`
+- Roadmap: `docs/ROADMAP.md`
+
 ## 🚀 Características Principales
 
 ### ✅ **Mejoras Implementadas**

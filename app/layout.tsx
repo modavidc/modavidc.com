@@ -1,67 +1,56 @@
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import Script from "next/script"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
+import { ChatBot } from "@/components/chat-bot"
 
-const inter = Inter({ subsets: ["latin"] })
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID
 
 export const metadata: Metadata = {
   title: {
-    default: "Moisés Cedeño - Arquitecto de Rescate | Ingeniería de la Razón",
-    template: "%s | Moisés Cedeño"
+    default: "modavidc — Moisés Cedeño · Solutions Architect",
+    template: "%s | modavidc"
   },
-  description: "Arquitecto de Rescate. Liderando la Ingeniería de la Razón. La IA acelera la deuda técnica. Mi foco es la arquitectura por propósito para convertir sistemas Legacy en ventaja competitiva. Creador de MC-DC.",
+  description: "Solutions Architect con +8 años en Healthcare, SaaS e IoT. FinOps: -58% AWS, -$20k/año en licencias. Arquitecturas que escalan sin depender de quién las creó.",
   keywords: [
-    "Arquitecto de Rescate",
-    "Ingeniería de la Razón",
-    "Arquitectura por Propósito",
-    "Deuda Técnica",
-    "Sistemas Legacy",
-    "Tech Lead",
-    "API Architecture",
-    "Modernización de Sistemas",
-    "ROI Tecnológico",
-    "Filosofía de Arquitectura",
-    "MC-DC",
-    "Cloud Infrastructure",
-    "AWS Optimization"
+    "Solutions Architect",
+    "FinOps",
+    "Cloud Optimization",
+    "AWS Cost Optimization",
+    "Healthcare Technology",
+    "SaaS Architecture",
+    "FHIR R4",
+    "Backend Engineer",
+    "AWS",
+    "Healthcare",
+    "SaaS",
+    "IoT",
   ],
   authors: [{ name: "Moisés Cedeño" }],
   creator: "Moisés Cedeño",
-  publisher: "Moisés Cedeño",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://moises.dev'),
-  alternates: {
-    canonical: '/',
-  },
+  metadataBase: new URL("https://modavidc.com"),
+  alternates: { canonical: "/" },
   openGraph: {
-    type: 'website',
-    locale: 'es_ES',
-    url: 'https://moises.dev',
-    title: 'Moisés Cedeño - Arquitecto de Rescate | Ingeniería de la Razón',
-    description: 'Arquitecto de Rescate. Liderando la Ingeniería de la Razón. Arquitectura por propósito para convertir sistemas Legacy en ventaja competitiva. Creador de MC-DC.',
-    siteName: 'Moisés Cedeño Portfolio',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Moisés Cedeño - Arquitecto de Rescate | Ingeniería de la Razón',
-      },
-    ],
+    type: "website",
+    locale: "es_ES",
+    url: "https://modavidc.com",
+    title: "modavidc — Moisés Cedeño · Solutions Architect",
+    description: "Solutions Architect con +8 años en Healthcare, SaaS e IoT. Arquitecturas que escalan sin depender de quién las creó.",
+    siteName: "modavidc",
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Moisés Cedeño - Arquitecto de Rescate | Ingeniería de la Razón',
-    description: 'Arquitecto de Rescate. Liderando la Ingeniería de la Razón. Arquitectura por propósito para convertir sistemas Legacy en ventaja competitiva.',
-    images: ['/og-image.jpg'],
-    creator: '@modavidc',
+    card: "summary_large_image",
+    title: "modavidc — Moisés Cedeño · Solutions Architect",
+    description: "Solutions Architect con +8 años en Healthcare, SaaS e IoT.",
+    creator: "@modavidc",
   },
   robots: {
     index: true,
@@ -69,13 +58,10 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
-  },
-  verification: {
-    google: 'your-google-verification-code',
   },
 }
 
@@ -85,15 +71,37 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+    <html lang="es" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+      </head>
+      <body>
+        <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
           <div className="relative flex min-h-screen flex-col">
             <Navbar />
             <div className="flex-1">{children}</div>
             <Footer />
           </div>
+          <ChatBot />
         </ThemeProvider>
+        {GA_ID && process.env.NODE_ENV === "production" && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GA_ID}', { page_path: window.location.pathname });
+              `}
+            </Script>
+          </>
+        )}
       </body>
     </html>
   )

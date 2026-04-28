@@ -1,286 +1,231 @@
-"use client"
-
-import { motion } from "framer-motion"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Clock, Target, CheckCircle, XCircle, AlertTriangle, Zap, Shield, Users, FileText, MessageSquare } from "lucide-react"
-import Link from "next/link"
-
 export default function MetodologiaPage() {
   return (
-    <div className="container px-4 py-12 md:px-6 md:py-24">
-      <div className="mx-auto max-w-4xl space-y-8">
-        {/* Header */}
-        <div className="space-y-4 text-center">
-          <Badge variant="destructive" className="mb-4">
-            Metodología Estricta
-          </Badge>
-          <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-            Metodología de Trabajo
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            "1 hora que pierdo porque alguien no hace lo que le dije 6 veces es 1 hora de mi vida que no le dedico a la filosofía"
-          </p>
-        </div>
+    <div className="page-wrap">
 
-        {/* Philosophy Alert */}
-        <Alert className="border-red-200 bg-red-50 dark:border-red-800 dark:bg-red-950">
-          <AlertTriangle className="h-4 w-4 text-red-600" />
-          <AlertDescription className="text-red-800 dark:text-red-200">
-            <strong>Mi tiempo es sagrado.</strong> Cada minuto que desperdicio en repeticiones innecesarias es tiempo que no dedico a mi crecimiento personal, mi familia, o proyectos que realmente importan. Esta metodología existe para maximizar la eficiencia y el respeto mutuo.
-          </AlertDescription>
-        </Alert>
-
-        {/* Core Principles */}
-        <div className="space-y-6">
-          <h2 className="text-3xl font-bold text-center">Principios Fundamentales</h2>
-          
-          <div className="grid gap-6 md:grid-cols-2">
-            <Card className="border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-950">
-              <CardHeader>
-                <div className="flex items-center space-x-2">
-                  <CheckCircle className="h-5 w-5 text-green-600" />
-                  <CardTitle className="text-green-800 dark:text-green-200">SÍ: Comunicación Clara</CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2 text-sm text-green-700 dark:text-green-300">
-                  <li>• Documentación completa desde el primer día</li>
-                  <li>• Requisitos específicos y medibles</li>
-                  <li>• Timeline detallado con milestones</li>
-                  <li>• Canales de comunicación definidos</li>
-                  <li>• Feedback inmediato y constructivo</li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            <Card className="border-red-200 bg-red-50 dark:border-red-800 dark:bg-red-950">
-              <CardHeader>
-                <div className="flex items-center space-x-2">
-                  <XCircle className="h-5 w-5 text-red-600" />
-                  <CardTitle className="text-red-800 dark:text-red-200">NO: Pérdida de Tiempo</CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2 text-sm text-red-700 dark:text-red-300">
-                  <li>• Reuniones sin agenda clara</li>
-                  <li>• Cambios de requisitos sin justificación</li>
-                  <li>• Falta de preparación en sesiones</li>
-                  <li>• Comunicación vaga o ambigua</li>
-                  <li>• Procrastinación o falta de responsabilidad</li>
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-
-        {/* Workflow Process */}
-        <div className="space-y-6">
-          <h2 className="text-3xl font-bold text-center">Proceso de Trabajo</h2>
-          
-          <div className="grid gap-6 md:grid-cols-3">
-            <Card>
-              <CardHeader className="text-center">
-                <div className="mx-auto mb-4 rounded-full bg-blue-100 p-3 w-fit dark:bg-blue-900">
-                  <FileText className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-                </div>
-                <CardTitle>1. Documentación</CardTitle>
-                <CardDescription>
-                  Todo se documenta. Sin excepciones.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>• Brief completo del proyecto</li>
-                  <li>• Requisitos técnicos detallados</li>
-                  <li>• Timeline con fechas específicas</li>
-                  <li>• Criterios de aceptación claros</li>
-                  <li>• Responsabilidades definidas</li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader className="text-center">
-                <div className="mx-auto mb-4 rounded-full bg-green-100 p-3 w-fit dark:bg-green-900">
-                  <Target className="h-6 w-6 text-green-600 dark:text-green-400" />
-                </div>
-                <CardTitle>2. Ejecución</CardTitle>
-                <CardDescription>
-                  Cumplimiento estricto del plan.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>• Seguimiento del timeline</li>
-                  <li>• Comunicación proactiva</li>
-                  <li>• Resolución inmediata de bloqueos</li>
-                  <li>• Calidad desde el primer intento</li>
-                  <li>• Actualizaciones regulares</li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader className="text-center">
-                <div className="mx-auto mb-4 rounded-full bg-purple-100 p-3 w-fit dark:bg-purple-900">
-                  <CheckCircle className="h-6 w-6 text-purple-600 dark:text-purple-400" />
-                </div>
-                <CardTitle>3. Entrega</CardTitle>
-                <CardDescription>
-                  Resultado final según especificaciones.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>• Testing completo</li>
-                  <li>• Documentación actualizada</li>
-                  <li>• Código limpio y comentado</li>
-                  <li>• Entrega a tiempo</li>
-                  <li>• Soporte post-entrega</li>
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-
-        {/* Communication Rules */}
-        <div className="space-y-6">
-          <h2 className="text-3xl font-bold text-center">Reglas de Comunicación</h2>
-          
-          <div className="grid gap-4">
-            <Card className="border-orange-200 bg-orange-50 dark:border-orange-800 dark:bg-orange-950">
-              <CardHeader>
-                <div className="flex items-center space-x-2">
-                  <MessageSquare className="h-5 w-5 text-orange-600" />
-                  <CardTitle className="text-orange-800 dark:text-orange-200">Comunicación Eficiente</CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="grid gap-4 md:grid-cols-2">
-                  <div>
-                    <h4 className="font-semibold text-orange-800 dark:text-orange-200 mb-2">✅ HACER:</h4>
-                    <ul className="space-y-1 text-sm text-orange-700 dark:text-orange-300">
-                      <li>• Preguntas específicas y directas</li>
-                      <li>• Contexto completo en cada mensaje</li>
-                      <li>• Respuestas dentro de 24 horas</li>
-                      <li>• Uso de canales apropiados</li>
-                      <li>• Confirmación de entendimiento</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-orange-800 dark:text-orange-200 mb-2">❌ NO HACER:</h4>
-                    <ul className="space-y-1 text-sm text-orange-700 dark:text-orange-300">
-                      <li>• Mensajes vagos o incompletos</li>
-                      <li>• Múltiples canales para lo mismo</li>
-                      <li>• Respuestas tardías sin justificación</li>
-                      <li>• Asumir que algo está claro</li>
-                      <li>• Ignorar mensajes importantes</li>
-                    </ul>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-
-        {/* Time Management */}
-        <div className="space-y-6">
-          <h2 className="text-3xl font-bold text-center">Gestión del Tiempo</h2>
-          
-          <div className="grid gap-6 md:grid-cols-2">
-            <Card>
-              <CardHeader>
-                <div className="flex items-center space-x-2">
-                  <Clock className="h-5 w-5 text-primary" />
-                  <CardTitle>Mi Compromiso</CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3 text-sm">
-                  <li className="flex items-start space-x-2">
-                    <Zap className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                    <span>Respuesta garantizada en 24 horas</span>
-                  </li>
-                  <li className="flex items-start space-x-2">
-                    <Shield className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
-                    <span>Calidad profesional en cada entrega</span>
-                  </li>
-                  <li className="flex items-start space-x-2">
-                    <Users className="h-4 w-4 text-purple-500 mt-0.5 flex-shrink-0" />
-                    <span>Comunicación transparente y directa</span>
-                  </li>
-                  <li className="flex items-start space-x-2">
-                    <Target className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
-                    <span>Cumplimiento estricto de deadlines</span>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <div className="flex items-center space-x-2">
-                  <AlertTriangle className="h-5 w-5 text-red-500" />
-                  <CardTitle>Lo Que No Toleraré</CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3 text-sm">
-                  <li className="flex items-start space-x-2">
-                    <XCircle className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" />
-                    <span>Falta de preparación en reuniones</span>
-                  </li>
-                  <li className="flex items-start space-x-2">
-                    <XCircle className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" />
-                    <span>Cambios de requisitos sin justificación</span>
-                  </li>
-                  <li className="flex items-start space-x-2">
-                    <XCircle className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" />
-                    <span>Comunicación vaga o ambigua</span>
-                  </li>
-                  <li className="flex items-start space-x-2">
-                    <XCircle className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" />
-                    <span>Falta de responsabilidad en deadlines</span>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-
-        {/* Call to Action */}
-        <div className="text-center space-y-6">
-          <div className="space-y-4">
-            <h2 className="text-2xl font-bold">¿Estás Listo para Trabajar Eficientemente?</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Si respetas mi tiempo, yo respetaré el tuyo. Juntos podemos crear resultados excepcionales sin desperdiciar un solo minuto.
-            </p>
-          </div>
-          
-          <div className="flex flex-col gap-3 min-[400px]:flex-row justify-center">
-            <Link href="/contact">
-              <Button size="lg" className="w-full min-[400px]:w-auto">
-                Iniciar Proyecto
-              </Button>
-            </Link>
-            <Link href="/projects">
-              <Button variant="outline" size="lg" className="w-full min-[400px]:w-auto">
-                Ver Proyectos
-              </Button>
-            </Link>
-          </div>
-        </div>
-
-        {/* Final Quote */}
-        <div className="text-center py-8 border-t">
-          <blockquote className="text-lg italic text-muted-foreground">
-            "La eficiencia no es solo una metodología, es un respeto por la vida de todos los involucrados."
-          </blockquote>
+      {/* ── HERO ── */}
+      <div className="page-section" style={{paddingTop:'72px'}}>
+        <div className="section-kicker">Metodología</div>
+        <h1 className="page-h1" style={{fontSize:'clamp(36px,5vw,64px)'}}>
+          Así es cómo trabajo — y por qué<br />importa más que el <em>stack</em> que elijo.
+        </h1>
+        <p className="page-sub" style={{marginBottom:'32px'}}>
+          IA para velocidad. Documentación para continuidad. Criterio para que el proyecto no dependa de mí. Cada proyecto queda en mejor estado del que lo encontré.
+        </p>
+        <div className="hero-pull">
+          Cuando termino un proyecto, el equipo <strong>no me necesita para seguir</strong> — eso no es accidental, es el objetivo desde el día uno.
         </div>
       </div>
+
+      {/* ── PILARES ── */}
+      <section className="page-section">
+        <div className="section-kicker">Los tres pilares</div>
+        <h2 className="section-h2">IA + Contexto + <em>Criterio</em></h2>
+        <p className="section-sub">No es un proceso lineal — es un sistema donde cada pilar refuerza a los otros.</p>
+
+        <div className="pilares-grid">
+          <div className="pilar-card">
+            <div className="pilar-icon">
+              <div className="pilar-icon-mark">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                  <path d="M8 2L10 6H14L11 9L12 13L8 11L4 13L5 9L2 6H6L8 2Z" stroke="currentColor" strokeWidth="1.2" fill="none"/>
+                </svg>
+              </div>
+              IA para velocidad
+            </div>
+            <div className="pilar-title">Velocidad con criterio</div>
+            <div className="pilar-body">Uso IA como acelerador del trabajo técnico, no como sustituto del juicio. La diferencia es que puedo entregar en 3 semanas lo que antes tardaba 3 meses — sin sacrificar la calidad de la arquitectura.</div>
+            <div className="pilar-items">
+              <div className="pilar-item"><strong>Generación de código</strong> — acelero scaffolding, tests y boilerplate repetitivo</div>
+              <div className="pilar-item"><strong>Análisis</strong> — reviso dependencias, surface patterns y deuda técnica con mayor velocidad</div>
+              <div className="pilar-item"><strong>Documentación</strong> — genero primeros borradores de ADRs y runbooks que luego refino</div>
+            </div>
+          </div>
+          <div className="pilar-card">
+            <div className="pilar-icon">
+              <div className="pilar-icon-mark">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                  <rect x="2" y="2" width="12" height="12" rx="1" stroke="currentColor" strokeWidth="1.2"/>
+                  <line x1="5" y1="6" x2="11" y2="6" stroke="currentColor" strokeWidth="1.2"/>
+                  <line x1="5" y1="9" x2="9" y2="9" stroke="currentColor" strokeWidth="1.2"/>
+                </svg>
+              </div>
+              Contexto documentado
+            </div>
+            <div className="pilar-title">Documentación que vive</div>
+            <div className="pilar-body">No escribo documentación para que exista — la escribo para que cualquier dev pueda tomar el control del sistema sin necesitarme. ADRs, runbooks y guías de contribución como ciudadanos de primera clase del proyecto.</div>
+            <div className="pilar-items">
+              <div className="pilar-item"><strong>ADRs</strong> — cada decisión de arquitectura documentada con contexto y alternativas evaluadas</div>
+              <div className="pilar-item"><strong>Runbooks</strong> — guías operacionales para incidentes, deploys y rollbacks</div>
+              <div className="pilar-item"><strong>Onboarding</strong> — cualquier dev nuevo productivo en menos de 48 horas</div>
+            </div>
+          </div>
+          <div className="pilar-card">
+            <div className="pilar-icon">
+              <div className="pilar-icon-mark">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                  <circle cx="8" cy="8" r="5" stroke="currentColor" strokeWidth="1.2"/>
+                  <circle cx="8" cy="8" r="2" fill="currentColor"/>
+                </svg>
+              </div>
+              Criterio técnico
+            </div>
+            <div className="pilar-title">Criterio, no herramientas</div>
+            <div className="pilar-body">La IA me da velocidad pero no me da criterio. Saber cuándo no usar un framework, cuándo construir internamente, cuándo la solución simple gana — eso viene de 8 años de proyectos reales.</div>
+            <div className="pilar-items">
+              <div className="pilar-item"><strong>Build vs. buy</strong> — análisis de TCO real antes de adoptar una dependencia</div>
+              <div className="pilar-item"><strong>Simplicidad intencional</strong> — la arquitectura más simple que resuelve el problema</div>
+              <div className="pilar-item"><strong>ROI técnico</strong> — cada decisión tiene un argumento de negocio</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CASO REAL ── */}
+      <section className="page-section">
+        <div className="section-kicker">Caso real</div>
+        <h2 className="section-h2">De 3 semanas a <em>48 horas</em></h2>
+        <p className="section-sub">Cómo el sistema funcionó en un proyecto real — con números.</p>
+
+        <div className="caso-real">
+          <div className="caso-real-label">Caso real · T-Cuida · SaaS IoT</div>
+          <div className="caso-real-h">De la idea al App Store en 3 semanas</div>
+          <p className="caso-real-body">
+            Se necesitaba construir una plataforma SaaS completa — wearables, GPS, dashboard real-time, comunicación familiar — en tiempo récord. Con el sistema de IA + documentación desde el día uno, pude generar el registro de arquitectura completo en las primeras 48 horas. Eso permitió que cualquier colaborador externo pudiera integrarse al proyecto sin fricción.<br /><br />
+            El resultado: de cero a App Store + Play Store en 3 semanas. Con documentación que permitió que el equipo tomara ownership inmediato al entregarlo.
+          </p>
+          <div className="caso-kpis">
+            <div className="caso-kpi">
+              <div className="caso-kpi-val">3</div>
+              <div className="caso-kpi-label">Semanas · entrega total</div>
+            </div>
+            <div className="caso-kpi">
+              <div className="caso-kpi-val">48h</div>
+              <div className="caso-kpi-label">Onboarding de dev nuevo</div>
+            </div>
+            <div className="caso-kpi">
+              <div className="caso-kpi-val">0</div>
+              <div className="caso-kpi-label">Dependencia de persona</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── PROCESO ── */}
+      <section className="page-section">
+        <div className="section-kicker">El proceso</div>
+        <h2 className="section-h2">Del problema a la solución <em>documentada</em></h2>
+        <p className="section-sub">Cuatro fases en cada proyecto — sin importar el tamaño.</p>
+
+        <div className="process-flow">
+          <div className="process-step">
+            <div className="step-num">01 · Diagnóstico</div>
+            <div className="step-title">Entender el sistema existente</div>
+            <div className="step-body">Mapeo de deuda técnica, dependencias críticas y riesgos antes de escribir una línea. El problema real no siempre es el problema reportado.</div>
+          </div>
+          <div className="process-step">
+            <div className="step-num">02 · Arquitectura</div>
+            <div className="step-title">Diseñar antes de construir</div>
+            <div className="step-body">ADRs escritos antes del código. Cada decisión de arquitectura con alternativas evaluadas, contexto y criterio de negocio documentados.</div>
+          </div>
+          <div className="process-step">
+            <div className="step-num">03 · Entrega</div>
+            <div className="step-title">Iterar con contexto</div>
+            <div className="step-body">Sprints cortos con CI/CD desde el primer día. Cada deploy es auditado y documentado. La velocidad no sacrifica la calidad de la arquitectura.</div>
+          </div>
+          <div className="process-step">
+            <div className="step-num">04 · Transferencia</div>
+            <div className="step-title">El equipo toma ownership</div>
+            <div className="step-body">Entrego cuando el equipo puede continuar sin mí. Runbook completo, guía de contribución, onboarding documentado. Cualquier dev productivo en 48h.</div>
+          </div>
+        </div>
+
+        <div className="video-block">
+          <div className="video-header">
+            <div className="video-title">Del problema a la solución documentada</div>
+            <div className="video-coming">Próximamente</div>
+          </div>
+          <div className="video-placeholder">
+            <button className="video-play" aria-label="Reproducir">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--text-2)"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <div className="video-caption">Velocidad + Documentación + Criterio<br />Cómo construyo software que cualquier dev puede mantener</div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── RIESGOS ── */}
+      <section className="page-section">
+        <div className="section-kicker">Lo que elimino · Lo que garantizo</div>
+        <h2 className="section-h2">Riesgos que <em>elimino</em></h2>
+        <p className="section-sub">Cada uno de estos es un patrón que he visto en proyectos reales — y que el proceso está diseñado para prevenir.</p>
+
+        <div className="riesgos-grid">
+          <div className="riesgos-col bad">
+            <div className="riesgos-head bad">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <circle cx="6" cy="6" r="5" stroke="currentColor"/>
+                <line x1="4" y1="4" x2="8" y2="8" stroke="currentColor" strokeWidth="1.2"/>
+                <line x1="8" y1="4" x2="4" y2="8" stroke="currentColor" strokeWidth="1.2"/>
+              </svg>
+              Riesgos que elimino
+            </div>
+            <div className="riesgo-item"><strong>Fuga de conocimiento</strong> — cuando el dev que llevaba el proyecto ya no está disponible</div>
+            <div className="riesgo-item"><strong>Onboarding lento</strong> — semanas para que un dev nuevo entienda por qué las cosas son como son</div>
+            <div className="riesgo-item"><strong>Dependencia de persona</strong> — no podrás escalar sin esa persona clave</div>
+            <div className="riesgo-item"><strong>Decisiones sin contexto</strong> — código sin documentar por qué se tomó esa decisión</div>
+          </div>
+          <div className="riesgos-col good">
+            <div className="riesgos-head good">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <circle cx="6" cy="6" r="5" stroke="currentColor"/>
+                <path d="M3.5 6L5.5 8L8.5 4" stroke="currentColor" strokeWidth="1.2"/>
+              </svg>
+              Lo que garantizo
+            </div>
+            <div className="riesgo-item"><strong>ADRs completos</strong> — cada decisión de arquitectura con contexto, alternativas y criterio de negocio</div>
+            <div className="riesgo-item"><strong>Onboarding rápido</strong> — cualquier dev nuevo productivo en menos de 48 horas con la documentación entregada</div>
+            <div className="riesgo-item"><strong>Sistema que escala</strong> — arquitectura que el equipo puede mantener y extender sin mí</div>
+            <div className="riesgo-item"><strong>Listo para crecer</strong> — infraestructura y prácticas que soportan el crecimiento futuro</div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── REGLAS + CTA ── */}
+      <section className="page-section">
+        <div className="section-kicker">Principios</div>
+        <h2 className="section-h2">Tres reglas <em>innegociables</em></h2>
+        <p className="section-sub">Son los valores que no negocio en ningún proyecto, sin importar el deadline.</p>
+
+        <div className="reglas-grid">
+          <div className="regla-card">
+            <div className="regla-num">01</div>
+            <div className="regla-title">Si no está escrito, no pasó</div>
+            <div className="regla-body">Cada decisión importante que no está documentada es deuda técnica disfrazada de velocidad. La documentación no es un extra — es parte del entregable desde el sprint uno.</div>
+          </div>
+          <div className="regla-card">
+            <div className="regla-num">02</div>
+            <div className="regla-title">Mínimo 2 opciones evaluadas</div>
+            <div className="regla-body">No existe una única solución a un problema de arquitectura. Siempre evalúo al menos dos alternativas y documento por qué elegí la que elegí — con criterio técnico y de negocio.</div>
+          </div>
+          <div className="regla-card">
+            <div className="regla-num">03</div>
+            <div className="regla-title">IA como herramienta, no muleta</div>
+            <div className="regla-body">La IA me da velocidad. El criterio técnico y el juicio de arquitectura son míos. Reviso, valido y refino cada output antes de que entre al proyecto. El estándar no baja.</div>
+          </div>
+        </div>
+
+        <div className="cta-band cta-band--accent">
+          <div>
+            <h3 className="cta-band-h">¿Tu próximo proyecto o<br />rescatando uno <em>existente</em>?</h3>
+            <p className="cta-band-sub">Si tu problema es nuevo o ya tienes un sistema que necesita mejorar — el resultado es el mismo: un sistema que escala sin depender de nadie.</p>
+          </div>
+          <div className="cta-band-btns">
+            <a className="btn btn-primary" href="mailto:hola@modavidc.com">Hablemos →</a>
+            <a className="btn btn-secondary" href="/casos-de-exito">Ver todos los casos</a>
+          </div>
+        </div>
+      </section>
+
     </div>
   )
-} 
+}

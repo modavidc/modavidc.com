@@ -1,0 +1,151 @@
+<svg width="1280" height="640" viewBox="0 0 1280 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Background -->
+  <rect width="1280" height="640" fill="#0b0c0e"/>
+
+  <!-- KPI surface (right section) -->
+  <rect x="808" y="0" width="472" height="640" fill="#111316"/>
+
+  <!-- Grid dividers (KPI section) -->
+  <line x1="808" y1="0"   x2="808"  y2="640" stroke="#202227" stroke-width="1"/>
+  <line x1="1024" y1="40" x2="1024" y2="600" stroke="#202227" stroke-width="1"/>
+  <line x1="808" y1="320" x2="1280" y2="320" stroke="#202227" stroke-width="1"/>
+
+  <!-- Inner frame (left column) -->
+  <rect x="40" y="40" width="728" height="560" fill="none" stroke="#202227" stroke-width="1"/>
+
+  <!-- ════════════════════════════════════
+       LEFT CONTENT
+  ════════════════════════════════════ -->
+
+  <!-- Mark icon (36×36, scaled from 48×48) -->
+  <g transform="translate(72, 72) scale(0.75)">
+    <rect width="48" height="48" rx="8" fill="#181a1d"/>
+    <rect x="11" y="11" width="26" height="26" rx="3" fill="none" stroke="#303540" stroke-width="1"/>
+    <path d="M14 32 L14 20 L21 27 L28 20 L28 32"
+      stroke="#34d675" stroke-width="2.2"
+      stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <circle cx="34" cy="32" r="2" fill="#34d675"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="118" y="101"
+    font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif"
+    font-size="22" font-weight="400" letter-spacing="-0.5">
+    <tspan fill="#34d675">mo</tspan><tspan fill="#eaedf2">davidc</tspan>
+  </text>
+
+  <!-- Tagline (mono) -->
+  <text x="118" y="122"
+    font-family="'DM Mono', 'SF Mono', 'Fira Code', 'Roboto Mono', monospace"
+    font-size="9.5" fill="#555c6a" letter-spacing="1.8">
+    HONEST WORK. EFFICIENT ARCHITECTURES.
+  </text>
+
+  <!-- Name -->
+  <text x="72" y="282"
+    font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif"
+    font-size="82" font-weight="300" letter-spacing="-3.2" fill="#eaedf2">
+    Moisés Cedeño
+  </text>
+
+  <!-- Green accent bar + Title -->
+  <rect x="72" y="302" width="40" height="2" fill="#34d675"/>
+  <text x="122" y="316"
+    font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif"
+    font-size="22" font-weight="500" letter-spacing="-0.4" fill="#34d675">
+    Solutions Architect · FinOps &amp; Cloud
+  </text>
+
+  <!-- Description -->
+  <text x="72" y="372"
+    font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif"
+    font-size="15" font-weight="300" fill="#9aa0ae" letter-spacing="-0.1">
+    +8 años en Healthcare, SaaS e IoT · Lima, Perú
+  </text>
+
+  <!-- Bottom links -->
+  <text x="72" y="560"
+    font-family="'DM Mono', 'SF Mono', 'Fira Code', 'Roboto Mono', monospace"
+    font-size="10" fill="#555c6a" letter-spacing="1.2">
+    modavidc.com  ·  github.com/modavidc  ·  linkedin.com/in/modavidc
+  </text>
+
+
+  <!-- ════════════════════════════════════
+       KPI GRID (2×2)
+       Left cells  x: 808–1024 center=916
+       Right cells x: 1024–1280 center=1152
+       Top cells   y: 0–320    center=160
+       Bottom cells y:320–640  center=480
+  ════════════════════════════════════ -->
+
+  <!-- ── KPI 1: -58% (green, top-left) ── -->
+  <text x="916" y="175" text-anchor="middle"
+    font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif"
+    font-size="72" font-weight="500" letter-spacing="-3" fill="#34d675">
+    -58%
+  </text>
+  <text x="916" y="214" text-anchor="middle"
+    font-family="'DM Mono', 'SF Mono', 'Fira Code', 'Roboto Mono', monospace"
+    font-size="9.5" fill="#555c6a" letter-spacing="2">
+    FACTURA AWS
+  </text>
+  <text x="916" y="234" text-anchor="middle"
+    font-family="'DM Mono', 'SF Mono', 'Fira Code', 'Roboto Mono', monospace"
+    font-size="9.5" fill="#555c6a" letter-spacing="1.5">
+    MediRec · 2023
+  </text>
+
+  <!-- ── KPI 2: 48h (top-right) ── -->
+  <text x="1152" y="175" text-anchor="middle"
+    font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif"
+    font-size="72" font-weight="500" letter-spacing="-3" fill="#eaedf2">
+    48h
+  </text>
+  <text x="1152" y="214" text-anchor="middle"
+    font-family="'DM Mono', 'SF Mono', 'Fira Code', 'Roboto Mono', monospace"
+    font-size="9.5" fill="#555c6a" letter-spacing="2">
+    ONBOARDING
+  </text>
+  <text x="1152" y="234" text-anchor="middle"
+    font-family="'DM Mono', 'SF Mono', 'Fira Code', 'Roboto Mono', monospace"
+    font-size="9.5" fill="#555c6a" letter-spacing="1.5">
+    Dev nuevo productivo
+  </text>
+
+  <!-- ── KPI 3: 20K+ (bottom-left) ── -->
+  <text x="916" y="464" text-anchor="middle"
+    font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif"
+    font-size="64" font-weight="500" letter-spacing="-2.5" fill="#eaedf2">
+    20K+
+  </text>
+  <text x="916" y="500" text-anchor="middle"
+    font-family="'DM Mono', 'SF Mono', 'Fira Code', 'Roboto Mono', monospace"
+    font-size="9.5" fill="#555c6a" letter-spacing="2">
+    USUARIOS
+  </text>
+  <text x="916" y="520" text-anchor="middle"
+    font-family="'DM Mono', 'SF Mono', 'Fira Code', 'Roboto Mono', monospace"
+    font-size="9.5" fill="#555c6a" letter-spacing="1.5">
+    En producción
+  </text>
+
+  <!-- ── KPI 4: +8 (bottom-right) ── -->
+  <text x="1152" y="464" text-anchor="middle"
+    font-family="'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif"
+    font-size="64" font-weight="500" letter-spacing="-2.5" fill="#eaedf2">
+    +8
+  </text>
+  <text x="1152" y="500" text-anchor="middle"
+    font-family="'DM Mono', 'SF Mono', 'Fira Code', 'Roboto Mono', monospace"
+    font-size="9.5" fill="#555c6a" letter-spacing="2">
+    AÑOS EXP.
+  </text>
+  <text x="1152" y="520" text-anchor="middle"
+    font-family="'DM Mono', 'SF Mono', 'Fira Code', 'Roboto Mono', monospace"
+    font-size="9.5" fill="#555c6a" letter-spacing="1.5">
+    Healthcare · SaaS · IoT
+  </text>
+
+</svg>

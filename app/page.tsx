@@ -1,586 +1,309 @@
-"use client"
-
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { ArrowRight, Github, Linkedin, Mail, Twitter, Instagram, Youtube, Dribbble, Globe, Bell, CheckCircle, XCircle, Cloud, Zap, TrendingUp, Shield } from "lucide-react"
 import Image from "next/image"
-import { Badge } from "@/components/ui/badge"
-import { useState } from "react"
 
 export default function Home() {
-  const [isAvailable, setIsAvailable] = useState(false);
-  const [notificationRequested, setNotificationRequested] = useState(false);
-
-  const handleNotificationRequest = () => {
-    // Aquí podrías implementar la lógica para registrar el interés del usuario
-    setNotificationRequested(true);
-    alert("Te avisaré cuando esté disponible para colaborar.");
-  };
-
   return (
-    <div className="flex flex-col min-h-screen">
-      <main className="flex-1">
-        {/* Hero Section with improved visual design */}
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-background via-background to-muted/50 relative overflow-hidden">
-          {/* Background decorative elements */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute -top-[40%] -right-[10%] w-[80%] h-[80%] rounded-full bg-primary/5 blur-3xl"></div>
-            <div className="absolute -bottom-[30%] -left-[10%] w-[60%] h-[60%] rounded-full bg-primary/5 blur-3xl"></div>
+    <>
+      {/* ═══ HERO ════════════════════════════════════════════════ */}
+      <div className="hero">
+        <div className="hero-left">
+          <div className="hero-kicker">Solutions Architect · FinOps &amp; Cloud · Healthcare &amp; SaaS</div>
+          <h1 className="hero-h1">
+            Construyo software<br />
+            que escala sin depender<br />
+            <em>de quién lo creó.</em>
+          </h1>
+          <p className="hero-sub">
+            +8 años en Healthcare, SaaS e IoT entregando sistemas que cualquier dev puede mantener desde el primer día. Sin documentación muerta. Sin dependencia de persona.
+          </p>
+          <div className="hero-ctas">
+            <Link className="btn btn-primary" href="/contact">Hablemos →</Link>
+            <Link className="btn btn-secondary" href="/casos-de-exito">Ver casos de éxito</Link>
           </div>
+        </div>
 
-          <div className="container px-4 md:px-6 relative z-10">
-            <div className="grid gap-8 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_500px] items-center">
-              <div className="flex flex-col justify-center space-y-6">
-                <Badge className="w-fit" variant="destructive">
-                  {isAvailable ? "Disponible" : "No Disponible Actualmente"}
-                </Badge>
-                <div className="flex items-center space-x-2">
-                  {isAvailable ? (
-                    <CheckCircle className="text-green-500" />
-                  ) : (
-                    <XCircle className="text-red-500" />
-                  )}
-                  <span>{isAvailable ? "Disponible" : "No disponible"}</span>
-                  {!isAvailable && !notificationRequested && (
-                    <button
-                      onClick={handleNotificationRequest}
-                      className="flex items-center space-x-1 text-blue-500 hover:underline"
-                    >
-                      <Bell />
-                      <span>Notificarme</span>
-                    </button>
-                  )}
-                </div>
-                <div className="space-y-2">
-                  <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">Moisés Cedeño</h1>
-                  <p className="text-xl text-muted-foreground">Arquitecto de Rescate. Liderando la Ingeniería de la Razón.</p>
-                </div>
-                <p className="max-w-[600px] text-muted-foreground text-lg">
-                  La IA acelera la deuda técnica. Mi foco es la arquitectura por propósito para convertir sistemas <em>Legacy</em> en ventaja competitiva. Creador de <Link href="https://mc-dc.com" className="text-primary hover:underline font-medium">MC-DC</Link>.
-                </p>
-                
-                {/* Métricas de Impacto */}
-                <div className="grid grid-cols-2 gap-4 py-4">
-                  <div className="text-center p-3 bg-primary/5 rounded-lg">
-                    <div className="text-2xl font-bold text-primary">58%</div>
-                    <div className="text-sm text-muted-foreground">Reducción costos AWS</div>
-                  </div>
-                  <div className="text-center p-3 bg-primary/5 rounded-lg">
-                    <div className="text-2xl font-bold text-primary">$20k+</div>
-                    <div className="text-sm text-muted-foreground">Ahorro en licencias</div>
-                  </div>
-                </div>
-
-                <div className="flex flex-col gap-3 min-[400px]:flex-row">
-                  <Link href="/projects">
-                    <Button className="inline-flex items-center justify-center w-full min-[400px]:w-auto" size="lg">
-                      Ver Proyectos
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </Link>
-                  <Link href="/metodologia">
-                    <Button
-                      variant="outline"
-                      className="inline-flex items-center justify-center w-full min-[400px]:w-auto"
-                      size="lg"
-                    >
-                      Mi Metodología
-                    </Button>
-                  </Link>
-                  <Link href="/experience">
-                    <Button
-                      variant="outline"
-                      className="inline-flex items-center justify-center w-full min-[400px]:w-auto"
-                      size="lg"
-                    >
-                      Experiencia
-                    </Button>
-                  </Link>
-                </div>
-                <div className="flex items-center gap-4 mt-4">
-                  <Link href="https://github.com/modavidc" target="_blank" rel="noopener noreferrer">
-                    <Button variant="ghost" size="icon" className="rounded-full h-10 w-10">
-                      <Github className="h-5 w-5" />
-                      <span className="sr-only">GitHub</span>
-                    </Button>
-                  </Link>
-                  <Link href="https://linkedin.com/in/modavidc" target="_blank" rel="noopener noreferrer">
-                    <Button variant="ghost" size="icon" className="rounded-full h-10 w-10">
-                      <Linkedin className="h-5 w-5" />
-                      <span className="sr-only">LinkedIn</span>
-                    </Button>
-                  </Link>
-                  <Link href="https://twitter.com/modavidc" target="_blank" rel="noopener noreferrer">
-                    <Button variant="ghost" size="icon" className="rounded-full h-10 w-10">
-                      <Twitter className="h-5 w-5" />
-                      <span className="sr-only">Twitter</span>
-                    </Button>
-                  </Link>
-                  <Link href="https://instagram.com/modavidc" target="_blank" rel="noopener noreferrer">
-                    <Button variant="ghost" size="icon" className="rounded-full h-10 w-10">
-                      <Instagram className="h-5 w-5" />
-                      <span className="sr-only">Instagram</span>
-                    </Button>
-                  </Link>
-                  <Link href="https://youtube.com/@modavidc" target="_blank" rel="noopener noreferrer">
-                    <Button variant="ghost" size="icon" className="rounded-full h-10 w-10">
-                      <Youtube className="h-5 w-5" />
-                      <span className="sr-only">YouTube</span>
-                    </Button>
-                  </Link>
-                  <Link href="mailto:moisesdavidaaron@gmail.com">
-                    <Button variant="ghost" size="icon" className="rounded-full h-10 w-10">
-                      <Mail className="h-5 w-5" />
-                      <span className="sr-only">Email</span>
-                    </Button>
-                  </Link>
-                </div>
+        <div className="hero-right">
+          <div className="hero-photo-wrap">
+            <Image
+              src="/assets/profile/moises_cedeno.png"
+              alt="Moisés Cedeño — Solutions Architect"
+              width={360}
+              height={480}
+              priority
+              style={{ width: "100%", height: "auto" }}
+            />
+            <div className="hero-photo-caption">
+              <div>
+                <div className="hero-photo-name">Moisés Cedeño</div>
+                <div className="hero-photo-role">Solutions Architect · Lima, Perú</div>
               </div>
-              <div className="flex items-center justify-center">
-                <div className="relative w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] lg:w-[400px] lg:h-[400px] rounded-full overflow-hidden border-8 border-background shadow-xl">
-                  <Image
-                    src="https://media.licdn.com/dms/image/v2/C4D03AQFzbPWazkukLQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1628294029732?e=1747872000&v=beta&t=vjFW3nkrASFHqWgkraI1dGjHfmpZqYOeifF6zq0unfY"
-                    alt="Moisés Cedeño"
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                </div>
+              <div className="hero-photo-badge">Disponible</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      {/* ═══ KPI BAR ═════════════════════════════════════════════ */}
+      <div className="full-border">
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <div className="kpi-bar">
+            <div className="kpi-cell">
+              <div className="kpi-val green">-58%</div>
+              <div className="kpi-label">Factura AWS</div>
+              <div className="kpi-sub">MediRec · 2023</div>
+            </div>
+            <div className="kpi-cell">
+              <div className="kpi-val">+8</div>
+              <div className="kpi-label">Años de experiencia</div>
+              <div className="kpi-sub">Healthcare · SaaS · IoT</div>
+            </div>
+            <div className="kpi-cell">
+              <div className="kpi-val">20K+</div>
+              <div className="kpi-label">Usuarios en producción</div>
+              <div className="kpi-sub">Sistemas multi-tenant</div>
+            </div>
+            <div className="kpi-cell">
+              <div className="kpi-val">48h</div>
+              <div className="kpi-label">Onboarding de dev nuevo</div>
+              <div className="kpi-sub">Sin dependencia de persona</div>
+            </div>
+            <div className="kpi-cell">
+              <div className="kpi-val">-$20K</div>
+              <div className="kpi-label">En licencias / año</div>
+              <div className="kpi-sub">Migración NLMI · 2024</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      {/* ═══ INDUSTRY TAGS ══════════════════════════════════════ */}
+      <div style={{ borderBottom: "1px solid var(--border)", background: "var(--bg)" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "20px 48px", display: "flex", alignItems: "center", gap: "32px", flexWrap: "wrap" }}>
+          <span style={{ fontFamily: "var(--ff-mono)", fontSize: "9px", color: "var(--text-3)", letterSpacing: ".18em", textTransform: "uppercase", whiteSpace: "nowrap" }}>Industrias</span>
+          <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", alignItems: "center" }}>
+            {["Healthcare", "SaaS", "IoT", "Gov-Tech", "FinOps", "Sistemas distribuidos"].map(tag => (
+              <span key={tag} style={{ fontFamily: "var(--ff-mono)", fontSize: "10px", color: "var(--text-3)", letterSpacing: ".08em", padding: "3px 10px", border: "1px solid var(--border)", borderRadius: "2px" }}>{tag}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ═══ MI ENFOQUE ══════════════════════════════════════════ */}
+      <div id="metodologia" className="full-border">
+        <section className="section">
+          <div className="section-kicker">Mi Enfoque</div>
+          <h2 className="section-h2">Entrego sistemas que funcionan<br />cuando yo no estoy.</h2>
+          <p className="section-sub">Documentación que permite que cualquier dev entienda el sistema. Arquitecturas que no dependen del conocimiento de una sola persona.</p>
+
+          <div className="enfoque-grid">
+            <div className="enfoque-cell">
+              <div className="enfoque-icon">IA</div>
+              <div className="enfoque-title">Velocidad con criterio</div>
+              <div className="enfoque-body">Uso IA como acelerador, no como sustituto del criterio técnico. Entrego en semanas lo que antes tardaba meses — con la misma calidad de arquitectura.</div>
+              <span className="metric-tag">+400% velocidad de desarrollo</span>
+            </div>
+            <div className="enfoque-cell">
+              <div className="enfoque-icon" style={{ color: "var(--blue)" }}>↗</div>
+              <div className="enfoque-title">Arquitectura que escala</div>
+              <div className="enfoque-body">Diseño sistemas para el día que yo ya no esté. Decisiones documentadas, patrones reusables, onboarding de 48h para cualquier dev nuevo en el equipo.</div>
+              <span className="metric-tag neutral">48h onboarding · garantizado</span>
+            </div>
+            <div className="enfoque-cell">
+              <div className="enfoque-icon" style={{ color: "var(--violet)" }}>⌬</div>
+              <div className="enfoque-title">Autonomía del equipo</div>
+              <div className="enfoque-body">Dejo equipos más capaces de lo que los encontré. Registro de decisiones, guías de contribución y documentación viva que cualquier dev puede navegar solo.</div>
+              <span className="metric-tag neutral">0 dependencias de persona clave</span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+
+      {/* ═══ PROBLEMAS QUE RESUELVO ══════════════════════════════ */}
+      <div className="full-border">
+        <section className="section">
+          <div className="section-kicker">Problemas que Resuelvo</div>
+          <h2 className="section-h2">¿Te suena alguno de estos?</h2>
+          <p className="section-sub">Si una de estas situaciones describe tu empresa hoy, probablemente podamos hablar.</p>
+
+          <div className="problemas-list">
+            <div className="problema-item">
+              <div className="problema-q">¿Tu factura de AWS sube cada mes sin una explicación clara de por qué?</div>
+              <div className="problema-a">
+                <strong>Reduzco costos de nube sin tocar la disponibilidad.</strong> En MediRec identifiqué instancias sobredimensionadas, eliminé recursos huérfanos y reestructuré el modelo de reservas. Resultado: <strong>-58% en factura AWS</strong> en 90 días, con la plataforma al 100% de uptime.
+                <br /><Link className="problema-link" href="/casos-de-exito">Ver caso completo →</Link>
+              </div>
+            </div>
+            <div className="problema-item">
+              <div className="problema-q">¿Cada vez que un dev se va, el proyecto pierde velocidad durante semanas?</div>
+              <div className="problema-a">
+                <strong>Elimino la dependencia de persona clave.</strong> Implemento arquitecturas documentadas donde el conocimiento vive en el sistema, no en la cabeza de alguien. Un dev nuevo queda productivo en <strong>48 horas</strong>.
+              </div>
+            </div>
+            <div className="problema-item">
+              <div className="problema-q">¿Pagas licencias de software por herramientas que podrías construir internamente?</div>
+              <div className="problema-a">
+                <strong>Migro dependencias costosas a alternativas open source sin perder funcionalidad.</strong> En un proyecto Healthcare migré LexComp a NLMI, eliminando <strong>$20k/año</strong> en licencias farmacéuticas sin comprometer la integridad clínica.
+                <br /><Link className="problema-link" href="/casos-de-exito">Ver caso completo →</Link>
+              </div>
+            </div>
+            <div className="problema-item">
+              <div className="problema-q">¿Tu equipo tarda meses en onboardear un dev nuevo en el sistema?</div>
+              <div className="problema-a">
+                <strong>Construyo sistemas con onboarding documentado.</strong> ADRs (Architecture Decision Records), guías de contribución y runbooks que permiten que cualquier dev navegue el sistema solo — en horas, no semanas.
               </div>
             </div>
           </div>
         </section>
+      </div>
 
-        {/* Skills Section - Redefined for Cloud Infrastructure focus */}
-        <section className="w-full py-12 md:py-16 bg-muted/30">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Principios de Ingeniería de la Razón</h2>
-                <p className="max-w-[700px] text-muted-foreground md:text-xl">
-                  Aplicando la filosofía de arquitectura que garantiza el ROI y la sostenibilidad
-                </p>
+
+      {/* ═══ TESTIMONIOS ══════════════════════════════════════════ */}
+      <div id="testimonios" className="full-border">
+        <section className="section">
+          <div className="section-kicker">Testimonios</div>
+          <h2 className="section-h2">Feedback real de proyectos<br />documentados.</h2>
+          <p className="section-sub">Algunos detalles modificados por NDA. Las métricas son verificables.</p>
+
+          <div className="test-grid">
+            <div className="test-cell">
+              <div className="test-quote">El nuevo dev estuvo productivo en menos de 48 horas gracias al registro de decisiones que Moisés implementó. Nunca habíamos onboardeado tan rápido.</div>
+              <div className="test-meta">
+                <div className="test-name">Product Owner</div>
+                <div className="test-role">Plataforma Healthcare · Lima, 2023</div>
+                <span className="cat-badge cat-violet"><span className="dot" />Healthcare</span>
               </div>
             </div>
-            <div className="mx-auto grid max-w-5xl gap-8 py-8 md:grid-cols-2 lg:grid-cols-4">
-              <div className="flex flex-col items-center space-y-2 rounded-lg border bg-background p-6 shadow-sm transition-all hover:shadow-md">
-                <div className="rounded-full bg-primary/10 p-3">
-                  <Zap className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="text-xl font-bold">Diseño de APIs por Propósito</h3>
-                <p className="text-center text-sm text-muted-foreground">
-                  No solo construyo endpoints, diseño la autonomía y el bajo acoplamiento de tus microservicios.
-                </p>
+            <div className="test-cell">
+              <div className="test-quote">Redujimos la factura de AWS en un 58% en menos de tres meses. Lo que más sorprendió al equipo fue que la disponibilidad no bajó ni un punto durante el proceso.</div>
+              <div className="test-meta">
+                <div className="test-name">Director de TI</div>
+                <div className="test-role">MediRec · SaaS Healthcare · 2023</div>
+                <span className="cat-badge cat-green"><span className="dot" />FinOps</span>
               </div>
-              <div className="flex flex-col items-center space-y-2 rounded-lg border bg-background p-6 shadow-sm transition-all hover:shadow-md">
-                <div className="rounded-full bg-primary/10 p-3">
-                  <TrendingUp className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="text-xl font-bold">Liderazgo de Ingeniería y Filosofía</h3>
-                <p className="text-center text-sm text-muted-foreground">
-                  Llevando a equipos a priorizar el valor de negocio sobre la velocidad de la moda tecnológica.
-                </p>
-              </div>
-              <div className="flex flex-col items-center space-y-2 rounded-lg border bg-background p-6 shadow-sm transition-all hover:shadow-md">
-                <div className="rounded-full bg-primary/10 p-3">
-                  <Shield className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="text-xl font-bold">Testing de Valor (Validación del Problema)</h3>
-                <p className="text-center text-sm text-muted-foreground">
-                  Mi QA va más allá del unit test: aseguramos que la solución resuelva el dolor de negocio real (Outcome Testing).
-                </p>
-              </div>
-              <div className="flex flex-col items-center space-y-2 rounded-lg border bg-background p-6 shadow-sm transition-all hover:shadow-md">
-                <div className="rounded-full bg-primary/10 p-3">
-                  <Cloud className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="text-xl font-bold">Arquitecto de Rescate</h3>
-                <p className="text-center text-sm text-muted-foreground">
-                  Modernización de sistemas complejos y conversión de deuda técnica en ventaja competitiva.
-                </p>
+            </div>
+            <div className="test-cell">
+              <div className="test-quote">Moisés no solo entregó el sistema — entregó documentación que hace que cualquier dev pueda contribuir desde el día uno. Eso vale más que el código.</div>
+              <div className="test-meta">
+                <div className="test-name">CTO</div>
+                <div className="test-role">SaaS IoT · Miami, 2024</div>
+                <span className="cat-badge cat-blue"><span className="dot" />SaaS</span>
               </div>
             </div>
           </div>
-        </section>
 
-        {/* Impact Statistics Section */}
-        <section className="w-full py-12 md:py-16 bg-background">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Impacto Medible</h2>
-                <p className="max-w-[700px] text-muted-foreground md:text-xl">
-                  Resultados cuantificables de mis proyectos y optimizaciones
-                </p>
+          <div style={{ marginTop: "20px", textAlign: "center" }}>
+            <Link className="btn btn-secondary" href="/testimonials" style={{ fontSize: "13px" }}>Ver los 6 testimonios →</Link>
+          </div>
+        </section>
+      </div>
+
+
+      {/* ═══ CASOS DE ÉXITO ══════════════════════════════════════ */}
+      <div id="casos" className="full-border">
+        <section className="section">
+          <div className="section-kicker">Casos de Éxito</div>
+          <h2 className="section-h2">Proyectos reales.<br />Métricas verificables.</h2>
+          <p className="section-sub">8 años de decisiones técnicas documentadas. Selecciona el que más se acerque a tu contexto.</p>
+
+          <div className="casos-grid">
+            <div className="caso-card">
+              <div className="caso-meta">
+                <span>Work · Healthcare</span>
+                <span>2023</span>
+              </div>
+              <div className="caso-title">Cómo reduje 58% la factura AWS de MediRec</div>
+              <div className="caso-body">Re-arquitectura y gobernanza de costos en plataforma Healthcare con 20K+ usuarios. Instancias reservadas, auto-scaling inteligente y eliminación de recursos huérfanos — sin tocar uptime.</div>
+              <div className="caso-foot">
+                <span className="metric-tag">-58% AWS · $180K ahorrados</span>
+                <Link className="caso-link" href="/casos-de-exito/detail/medirec-aws">Ver caso →</Link>
               </div>
             </div>
-            <div className="mx-auto grid max-w-4xl gap-8 py-12 md:grid-cols-2 lg:grid-cols-4">
-              <div className="flex flex-col items-center space-y-2 text-center">
-                <div className="text-4xl font-bold text-primary">58%</div>
-                <p className="text-sm text-muted-foreground">Reducción en costos AWS</p>
-                <p className="text-xs text-muted-foreground">MediRec Infrastructure</p>
+            <div className="caso-card">
+              <div className="caso-meta">
+                <span>Work · FinOps</span>
+                <span>2024</span>
               </div>
-              <div className="flex flex-col items-center space-y-2 text-center">
-                <div className="text-4xl font-bold text-primary">$20k+</div>
-                <p className="text-sm text-muted-foreground">Ahorro en licencias</p>
-                <p className="text-xs text-muted-foreground">LexiComp → NLM Migration</p>
+              <div className="caso-title">Cómo eliminé $20k/año en licencias farmacéuticas</div>
+              <div className="caso-body">Migración de LexComp a NLMI sin perder integridad clínica ni cobertura de datos. Sistema de validación de medicamentos que cumple PREIS con la mitad del costo operativo.</div>
+              <div className="caso-foot">
+                <span className="metric-tag neutral">-$20k/año · 0 downtime</span>
+                <Link className="caso-link" href="/casos-de-exito/detail/licencias-farmaceuticas">Ver caso →</Link>
               </div>
-              <div className="flex flex-col items-center space-y-2 text-center">
-                <div className="text-4xl font-bold text-primary">400%</div>
-                <p className="text-sm text-muted-foreground">Mejora en tiempo de programación</p>
-                <p className="text-xs text-muted-foreground">T-Cuida Wearables</p>
+            </div>
+            <div className="caso-card">
+              <div className="caso-meta">
+                <span>Work · SaaS</span>
+                <span>2023</span>
               </div>
-              <div className="flex flex-col items-center space-y-2 text-center">
-                <div className="text-4xl font-bold text-primary">8</div>
-                <p className="text-sm text-muted-foreground">Semanas para primera app móvil</p>
-                <p className="text-xs text-muted-foreground">MediRec Flutter App</p>
+              <div className="caso-title">Lab Middleware: -70% en tiempo de resultados clínicos</div>
+              <div className="caso-body">Middleware de integración de laboratorio que redujo el tiempo de entrega de resultados clínicos de 6 horas a menos de 90 minutos. Stack: Node + HL7 + AWS Lambda.</div>
+              <div className="caso-foot">
+                <span className="cat-badge cat-violet"><span className="dot" />Healthcare</span>
+                <Link className="caso-link" href="/casos-de-exito/detail/lab-middleware">Ver caso →</Link>
+              </div>
+            </div>
+            <div className="caso-card">
+              <div className="caso-meta">
+                <span>Personal · IoT</span>
+                <span>2024</span>
+              </div>
+              <div className="caso-title">Lo que construyo cuando nadie me paga</div>
+              <div className="caso-body">Proyectos de exploración técnica: sistemas IoT con MQTT y edge computing, herramientas de automatización personal, experimentos de arquitectura distribuida en Raspberry Pi.</div>
+              <div className="caso-foot">
+                <span className="cat-badge cat-amber"><span className="dot" />Personal</span>
+                <Link className="caso-link" href="/labs">Ver proyectos →</Link>
               </div>
             </div>
           </div>
-        </section>
 
-        {/* Featured Projects Section - Updated with real projects */}
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-background">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Proyectos Destacados</h2>
-                <p className="max-w-[900px] text-muted-foreground md:text-xl">
-                  Casos de estudio reales de optimización de infraestructura e integración de sistemas
-                </p>
-              </div>
-            </div>
-            <div className="mx-auto grid max-w-6xl items-center gap-8 py-12 lg:grid-cols-2 xl:grid-cols-3">
-              {/* Project Card 1 - AWS Infrastructure Optimization */}
-              <div className="group relative overflow-hidden rounded-xl border bg-background transition-all hover:shadow-lg">
-                <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100"></div>
-                <div className="relative aspect-video overflow-hidden">
-                  <Image
-                    src="https://d2908q01vomqb2.cloudfront.net/887309d048beef83ad3eabf2a79a64a389ab1c9f/2021/05/21/dbblog_1088_v2_02.png"
-                    alt="AWS Infrastructure Optimization"
-                    width={500}
-                    height={300}
-                    className="object-cover transition-all duration-300 group-hover:scale-105"
-                  />
-                  <Badge className="absolute top-3 right-3 z-20">MediRec</Badge>
-                </div>
-                <div className="p-5">
-                  <h3 className="text-xl font-bold">AWS Infrastructure Optimization</h3>
-                  <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
-                    Reducción del 58% en costos operativos mediante estrategias de optimización y automatización.
-                  </p>
-                  <div className="mt-3 flex flex-wrap gap-1">
-                    <Badge variant="secondary" className="bg-primary/10 hover:bg-primary/20">
-                      AWS
-                    </Badge>
-                    <Badge variant="secondary" className="bg-primary/10 hover:bg-primary/20">
-                      Docker
-                    </Badge>
-                    <Badge variant="secondary" className="bg-primary/10 hover:bg-primary/20">
-                      CI/CD
-                    </Badge>
-                  </div>
-                  <div className="mt-4">
-                    <Link href="/projects/aws-infrastructure-optimization">
-                      <Button variant="outline" size="sm" className="w-full">
-                        Ver Detalles
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-
-              {/* Project Card 2 - PREIS API Integration */}
-              <div className="group relative overflow-hidden rounded-xl border bg-background transition-all hover:shadow-lg">
-                <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100"></div>
-                <div className="relative aspect-video overflow-hidden">
-                  <Image
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMzZbfSXff0UWQQ0_AxGlJb7QmaqIDghSwoQ&s"
-                    alt="PREIS API Integration"
-                    width={500}
-                    height={300}
-                    className="object-cover transition-all duration-300 group-hover:scale-105"
-                  />
-                  <Badge className="absolute top-3 right-3 z-20">MediRec</Badge>
-                </div>
-                <div className="p-5">
-                  <h3 className="text-xl font-bold">PREIS API Integration</h3>
-                  <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
-                    Integración con sistema gubernamental para envío automatizado de registros de vacunación.
-                  </p>
-                  <div className="mt-3 flex flex-wrap gap-1">
-                    <Badge variant="secondary" className="bg-primary/10 hover:bg-primary/20">
-                      REST API
-                    </Badge>
-                    <Badge variant="secondary" className="bg-primary/10 hover:bg-primary/20">
-                      FHIR
-                    </Badge>
-                    <Badge variant="secondary" className="bg-primary/10 hover:bg-primary/20">
-                      Laravel
-                    </Badge>
-                  </div>
-                  <div className="mt-4">
-                    <Link href="/projects/medirec-preis-integration">
-                      <Button variant="outline" size="sm" className="w-full">
-                        Ver Detalles
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-
-              {/* Project Card 3 - Flutter Mobile App */}
-              <div className="group relative overflow-hidden rounded-xl border bg-background transition-all hover:shadow-lg">
-                <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100"></div>
-                <div className="relative aspect-video overflow-hidden">
-                  <Image
-                    src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop"
-                    alt="MediRec Mobile App"
-                    width={500}
-                    height={300}
-                    className="object-cover transition-all duration-300 group-hover:scale-105"
-                  />
-                  <Badge className="absolute top-3 right-3 z-20">MediRec</Badge>
-                </div>
-                <div className="p-5">
-                  <h3 className="text-xl font-bold">App Móvil MediRec</h3>
-                  <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
-                    Primera aplicación móvil de la empresa desarrollada en 8 semanas con Flutter.
-                  </p>
-                  <div className="mt-3 flex flex-wrap gap-1">
-                    <Badge variant="secondary" className="bg-primary/10 hover:bg-primary/20">
-                      Flutter
-                    </Badge>
-                    <Badge variant="secondary" className="bg-primary/10 hover:bg-primary/20">
-                      Dart
-                    </Badge>
-                    <Badge variant="secondary" className="bg-primary/10 hover:bg-primary/20">
-                      Mobile
-                    </Badge>
-                  </div>
-                  <div className="mt-4">
-                    <Link href="/projects/medirec-mobile-app">
-                      <Button variant="outline" size="sm" className="w-full">
-                        Ver Detalles
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-
-              {/* Project Card 4 - T-Cuida Platform */}
-              <div className="group relative overflow-hidden rounded-xl border bg-background transition-all hover:shadow-lg">
-                <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100"></div>
-                <div className="relative aspect-video overflow-hidden">
-                  <Image
-                    src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=2070&auto=format&fit=crop"
-                    alt="T-Cuida Platform"
-                    width={500}
-                    height={300}
-                    className="object-cover transition-all duration-300 group-hover:scale-105"
-                  />
-                  <Badge className="absolute top-3 right-3 z-20">T-Cuida</Badge>
-                </div>
-                <div className="p-5">
-                  <h3 className="text-xl font-bold">T-Cuida - Safety Platform</h3>
-                  <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
-                    Plataforma SaaS de seguridad corporativa con integración de wearables y comunicación multicanal.
-                  </p>
-                  <div className="mt-3 flex flex-wrap gap-1">
-                    <Badge variant="secondary" className="bg-primary/10 hover:bg-primary/20">
-                      Node.js
-                    </Badge>
-                    <Badge variant="secondary" className="bg-primary/10 hover:bg-primary/20">
-                      Vue.js
-                    </Badge>
-                    <Badge variant="secondary" className="bg-primary/10 hover:bg-primary/20">
-                      IoT
-                    </Badge>
-                  </div>
-                  <div className="mt-4">
-                    <Link href="/projects/t-cuida-platform">
-                      <Button variant="outline" size="sm" className="w-full">
-                        Ver Detalles
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-
-              {/* Project Card 5 - José Dergán Website */}
-              <div className="group relative overflow-hidden rounded-xl border bg-background transition-all hover:shadow-lg">
-                <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100"></div>
-                <div className="relative aspect-video overflow-hidden">
-                  <Image
-                    src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=2070&auto=format&fit=crop"
-                    alt="José Dergán Website"
-                    width={500}
-                    height={300}
-                    className="object-cover transition-all duration-300 group-hover:scale-105"
-                  />
-                  <Badge className="absolute top-3 right-3 z-20">Freelance</Badge>
-                </div>
-                <div className="p-5">
-                  <h3 className="text-xl font-bold">José Dergán - Psicólogo</h3>
-                  <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
-                    Sitio web profesional con blog y plataforma de cursos para psicólogo.
-                  </p>
-                  <div className="mt-3 flex flex-wrap gap-1">
-                    <Badge variant="secondary" className="bg-primary/10 hover:bg-primary/20">
-                      Next.js
-                    </Badge>
-                    <Badge variant="secondary" className="bg-primary/10 hover:bg-primary/20">
-                      Sanity CMS
-                    </Badge>
-                    <Badge variant="secondary" className="bg-primary/10 hover:bg-primary/20">
-                      SEO
-                    </Badge>
-                  </div>
-                  <div className="mt-4">
-                    <Link href="/projects/jose-dergan">
-                      <Button variant="outline" size="sm" className="w-full">
-                        Ver Detalles
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-
-              {/* Project Card 6 - Ankicito App */}
-              <div className="group relative overflow-hidden rounded-xl border bg-background transition-all hover:shadow-lg">
-                <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100"></div>
-                <div className="relative aspect-video overflow-hidden">
-                  <Image
-                    src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=2028&auto=format&fit=crop"
-                    alt="Ankicito App"
-                    width={500}
-                    height={300}
-                    className="object-cover transition-all duration-300 group-hover:scale-105"
-                  />
-                  <Badge className="absolute top-3 right-3 z-20">Personal</Badge>
-                </div>
-                <div className="p-5">
-                  <h3 className="text-xl font-bold">Ankicito - Book Exchange</h3>
-                  <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
-                    Aplicación móvil para intercambio de libros y aprendizaje con tarjetas de memoria.
-                  </p>
-                  <div className="mt-3 flex flex-wrap gap-1">
-                    <Badge variant="secondary" className="bg-primary/10 hover:bg-primary/20">
-                      React Native
-                    </Badge>
-                    <Badge variant="secondary" className="bg-primary/10 hover:bg-primary/20">
-                      In Progress
-                    </Badge>
-                    <Badge variant="secondary" className="bg-primary/10 hover:bg-primary/20">
-                      Education
-                    </Badge>
-                  </div>
-                  <div className="mt-4">
-                    <Link href="/projects/ankicito">
-                      <Button variant="outline" size="sm" className="w-full">
-                        Ver Detalles
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex justify-center">
-              <Link href="/projects">
-                <Button variant="outline" className="gap-1">
-                  Ver Todos los Proyectos
-                  <ArrowRight className="h-4 w-4" />
-                </Button>
-              </Link>
-            </div>
+          <div style={{ marginTop: "20px", textAlign: "center" }}>
+            <Link className="btn btn-secondary" href="/casos-de-exito" style={{ fontSize: "13px" }}>Ver todos los casos →</Link>
           </div>
         </section>
+      </div>
 
-        {/* Testimonials Section - Updated with relevant testimonials */}
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-muted/30">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Testimonios</h2>
-                <p className="max-w-[700px] text-muted-foreground md:text-xl">
-                  Lo que dicen mis clientes y colaboradores sobre mi trabajo
-                </p>
-              </div>
-            </div>
-            <div className="mx-auto grid max-w-5xl gap-6 py-12 lg:grid-cols-2">
-              <div className="rounded-xl border bg-background p-6 shadow-sm">
-                <div className="flex items-start gap-4">
-                  <div className="relative h-10 w-10 rounded-full bg-muted">
-                    <Image
-                      src="/placeholder.svg?height=40&width=40"
-                      alt="Client"
-                      fill
-                      className="rounded-full object-cover"
-                    />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">
-                      "Moisés lideró la optimización de nuestra infraestructura AWS, reduciendo costos en un 58% sin afectar el rendimiento. Su expertise en cloud y APIs fue fundamental para nuestro éxito."
-                    </p>
-                    <div className="mt-3">
-                      <p className="text-sm font-medium">Director Técnico</p>
-                      <p className="text-xs text-muted-foreground">MediRec</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="rounded-xl border bg-background p-6 shadow-sm">
-                <div className="flex items-start gap-4">
-                  <div className="relative h-10 w-10 rounded-full bg-muted">
-                    <Image
-                      src="/placeholder.svg?height=40&width=40"
-                      alt="Client"
-                      fill
-                      className="rounded-full object-cover"
-                    />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">
-                      "Su capacidad para modernizar sistemas legacy y implementar integraciones complejas con el gobierno fue excepcional. Ahorramos más de $20k en licencias gracias a su trabajo."
-                    </p>
-                    <div className="mt-3">
-                      <p className="text-sm font-medium">CEO</p>
-                      <p className="text-xs text-muted-foreground">MediRec</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+
+      {/* ═══ CTA FINAL ════════════════════════════════════════════ */}
+      <div id="contacto" className="full-border">
+        <div className="cta-final">
+          <div>
+            <div className="section-kicker" style={{ marginBottom: "20px" }}>¿Hablamos?</div>
+            <h2 className="cta-final-h2">¿Buscas este perfil<br />para tu <em>equipo</em>?</h2>
+            <p className="cta-final-sub">
+              Si tienes un proyecto que necesita reducción de costos, escalar sin depender de una sola persona o simplemente construirse bien desde el inicio — cuéntame.
+            </p>
+            <div className="cta-final-btns">
+              <a className="btn btn-primary" href="mailto:hola@modavidc.com">Enviar mensaje →</a>
+              <a className="btn btn-secondary" href="/assets/cv/cv.pdf" download>Descargar CV · PDF</a>
             </div>
           </div>
-        </section>
-
-        {/* Call to Action */}
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-primary/5">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">¿Tu negocio sufre de Deuda Técnica o Caos de IA?</h2>
-                <p className="max-w-[700px] text-muted-foreground md:text-xl">
-                  La arquitectura por propósito convierte sistemas legacy en ventaja competitiva. Hablemos de cómo aplicar la Ingeniería de la Razón a tu negocio.
-                </p>
-              </div>
-              <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Link href="/contact">
-                  <Button size="lg" className="w-full min-[400px]:w-auto">
-                    Hablemos de Arquitectura y ROI
-                  </Button>
-                </Link>
-                <Link href="/metodologia">
-                  <Button variant="outline" size="lg" className="w-full min-[400px]:w-auto">
-                    Leer mi Pensamiento
-                  </Button>
-                </Link>
-              </div>
+          <div className="cta-final-aside">
+            <div className="cta-aside-item">
+              <span className="cta-aside-label">Email</span>
+              <span className="cta-aside-val"><a href="mailto:hola@modavidc.com">hola@modavidc.com</a></span>
+            </div>
+            <div className="cta-aside-item">
+              <span className="cta-aside-label">LinkedIn</span>
+              <span className="cta-aside-val"><a href="https://linkedin.com/in/modavidc" target="_blank" rel="noopener">linkedin.com/in/modavidc</a></span>
+            </div>
+            <div className="cta-aside-item">
+              <span className="cta-aside-label">GitHub</span>
+              <span className="cta-aside-val"><a href="https://github.com/modavidc" target="_blank" rel="noopener">github.com/modavidc</a></span>
+            </div>
+            <div className="cta-aside-item">
+              <span className="cta-aside-label">Disponibilidad</span>
+              <span className="cta-aside-val" style={{ color: "var(--green)" }}>Proyectos seleccionados — preguntar</span>
+            </div>
+            <div className="cta-aside-item">
+              <span className="cta-aside-label">Respuesta</span>
+              <span className="cta-aside-val">Menos de 24h</span>
             </div>
           </div>
-        </section>
-      </main>
-    </div>
+        </div>
+      </div>
+    </>
   )
 }
-

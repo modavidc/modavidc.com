@@ -23,7 +23,6 @@ docker-compose --env-file .env -f docker-compose.prod.yml up -d --build
 ## Desarrollo local
 
 ```bash
-# Por defecto expone 3000:3000. Si ya tienes algo usando el 3000, cambia el puerto host:
-HOST_PORT=3001 docker-compose -f docker-compose.dev.yml up
+docker-compose -f docker-compose.dev.yml up
 ```
 

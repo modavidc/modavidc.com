@@ -1,5 +1,37 @@
 export type ProjectCategory = "Work" | "Freelance" | "Personal" | "Talks"
 
+export type CaseStudyMediaType = "image" | "video"
+
+export interface CaseStudyBenefit {
+  value: string
+  label: string
+  detail?: string
+}
+
+export interface CaseStudyQuote {
+  text: string
+  author?: string
+  role?: string
+}
+
+export interface CaseStudyMediaItem {
+  type: CaseStudyMediaType
+  src: string
+  alt?: string
+}
+
+export interface ProjectAuthor {
+  name?: string
+  headline?: string
+  about?: string
+}
+
+export interface BeforeAfter {
+  before: string
+  after: string
+  metric?: string
+}
+
 export interface Project {
   title: string
   description: string
@@ -10,6 +42,11 @@ export interface Project {
   slug: string
   github: string
   demo: string
+  // Senior narrative fields (featured projects)
+  concept?: string
+  purpose?: string
+  techHighlight?: string
+  impactMetrics?: string[]
   // Extended fields for detail page
   longDescription?: string
   challenge?: string
@@ -20,469 +57,612 @@ export interface Project {
   client?: string
   pillar?: string // For AWS projects
   videoUrl?: string // URL del video explicativo (YouTube, Vimeo, o video directo)
+  // Case study (AWS-like layout)
+  benefits?: CaseStudyBenefit[]
+  servicesUsed?: string[]
+  quote?: CaseStudyQuote
+  gallery?: CaseStudyMediaItem[]
+  author?: ProjectAuthor
+  // NEW: Estructura que vende
+  heroMetric?: string // Métrica principal grande (ej: "-58%")
+  heroMetricLabel?: string // Label de la métrica (ej: "Factura AWS")
+  problem?: {
+    situation: string // Situación inicial
+    pain: string // Dolor/costo de no hacer nada
+    whyMe?: string // Por qué me llamaron
+  }
+  approach?: {
+    strategy: string // Mi estrategia
+    keyDecisions?: string[] // Decisiones técnicas clave
+    timeline?: string // Cuánto tomó
+  }
+  results?: {
+    beforeAfter?: BeforeAfter[]
+    businessImpact?: string
+  }
+  industry?: string // Healthcare, SaaS, etc.
+  duration?: string // "6 meses", "2 meses"
+  storyId?: "medirec" | "nlm" | "preis" | "lab" | "tcuida" | "dashboard" | "bridge" | "mobile" | "estoico" | "grupero" // ID de historia animada
 }
 
+// REGLA DE ORO: NO BORRAR NADA.
+// Los proyectos no seleccionados como "Featured" están archivados en `data/archived_projects.json`.
+import archivedProjectsJson from "@/data/archived_projects.json"
+
+export const archivedProjects = archivedProjectsJson as Record<ProjectCategory, Project[]>
+
+export const featuredProjects: Project[] = [
+  // === TIER 1: FinOps & Impacto Financiero ===
+  {
+    title: "Cómo reduje 58% la factura AWS de MediRec",
+    description: "Re‑arquitectura y gobernanza de costos en plataforma Healthcare.",
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
+    category: "Work",
+    tags: ["AWS", "FinOps", "Terraform", "CloudFormation", "Docker", "CI/CD"],
+    summary: "Proyecto de optimización de infraestructura AWS con impacto financiero directo.",
+    slug: "aws-infrastructure-optimization",
+    github: "#",
+    demo: "#",
+    client: "MediRec, Inc",
+    industry: "Healthcare",
+    year: "2023",
+    duration: "3 meses",
+    heroMetric: "-58%",
+    heroMetricLabel: "Factura AWS",
+    problem: {
+      situation: "Infraestructura AWS sobredimensionada. Servidores EC2 pagando por capacidad que nunca se usaba. Sin gobernanza de recursos ni visibilidad de costos por servicio.",
+      pain: "Factura AWS creciendo mes a mes sin correlación con el crecimiento del negocio. Dinero tirado en recursos ociosos.",
+      whyMe: "Necesitaban alguien que entendiera tanto la arquitectura técnica como el impacto financiero de cada decisión."
+    },
+    approach: {
+      strategy: "Análisis de utilización real con CloudWatch, identificación de recursos sobre-provisionados, implementación de right-sizing e Infrastructure as Code para prevenir drift.",
+      keyDecisions: [
+        "Right-sizing de instancias EC2 basado en métricas reales de CPU/memoria",
+        "Implementación de Auto Scaling para cargas variables",
+        "Migración de EBS a tipos de almacenamiento optimizados",
+        "Governance con Terraform para prevenir over-provisioning futuro"
+      ],
+      timeline: "3 meses desde análisis hasta implementación completa"
+    },
+    results: {
+      beforeAfter: [
+        { before: "100%", after: "42%", metric: "Factura AWS" },
+        { before: "Manual", after: "IaC", metric: "Provisioning" },
+        { before: "Ninguna", after: "Total", metric: "Visibilidad de costos" }
+      ],
+      businessImpact: "Ahorro anual estimado de $20k+ que se reinvirtió en desarrollo de producto."
+    },
+    servicesUsed: ["AWS EC2", "CloudWatch", "Terraform", "CloudFormation", "Docker", "S3", "Route 53"],
+    impactMetrics: ["-58% AWS bill", "-70% deploy time", "IaC governance"],
+    benefits: [
+      { value: "-58%", label: "Factura AWS", detail: "Reducción directa en costos mensuales" },
+      { value: "-70%", label: "Deploy Time", detail: "Gracias a IaC y automatización" },
+      { value: "100%", label: "Visibilidad", detail: "Costos por servicio y equipo" }
+    ],
+    quote: {
+      text: "Moisés no solo optimizó nuestra infraestructura, documentó cada decisión para que el equipo pudiera mantenerla sin depender de él.",
+      author: "Director de Tecnología",
+      role: "MediRec, Inc"
+    },
+    videoUrl: "https://www.youtube.com/watch?v=O7sRLm7urnI",
+    storyId: "medirec",
+    gallery: [
+      { type: "image", src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop", alt: "AWS Cost Explorer Dashboard" },
+      { type: "image", src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop", alt: "Métricas de CloudWatch" },
+      { type: "image", src: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?q=80&w=2074&auto=format&fit=crop", alt: "Arquitectura de infraestructura" }
+    ]
+  },
+  {
+    title: "Cómo eliminé $20k/año en licencias farmacéuticas",
+    description: "Migración de LexiComp a NLM sin perder integridad clínica.",
+    image: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?q=80&w=2069&auto=format&fit=crop",
+    category: "Work",
+    tags: ["Healthcare", "API Integration", "NLM", "Laravel", "PHP", "Cost Optimization"],
+    summary: "Migración de proveedor de datos farmacéuticos con impacto financiero directo.",
+    slug: "nlm-migration",
+    github: "#",
+    demo: "#",
+    client: "MediRec, Inc",
+    industry: "Healthcare",
+    year: "2024",
+    duration: "2 meses",
+    heroMetric: "-$20k",
+    heroMetricLabel: "Ahorro anual",
+    problem: {
+      situation: "La plataforma dependía de LexiComp para datos farmacéuticos (interacciones, dosis, contraindicaciones). Licencia anual de $20,000 USD.",
+      pain: "Costo fijo alto que no escalaba con el negocio. Cada año renovaban sin cuestionar.",
+      whyMe: "Necesitaban validar que NLM (gratuito) tenía la misma calidad de datos antes de migrar."
+    },
+    approach: {
+      strategy: "Análisis comparativo de datos entre LexiComp y NLM, migración gradual con fallback, validación clínica con equipo médico.",
+      keyDecisions: [
+        "Mapeo de equivalencias entre códigos LexiComp y NLM/RxNorm",
+        "API de abstracción para cambiar proveedor sin afectar frontend",
+        "Periodo de prueba paralelo con ambos sistemas",
+        "Validación con farmacéuticos del equipo clínico"
+      ],
+      timeline: "2 meses incluyendo validación clínica"
+    },
+    results: {
+      beforeAfter: [
+        { before: "$20k/año", after: "$0", metric: "Costo de licencias" },
+        { before: "Propietario", after: "Abierto", metric: "Datos" },
+        { before: "Acoplado", after: "Abstraído", metric: "Arquitectura" }
+      ],
+      businessImpact: "Ahorro de $20k anuales reinvertidos en desarrollo de nuevas features."
+    },
+    servicesUsed: ["Laravel", "PHP", "NLM RxNorm API", "MySQL", "PHPUnit", "Postman"],
+    impactMetrics: ["-$20k/año", "Zero downtime", "Clinical integrity"],
+    quote: {
+      text: "La migración fue transparente para los usuarios. Ni los médicos ni los pacientes notaron el cambio, pero nosotros ahorramos $20k al año.",
+      author: "Product Manager",
+      role: "MediRec, Inc"
+    },
+    storyId: "nlm",
+    gallery: [
+      { type: "image", src: "https://images.unsplash.com/photo-1585435557343-3b092031a831?q=80&w=2070&auto=format&fit=crop", alt: "Datos farmacéuticos" },
+      { type: "image", src: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop", alt: "Integración de APIs" }
+    ]
+  },
+  {
+    title: "Integración Gov-Tech: De Excel manual a API automatizada",
+    description: "API de misión crítica para reporte de inmunizaciones al Gobierno de Puerto Rico.",
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=2070&auto=format&fit=crop",
+    category: "Work",
+    tags: ["Gov-Tech", "Healthcare", "API", "Security", "mTLS", "Compliance"],
+    summary: "Integración con sistema gubernamental de inmunización con cumplimiento regulatorio.",
+    slug: "preis-integration",
+    github: "#",
+    demo: "#",
+    client: "MediRec, Inc",
+    industry: "Gov-Tech / Healthcare",
+    year: "2023",
+    duration: "4 meses",
+    heroMetric: "100%",
+    heroMetricLabel: "Compliance",
+    problem: {
+      situation: "El reporte de vacunaciones al sistema PREIS del gobierno se hacía manualmente: exportar a Excel, subir archivo, verificar errores, corregir, resubir.",
+      pain: "Proceso de 2-3 horas semanales propenso a errores. Riesgo de multas por incumplimiento de plazos regulatorios.",
+      whyMe: "Necesitaban integración directa API-to-API con seguridad de nivel gubernamental (mTLS)."
+    },
+    approach: {
+      strategy: "Diseño de API RESTful con autenticación mTLS, mapeo de datos clínicos al formato PREIS, sistema de reintentos y auditoría completa.",
+      keyDecisions: [
+        "mTLS (mutual TLS) para autenticación de ambos lados",
+        "Cola de mensajes con retry automático para fallos temporales",
+        "Audit trail completo para cumplimiento regulatorio",
+        "Dashboard de monitoreo para el equipo de compliance"
+      ],
+      timeline: "4 meses incluyendo certificación con el gobierno"
+    },
+    results: {
+      beforeAfter: [
+        { before: "2-3h/sem", after: "0", metric: "Tiempo manual" },
+        { before: "Errores", after: "Validado", metric: "Calidad de datos" },
+        { before: "Riesgo", after: "100%", metric: "Compliance" }
+      ],
+      businessImpact: "Eliminación de riesgo regulatorio y liberación de tiempo del equipo de compliance."
+    },
+    servicesUsed: ["Laravel", "mTLS", "REST API", "MySQL", "Redis Queue", "Monolog"],
+    impactMetrics: ["100% compliance", "Automated reporting", "mTLS security"],
+    quote: {
+      text: "Pasamos de temer las auditorías a tener todo listo automáticamente. El sistema reporta solo y nosotros solo supervisamos.",
+      author: "Compliance Officer",
+      role: "MediRec, Inc"
+    },
+    storyId: "preis",
+    gallery: [
+      { type: "image", src: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2070&auto=format&fit=crop", alt: "Dashboard de monitoreo" },
+      { type: "image", src: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2034&auto=format&fit=crop", alt: "Integración segura" }
+    ]
+  },
+
+  // === TIER 2: Healthcare Interoperability ===
+  {
+    title: "De fax a real-time: Resultados de lab en minutos",
+    description: "Middleware que redujo 70% el tiempo de comunicación lab-médico.",
+    image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2080&auto=format&fit=crop",
+    category: "Work",
+    tags: ["Healthcare", "Interoperability", "HL7", "FHIR", "Middleware", "Laravel"],
+    summary: "Automatización de flujo de resultados clínicos entre sistemas de laboratorio y EHR.",
+    slug: "lab-middleware",
+    github: "#",
+    demo: "#",
+    client: "MediRec, Inc",
+    industry: "Healthcare",
+    year: "2022",
+    duration: "6 meses",
+    heroMetric: "-70%",
+    heroMetricLabel: "Tiempo de comunicación",
+    problem: {
+      situation: "Los resultados de laboratorio llegaban por fax o PDF. El personal los transcribía manualmente al sistema. Proceso de ~30 minutos por resultado.",
+      pain: "Errores de transcripción, demoras en diagnósticos, médicos esperando resultados que ya estaban listos en el lab.",
+      whyMe: "Necesitaban conectar sistemas legacy (HL7 v2) con su EHR moderno (FHIR R4)."
+    },
+    approach: {
+      strategy: "Middleware de transformación HL7-to-FHIR con parsing robusto, validación clínica, y notificaciones push a médicos.",
+      keyDecisions: [
+        "Parser HL7 v2.x compatible con múltiples laboratorios",
+        "Transformación a FHIR R4 para interoperabilidad moderna",
+        "Notificaciones push inmediatas al médico tratante",
+        "Dashboard de monitoreo para el equipo de IT"
+      ],
+      timeline: "6 meses incluyendo integración con 3 laboratorios"
+    },
+    results: {
+      beforeAfter: [
+        { before: "30 min", after: "< 5 min", metric: "Tiempo de entrega" },
+        { before: "Manual", after: "Automático", metric: "Transcripción" },
+        { before: "Errores", after: "Zero", metric: "Transcripción" }
+      ],
+      businessImpact: "Diagnósticos más rápidos, mejor experiencia para pacientes, menos carga para el equipo administrativo."
+    },
+    servicesUsed: ["Laravel", "HL7 HAPI", "FHIR R4", "MySQL", "Redis", "Push Notifications"],
+    impactMetrics: ["-70% communication time", "Real-time results", "Zero transcription errors"],
+    quote: {
+      text: "Antes esperábamos horas por resultados que ya estaban listos. Ahora llegan al instante con notificación al celular.",
+      author: "Dr. Rivera",
+      role: "Médico Internista"
+    },
+    storyId: "lab",
+    gallery: [
+      { type: "image", src: "https://images.unsplash.com/photo-1581595220892-b0739db3ba8c?q=80&w=2070&auto=format&fit=crop", alt: "Laboratorio clínico" },
+      { type: "image", src: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop", alt: "Dashboard de resultados" }
+    ]
+  },
+
+  // === TIER 3: SaaS & Arquitectura ===
+  {
+    title: "T-Cuida — Sistema IoT que construí desde cero",
+    description: "Ecosistema SaaS completo: wearables, GPS, dashboard real-time y comunicación multicanal.",
+    image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=2070&auto=format&fit=crop",
+    category: "Work",
+    tags: ["SaaS", "IoT", "Node.js", "Laravel", "Vue.js", "WebSockets", "AWS"],
+    summary: "Plataforma SaaS de seguridad corporativa con 100% ownership técnico.",
+    slug: "t-cuida-platform",
+    github: "#",
+    demo: "#",
+    client: "T-Cuida / Konecta",
+    industry: "SaaS / Seguridad Corporativa",
+    year: "2023",
+    duration: "+15 meses",
+    heroMetric: "100%",
+    heroMetricLabel: "Ownership",
+    problem: {
+      situation: "Necesitaban un sistema de seguridad corporativa que integrara wearables, GPS, llamadas y WhatsApp en una sola plataforma. No existía nada previo.",
+      pain: "Sin sistema unificado, las incidencias se perdían entre canales. Tiempo de respuesta inaceptable para situaciones de emergencia.",
+      whyMe: "Buscaban alguien capaz de diseñar y construir el sistema completo, desde arquitectura hasta despliegue."
+    },
+    approach: {
+      strategy: "Arquitectura modular: bridge IoT para dispositivos, backend Laravel/Node.js, dashboard Vue.js con WebSockets, integración Asterisk para llamadas.",
+      keyDecisions: [
+        "Bridge TCP/IP-WebSocket para dispositivos legacy sin cambiar hardware",
+        "WebSockets para actualizaciones en tiempo real (respuesta < 1 segundo)",
+        "Arquitectura event-driven para escalar a múltiples clientes",
+        "ADRs documentados para onboarding rápido de nuevos devs"
+      ],
+      timeline: "+15 meses de desarrollo continuo"
+    },
+    results: {
+      beforeAfter: [
+        { before: "3 min", after: "1 min", metric: "Tiempo de respuesta" },
+        { before: "3+ sem", after: "48h", metric: "Onboarding de devs" },
+        { before: "Manual", after: "Real-time", metric: "Seguimiento" }
+      ],
+      businessImpact: "Sistema operativo para Konecta Colombia con +20k usuarios potenciales."
+    },
+    servicesUsed: ["Laravel", "Node.js", "Vue.js", "WebSockets", "AWS S3", "Digital Ocean", "Asterisk PBX", "MySQL"],
+    impactMetrics: ["100% ownership", "Real‑time ops", "48h onboarding"],
+    benefits: [
+      { value: "100%", label: "Ownership", detail: "Arquitectura, código, deploy" },
+      { value: "48h", label: "Onboarding", detail: "Nuevos devs productivos" },
+      { value: "< 1s", label: "Latencia", detail: "Actualizaciones real-time" }
+    ],
+    quote: {
+      text: "Moisés construyó todo el sistema desde cero. Cuando necesitamos agregar un nuevo dev, estuvo productivo en 2 días gracias a la documentación.",
+      author: "CEO",
+      role: "T-Cuida"
+    },
+    videoUrl: "https://www.youtube.com/watch?v=1PnVor36_40",
+    storyId: "tcuida",
+    gallery: [
+      { type: "image", src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop", alt: "Dashboard de operaciones" },
+      { type: "image", src: "https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop", alt: "Dispositivos wearables" },
+      { type: "image", src: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?q=80&w=2070&auto=format&fit=crop", alt: "Arquitectura IoT" }
+    ]
+  },
+  {
+    title: "De 3 minutos a 1 — Dashboard de emergencias",
+    description: "Panel de atención en tiempo real que triplicó la velocidad de respuesta.",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
+    category: "Work",
+    tags: ["Dashboard", "Real-time", "Vue.js", "WebSockets", "UX", "Performance"],
+    summary: "Dashboard de operaciones críticas con actualización en tiempo real.",
+    slug: "t-cuida-dashboard",
+    github: "#",
+    demo: "#",
+    client: "T-Cuida",
+    industry: "SaaS / Seguridad",
+    year: "2023",
+    heroMetric: "3x",
+    heroMetricLabel: "Más rápido",
+    problem: {
+      situation: "El dashboard anterior tardaba ~3 minutos en mostrar nuevas incidencias. Para emergencias, eso es inaceptable.",
+      pain: "En situaciones de riesgo, cada segundo cuenta. 3 minutos de delay podía significar vidas en peligro.",
+      whyMe: "Necesitaban rediseño completo de UX + arquitectura de real-time."
+    },
+    approach: {
+      strategy: "Reescritura del frontend con Vue.js + WebSockets, eliminando polling. UX diseñado para acción inmediata.",
+      keyDecisions: [
+        "WebSockets en lugar de polling HTTP",
+        "Optimización de renders para evitar re-renderizado innecesario",
+        "UX con jerarquía visual clara: lo urgente primero",
+        "Sonidos y alertas visuales para incidencias críticas"
+      ]
+    },
+    results: {
+      beforeAfter: [
+        { before: "3 min", after: "< 1 min", metric: "Tiempo de respuesta" },
+        { before: "Polling", after: "WebSocket", metric: "Arquitectura" },
+        { before: "Confuso", after: "Claro", metric: "UX" }
+      ],
+      businessImpact: "Operadores pueden atender 3x más incidencias en el mismo tiempo."
+    },
+    servicesUsed: ["Vue.js", "WebSockets", "Node.js", "CSS Grid", "Figma"],
+    impactMetrics: ["3min → 1min", "200% faster", "Real-time"],
+    benefits: [
+      { value: "3x", label: "Velocidad", detail: "De 3 min a < 1 min" },
+      { value: "Real-time", label: "Actualizaciones", detail: "Sin refresh manual" },
+      { value: "3x", label: "Capacidad", detail: "Incidencias atendidas" }
+    ],
+    quote: {
+      text: "Antes teníamos que refrescar constantemente. Ahora las alertas aparecen solas con sonido. Es otro nivel de eficiencia.",
+      author: "Supervisor de Operaciones",
+      role: "T-Cuida"
+    },
+    storyId: "dashboard",
+    gallery: [
+      { type: "image", src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop", alt: "Dashboard real-time" },
+      { type: "image", src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop", alt: "Métricas de operación" }
+    ]
+  },
+  {
+    title: "Bridge TCP/IP-WebSocket: 400% más rápido sin cambiar hardware",
+    description: "Puente que conecta dispositivos IoT legacy con aplicaciones web modernas.",
+    image: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?q=80&w=2070&auto=format&fit=crop",
+    category: "Work",
+    tags: ["IoT", "TCP/IP", "WebSockets", "Node.js", "Performance", "Bridge"],
+    summary: "Puente de comunicación entre protocolos legacy y web modernos.",
+    slug: "tcpip-websocket-bridge",
+    github: "#",
+    demo: "#",
+    client: "T-Cuida",
+    industry: "IoT / SaaS",
+    year: "2023",
+    duration: "1 mes",
+    heroMetric: "+400%",
+    heroMetricLabel: "Velocidad",
+    problem: {
+      situation: "Los dispositivos IoT (wearables, GPS) usaban protocolo TCP/IP propietario. La app web moderna necesitaba WebSockets. No había forma de comunicarlos directamente.",
+      pain: "Programar un dispositivo tomaba 15+ minutos de configuración manual. Imposible escalar a cientos de dispositivos.",
+      whyMe: "Necesitaban un bridge que tradujera entre protocolos sin reemplazar los dispositivos existentes."
+    },
+    approach: {
+      strategy: "Bridge en Node.js que mantiene conexiones TCP persistentes con dispositivos y las expone como WebSockets para el frontend.",
+      keyDecisions: [
+        "Node.js por su modelo non-blocking ideal para I/O intensivo",
+        "Buffer management para manejar fragmentación de paquetes TCP",
+        "Heartbeat bidireccional para detectar desconexiones",
+        "Reconexión automática con backoff exponencial"
+      ],
+      timeline: "1 mes desde diseño hasta producción"
+    },
+    results: {
+      beforeAfter: [
+        { before: "15 min", after: "3 min", metric: "Programación" },
+        { before: "Manual", after: "Web UI", metric: "Interfaz" },
+        { before: "1 a 1", after: "Batch", metric: "Capacidad" }
+      ],
+      businessImpact: "Deployment de cientos de dispositivos en días en lugar de semanas."
+    },
+    servicesUsed: ["Node.js", "TCP Sockets", "WebSockets", "Docker", "PM2"],
+    impactMetrics: ["+400% programming speed", "Zero hardware changes", "Backward compatible"],
+    quote: {
+      text: "Antes me tomaba un día configurar 10 dispositivos. Ahora lo hago en una hora desde la web.",
+      author: "Técnico de Campo",
+      role: "T-Cuida"
+    },
+    storyId: "bridge",
+    gallery: [
+      { type: "image", src: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?q=80&w=2070&auto=format&fit=crop", alt: "Arquitectura del bridge" },
+      { type: "image", src: "https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop", alt: "Dispositivos IoT" }
+    ]
+  },
+
+  // === TIER 4: Mobile & Full-Stack ===
+  {
+    title: "Primera app móvil de MediRec en 2 meses",
+    description: "De cero a App Store + Play Store con Flutter.",
+    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop",
+    category: "Work",
+    tags: ["Mobile", "Flutter", "iOS", "Android", "Healthcare", "App Store"],
+    summary: "App móvil cross-platform para pacientes de plataforma healthcare.",
+    slug: "medirec-mobile",
+    github: "#",
+    demo: "#",
+    client: "MediRec, Inc",
+    industry: "Healthcare / Mobile",
+    year: "2024",
+    duration: "2 meses",
+    heroMetric: "2",
+    heroMetricLabel: "Meses a producción",
+    problem: {
+      situation: "MediRec no tenía presencia mobile. Los pacientes pedían acceso a su información desde el celular pero solo existía web.",
+      pain: "Competidores con apps móviles estaban captando mercado. Cada mes sin app era market share perdido.",
+      whyMe: "Necesitaban entrega rápida (2 meses) con calidad de producción, no un MVP descartable."
+    },
+    approach: {
+      strategy: "Flutter para desarrollo cross-platform, integración directa con API existente, proceso de publicación paralelo en ambas stores.",
+      keyDecisions: [
+        "Flutter por velocidad de desarrollo iOS+Android simultáneo",
+        "Reutilización de API existente sin cambios en backend",
+        "CI/CD para builds automáticos y testing",
+        "Proceso de publicación iniciado en semana 6 para no bloquear"
+      ],
+      timeline: "2 meses desde kickoff hasta publicación en ambas stores"
+    },
+    results: {
+      beforeAfter: [
+        { before: "0", after: "2", metric: "Plataformas" },
+        { before: "Solo web", after: "Mobile", metric: "Acceso" },
+        { before: "Ninguno", after: "Definido", metric: "Roadmap mobile" }
+      ],
+      businessImpact: "Primera presencia mobile de la empresa, base para futuras features móviles."
+    },
+    servicesUsed: ["Flutter", "Dart", "REST API", "iOS", "Android", "Firebase", "Fastlane"],
+    impactMetrics: ["2 months delivery", "iOS + Android", "First mobile product"],
+    quote: {
+      text: "Nos dijeron que una app tomaría 6 meses. Moisés la entregó en 2 y funcionando en ambas plataformas.",
+      author: "VP of Product",
+      role: "MediRec, Inc"
+    },
+    storyId: "mobile",
+    gallery: [
+      { type: "image", src: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop", alt: "App en smartphone" },
+      { type: "image", src: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop", alt: "Pantallas de la app" }
+    ]
+  },
+  {
+    title: "El Estoico — Performance perfecta en 0.8s",
+    description: "Landing page con Core Web Vitals verdes y arquitectura moderna.",
+    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop",
+    category: "Personal",
+    tags: ["Astro", "TypeScript", "Docker", "Traefik", "Core Web Vitals"],
+    summary: "Landing optimizado para performance con Docker + Traefik.",
+    slug: "el-estoico",
+    github: "#",
+    demo: "https://elestoico.modavidc.com/",
+    industry: "Personal / Content",
+    year: "2025",
+    duration: "2 semanas",
+    heroMetric: "< 0.8s",
+    heroMetricLabel: "First Contentful Paint",
+    problem: {
+      situation: "Quería crear una plataforma de contenido sobre filosofía estoica aplicada a profesionales tech. Tenía que ser rápida y demostrar mis capacidades técnicas.",
+      pain: "La mayoría de landing pages cargan en 3-5 segundos. Eso mata conversiones y demuestra poco cuidado técnico.",
+      whyMe: "Proyecto personal para demostrar que puedo entregar excelencia técnica cuando tengo control total."
+    },
+    approach: {
+      strategy: "Astro para static-site generation, optimización de assets, Docker + Traefik para deploy, medición obsesiva de Core Web Vitals.",
+      keyDecisions: [
+        "Astro por su enfoque 'zero JavaScript by default'",
+        "Imágenes en WebP con lazy loading",
+        "CSS crítico inline, resto diferido",
+        "Docker + Traefik para SSL automático y routing"
+      ],
+      timeline: "2 semanas incluyendo contenido"
+    },
+    results: {
+      beforeAfter: [
+        { before: "~3s", after: "0.8s", metric: "FCP" },
+        { before: "Amarillo", after: "Verde", metric: "Core Web Vitals" },
+        { before: "N/A", after: "95+", metric: "Lighthouse" }
+      ],
+      businessImpact: "Demostración de capacidad técnica y base para futuro contenido."
+    },
+    servicesUsed: ["Astro", "TypeScript", "Docker", "Traefik", "Cloudflare", "Markdown"],
+    impactMetrics: ["FCP < 0.8s", "Core Web Vitals", "Static build"],
+    storyId: "estoico",
+    gallery: [
+      { type: "image", src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop", alt: "Lighthouse score" },
+      { type: "image", src: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop", alt: "Landing page" }
+    ]
+  },
+
+  // === Grupero — Side Project / SaaS ===
+  {
+    title: "Grupero — La radiografía de tus grupos de WhatsApp",
+    description: "App Android que analiza participación, detecta inactivos y eventos en grupos de WhatsApp. 100% offline y privado.",
+    image: "https://images.unsplash.com/photo-1611746872915-64382b5c76da?q=80&w=2070&auto=format&fit=crop",
+    category: "Personal",
+    tags: ["Android", "Kotlin", "IA", "WhatsApp", "Analytics", "Privacy-first"],
+    summary: "App que convierte chats de WhatsApp en insights accionables para administradores de grupos.",
+    slug: "grupero",
+    github: "#",
+    demo: "https://grupero.app",
+    industry: "SaaS / Productividad",
+    year: "2025",
+    duration: "4 meses",
+    heroMetric: "-85%",
+    heroMetricLabel: "Tiempo de gestión",
+    problem: {
+      situation: "Los admins de grupos grandes (+100 personas) no tienen visibilidad real de quién participa. WhatsApp solo muestra quién escribe, no quién aporta valor: confirma eventos, responde, organiza.",
+      pain: "Decisiones a ciegas: ¿A quién saco del grupo? ¿Quién dejó de participar? ¿Cuándo es mejor publicar un evento? Todo es intuición o perseguir gente manualmente.",
+      whyMe: "Administro 6 grupos de +150 personas cada uno. Me cansé de perseguir confirmaciones y tomar decisiones sin datos. Lo construí para mí, y funcionó."
+    },
+    approach: {
+      strategy: "App Android nativa que procesa el archivo exportado de WhatsApp localmente. Cero datos salen del dispositivo. IA on-device para resúmenes y detección de eventos.",
+      keyDecisions: [
+        "100% offline — los chats nunca salen del teléfono",
+        "Parser robusto para múltiples formatos de fecha de WhatsApp",
+        "IA on-device para resúmenes y análisis de sentimiento",
+        "Modelo freemium: análisis gratis, IA y alertas en Pro"
+      ],
+      timeline: "4 meses desde idea hasta beta en Play Store"
+    },
+    results: {
+      beforeAfter: [
+        { before: "Intuición", after: "Datos", metric: "Decisiones de purga" },
+        { before: "25 min", after: "30 seg", metric: "Identificar inactivos" },
+        { before: "Manual", after: "Automático", metric: "Detección de eventos" }
+      ],
+      businessImpact: "En beta privada con 12 admins de grupos deportivos. 47 grupos analizados, 3,200+ miembros procesados."
+    },
+    servicesUsed: ["Kotlin", "Android", "Room DB", "On-device ML", "Material Design 3"],
+    impactMetrics: ["100% privado", "45+ funcionalidades", "12 beta testers"],
+    benefits: [
+      { value: "45+", label: "Funcionalidades", detail: "Análisis completo de participación" },
+      { value: "100%", label: "Privado", detail: "Datos nunca salen del dispositivo" },
+      { value: "0", label: "Registro", detail: "Funciona sin crear cuenta" }
+    ],
+    quote: {
+      text: "Tengo un grupo de fútbol de 180 personas. Antes de cada partido perseguía confirmaciones por 2 horas. Ahora sé exactamente quiénes son 'Los Chancletas' que nunca confirman pero siempre aparecen.",
+      author: "Roberto M.",
+      role: "Admin de grupo de fútbol, 180 miembros"
+    },
+    storyId: "grupero",
+    gallery: [
+      { type: "image", src: "https://images.unsplash.com/photo-1611746872915-64382b5c76da?q=80&w=2070&auto=format&fit=crop", alt: "WhatsApp analytics" },
+      { type: "image", src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop", alt: "Dashboard de participación" },
+      { type: "image", src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop", alt: "Heatmap de actividad" }
+    ]
+  }
+]
+
 export const projects: Record<ProjectCategory, Project[]> = {
-  Work: [
-    {
-      title: "SecureCard – Security Pillar",
-      description: "Security First Architecture - Enterprise-grade secure infrastructure",
-      image: "https://d2908q01vomqb2.cloudfront.net/887309d048beef83ad3eabf2a79a64a389ab1c9f/2021/05/21/dbblog_1088_v2_02.png",
-      category: "Work",
-      tags: ["AWS", "VPC", "ALB", "RDS", "S3", "WAF", "Security", "Bastion Host", "Encryption"],
-      summary: "Desarrollé una arquitectura de seguridad enterprise-grade siguiendo el Security Pillar del AWS Well-Architected Framework, implementando múltiples capas de seguridad.",
-      slug: "securecard-security-pillar",
-      github: "https://github.com/modavidc/securecard",
-      demo: "#",
-      longDescription: "SecureCard es un proyecto que demuestra la implementación completa del Security Pillar del AWS Well-Architected Framework. Comenzando con una aplicación insegura, transformé la infraestructura en un sistema enterprise-grade con múltiples capas de seguridad.",
-      challenge: "El desafío principal fue transformar una aplicación insegura desplegada en una instancia EC2 pública en una arquitectura segura y escalable, siguiendo las mejores prácticas de seguridad de AWS.",
-      solution: "Implementé una arquitectura de seguridad multicapa: VPC personalizada con subnets públicas y privadas, migración de EC2 a subnets privadas, ALB con Bastion Host para acceso seguro, RDS con conectividad privada y encriptación, S3 con bloqueo de acceso público y encriptación, y AWS WAF frente al ALB para protección adicional.",
-      outcome: "Resultado: Arquitectura enterprise-grade segura que cumple con los estándares de seguridad más estrictos, protegiendo los datos y aplicaciones contra amenazas comunes.",
-      implementationSteps: [
-        "Deploy insecure sample app",
-        "Create custom VPC (public/private subnets)",
-        "Migrate EC2 to private subnet",
-        "Add ALB + Bastion Host",
-        "Secure RDS (private connectivity + encryption)",
-        "Secure S3 (block public access + encryption)",
-        "Add AWS WAF in front of ALB"
-      ],
-      pillar: "Security",
-      year: "2024",
-      videoUrl: "https://www.youtube.com/watch?v=Tp2D-owIReI"
-    },
-    {
-      title: "MedicareHub – Reliability Pillar",
-      description: "Highly Available System - Fault-tolerant architecture with self-healing",
-      image: "https://d2908q01vomqb2.cloudfront.net/887309d048beef83ad3eabf2a79a64a389ab1c9f/2021/05/21/dbblog_1088_v2_02.png",
-      category: "Work",
-      tags: ["AWS", "EC2", "Auto Scaling", "ALB", "RDS Multi-AZ", "Route 53", "EFS", "High Availability"],
-      summary: "Implementé una arquitectura altamente disponible y tolerante a fallos siguiendo el Reliability Pillar, con auto-scaling y auto-healing capabilities.",
-      slug: "medicarehub-reliability-pillar",
-      github: "https://github.com/modavidc/medicarehub",
-      demo: "#",
-      longDescription: "MedicareHub demuestra la implementación del Reliability Pillar del AWS Well-Architected Framework. El sistema está diseñado para ser altamente disponible, tolerante a fallos y con capacidades de auto-recuperación.",
-      challenge: "El desafío fue crear un sistema que pueda mantener la disponibilidad incluso ante fallos de componentes individuales, garantizando cero downtime y recuperación automática.",
-      solution: "Implementé una arquitectura multi-AZ con EC2 Launch Templates, Auto Scaling Groups configurados en múltiples zonas de disponibilidad, Application Load Balancer para distribución de carga, RDS Multi-AZ para alta disponibilidad de base de datos, Route 53 DNS failover para redundancia, y EFS para almacenamiento compartido.",
-      outcome: "Resultado: Arquitectura fault-tolerant con auto-healing que garantiza alta disponibilidad y recuperación automática ante fallos, cumpliendo con los requisitos de sistemas críticos.",
-      implementationSteps: [
-        "Create EC2 Launch Template",
-        "Configure Auto Scaling Groups (multi-AZ)",
-        "Add Application Load Balancer",
-        "Deploy Multi-AZ RDS",
-        "Configure Route 53 DNS failover",
-        "Add EFS for shared storage"
-      ],
-      pillar: "Reliability",
-      year: "2024",
-      videoUrl: "https://www.youtube.com/watch?v=K9Tr1p0Xj2E"
-    },
-    {
-      title: "ChatOpsBot – Operational Excellence",
-      description: "AWS Alerts to Slack - Real-time monitoring and command system",
-      image: "https://d2908q01vomqb2.cloudfront.net/887309d048beef83ad3eabf2a79a64a389ab1c9f/2021/05/21/dbblog_1088_v2_02.png",
-      category: "Work",
-      tags: ["AWS", "Lambda", "Slack", "CloudWatch", "EventBridge", "SSM", "ChatOps", "Monitoring"],
-      summary: "Sistema de alertas y comandos en tiempo real que integra AWS con Slack para operaciones automatizadas y monitoreo proactivo.",
-      slug: "chatopsbot-operational-excellence",
-      github: "https://github.com/modavidc/chatopsbot",
-      demo: "#",
-      longDescription: "ChatOpsBot implementa el Operational Excellence Pillar del AWS Well-Architected Framework, creando un sistema de ChatOps que permite monitoreo en tiempo real y ejecución de comandos desde Slack.",
-      challenge: "El desafío fue crear un sistema que permitiera a los equipos de operaciones recibir alertas en tiempo real y ejecutar comandos automatizados directamente desde Slack, mejorando la eficiencia operacional.",
-      solution: "Integré AWS Chatbot con Slack workspace, creé funciones Lambda para tareas automatizadas de operaciones, implementé documentos SSM Run Command para ejecución remota, configuré alarmas CloudWatch, enruté alertas a través de EventBridge, y asigné roles IAM con permisos granulares. Opcionalmente agregué dashboard CloudWatch y CloudFront.",
-      outcome: "Resultado: Sistema de alertas y comandos en tiempo real que mejora significativamente la eficiencia operacional, permitiendo respuesta rápida a incidentes y automatización de tareas rutinarias.",
-      implementationSteps: [
-        "Connect Slack workspace via AWS Chatbot",
-        "Create Lambda functions for automated ops tasks",
-        "Create SSM Run Command documents",
-        "Configure CloudWatch alarms",
-        "Route alerts through EventBridge",
-        "Assign IAM roles with fine-grained permissions",
-        "Optional: CloudWatch dashboard + CloudFront"
-      ],
-      pillar: "Operational Excellence",
-      year: "2024",
-      videoUrl: "https://www.youtube.com/watch?v=9wvEwPLcLcA"
-    },
-    {
-      title: "CoffeeShop Manager – Performance Efficiency",
-      description: "Full Serverless App - Auto-scaling, pay-per-use inventory system",
-      image: "https://d2908q01vomqb2.cloudfront.net/887309d048beef83ad3eabf2a79a64a389ab1c9f/2021/05/21/dbblog_1088_v2_02.png",
-      category: "Work",
-      tags: ["AWS", "DynamoDB", "Lambda", "API Gateway", "React", "Amplify", "Serverless", "CORS"],
-      summary: "Aplicación completamente serverless para gestión de inventario con auto-scaling y modelo de pago por uso, demostrando eficiencia de rendimiento.",
-      slug: "coffeeshop-manager-performance-efficiency",
-      github: "https://github.com/modavidc/coffeeshop-manager",
-      demo: "#",
-      longDescription: "CoffeeShop Manager implementa el Performance Efficiency Pillar del AWS Well-Architected Framework, creando una aplicación completamente serverless que escala automáticamente y solo paga por lo que usa.",
-      challenge: "El desafío fue crear una aplicación que pueda escalar automáticamente desde cero hasta miles de usuarios sin necesidad de gestión de servidores, optimizando costos y rendimiento.",
-      solution: "Construí una arquitectura completamente serverless: tabla DynamoDB para inventario, funciones Lambda con shared layers para lógica de negocio, REST API con API Gateway, frontend React, despliegue con AWS Amplify, y configuración de CORS y monitoreo.",
-      outcome: "Resultado: Sistema completamente serverless con auto-scaling y modelo de pago por uso, que puede manejar cargas variables sin intervención manual y con costos optimizados.",
-      implementationSteps: [
-        "Create DynamoDB table (inventory)",
-        "Build Lambda functions + shared layers",
-        "Create REST API with API Gateway",
-        "Develop React frontend",
-        "Deploy frontend with AWS Amplify",
-        "Configure CORS & monitoring"
-      ],
-      pillar: "Performance Efficiency",
-      year: "2024",
-      videoUrl: "https://www.youtube.com/watch?v=9wvEwPLcLcA"
-    },
-    {
-      title: "CostGuardian – Cost Optimization",
-      description: "Automated cost governance system - Detect and eliminate waste",
-      image: "https://d2908q01vomqb2.cloudfront.net/887309d048beef83ad3eabf2a79a64a389ab1c9f/2021/05/21/dbblog_1088_v2_02.png",
-      category: "Work",
-      tags: ["AWS", "CloudFormation", "CloudWatch", "Trusted Advisor", "SSM", "SNS", "Cost Optimization", "Automation"],
-      summary: "Sistema automatizado de gobernanza de costos que detecta y elimina desperdicios en la infraestructura AWS, implementando el Cost Optimization Pillar.",
-      slug: "costguardian-cost-optimization",
-      github: "https://github.com/modavidc/costguardian",
-      demo: "#",
-      longDescription: "CostGuardian implementa el Cost Optimization Pillar del AWS Well-Architected Framework, creando un sistema automatizado que detecta, reporta y elimina desperdicios en la infraestructura AWS.",
-      challenge: "El desafío fue crear un sistema que pueda identificar automáticamente recursos desperdiciados y aplicar políticas de limpieza, reduciendo costos sin impacto en la funcionalidad.",
-      solution: "Desplegué infraestructura intencionalmente derrochadora vía CloudFormation, implementé detección de fugas mediante métricas CloudWatch y Trusted Advisor, creé documentos de automatización SSM con scripts Python de limpieza, configuré roles IAM y notificaciones SNS, apliqué pipeline de limpieza automatizado, y agregué políticas de lifecycle de S3.",
-      outcome: "Resultado: Sistema automatizado de gobernanza de costos que reduce significativamente el desperdicio en infraestructura, optimizando costos de manera continua y proactiva.",
-      implementationSteps: [
-        "Deploy intentionally wasteful infra via CloudFormation",
-        "Detect leaks via CloudWatch metrics + Trusted Advisor",
-        "Build SSM automation documents with Python cleanup scripts",
-        "Configure IAM roles + SNS notifications",
-        "Apply automated cleanup pipeline",
-        "Add S3 lifecycle policies"
-      ],
-      pillar: "Cost Optimization",
-      year: "2024",
-      videoUrl: "https://www.youtube.com/watch?v=9wvEwPLcLcA"
-    },
-    {
-      title: "Optimización de Infraestructura AWS",
-      description: "Reducción significativa de costos en infraestructura cloud",
-      image: "https://d2908q01vomqb2.cloudfront.net/887309d048beef83ad3eabf2a79a64a389ab1c9f/2021/05/21/dbblog_1088_v2_02.png",
-      category: "Work",
-      tags: ["AWS", "Terraform", "CloudFormation", "Docker", "CI/CD", "Infrastructure as Code"],
-      summary: "Lideré un proyecto de optimización que logró una reducción del 58% en costos de AWS mediante la implementación de estrategias de optimización de infraestructura y automatización de flujos de trabajo.",
-      slug: "aws-infrastructure-optimization",
-      github: "https://github.com/username/aws-optimization",
-      demo: "#",
-      longDescription: "Proyecto de optimización de infraestructura AWS que resultó en una reducción del 58% en costos operativos mediante la implementación de mejores prácticas, automatización y optimización de recursos.",
-      challenge: "La infraestructura AWS existente tenía costos elevados debido a recursos subutilizados, falta de automatización y configuraciones no optimizadas.",
-      solution: "Implementé estrategias de optimización incluyendo right-sizing de instancias, implementación de auto-scaling, uso de instancias reservadas, optimización de almacenamiento, automatización con Terraform y CloudFormation, y mejora de pipelines CI/CD.",
-      outcome: "Reducción del 58% en costos de AWS, mejor rendimiento de la infraestructura, y procesos automatizados que reducen el tiempo de despliegue en un 70%.",
-      year: "2023"
-    },
-    {
-      title: "Integración PREIS - MediRec",
-      description: "API de interoperabilidad con sistema gubernamental",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMzZbfSXff0UWQQ0_AxGlJb7QmaqIDghSwoQ&s",
-      category: "Work",
-      tags: ["Node.js", "Express", "PostgreSQL", "REST API", "HL7", "FHIR"],
-      summary: "Implementé una API que integra MediRec con el sistema PREIS, permitiendo el envío automatizado de registros de vacunación al sistema de salud del Gobierno de Puerto Rico.",
-      slug: "medirec-preis-integration",
-      github: "https://github.com/username/medirec-preis",
-      demo: "#",
-      longDescription: "API de integración que conecta el sistema MediRec con PREIS (sistema gubernamental de salud de Puerto Rico), permitiendo el intercambio automatizado de datos de vacunación siguiendo estándares HL7 y FHIR.",
-      challenge: "Integrar dos sistemas diferentes con estándares de datos distintos, garantizando la seguridad, confiabilidad y cumplimiento de regulaciones de salud.",
-      solution: "Desarrollé una API REST con Node.js y Express que transforma datos entre formatos, implementé autenticación segura, manejo de errores robusto, y seguimiento de estándares HL7 y FHIR para interoperabilidad.",
-      outcome: "Integración exitosa que permite el envío automatizado de registros de vacunación, mejorando la eficiencia y cumplimiento regulatorio del sistema de salud.",
-      year: "2023"
-    },
-    {
-      title: "Migración LexiComp a NLM",
-      description: "Optimización de gestión de datos médicos",
-      image: "https://i0.wp.com/www.fnlm.org/wp-content/uploads/2020/07/us-nih-nlm.jpg?fit=900%2C900&ssl=1",
-      category: "Work",
-      tags: ["PostgreSQL", "Python", "ETL", "Data Migration", "Healthcare Data", "NLM API"],
-      summary: "Lideré la transición de LexiComp a NLM, logrando un ahorro de $20,000 en licencias y optimizando la gestión de datos médicos a través de una migración eficiente y sin interrupciones.",
-      slug: "lexicomp-nlm-migration",
-      github: "https://github.com/username/lexicomp-migration",
-      demo: "#",
-      longDescription: "Proyecto de migración de datos médicos desde LexiComp (sistema comercial) a NLM (National Library of Medicine), logrando ahorros significativos y mejor acceso a datos médicos actualizados.",
-      challenge: "Migrar datos críticos de salud sin interrupciones en el servicio, manteniendo la integridad de los datos y garantizando acceso continuo a información médica.",
-      solution: "Desarrollé scripts ETL en Python para transformar y migrar datos, implementé validación de datos, proceso de migración por fases, y integración con la API de NLM para acceso a datos actualizados.",
-      outcome: "Ahorro de $20,000 anuales en licencias, migración sin interrupciones, y acceso mejorado a datos médicos actualizados y gratuitos.",
-      year: "2023"
-    },
-    {
-      title: "App Móvil MediRec - Flutter",
-      description: "Primera aplicación móvil de la empresa desarrollada en 8 semanas",
-      image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop",
-      category: "Work",
-      tags: ["Flutter", "Dart", "Mobile Development", "Healthcare", "REST API", "Firebase"],
-      summary: "Desarrollé la primera aplicación móvil de MediRec utilizando Flutter, completando el proyecto en 8 semanas. La app incluye funcionalidades de gestión de pacientes, citas y acceso a historiales médicos.",
-      slug: "medirec-mobile-app",
-      github: "https://github.com/username/medirec-mobile",
-      demo: "#",
-      longDescription: "Primera aplicación móvil de MediRec desarrollada desde cero en Flutter, proporcionando acceso móvil a funcionalidades críticas del sistema de gestión de salud.",
-      challenge: "Crear una aplicación móvil completa en un plazo de 8 semanas, integrando con APIs existentes y manteniendo la seguridad de datos de salud.",
-      solution: "Desarrollé la aplicación en Flutter para desarrollo multiplataforma, integré con APIs REST existentes, implementé autenticación segura, y utilizé Firebase para funcionalidades adicionales como notificaciones push.",
-      outcome: "Aplicación móvil funcional entregada en 8 semanas, mejorando el acceso de usuarios a funcionalidades del sistema y aumentando la satisfacción del usuario.",
-      year: "2023"
-    },
-    {
-      title: "Sistema de Testing Automatizado",
-      description: "Implementación de cultura de QA y testing automatizado",
-      image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=2070&auto=format&fit=crop",
-      category: "Work",
-      tags: ["Selenium", "JUnit", "Jest", "PHPUnit", "CI/CD", "Automated Testing"],
-      summary: "Implementé una cultura de testing automatizado que no existía previamente, incluyendo pruebas unitarias, de integración y de rendimiento. Esto mejoró significativamente la estabilidad y calidad del software.",
-      slug: "automated-testing-system",
-      github: "https://github.com/username/testing-framework",
-      demo: "#",
-      longDescription: "Implementación completa de una cultura de testing automatizado en una organización que no tenía procesos de QA establecidos, mejorando significativamente la calidad del software.",
-      challenge: "Introducir testing automatizado en un equipo sin experiencia previa, creando procesos y herramientas que sean fáciles de usar y mantener.",
-      solution: "Implementé frameworks de testing para diferentes tecnologías (Jest para JavaScript, PHPUnit para PHP, JUnit para Java), configuré CI/CD para ejecución automática de tests, y creé documentación y capacitación para el equipo.",
-      outcome: "Reducción del 60% en bugs en producción, mejora en la confianza del equipo para hacer cambios, y procesos de QA establecidos que mejoran continuamente la calidad.",
-      year: "2023"
-    },
-    {
-      title: "Modernización de Sistemas Legacy C#",
-      description: "Migración y documentación de sistemas legacy",
-      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop",
-      category: "Work",
-      tags: ["C#", ".NET", "Legacy Migration", "Documentation", "Code Refactoring"],
-      summary: "Modernicé sistemas legacy en C# y .NET, documentando procesos para facilitar el mantenimiento futuro y mejorando la arquitectura del código existente.",
-      slug: "legacy-csharp-modernization",
-      github: "https://github.com/username/legacy-modernization",
-      demo: "#",
-      longDescription: "Proyecto de modernización de sistemas legacy en C# y .NET, mejorando la arquitectura, documentación y mantenibilidad del código existente.",
-      challenge: "Sistemas legacy con código difícil de mantener, falta de documentación, y arquitectura obsoleta que dificultaba el desarrollo de nuevas funcionalidades.",
-      solution: "Refactoricé código legacy siguiendo mejores prácticas, creé documentación completa, modernicé la arquitectura, y establecí procesos para mantener el código actualizado.",
-      outcome: "Código más mantenible, documentación completa que facilita el onboarding de nuevos desarrolladores, y arquitectura mejorada que permite desarrollo más rápido de nuevas funcionalidades.",
-      year: "2023"
-    },
-    {
-      title: "T-Cuida - Plataforma de Seguridad Corporativa",
-      description: "SaaS de seguridad con integración de wearables y comunicación multicanal",
-      image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=2070&auto=format&fit=crop",
-      category: "Work",
-      tags: ["Node.js", "PHP", "Vue.js", "AWS", "MySQL", "Socket.IO", "IoT"],
-      summary: "Lideré el desarrollo de una plataforma SaaS de seguridad corporativa que incluye integración con wearables, comunicación multicanal (push, SMS, email, WhatsApp) y reducción del 400% en tiempo de programación de dispositivos.",
-      slug: "t-cuida-platform",
-      github: "https://github.com/username/t-cuida",
-      demo: "#",
-      longDescription: "Plataforma SaaS completa de seguridad corporativa que integra wearables, comunicación multicanal, y gestión de dispositivos IoT para empresas.",
-      challenge: "Crear una plataforma que integre múltiples sistemas (wearables, comunicación, IoT) en una solución unificada y escalable.",
-      solution: "Desarrollé backend con Node.js y PHP, frontend con Vue.js, integración con AWS para escalabilidad, Socket.IO para comunicación en tiempo real, y APIs para integración con wearables y servicios de comunicación.",
-      outcome: "Plataforma funcional que reduce el tiempo de programación de dispositivos en un 400%, mejora la comunicación de seguridad, y proporciona una solución integrada para empresas.",
-      year: "2022"
-    }
-  ],
-  Freelance: [
-    {
-      title: "José Dergán - Psicólogo",
-      description: "Sitio web profesional y blog personal",
-      image: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=2070&auto=format&fit=crop",
-      category: "Freelance",
-      tags: ["Next.js", "Tailwind CSS", "Sanity CMS", "SEO", "Content Management", "Responsive Design"],
-      summary: "Diseñé y desarrollé la página web para José Dergán, psicólogo, con enfoque en su blog y sus cursos. El sitio fue creado para reflejar su marca personal, optimizando su presencia online y facilitando la gestión de contenido.",
-      slug: "jose-dergan",
-      github: "https://github.com/username/jose-dergan",
-      demo: "https://josedergan.com",
-      longDescription: "Sitio web profesional desarrollado para José Dergán, psicólogo, con enfoque en su blog personal y cursos. El sitio utiliza Next.js para rendimiento y SEO, y Sanity CMS para gestión de contenido fácil.",
-      challenge: "Crear un sitio que refleje la marca personal del cliente, sea fácil de mantener, y optimizado para SEO y conversión de visitantes en estudiantes de cursos.",
-      solution: "Desarrollé el sitio con Next.js para SEO y rendimiento, integré Sanity CMS para gestión de contenido sin necesidad de conocimientos técnicos, y diseñé una interfaz limpia y profesional que refleja la marca del cliente.",
-      outcome: "Sitio web profesional que mejora la presencia online del cliente, facilita la gestión de contenido, y aumenta la visibilidad en motores de búsqueda.",
-      year: "2023"
-    },
-    {
-      title: "Gabriel Niezen Matos - Portfolio",
-      description: "Portafolio profesional personalizado",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop",
-      category: "Freelance",
-      tags: ["WordPress", "PHP", "CSS", "SEO", "Responsive Design", "Custom Theme"],
-      summary: "Desarrollé el sitio web completo en WordPress, proporcionando una plataforma intuitiva y fácil de usar para el portafolio profesional de Gabriel Niezen Matos. El proyecto incluyó la creación de una estructura personalizada, diseño responsivo y optimización para SEO.",
-      slug: "gabriel-niezen",
-      github: "https://github.com/username/gabriel-niezen",
-      demo: "https://gabrielniezenmatos.com",
-      longDescription: "Portafolio profesional personalizado desarrollado en WordPress con tema custom, optimizado para mostrar el trabajo y experiencia del cliente de manera efectiva.",
-      challenge: "Crear un portafolio que destaque el trabajo del cliente de manera profesional, sea fácil de mantener, y optimizado para SEO.",
-      solution: "Desarrollé un tema WordPress personalizado, creé una estructura intuitiva para mostrar proyectos, implementé diseño responsivo, y optimicé para SEO.",
-      outcome: "Portafolio profesional que mejora la presencia online del cliente y facilita la gestión de contenido.",
-      year: "2023"
-    },
-    {
-      title: "Sintrasat - Sitio Web Empresarial",
-      description: "Sitio web empresarial con CMS personalizado",
-      image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=2070&auto=format&fit=crop",
-      category: "Freelance",
-      tags: ["WordPress", "Custom CMS", "PHP", "MySQL", "SEO", "Business Website"],
-      summary: "Desarrollé un sitio web empresarial completo para Sintrasat con funcionalidades de CMS personalizadas, optimización SEO y diseño responsivo para mejorar la presencia online de la empresa.",
-      slug: "sintrasat-business",
-      github: "https://github.com/username/sintrasat",
-      demo: "https://sintrasat.com",
-      longDescription: "Sitio web empresarial desarrollado para Sintrasat con CMS personalizado que permite a la empresa gestionar su contenido fácilmente.",
-      challenge: "Crear un sitio empresarial profesional con funcionalidades de CMS que permitan a la empresa gestionar contenido sin conocimientos técnicos.",
-      solution: "Desarrollé un sitio WordPress con funcionalidades personalizadas, creé un CMS intuitivo, implementé diseño profesional, y optimicé para SEO.",
-      outcome: "Sitio web empresarial que mejora la presencia online de la empresa y facilita la gestión de contenido.",
-      year: "2023"
-    },
-    {
-      title: "Falling Awake - Plataforma de Membresía",
-      description: "Plataforma de membresía con sistema de pagos",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=2070&auto=format&fit=crop",
-      category: "Freelance",
-      tags: ["WordPress", "Membership Platform", "Payment Integration", "User Management", "Content Protection"],
-      summary: "Creé una plataforma de membresía completa con sistema de pagos integrado, gestión de usuarios y protección de contenido para Falling Awake.",
-      slug: "falling-awake-membership",
-      github: "https://github.com/username/falling-awake",
-      demo: "https://fallingawake.com",
-      longDescription: "Plataforma de membresía desarrollada para Falling Awake que permite gestionar suscriptores, procesar pagos, y proteger contenido exclusivo para miembros.",
-      challenge: "Crear una plataforma de membresía segura con integración de pagos, gestión de usuarios, y protección de contenido.",
-      solution: "Desarrollé una plataforma WordPress con plugins de membresía, integré sistemas de pago, implementé gestión de usuarios, y configuré protección de contenido.",
-      outcome: "Plataforma de membresía funcional que permite monetizar contenido y gestionar suscriptores de manera eficiente.",
-      year: "2023"
-    },
-    {
-      title: "Apoyo Consultivo - Sitio Web Consultoría",
-      description: "Sitio web para firma de consultoría",
-      image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=2070&auto=format&fit=crop",
-      category: "Freelance",
-      tags: ["WordPress", "Consulting Website", "SEO", "Lead Generation", "Professional Design"],
-      summary: "Desarrollé un sitio web profesional para Apoyo Consultivo, enfocado en generar leads y presentar los servicios de consultoría de manera efectiva.",
-      slug: "apoyo-consultivo",
-      github: "https://github.com/username/apoyo-consultivo",
-      demo: "https://apoyoconsultivo.com",
-      longDescription: "Sitio web profesional desarrollado para Apoyo Consultivo, firma de consultoría, optimizado para generar leads y presentar servicios de manera efectiva.",
-      challenge: "Crear un sitio que genere leads efectivamente, presente servicios de consultoría de manera profesional, y convierta visitantes en clientes potenciales.",
-      solution: "Desarrollé un sitio WordPress profesional con formularios de contacto, diseño enfocado en conversión, optimización SEO, y estructura clara para presentar servicios.",
-      outcome: "Sitio web profesional que mejora la generación de leads y presenta los servicios de consultoría de manera efectiva.",
-      year: "2023"
-    }
-  ],
-  Personal: [
-    {
-      title: "Cuentos de Yvón",
-      description: "Sitio web de cuentos para mi mamá",
-      image: "https://images.unsplash.com/photo-1472745433479-4556f22e32c2?q=80&w=2069&auto=format&fit=crop",
-      category: "Personal",
-      tags: ["WordPress", "Elementor", "SEO", "Content Management", "Responsive Design", "Custom Design"],
-      summary: "Creé un sitio web sencillo y funcional para mi mamá, permitiéndole compartir sus cuentos de manera rápida y fácil. El diseño es limpio y enfocado en la lectura, facilitando tanto la publicación como la experiencia del lector.",
-      slug: "cuentos-yvon",
-      github: "https://github.com/username/cuentos-yvon",
-      demo: "https://cuentos.yvonbrito.com",
-      longDescription: "Sitio web personal desarrollado para mi mamá para compartir sus cuentos. El sitio está diseñado para ser fácil de usar tanto para publicar como para leer contenido.",
-      challenge: "Crear un sitio simple y fácil de usar para alguien sin conocimientos técnicos, enfocado en la lectura y publicación de cuentos.",
-      solution: "Desarrollé un sitio WordPress con Elementor para facilidad de uso, diseño limpio enfocado en la lectura, y estructura simple para publicación de contenido.",
-      outcome: "Sitio web funcional que permite a mi mamá compartir sus cuentos fácilmente y a los lectores disfrutar de una experiencia de lectura agradable.",
-      year: "2023"
-    },
-    {
-      title: "Cuentos de Moisés",
-      description: "Mi sitio web personal de cuentos",
-      image: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?q=80&w=2069&auto=format&fit=crop",
-      category: "Personal",
-      tags: ["WordPress", "Custom Design", "SEO", "Content Management", "Responsive Design"],
-      summary: "Desarrollé mi sitio web de cuentos con un enfoque en la simplicidad y la eficiencia, permitiéndome publicar y compartir mis historias de manera rápida. El diseño es minimalista y optimizado para una lectura agradable.",
-      slug: "cuentos-moises",
-      github: "https://github.com/username/cuentos-moises",
-      demo: "https://cuentos.moises.com",
-      longDescription: "Sitio web personal para compartir mis cuentos, diseñado con un enfoque minimalista y enfocado en la experiencia de lectura.",
-      challenge: "Crear un sitio personal que me permita publicar cuentos fácilmente y que ofrezca una excelente experiencia de lectura.",
-      solution: "Desarrollé un sitio WordPress con diseño minimalista, optimizado para lectura, y con estructura simple para publicación rápida de contenido.",
-      outcome: "Sitio web personal funcional que me permite compartir mis cuentos y ofrece una excelente experiencia de lectura.",
-      year: "2023"
-    },
-    {
-      title: "Saiyans Blog",
-      description: "Blog tecnológico con artículos y tutoriales",
-      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=2072&auto=format&fit=crop",
-      category: "Personal",
-      tags: ["Blog", "Technology", "Tutorials", "Content Creation", "SEO"],
-      summary: "Blog personal donde comparto conocimientos técnicos, tutoriales y reflexiones sobre desarrollo de software y tecnología.",
-      slug: "saiyans-blog",
-      github: "https://github.com/username/saiyans-blog",
-      demo: "https://saiyans.dev",
-      longDescription: "Blog personal donde comparto conocimientos técnicos, tutoriales, y reflexiones sobre desarrollo de software y tecnología.",
-      challenge: "Crear un blog que me permita compartir conocimientos técnicos de manera efectiva y que sea fácil de mantener.",
-      solution: "Desarrollé un blog con WordPress, optimizado para contenido técnico, con estructura clara para tutoriales y artículos, y optimizado para SEO.",
-      outcome: "Blog funcional que me permite compartir conocimientos técnicos y que ofrece una buena experiencia de lectura.",
-      year: "2023"
-    },
-    {
-      title: "My English Journey",
-      description: "Blog documentando mi proceso de aprendizaje de inglés",
-      image: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=2071&auto=format&fit=crop",
-      category: "Personal",
-      tags: ["Blog", "Language Learning", "English", "Documentation", "Personal Growth"],
-      summary: "Blog personal donde documento mi proceso de aprendizaje del inglés, compartiendo recursos, experiencias y progreso.",
-      slug: "english-journey",
-      github: "https://github.com/username/english-journey",
-      demo: "https://englishwithmoises.com",
-      longDescription: "Blog personal donde documento mi proceso de aprendizaje del inglés, compartiendo recursos, experiencias, y progreso.",
-      challenge: "Crear un blog que me permita documentar mi proceso de aprendizaje y compartir recursos con otros estudiantes.",
-      solution: "Desarrollé un blog con WordPress, estructurado para documentar progreso, compartir recursos, y con diseño enfocado en la lectura.",
-      outcome: "Blog funcional que me permite documentar mi proceso de aprendizaje y compartir recursos con otros estudiantes.",
-      year: "2023"
-    },
-    {
-      title: "Ankicito",
-      description: "Aplicación en desarrollo para intercambio de libros",
-      image: "/assets/ankicito.png",
-      category: "Personal",
-      tags: ["React Native", "In Progress", "Education", "Mobile App", "Book Exchange"],
-      summary: "Actualmente estoy desarrollando Ankicito, una aplicación móvil diseñada para facilitar el intercambio de libros y mejorar el aprendizaje mediante tarjetas de memoria. El proyecto está en curso y se centra en ofrecer una experiencia de usuario intuitiva y efectiva.",
-      slug: "ankicito",
-      github: "https://github.com/username/ankicito",
-      demo: "#",
-      longDescription: "Aplicación móvil en desarrollo para facilitar el intercambio de libros y mejorar el aprendizaje mediante tarjetas de memoria (flashcards).",
-      challenge: "Crear una aplicación móvil que facilite el intercambio de libros y el aprendizaje mediante flashcards, con una experiencia de usuario intuitiva.",
-      solution: "Desarrollando la aplicación con React Native para multiplataforma, implementando funcionalidades de intercambio de libros y sistema de flashcards para aprendizaje.",
-      outcome: "Proyecto en desarrollo que busca facilitar el intercambio de libros y mejorar el aprendizaje mediante tecnología móvil.",
-      year: "2024"
-    },
-    {
-      title: "Personal Workflow Architecture (AI-Assisted Engineering System)",
-      description: "A personal engineering operating system built with AI, diagrams and standardized workflows",
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2070&auto=format&fit=crop",
-      category: "Personal",
-      tags: ["AWS", "Python", "Laravel", "Mermaid", "Miro", "GitHub Copilot", "Cursor", "RAG", "AI", "Workflow Automation", "System Design"],
-      summary: "Sistema operativo de ingeniería personal construido con IA, diagramas y flujos de trabajo estandarizados. Incluye Personal System Design Playbook, AI Coding Flow, Architecture Patterns, y productividad meta-automatizada.",
-      slug: "personal-workflow-architecture",
-      github: "https://github.com/modavidc/personal-workflow-architecture",
-      demo: "#",
-      longDescription: "Personal Workflow Architecture es un sistema operativo de ingeniería personal de largo plazo (2025-2026) que integra IA, diagramas y flujos de trabajo estandarizados para acelerar el desarrollo, mejorar la calidad y reducir el retrabajo. El sistema incluye un Personal System Design Playbook, flujos de programación asistida por IA (pair programming, automatización de refactorización, razonamiento de debugging), patrones de arquitectura para APIs, AWS, colas y sistemas distribuidos, testing y quality gates guiados por IA, y productividad meta-automatizada.",
-      challenge: "Crear un sistema personal que eleve el nivel técnico hasta estándares globales, acelerando el desarrollo mientras mejora la calidad y reduce el retrabajo mediante la integración de IA y flujos de trabajo estandarizados.",
-      solution: "Desarrollé un sistema operativo de ingeniería que integra múltiples herramientas: AWS para infraestructura, Python y Laravel para desarrollo, Mermaid y Miro para diagramas, GitHub Copilot y Cursor para programación asistida por IA, y workflows RAG para conocimiento contextual. El sistema incluye playbooks personalizados, patrones de arquitectura documentados, y automatización de procesos de desarrollo y testing.",
-      outcome: "Versión 1.0 publicada. Impacto esperado: acelerar desarrollo, mejorar calidad, reducir retrabajo y elevar nivel técnico hasta estándar global. El sistema proporciona diagramas, templates y estándares propios que guían todo el proceso de desarrollo.",
-      year: "2025-2026"
-    }
-  ],
-  Talks: [
-    {
-      title: "Charla: Innovación en Tecnología Educativa",
-      description: "Presentación sobre las últimas tendencias en tecnología educativa",
-      image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2069&auto=format&fit=crop",
-      category: "Talks",
-      tags: ["Public Speaking", "Education", "Technology", "Innovation"],
-      summary: "Di una charla sobre innovación en tecnología educativa, explorando las últimas tendencias y cómo están transformando el aprendizaje. La presentación incluyó ejemplos prácticos y estrategias para implementar tecnología en entornos educativos.",
-      slug: "charla-innovacion-tecnologia-educativa",
-      github: "#",
-      demo: "#",
-      longDescription: "Charla sobre innovación en tecnología educativa donde exploré las últimas tendencias y cómo están transformando el aprendizaje.",
-      challenge: "Presentar información técnica de manera accesible y motivar a la audiencia a implementar tecnología en entornos educativos.",
-      solution: "Preparé una presentación con ejemplos prácticos, casos de uso reales, y estrategias implementables para integrar tecnología en educación.",
-      outcome: "Charla exitosa que inspiró a educadores a explorar nuevas tecnologías y mejoró mi capacidad de comunicación técnica.",
-      year: "2023"
-    }
-  ]
+  Work: featuredProjects.filter((p) => p.category === "Work"),
+  Freelance: [],
+  Personal: featuredProjects.filter((p) => p.category === "Personal"),
+  Talks: []
 }
 
 // Helper function to get all projects
 export function getAllProjects(): Project[] {
-  return [
-    ...projects.Work,
-    ...projects.Freelance,
-    ...projects.Personal,
-    ...projects.Talks
-  ]
+  return [...featuredProjects]
 }
 
 // Helper function to get project by slug
 export function getProjectBySlug(slug: string): Project | undefined {
-  const allProjects = getAllProjects()
-  return allProjects.find(project => project.slug === slug)
+  const fromFeatured = featuredProjects.find((project) => project.slug === slug)
+  if (fromFeatured) return fromFeatured
+
+  const archived = [
+    ...(archivedProjects.Work || []),
+    ...(archivedProjects.Freelance || []),
+    ...(archivedProjects.Personal || []),
+    ...(archivedProjects.Talks || [])
+  ]
+  return archived.find((project) => project.slug === slug)
 }
 
 // Helper function to get projects by category
