@@ -279,7 +279,7 @@ export default function CasoDetailPage({ params }: { params: { id: string } }) {
           <Link href="/casos-de-exito" className="btn btn-secondary" style={{ fontSize: "13px" }}>
             ← Todos los casos
           </Link>
-          <a href="mailto:hola@modavidc.com" className="btn btn-primary" style={{ fontSize: "13px" }}>
+          <a href="mailto:moisesdavidaaron@gmail.com" className="btn btn-primary" style={{ fontSize: "13px" }}>
             Hablemos de tu proyecto →
           </a>
         </div>

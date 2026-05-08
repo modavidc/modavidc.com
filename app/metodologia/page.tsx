@@ -220,7 +220,7 @@ export default function MetodologiaPage() {
             <p className="cta-band-sub">Si tu problema es nuevo o ya tienes un sistema que necesita mejorar — el resultado es el mismo: un sistema que escala sin depender de nadie.</p>
           </div>
           <div className="cta-band-btns">
-            <a className="btn btn-primary" href="mailto:hola@modavidc.com">Hablemos →</a>
+            <a className="btn btn-primary" href="mailto:moisesdavidaaron@gmail.com">Hablemos →</a>
             <a className="btn btn-secondary" href="/casos-de-exito">Ver todos los casos</a>
           </div>
         </div>

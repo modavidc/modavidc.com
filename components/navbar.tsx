@@ -77,7 +77,7 @@ export function Navbar() {
         <div className="nav-inner">
           <Link className="nav-brand" href="/">
             <div className="nav-wm"><span className="mo">mo</span>davidc</div>
-            <div className="nav-tagline">Honest work. Efficient architectures.</div>
+            <div className="nav-tagline">Criterio · Contexto · Intención</div>
           </Link>
           <div className="nav-links">
             <Link href="/experiencia" className={pathname === "/experiencia" ? "active" : ""}>Experiencia</Link>

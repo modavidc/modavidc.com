@@ -1,5 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
+import { Mail, Linkedin, Github, MessageCircle, Send } from "lucide-react"
 
 export default function Home() {
   return (
@@ -7,14 +8,14 @@ export default function Home() {
       {/* ═══ HERO ════════════════════════════════════════════════ */}
       <div className="hero">
         <div className="hero-left">
-          <div className="hero-kicker">Solutions Architect · FinOps &amp; Cloud · Healthcare &amp; SaaS</div>
+          <div className="hero-kicker">Tech Lead · Arquitecto de Soluciones · AWS &amp; FinOps</div>
           <h1 className="hero-h1">
-            Construyo software<br />
-            que escala sin depender<br />
-            <em>de quién lo creó.</em>
+            Lidero equipos. Construyo software<br />
+            acelerado por IA<br />
+            <em>con criterio e intención.</em>
           </h1>
           <p className="hero-sub">
-            +8 años en Healthcare, SaaS e IoT entregando sistemas que cualquier dev puede mantener desde el primer día. Sin documentación muerta. Sin dependencia de persona.
+            +8 años en software, los últimos 3 como Tech Lead en Healthcare, SaaS e IoT. La IA acelera, pero yo pongo el criterio, la intención y la experiencia. Resultados comprobados: -58% en costos AWS, $20k/yr menos en licencias y equipos que escalan.
           </p>
           <div className="hero-ctas">
             <Link className="btn btn-primary" href="/contact">Hablemos →</Link>
@@ -26,7 +27,7 @@ export default function Home() {
           <div className="hero-photo-wrap">
             <Image
               src="/assets/profile/moises_cedeno.png"
-              alt="Moisés Cedeño — Solutions Architect"
+              alt="Moisés Cedeño — Tech Lead"
               width={360}
               height={480}
               priority
@@ -35,9 +36,9 @@ export default function Home() {
             <div className="hero-photo-caption">
               <div>
                 <div className="hero-photo-name">Moisés Cedeño</div>
-                <div className="hero-photo-role">Solutions Architect · Lima, Perú</div>
+                <div className="hero-photo-role">Tech Lead · AWS & FinOps</div>
               </div>
-              <div className="hero-photo-badge">Disponible</div>
+              <div style={{ fontFamily: "var(--ff-mono)", fontSize: "9px", color: "var(--green)", letterSpacing: ".16em", textTransform: "uppercase" }}>Criterio · Contexto · Intención</div>
             </div>
           </div>
         </div>
@@ -54,9 +55,14 @@ export default function Home() {
               <div className="kpi-sub">MediRec · 2023</div>
             </div>
             <div className="kpi-cell">
-              <div className="kpi-val">+8</div>
-              <div className="kpi-label">Años de experiencia</div>
-              <div className="kpi-sub">Healthcare · SaaS · IoT</div>
+              <div className="kpi-val green">-$20K</div>
+              <div className="kpi-label">En licencias / año</div>
+              <div className="kpi-sub">Migración NLMI · 2024</div>
+            </div>
+            <div className="kpi-cell">
+              <div className="kpi-val green">-70%</div>
+              <div className="kpi-label">Tiempo de resultados clínicos</div>
+              <div className="kpi-sub">Lab Middleware · 2022</div>
             </div>
             <div className="kpi-cell">
               <div className="kpi-val">20K+</div>
@@ -64,14 +70,9 @@ export default function Home() {
               <div className="kpi-sub">Sistemas multi-tenant</div>
             </div>
             <div className="kpi-cell">
-              <div className="kpi-val">48h</div>
-              <div className="kpi-label">Onboarding de dev nuevo</div>
-              <div className="kpi-sub">Sin dependencia de persona</div>
-            </div>
-            <div className="kpi-cell">
-              <div className="kpi-val">-$20K</div>
-              <div className="kpi-label">En licencias / año</div>
-              <div className="kpi-sub">Migración NLMI · 2024</div>
+              <div className="kpi-val green">-200%</div>
+              <div className="kpi-label">Tiempo de respuesta</div>
+              <div className="kpi-sub">T-Cuida · 3min → 1min</div>
             </div>
           </div>
         </div>
@@ -83,7 +84,7 @@ export default function Home() {
         <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "20px 48px", display: "flex", alignItems: "center", gap: "32px", flexWrap: "wrap" }}>
           <span style={{ fontFamily: "var(--ff-mono)", fontSize: "9px", color: "var(--text-3)", letterSpacing: ".18em", textTransform: "uppercase", whiteSpace: "nowrap" }}>Industrias</span>
           <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", alignItems: "center" }}>
-            {["Healthcare", "SaaS", "IoT", "Gov-Tech", "FinOps", "Sistemas distribuidos"].map(tag => (
+            {["SaaS", "IoT", "Gov-Tech", "FinOps", "AWS", "Sistemas distribuidos"].map(tag => (
               <span key={tag} style={{ fontFamily: "var(--ff-mono)", fontSize: "10px", color: "var(--text-3)", letterSpacing: ".08em", padding: "3px 10px", border: "1px solid var(--border)", borderRadius: "2px" }}>{tag}</span>
             ))}
           </div>
@@ -94,27 +95,27 @@ export default function Home() {
       <div id="metodologia" className="full-border">
         <section className="section">
           <div className="section-kicker">Mi Enfoque</div>
-          <h2 className="section-h2">Entrego sistemas que funcionan<br />cuando yo no estoy.</h2>
-          <p className="section-sub">Documentación que permite que cualquier dev entienda el sistema. Arquitecturas que no dependen del conocimiento de una sola persona.</p>
+          <h2 className="section-h2">Cómo convierto criterio técnico<br />en resultados medibles.</h2>
+          <p className="section-sub">No es solo escribir buen código. Es tomar las decisiones correctas en el momento correcto y liderar el equipo para ejecutarlas.</p>
 
           <div className="enfoque-grid">
             <div className="enfoque-cell">
-              <div className="enfoque-icon">IA</div>
-              <div className="enfoque-title">Velocidad con criterio</div>
-              <div className="enfoque-body">Uso IA como acelerador, no como sustituto del criterio técnico. Entrego en semanas lo que antes tardaba meses — con la misma calidad de arquitectura.</div>
-              <span className="metric-tag">+400% velocidad de desarrollo</span>
+              <div className="enfoque-icon" style={{ color: "var(--blue)" }}>↗</div>
+              <div className="enfoque-title">Liderazgo técnico con impacto</div>
+              <div className="enfoque-body">Defino la arquitectura, priorizo la deuda técnica y conecto las decisiones de ingeniería con el negocio. Lidero equipos para que entreguen más y mejor, no solo más rápido.</div>
+              <span className="metric-tag neutral">3 años como Tech Lead · SaaS & IoT</span>
             </div>
             <div className="enfoque-cell">
-              <div className="enfoque-icon" style={{ color: "var(--blue)" }}>↗</div>
-              <div className="enfoque-title">Arquitectura que escala</div>
-              <div className="enfoque-body">Diseño sistemas para el día que yo ya no esté. Decisiones documentadas, patrones reusables, onboarding de 48h para cualquier dev nuevo en el equipo.</div>
-              <span className="metric-tag neutral">48h onboarding · garantizado</span>
+              <div className="enfoque-icon">IA</div>
+              <div className="enfoque-title">IA con criterio e intención</div>
+              <div className="enfoque-body">Uso IA para acelerar entrega sin sacrificar arquitectura. La herramienta no reemplaza el criterio, lo amplifica. El contexto y la intención siempre los pongo yo.</div>
+              <span className="metric-tag">+8 años de criterio técnico detrás</span>
             </div>
             <div className="enfoque-cell">
               <div className="enfoque-icon" style={{ color: "var(--violet)" }}>⌬</div>
-              <div className="enfoque-title">Autonomía del equipo</div>
-              <div className="enfoque-body">Dejo equipos más capaces de lo que los encontré. Registro de decisiones, guías de contribución y documentación viva que cualquier dev puede navegar solo.</div>
-              <span className="metric-tag neutral">0 dependencias de persona clave</span>
+              <div className="enfoque-title">Resultados que se miden</div>
+              <div className="enfoque-body">-58% en factura AWS, $20k/yr menos en licencias farmacéuticas. Cada decisión técnica tiene un impacto en el negocio — y ese impacto se mide.</div>
+              <span className="metric-tag">Resultados comprobados · Healthcare & SaaS</span>
             </div>
           </div>
         </section>
@@ -130,31 +131,37 @@ export default function Home() {
 
           <div className="problemas-list">
             <div className="problema-item">
-              <div className="problema-q">¿Tu factura de AWS sube cada mes sin una explicación clara de por qué?</div>
+              <div className="problema-q">¿Tu factura AWS sube cada mes sin que nadie sepa exactamente por qué?</div>
               <div className="problema-a">
-                <strong>Reduzco costos de nube sin tocar la disponibilidad.</strong> En MediRec identifiqué instancias sobredimensionadas, eliminé recursos huérfanos y reestructuré el modelo de reservas. Resultado: <strong>-58% en factura AWS</strong> en 90 días, con la plataforma al 100% de uptime.
-                <br /><Link className="problema-link" href="/casos-de-exito">Ver caso completo →</Link>
+                <strong>Gobierno de costos cloud sin tocar la disponibilidad.</strong> En MediRec identifiqué instancias sobredimensionadas, eliminé recursos huérfanos y reestructuré el modelo de reservas. Resultado: <strong>-58% en factura AWS</strong> en 90 días, plataforma al 100% de uptime.
+                <br /><Link className="problema-link" href="/casos-de-exito/medirec-aws">Ver caso completo →</Link>
               </div>
             </div>
             <div className="problema-item">
-              <div className="problema-q">¿Cada vez que un dev se va, el proyecto pierde velocidad durante semanas?</div>
+              <div className="problema-q">¿Pagas licencias de software que podrías eliminar sin perder funcionalidad?</div>
               <div className="problema-a">
-                <strong>Elimino la dependencia de persona clave.</strong> Implemento arquitecturas documentadas donde el conocimiento vive en el sistema, no en la cabeza de alguien. Un dev nuevo queda productivo en <strong>48 horas</strong>.
+                <strong>Migro dependencias costosas a alternativas sin comprometer el producto.</strong> Migré LexComp a NLMI en un sistema Healthcare crítico, eliminando <strong>$20k/año</strong> en licencias farmacéuticas con cero pérdida de integridad clínica.
+                <br /><Link className="problema-link" href="/casos-de-exito/licencias-farmaceuticas">Ver caso completo →</Link>
               </div>
             </div>
             <div className="problema-item">
-              <div className="problema-q">¿Pagas licencias de software por herramientas que podrías construir internamente?</div>
+              <div className="problema-q">¿Tu plataforma funciona pero sabes que es frágil y nadie quiere tocarla?</div>
               <div className="problema-a">
-                <strong>Migro dependencias costosas a alternativas open source sin perder funcionalidad.</strong> En un proyecto Healthcare migré LexComp a NLMI, eliminando <strong>$20k/año</strong> en licencias farmacéuticas sin comprometer la integridad clínica.
-                <br /><Link className="problema-link" href="/casos-de-exito">Ver caso completo →</Link>
+                <strong>Re-arquitecturo sistemas frágiles sin detener la operación.</strong> Identifico los puntos de quiebre, priorizo la deuda técnica con criterio de negocio y construyo una base sólida para escalar — sin reescribir todo desde cero.
+                <br /><Link className="problema-link" style={{ color: "var(--red)", opacity: 0.7 }} href="/contact">Caso en proceso · Hablemos →</Link>
               </div>
             </div>
             <div className="problema-item">
-              <div className="problema-q">¿Tu equipo tarda meses en onboardear un dev nuevo en el sistema?</div>
+              <div className="problema-q">¿Tu infraestructura cloud creció sin orden y hoy nadie sabe qué hay en producción?</div>
               <div className="problema-a">
-                <strong>Construyo sistemas con onboarding documentado.</strong> ADRs (Architecture Decision Records), guías de contribución y runbooks que permiten que cualquier dev navegue el sistema solo — en horas, no semanas.
+                <strong>Estandarizo infraestructura con IaC y visibilidad real.</strong> Implemento Infrastructure as Code, elimino recursos huérfanos y dejo una arquitectura que cualquier ingeniero puede entender y operar desde el primer día.
+                <br /><Link className="problema-link" style={{ color: "var(--red)", opacity: 0.7 }} href="/contact">Caso en proceso · Hablemos →</Link>
               </div>
             </div>
+          </div>
+          <div style={{ marginTop: "32px", paddingTop: "24px", borderTop: "1px solid var(--border)", textAlign: "center" }}>
+            <p style={{ color: "var(--text-3)", fontFamily: "var(--ff-mono)", fontSize: "12px", marginBottom: "12px" }}>¿Tu problema no está aquí? Descríbemelo.</p>
+            <Link className="btn btn-primary" href="/contact">Hablemos →</Link>
           </div>
         </section>
       </div>
@@ -271,35 +278,34 @@ export default function Home() {
         <div className="cta-final">
           <div>
             <div className="section-kicker" style={{ marginBottom: "20px" }}>¿Hablamos?</div>
-            <h2 className="cta-final-h2">¿Buscas este perfil<br />para tu <em>equipo</em>?</h2>
+            <h2 className="cta-final-h2">¿Tienes un problema<br />técnico que <em>resolver</em>?</h2>
             <p className="cta-final-sub">
-              Si tienes un proyecto que necesita reducción de costos, escalar sin depender de una sola persona o simplemente construirse bien desde el inicio — cuéntame.
+              Si tu plataforma AWS está fuera de control, tu infraestructura creció sin orden o necesitas criterio técnico real en tu equipo, cuéntamelo.
             </p>
             <div className="cta-final-btns">
-              <a className="btn btn-primary" href="mailto:hola@modavidc.com">Enviar mensaje →</a>
-              <a className="btn btn-secondary" href="/assets/cv/cv.pdf" download>Descargar CV · PDF</a>
+              <Link className="btn btn-primary" href="/contact">Hablemos →</Link>
             </div>
           </div>
           <div className="cta-final-aside">
             <div className="cta-aside-item">
-              <span className="cta-aside-label">Email</span>
-              <span className="cta-aside-val"><a href="mailto:hola@modavidc.com">hola@modavidc.com</a></span>
+              <span className="cta-aside-label"><MessageCircle size={13} style={{ display: "inline", marginRight: "6px", verticalAlign: "middle" }} />WhatsApp</span>
+              <span className="cta-aside-val"><a href="https://wa.me/51938804597" target="_blank" rel="noopener">+51 938 804 597</a></span>
             </div>
             <div className="cta-aside-item">
-              <span className="cta-aside-label">LinkedIn</span>
+              <span className="cta-aside-label"><Send size={13} style={{ display: "inline", marginRight: "6px", verticalAlign: "middle" }} />Telegram</span>
+              <span className="cta-aside-val"><a href="https://t.me/modavidc" target="_blank" rel="noopener">@modavidc</a></span>
+            </div>
+            <div className="cta-aside-item">
+              <span className="cta-aside-label"><Mail size={13} style={{ display: "inline", marginRight: "6px", verticalAlign: "middle" }} />Email</span>
+              <span className="cta-aside-val"><a href="mailto:moisesdavidaaron@gmail.com">moisesdavidaaron@gmail.com</a></span>
+            </div>
+            <div className="cta-aside-item">
+              <span className="cta-aside-label"><Linkedin size={13} style={{ display: "inline", marginRight: "6px", verticalAlign: "middle" }} />LinkedIn</span>
               <span className="cta-aside-val"><a href="https://linkedin.com/in/modavidc" target="_blank" rel="noopener">linkedin.com/in/modavidc</a></span>
             </div>
             <div className="cta-aside-item">
-              <span className="cta-aside-label">GitHub</span>
+              <span className="cta-aside-label"><Github size={13} style={{ display: "inline", marginRight: "6px", verticalAlign: "middle" }} />GitHub</span>
               <span className="cta-aside-val"><a href="https://github.com/modavidc" target="_blank" rel="noopener">github.com/modavidc</a></span>
-            </div>
-            <div className="cta-aside-item">
-              <span className="cta-aside-label">Disponibilidad</span>
-              <span className="cta-aside-val" style={{ color: "var(--green)" }}>Proyectos seleccionados — preguntar</span>
-            </div>
-            <div className="cta-aside-item">
-              <span className="cta-aside-label">Respuesta</span>
-              <span className="cta-aside-val">Menos de 24h</span>
             </div>
           </div>
         </div>

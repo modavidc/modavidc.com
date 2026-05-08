@@ -39,7 +39,7 @@ export function Footer() {
             textTransform: 'uppercase',
             marginBottom: '16px',
           }}>
-            Honest work. Efficient architectures.
+            Criterio, contexto e intención.
           </div>
           <div style={{
             fontFamily: 'var(--ff-mono)',
@@ -48,7 +48,7 @@ export function Footer() {
             letterSpacing: '.08em',
             textTransform: 'uppercase',
           }}>
-            Solutions Architect · FinOps &amp; Cloud
+            Tech Lead · Arquitecto de Soluciones · AWS &amp; FinOps
           </div>
         </div>
 

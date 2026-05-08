@@ -293,7 +293,7 @@ export default function CasosPage() {
               <p className="cta-band-sub">Si tienes un problema que se parece a alguno de estos casos — ya sé cómo resolverlo. Cuéntame el contexto.</p>
             </div>
             <div className="cta-band-btns">
-              <a className="btn btn-primary" href="mailto:hola@modavidc.com">Hablemos →</a>
+              <a className="btn btn-primary" href="mailto:moisesdavidaaron@gmail.com">Hablemos →</a>
               <a className="btn btn-secondary" href="/experiencia">Ver experiencia</a>
             </div>
           </div>

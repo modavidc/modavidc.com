@@ -257,7 +257,7 @@ export default function TestimoniosPage() {
               <p className="cta-band-sub">Proyectos que entregan resultados medibles, con documentación que permite continuidad sin dependencias.</p>
             </div>
             <div className="cta-band-btns">
-              <a className="btn btn-primary" href="mailto:hola@modavidc.com">Hablemos de tu proyecto →</a>
+              <a className="btn btn-primary" href="mailto:moisesdavidaaron@gmail.com">Hablemos de tu proyecto →</a>
               <a className="btn btn-secondary" href="/casos-de-exito">Ver casos de éxito</a>
             </div>
           </div>

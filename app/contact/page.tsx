@@ -7,9 +7,9 @@ export default function ContactPage() {
     <>
       <div className="page-header">
         <div className="section-kicker">Contacto</div>
-        <h1 className="page-h1">Hablemos de tu<br /><em>próximo proyecto.</em></h1>
+        <h1 className="page-h1">¿Tienes un problema<br /><em>técnico que resolver?</em></h1>
         <p className="page-sub">
-          Si tienes un proyecto que necesita reducción de costos cloud, arquitectura escalable o simplemente construirse bien desde el inicio — cuéntame.
+          Si tu plataforma AWS está fuera de control, tu infraestructura creció sin orden o necesitas criterio técnico real en tu equipo, cuéntamelo. Sin formularios genéricos.
         </p>
       </div>
 
@@ -65,7 +65,7 @@ export default function ContactPage() {
 
             {/* Email */}
             <a
-              href="mailto:hola@modavidc.com"
+              href="mailto:moisesdavidaaron@gmail.com"
               style={{
                 display: 'flex', alignItems: 'center', gap: '20px',
                 padding: '24px 28px', textDecoration: 'none',
@@ -93,7 +93,7 @@ export default function ContactPage() {
                   Email
                 </div>
                 <div style={{ fontSize: '13px', color: 'var(--text-3)', fontFamily: 'var(--ff-mono)' }}>
-                  hola@modavidc.com
+                  moisesdavidaaron@gmail.com
                 </div>
               </div>
               <div style={{
