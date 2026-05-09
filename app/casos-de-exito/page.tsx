@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 
-type Cat = "todos" | "finops" | "healthcare" | "saas" | "iot" | "personal"
+type Cat = "todos" | "finops" | "healthcare" | "saas" | "iot"
 
 const FILTERS: { key: Cat; label: string; color: string }[] = [
   { key: "todos", label: "Todos", color: "" },
@@ -11,7 +11,6 @@ const FILTERS: { key: Cat; label: string; color: string }[] = [
   { key: "healthcare", label: "Healthcare", color: "var(--violet)" },
   { key: "saas", label: "SaaS", color: "var(--blue)" },
   { key: "iot", label: "Mobile / IoT", color: "var(--amber)" },
-  { key: "personal", label: "Personal", color: "" },
 ]
 
 const CASOS = [
@@ -20,7 +19,7 @@ const CASOS = [
     cats: ["finops", "healthcare"],
     meta: ["Work · FinOps", "2023"],
     title: "Cómo reduje 58% la factura AWS de MediRec",
-    body: "Re-arquitectura y gobernanza de costos en plataforma Healthcare con 20K+ usuarios. Rightsizing, auto-scaling y eliminación de recursos huérfanos — sin tocar uptime.",
+    body: "Plataforma Healthcare con 20K+ usuarios y factura AWS creciendo sin control. Diagnostiqué, prioricé y lideré el plan de gobernanza de costos sin tocar el uptime.",
     metric: "-58% AWS · $180K",
     metricNeutral: false,
     svg: (
@@ -39,7 +38,7 @@ const CASOS = [
     cats: ["finops", "healthcare"],
     meta: ["Work · FinOps", "2024"],
     title: "Cómo eliminé $20k/año en licencias farmacéuticas",
-    body: "Migración de LexComp a NLMI sin perder integridad clínica. Sistema de medicamentos que cumple PREIS con cero costo de licencias.",
+    body: "Evalué el riesgo clínico, diseñé la migración incremental y lideré la transición de LexComp a NLMI. $20k/año menos en licencias, sin comprometer la cobertura farmacéutica.",
     metric: "-$20k/año · 0 downtime",
     metricNeutral: false,
     svg: (
@@ -59,7 +58,7 @@ const CASOS = [
     cats: ["saas", "healthcare"],
     meta: ["Work · Healthcare", "2022"],
     title: "De fax a real-time: resultados de lab en minutos",
-    body: "Middleware HL7 que redujo el tiempo de entrega de resultados clínicos de 6 horas a menos de 90 minutos. Cero cambios en el sistema de laboratorio legacy.",
+    body: "El equipo recibía resultados clínicos por fax, con 6 horas de espera. Diseñé y construí el middleware HL7 que los entrega en tiempo real, sin tocar el sistema legacy.",
     metric: "-70% tiempo clínico",
     metricNeutral: false,
     svg: (
@@ -81,7 +80,7 @@ const CASOS = [
     cats: ["saas", "healthcare"],
     meta: ["Work · Gov-Tech", "2023"],
     title: "Integración Gov-Tech: de Excel manual a API automatizada",
-    body: "API crítica para reportes de inmunizaciones al Gobierno de Puerto Rico. De proceso manual en Excel a sistema automatizado con auditoría completa.",
+    body: "4 horas de trabajo manual semanal en Excel para reportes al gobierno. Diseñé la integración con PREIS y la automaticé completamente, con auditoría desde el día uno.",
     metric: "100% compliance",
     metricNeutral: true,
     svg: (
@@ -103,8 +102,8 @@ const CASOS = [
     id: "tcuida-iot",
     cats: ["iot", "saas"],
     meta: ["Work · SaaS / IoT", "2023"],
-    title: "T-Cuida — sistema IoT que construí desde cero",
-    body: "Ecosistema SaaS completo: wearables, GPS, dashboard real-time y comunicación familiar. De cero a App Store + Play Store con Flutter en 3 semanas.",
+    title: "T-Cuida — ecosistema IoT liderado de cero a producción",
+    body: "Lideré la arquitectura y entrega de un ecosistema IoT completo: wearables, GPS, dashboard y app móvil. De cero a producción en 3 semanas, con documentación para que el equipo tomara ownership desde el día uno.",
     metric: "3 sem · 100% ownership",
     metricNeutral: true,
     svg: (
@@ -130,7 +129,7 @@ const CASOS = [
     cats: ["saas"],
     meta: ["Work · SaaS", "2023"],
     title: "De 3 minutos a 1 — dashboard de emergencias",
-    body: "Panel de atención en tiempo real que triplicó la velocidad de respuesta ante emergencias de campo. Stack: React + WebSockets + AWS.",
+    body: "Los coordinadores tardaban hasta 3 minutos en identificar y asignar respuesta a emergencias por un sistema fragmentado. Lideré el diseño y construcción del dashboard real-time que lo redujo a 1 minuto.",
     metric: "3min → 1min",
     metricNeutral: false,
     svg: (
@@ -151,9 +150,9 @@ const CASOS = [
     id: "tcpip-bridge",
     cats: ["iot"],
     meta: ["Work · IoT", "2023"],
-    title: "Bridge TCP/IP–WebSocket: 400% más rápido sin cambiar hardware",
-    body: "Puente que conecta dispositivos IoT legacy con aplicaciones web modernas vía WebSocket. Sin reemplazar hardware existente.",
-    metric: "+400% velocidad",
+    title: "Bridge TCP/IP a WebSocket: 400% más throughput sin cambiar hardware",
+    body: "La opción obvia era reemplazar hardware. Decidí construir un bridge que cuadruplicó el throughput sin cambiar un solo dispositivo y sin detener la operación.",
+    metric: "+400% throughput",
     metricNeutral: false,
     svg: (
       <svg viewBox="0 0 400 180" preserveAspectRatio="xMidYMid slice">
@@ -171,7 +170,7 @@ const CASOS = [
     cats: ["iot", "saas"],
     meta: ["Work · Mobile", "2024"],
     title: "Primera app móvil de MediRec en 2 meses",
-    body: "De cero a App Store + Play Store con Flutter y Firebase. Resultado de laboratorio en el bolsillo del paciente. Entrega en 8 semanas.",
+    body: "Comprometí entrega en 8 semanas para iOS y Android simultáneos. Diseñé la arquitectura para que el equipo la mantuviera sin mí y la entregué en tiempo.",
     metric: "2 meses · delivery",
     metricNeutral: true,
     svg: (
@@ -190,49 +189,6 @@ const CASOS = [
       </svg>
     ),
   },
-  {
-    id: "el-estoico",
-    cats: ["personal"],
-    meta: ["Personal", "2025"],
-    title: "El Estoico — performance perfecta en 0.8s",
-    body: "Landing page con Core Web Vitals verdes y arquitectura moderna. FCP de 0.8s, 100% Lighthouse, sin frameworks pesados.",
-    metric: "FCP 0.8s",
-    metricNeutral: false,
-    svg: (
-      <svg viewBox="0 0 400 180" preserveAspectRatio="xMidYMid slice">
-        <rect width="400" height="180" fill="#111316"/>
-        <rect x="30" y="40" width="340" height="100" rx="4" fill="#181a1d" stroke="#202227"/>
-        <text x="50" y="70" fontFamily="monospace" fontSize="10" fill="oklch(67% 0.17 148)">FCP 0.8s</text>
-        <text x="50" y="88" fontFamily="monospace" fontSize="9" fill="#9aa0ae">Core Web Vitals</text>
-        <line x1="50" y1="100" x2="350" y2="100" stroke="#202227"/>
-        <rect x="50" y="108" width="180" height="6" rx="3" fill="#202227"/>
-        <rect x="50" y="108" width="162" height="6" rx="3" fill="oklch(67% 0.17 148)" opacity=".6"/>
-        <text x="242" y="116" fontFamily="monospace" fontSize="8" fill="#555c6a">90%</text>
-        <text x="50" y="136" fontFamily="monospace" fontSize="8" fill="#555c6a">El Estoico · landing page · performance</text>
-      </svg>
-    ),
-  },
-  {
-    id: "grupero",
-    cats: ["personal"],
-    meta: ["Personal", "2025"],
-    title: "Grupero — la radiografía de tus grupos de WhatsApp",
-    body: "App Android que analiza participación, detecta inactivos y eventos en grupos de WhatsApp. Procesamiento 100% local, sin servidor.",
-    metric: "100% privado",
-    metricNeutral: true,
-    svg: (
-      <svg viewBox="0 0 400 180" preserveAspectRatio="xMidYMid slice">
-        <rect width="400" height="180" fill="#111316"/>
-        <circle cx="80" cy="90" r="30" fill="#181a1d" stroke="#202227"/>
-        <circle cx="80" cy="90" r="18" fill="#0b0c0e" stroke="#202227"/>
-        <circle cx="200" cy="90" r="30" fill="#181a1d" stroke="#202227"/>
-        <circle cx="320" cy="90" r="30" fill="#181a1d" stroke="#202227"/>
-        <line x1="110" y1="90" x2="170" y2="90" stroke="#202227"/>
-        <line x1="230" y1="90" x2="290" y2="90" stroke="#202227"/>
-        <text x="20" y="155" fontFamily="monospace" fontSize="8" fill="#555c6a">Grupero · análisis de grupos WhatsApp · 100% privado</text>
-      </svg>
-    ),
-  },
 ]
 
 export default function CasosPage() {
@@ -246,8 +202,8 @@ export default function CasosPage() {
     <>
       <div className="page-header page-header--center">
         <div className="section-kicker" style={{justifyContent:'center'}}>Casos de Éxito</div>
-        <h1 className="page-h1">Impacto <em>medible.</em></h1>
-        <p className="page-sub">Decisiones técnicas con ROI comprobable. Proyectos reales, métricas verificables.</p>
+        <h1 className="page-h1">Criterio técnico<br /><em>con impacto medible.</em></h1>
+        <p className="page-sub">Cada caso documenta la decisión, el contexto y el resultado. No solo qué se hizo, sino por qué se hizo así.</p>
       </div>
 
       <div className="page-wrap">

@@ -115,34 +115,6 @@ const projects = [
     outcome: "App publicada en App Store y Play Store en 2 meses. Código tan bien estructurado que el equipo añadió features sin reescribir nada. Ningún incidente de seguridad de datos desde el lanzamiento.",
     technologies: ["Flutter", "Firebase", "Dart", "BLoC", "REST API", "App Store", "Play Store"],
   },
-  {
-    id: "el-estoico",
-    title: "El Estoico — performance perfecta en 0.8s",
-    category: "Personal · Web Performance",
-    year: "2025",
-    client: "Proyecto personal",
-    metric: "FCP 0.8s · Lighthouse 100",
-    description: "Landing page con Core Web Vitals perfectos. FCP de 0.8s, Lighthouse 100, sin frameworks pesados.",
-    longDescription: "Proyecto de exploración técnica: construir una landing page con los mejores Core Web Vitals posibles usando HTML/CSS/JS vanilla. El resultado superó expectativas: 100 en Lighthouse en todas las categorías.",
-    challenge: "Demostrar que la performance extrema es alcanzable sin frameworks pesados. FCP objetivo: <1s. LCP: <2.5s. CLS: 0. Todo en producción real, no en localhost.",
-    solution: "HTML semántico, CSS custom properties, JavaScript vanilla. Imágenes optimizadas con formatos modernos (WebP/AVIF). Critical CSS inlined. Fonts subseteadas. Zero JavaScript blocking. Deploy en CDN global.",
-    outcome: "FCP: 0.8s. LCP: 1.2s. CLS: 0. Performance score: 100. Accessibility: 100. Best Practices: 100. SEO: 100. Un experimento que demostró cuánto pesan los frameworks modernos por defecto.",
-    technologies: ["HTML", "CSS", "JavaScript", "WebP", "AVIF", "Cloudflare CDN", "Lighthouse"],
-  },
-  {
-    id: "grupero",
-    title: "Grupero — radiografía de tus grupos de WhatsApp",
-    category: "Personal · Android",
-    year: "2025",
-    client: "Proyecto personal",
-    metric: "100% privado · procesamiento local",
-    description: "App Android que analiza participación, detecta inactivos y eventos en grupos de WhatsApp. Sin servidor, 100% local.",
-    longDescription: "Grupero analiza los exports de chat de WhatsApp para revelar quién participa, quién no, cuándo hay más actividad y qué palabras definen cada grupo. Todo el procesamiento ocurre en el dispositivo, sin enviar datos a ningún servidor.",
-    challenge: "Parsear el formato de export de WhatsApp (que cambia sin aviso). Procesamiento eficiente de exports grandes (100K+ mensajes) sin bloquear la UI. Privacidad total: cero datos salen del dispositivo.",
-    solution: "App Android nativa en Kotlin. Parser robusto del formato de export con manejo de variaciones regionales. Procesamiento asíncrono con coroutines. Visualizaciones en tiempo real con MPAndroidChart. Cero permisos de red.",
-    outcome: "Procesa exports de 100K+ mensajes en <2 segundos. Cero datos enviados a servidores externos. Proyecto de exploración técnica que resultó en aprendizajes aplicados a los proyectos IoT.",
-    technologies: ["Kotlin", "Android", "Coroutines", "MPAndroidChart", "Room", "Material Design"],
-  },
 ]
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
@@ -165,126 +137,91 @@ export default function CasoDetailPage({ params }: { params: { id: string } }) {
   if (!project) notFound()
 
   return (
-    <div className="container px-4 py-12 md:px-6 md:py-24">
-      <div className="mx-auto max-w-4xl space-y-8">
-
-        <div>
-          <Link
-            href="/casos-de-exito"
-            style={{
-              display: "inline-flex", alignItems: "center", gap: "8px",
-              fontFamily: "var(--ff-mono)", fontSize: "11px",
-              color: "var(--text-3)", textDecoration: "none",
-              letterSpacing: ".1em", textTransform: "uppercase",
-              marginBottom: "24px",
-            }}
-          >
-            ← Todos los casos
-          </Link>
-
-          <div style={{
+    <>
+      <div className="page-header">
+        <Link
+          href="/casos-de-exito"
+          style={{
+            display: "inline-flex", alignItems: "center", gap: "6px",
             fontFamily: "var(--ff-mono)", fontSize: "11px",
-            color: "var(--text-3)", letterSpacing: ".14em",
-            textTransform: "uppercase", marginBottom: "12px",
-          }}>
-            {project!.category} · {project!.year}
-          </div>
+            color: "var(--text-3)", textDecoration: "none",
+            letterSpacing: ".1em", textTransform: "uppercase",
+            marginBottom: "28px",
+          }}
+        >
+          ← Casos de éxito
+        </Link>
 
-          <h1 style={{
-            fontFamily: "var(--ff-display)", fontSize: "clamp(28px,4vw,48px)",
-            fontWeight: 300, letterSpacing: "-.03em", lineHeight: 1.1,
-            color: "var(--text)", marginBottom: "16px",
-          }}>
-            {project!.title}
-          </h1>
+        <div className="section-kicker">{project!.category} · {project!.year}</div>
+
+        <h1 className="page-h1">{project!.title}</h1>
+
+        <span className="metric-tag">{project!.metric}</span>
+      </div>
+
+      <div className="page-wrap">
+        <div style={{ maxWidth: "760px", paddingTop: "48px", paddingBottom: "96px", display: "flex", flexDirection: "column", gap: "48px" }}>
 
           <div style={{
-            display: "inline-flex", alignItems: "center", gap: "8px",
-            fontFamily: "var(--ff-mono)", fontSize: "12px",
-            background: "var(--green-bg)", color: "var(--green)",
-            border: "1px solid var(--green-dim)", padding: "4px 12px",
-            borderRadius: "3px", letterSpacing: ".04em",
+            display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
+            gap: "1px", background: "var(--border)",
+            border: "1px solid var(--border)",
           }}>
-            {project!.metric}
-          </div>
-        </div>
-
-        <div style={{
-          display: "grid", gridTemplateColumns: "1fr 1fr",
-          gap: "1px", background: "var(--border)",
-          border: "1px solid var(--border)",
-        }}>
-          <div style={{ background: "var(--bg-2)", padding: "20px 24px" }}>
-            <div style={{ fontFamily: "var(--ff-mono)", fontSize: "10px", color: "var(--text-3)", letterSpacing: ".14em", textTransform: "uppercase", marginBottom: "6px" }}>Cliente</div>
-            <div style={{ fontSize: "14px", color: "var(--text-2)" }}>{project!.client}</div>
-          </div>
-          <div style={{ background: "var(--bg-2)", padding: "20px 24px" }}>
-            <div style={{ fontFamily: "var(--ff-mono)", fontSize: "10px", color: "var(--text-3)", letterSpacing: ".14em", textTransform: "uppercase", marginBottom: "6px" }}>Año</div>
-            <div style={{ fontSize: "14px", color: "var(--text-2)" }}>{project!.year}</div>
-          </div>
-        </div>
-
-        <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
-          {[
-            { label: "Resumen", text: project!.longDescription },
-            { label: "El problema", text: project!.challenge },
-            { label: "La solución", text: project!.solution },
-            { label: "Resultado", text: project!.outcome },
-          ].map(({ label, text }) => (
-            <div key={label}>
-              <div style={{
-                fontFamily: "var(--ff-mono)", fontSize: "10px",
-                color: "var(--text-3)", letterSpacing: ".16em",
-                textTransform: "uppercase", marginBottom: "10px",
-                display: "flex", alignItems: "center", gap: "10px",
-              }}>
-                <span style={{ display: "block", width: "24px", height: "1px", background: "var(--border-2)" }} />
-                {label}
+            {[
+              { label: "Cliente", value: project!.client },
+              { label: "Año", value: project!.year },
+              { label: "Categoría", value: project!.category },
+            ].map(({ label, value }) => (
+              <div key={label} style={{ background: "var(--bg-2)", padding: "18px 22px" }}>
+                <div style={{ fontFamily: "var(--ff-mono)", fontSize: "10px", color: "var(--text-3)", letterSpacing: ".14em", textTransform: "uppercase", marginBottom: "6px" }}>{label}</div>
+                <div style={{ fontSize: "14px", color: "var(--text-2)" }}>{value}</div>
               </div>
-              <p style={{ fontSize: "15px", color: "var(--text-2)", lineHeight: 1.7, fontWeight: 300 }}>
-                {text}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        <div>
-          <div style={{
-            fontFamily: "var(--ff-mono)", fontSize: "10px",
-            color: "var(--text-3)", letterSpacing: ".16em",
-            textTransform: "uppercase", marginBottom: "12px",
-            display: "flex", alignItems: "center", gap: "10px",
-          }}>
-            <span style={{ display: "block", width: "24px", height: "1px", background: "var(--border-2)" }} />
-            Stack
-          </div>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
-            {project!.technologies.map(tech => (
-              <span key={tech} style={{
-                fontFamily: "var(--ff-mono)", fontSize: "11px",
-                color: "var(--text-2)", background: "var(--bg-3)",
-                border: "1px solid var(--border-2)", padding: "3px 10px",
-                borderRadius: "3px", letterSpacing: ".04em",
-              }}>
-                {tech}
-              </span>
             ))}
           </div>
-        </div>
 
-        <div style={{
-          borderTop: "1px solid var(--border)", paddingTop: "32px",
-          display: "flex", gap: "12px",
-        }}>
-          <Link href="/casos-de-exito" className="btn btn-secondary" style={{ fontSize: "13px" }}>
-            ← Todos los casos
-          </Link>
-          <a href="mailto:moisesdavidaaron@gmail.com" className="btn btn-primary" style={{ fontSize: "13px" }}>
-            Hablemos de tu proyecto →
-          </a>
-        </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: "36px" }}>
+            {[
+              { label: "Contexto", text: project!.longDescription },
+              { label: "El problema", text: project!.challenge },
+              { label: "Mi criterio y solución", text: project!.solution },
+              { label: "Resultado", text: project!.outcome },
+            ].map(({ label, text }) => (
+              <div key={label}>
+                <div className="section-kicker" style={{ marginBottom: "10px" }}>{label}</div>
+                <p style={{ fontSize: "15px", color: "var(--text-2)", lineHeight: 1.75, fontWeight: 300 }}>
+                  {text}
+                </p>
+              </div>
+            ))}
+          </div>
 
+          <div>
+            <div className="section-kicker" style={{ marginBottom: "12px" }}>Stack</div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+              {project!.technologies.map(tech => (
+                <span key={tech} style={{
+                  fontFamily: "var(--ff-mono)", fontSize: "11px",
+                  color: "var(--text-2)", background: "var(--bg-3)",
+                  border: "1px solid var(--border-2)", padding: "3px 10px",
+                  borderRadius: "3px", letterSpacing: ".04em",
+                }}>
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div style={{ borderTop: "1px solid var(--border)", paddingTop: "32px", display: "flex", gap: "12px" }}>
+            <Link href="/casos-de-exito" className="btn btn-secondary">
+              ← Todos los casos
+            </Link>
+            <a href="mailto:moisesdavidaaron@gmail.com" className="btn btn-primary">
+              Hablemos de tu proyecto →
+            </a>
+          </div>
+
+        </div>
       </div>
-    </div>
+    </>
   )
 }
