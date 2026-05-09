@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { CasoStory } from "@/components/caso-story"
+import { caseStories } from "@/data/case-stories"
 
 const projects = [
   {
@@ -201,6 +203,10 @@ export default function CasoDetailPage({ params }: { params: { id: string } }) {
               </div>
             ))}
           </div>
+
+          {caseStories[project!.id] && (
+            <CasoStory steps={caseStories[project!.id]} />
+          )}
 
           <div style={{ display: "flex", flexDirection: "column", gap: "40px" }}>
             {sections.map(({ label, text }) => (
