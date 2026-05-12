@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>T-Cuida AI Pipeline v2 — Resumen</title>
+  <style>
+    :root {
+      --background: #f0f4ff;
+      --card: #fff;
+      --foreground: #12132c;
+      --border: #e1e3f2;
+      --muted: #dee2ff;
+      --muted-foreground: #505271;
+      --primary: #7c3aed;
+      --accent: #0891b2;
+      --secondary: #d97706;
+      --success: #059669;
+      --human: #ea580c;
+
+      --haiku: #16a34a;
+      --haiku-bg: #dcfce7;
+      --sonnet: #7c3aed;
+      --sonnet-bg: #ede9fe;
+
+      --f1: #0891b2;
+      --f2: #d97706;
+      --f3: #059669;
+
+      /* Categorías */
+      --cat-recepcion: #0891b2;
+      --cat-desarrollo: #ec4899;
+      --cat-qa: #16a34a;
+      --cat-seguridad: #f59e0b;
+      --cat-devops: #2563eb;
+      --cat-docs: #8b5cf6;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--background);
+      color: var(--foreground);
+      min-height: 100vh;
+      background-image:
+        radial-gradient(ellipse at 20% 20%, rgba(124, 58, 237, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(8, 145, 178, 0.05) 0%, transparent 50%);
+    }
+
+    .container { max-width: 1400px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    .header { margin-bottom: 2rem; }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.35rem 0.85rem; border-radius: 9999px;
+      background: rgba(124, 58, 237, 0.1); border: 1px solid rgba(124, 58, 237, 0.25);
+      font-size: 0.78rem; font-weight: 600; color: #6d28d9;
+      margin-bottom: 1rem;
+    }
+
+    h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; line-height: 1.15; margin-bottom: 0.75rem; }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--accent), var(--primary), var(--success));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    .subtitle { font-size: 1rem; color: var(--muted-foreground); max-width: 600px; line-height: 1.6; }
+
+    /* Stats */
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
+    @media (max-width: 768px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+
+    .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1rem 1.25rem; }
+    .stat-value { font-size: 2rem; font-weight: 800; line-height: 1; margin-bottom: 0.3rem; }
+    .stat-label { font-size: 0.78rem; color: var(--muted-foreground); }
+
+    /* Org section */
+    .org-section {
+      background: var(--card); border: 1px solid var(--border); border-radius: 1rem;
+      padding: 2rem; box-shadow: 0 25px 60px rgba(0,0,0,0.08);
+    }
+    .org-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+    .org-title { font-size: 1.3rem; font-weight: 700; }
+    .pipeline-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.3rem 0.75rem; border-radius: 0.4rem;
+      background: rgba(8, 145, 178, 0.1); border: 1px solid rgba(8, 145, 178, 0.3);
+      font-size: 0.75rem; color: #0e7490;
+    }
+
+    /* Tree layout */
+    .tree { display: flex; flex-direction: column; align-items: center; }
+    .v-line { width: 2px; height: 1.5rem; background: linear-gradient(to bottom, rgba(124,58,237,0.4), rgba(124,58,237,0.15)); }
+
+    /* Agent Card */
+    .agent-card {
+      background: var(--card); border: 1.5px solid var(--border); border-radius: 1rem;
+      padding: 1rem 0.85rem; width: 175px;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      position: relative; overflow: hidden; cursor: default;
+    }
+    .agent-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; background: var(--agent-color, var(--primary)); border-radius: 1rem 1rem 0 0;
+    }
+    .agent-card:hover {
+      transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+      border-color: var(--agent-color, var(--primary));
+    }
+
+    .agent-card.orchestrator {
+      width: 220px; border-color: var(--primary);
+      box-shadow: 0 0 0 1px rgba(124,58,237,0.2), 0 8px 32px rgba(124,58,237,0.1);
+    }
+
+    /* Avatar circular */
+    .monkey-avatar {
+      width: 52px; height: 52px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: 1.6rem;
+      margin: 0 auto 0.6rem;
+      border: 2px solid var(--agent-color, var(--primary));
+      background: rgba(124,58,237,0.05); box-shadow: 0 0 0 4px rgba(124,58,237,0.08);
+      position: relative;
+    }
+    .orchestrator .monkey-avatar { width: 68px; height: 68px; font-size: 2.2rem; }
+
+    .status-dot {
+      position: absolute; bottom: 2px; right: 2px;
+      width: 11px; height: 11px; border-radius: 50%; border: 2px solid var(--card);
+    }
+    .status-dot.active { background: var(--secondary); box-shadow: 0 0 6px var(--secondary); }
+    .status-dot.idle { background: var(--muted); }
+
+    /* Category tag */
+    .cat-tag {
+      display: inline-block;
+      font-size: 0.58rem; font-weight: 600;
+      padding: 0.15rem 0.45rem; border-radius: 9999px;
+      margin-bottom: 0.35rem;
+    }
+
+    .agent-name { font-weight: 700; font-size: 0.8rem; text-align: center; margin-bottom: 0.15rem; }
+    .orchestrator .agent-name { font-size: 0.95rem; }
+
+    .agent-role {
+      font-size: 0.65rem; text-align: center; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.04em; margin-bottom: 0.5rem;
+    }
+
+    .agent-desc {
+      font-size: 0.64rem; color: var(--muted-foreground); text-align: center; line-height: 1.4; margin-bottom: 0.5rem;
+    }
+
+    .agent-tags { display: flex; flex-wrap: wrap; gap: 0.25rem; justify-content: center; margin-top: 0.4rem; }
+    .tag {
+      font-size: 0.55rem; padding: 0.12rem 0.4rem; border-radius: 9999px;
+      background: rgba(124,58,237,0.06); border: 1px solid rgba(124,58,237,0.12); color: var(--muted-foreground);
+    }
+
+    /* Model tag */
+    .model-tag {
+      display: inline-block;
+      font-size: 0.58rem; font-weight: 700; text-transform: uppercase;
+      padding: 0.15rem 0.5rem; border-radius: 9999px;
+      letter-spacing: 0.03em; margin-top: 0.4rem;
+    }
+    .model-tag.haiku { background: var(--haiku-bg); color: var(--haiku); }
+    .model-tag.sonnet { background: var(--sonnet-bg); color: var(--sonnet); }
+
+    /* Phase groups */
+    .phases-row {
+      display: flex; align-items: flex-start; width: 100%;
+      justify-content: center; gap: 1.5rem; position: relative;
+    }
+
+    .phase-column {
+      display: flex; flex-direction: column; align-items: center; flex: 1; max-width: 420px;
+    }
+
+    .phase-box {
+      border-radius: 1rem; padding: 1.25rem 0.75rem 1rem; width: 100%; position: relative;
+    }
+    .phase-box.f1 { background: rgba(8,145,178,0.05); border: 1px dashed rgba(8,145,178,0.25); }
+    .phase-box.f2 { background: rgba(217,119,6,0.05); border: 1px dashed rgba(217,119,6,0.25); }
+    .phase-box.f3 { background: rgba(5,150,105,0.05); border: 1px dashed rgba(5,150,105,0.25); }
+
+    .phase-box-label {
+      position: absolute; top: -0.55rem; left: 50%; transform: translateX(-50%);
+      background: var(--card); padding: 0.1rem 0.65rem;
+      font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.05em; color: var(--muted-foreground); border-radius: 9999px; white-space: nowrap;
+    }
+
+    .phase-label {
+      display: inline-block;
+      padding: 0.3rem 0.8rem; border-radius: 0.5rem;
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.06em; margin-bottom: 0.75rem;
+    }
+    .phase-label.f1 { background: rgba(8,145,178,0.12); border: 1px solid rgba(8,145,178,0.35); color: #0e7490; }
+    .phase-label.f2 { background: rgba(217,119,6,0.12); border: 1px solid rgba(217,119,6,0.35); color: #b45309; }
+    .phase-label.f3 { background: rgba(5,150,105,0.12); border: 1px solid rgba(5,150,105,0.35); color: #047857; }
+
+    .agents-group {
+      display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+    }
+
+    .agents-row-inline {
+      display: flex; gap: 0.6rem; align-items: flex-start; justify-content: center;
+    }
+
+    .flow-arrow-down {
+      color: var(--muted-foreground); font-size: 0.8rem; margin: 0.15rem 0;
+    }
+
+    .or-label {
+      font-size: 1rem; color: var(--muted-foreground); font-weight: 600;
+      padding: 0 0.2rem; align-self: center; padding-top: 2rem;
+    }
+
+    /* Human checkpoint */
+    .checkpoint {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 0.6rem 0.8rem; margin: 0.4rem 0;
+    }
+    .checkpoint-icon {
+      width: 44px; height: 44px; border-radius: 0.6rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; background: rgba(234,88,12,0.08);
+      border: 2px dashed rgba(234,88,12,0.4); margin-bottom: 0.3rem;
+    }
+    .checkpoint-label {
+      font-size: 0.62rem; font-weight: 700; color: var(--human);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center; margin-top: 2rem; color: var(--muted-foreground);
+      font-size: 0.8rem;
+    }
+    .footer small { display: block; margin-top: 0.3rem; font-size: 0.7rem; color: #94a3b8; }
+
+    /* Memory section */
+    .memory-section {
+      background: var(--card); border: 1px solid var(--border); border-radius: 1rem;
+      padding: 1.5rem 2rem; margin-top: 1.5rem; text-align: center;
+    }
+    .memory-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; }
+    .memory-pills {
+      display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; margin-bottom: 0.75rem;
+    }
+    .memory-pill {
+      background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.2);
+      padding: 0.4rem 0.8rem; border-radius: 9999px;
+      font-size: 0.75rem; font-weight: 600; color: var(--primary);
+      font-family: monospace;
+    }
+    .memory-note { font-size: 0.7rem; color: var(--muted-foreground); }
+
+    /* Horizontal line between phases */
+    .h-line {
+      position: absolute; top: 0; left: 10%; right: 10%;
+      height: 2px; background: linear-gradient(to right, transparent, rgba(124,58,237,0.2), transparent);
+    }
+
+    @media (max-width: 1100px) {
+      .phases-row { flex-direction: column; align-items: center; gap: 2rem; }
+      .h-line { display: none; }
+      .phase-column { max-width: 100%; }
+    }
+    @media (max-width: 500px) {
+      .stats { grid-template-columns: 1fr; }
+      .agent-card { width: 160px; }
+      .agents-row-inline { flex-direction: column; }
+      .or-label { display: none; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header class="header">
+    <div class="badge">🚀 T-Cuida AI Pipeline v2</div>
+    <h1>De <span class="gradient-text">Ticket a PR</span> Automatizado</h1>
+    <p class="subtitle">Equipo de agentes IA que toman un ticket, lo validan, construyen el codigo, generan tests y abren un PR listo para revision humana.</p>
+  </header>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-value" style="color: var(--primary);">10</div>
+      <div class="stat-label">Agentes Activos</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" style="color: var(--accent);">6</div>
+      <div class="stat-label">Categorias</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" style="color: var(--human);">2</div>
+      <div class="stat-label">Checkpoints Humanos</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" style="color: var(--success);">0</div>
+      <div class="stat-label">Merges Automaticos</div>
+    </div>
+  </div>
+
+  <div class="org-section">
+    <div class="org-header">
+      <h2 class="org-title">Estructura del Equipo de Agentes 🤖</h2>
+      <span class="pipeline-badge">🔄 3 Fases Secuenciales</span>
+    </div>
+
+    <div class="tree">
+
+      <!-- Orchestrator -->
+      <div class="agent-card orchestrator" style="--agent-color: var(--primary);">
+        <div class="monkey-avatar" style="border-color: var(--primary);">🧠<span class="status-dot active"></span></div>
+        <div class="agent-name">Pipeline Orchestrator</div>
+        <div class="agent-role" style="color: var(--primary);">Coordinador Principal</div>
+        <div class="agent-desc">Coordina las 3 fases. Decide el flujo segun tipo de ticket. Controla reintentos.</div>
+        <div class="agent-tags">
+          <span class="tag">Orquestacion</span>
+          <span class="tag">Delegacion</span>
+          <span class="tag">Control</span>
+        </div>
+        <span class="model-tag sonnet">Sonnet</span>
+      </div>
+
+      <div class="v-line"></div>
+
+      <!-- 3 Phases -->
+      <div class="phases-row">
+        <div class="h-line"></div>
+
+        <!-- FASE 1: Intake -->
+        <div class="phase-column">
+          <div class="v-line"></div>
+          <span class="phase-label f1">🎯 Fase 1: Recepcion</span>
+
+          <div class="phase-box f1">
+            <span class="phase-box-label">Parsear → Enriquecer → Evaluar</span>
+            <div class="agents-group">
+
+              <div class="agent-card" style="--agent-color: var(--f1);">
+                <div class="monkey-avatar" style="border-color: var(--f1); background: rgba(8,145,178,0.05);">📋<span class="status-dot active"></span></div>
+                <div style="text-align: center; margin-bottom: 0.3rem;"><span class="cat-tag" style="background: rgba(8,145,178,0.15); border: 1px solid rgba(8,145,178,0.4); color: var(--cat-recepcion);">📋 Recepcion</span></div>
+                <div class="agent-name">Ticket Parser</div>
+                <div class="agent-role" style="color: var(--f1);">Parseador</div>
+                <div class="agent-desc">Extrae campos del ticket al schema estandar. Solo extrae, no interpreta.</div>
+                <div class="agent-tags"><span class="tag">ID</span><span class="tag">Title</span><span class="tag">Priority</span></div>
+                <span class="model-tag haiku">Haiku</span>
+              </div>
+
+              <div class="flow-arrow-down">⬇</div>
+
+              <div class="agent-card" style="--agent-color: var(--f1);">
+                <div class="monkey-avatar" style="border-color: var(--f1); background: rgba(8,145,178,0.05);">🔍<span class="status-dot active"></span></div>
+                <div style="text-align: center; margin-bottom: 0.3rem;"><span class="cat-tag" style="background: rgba(8,145,178,0.15); border: 1px solid rgba(8,145,178,0.4); color: var(--cat-recepcion);">📋 Recepcion</span></div>
+                <div class="agent-name">Context Enricher</div>
+                <div class="agent-role" style="color: var(--f1);">Enriquecedor</div>
+                <div class="agent-desc">Busca contexto en docs y codebase. Asigna confidence por campo.</div>
+                <div class="agent-tags"><span class="tag">Docs</span><span class="tag">Codebase</span></div>
+                <span class="model-tag haiku">Haiku</span>
+              </div>
+
+              <div class="flow-arrow-down">⬇</div>
+
+              <div class="agent-card" style="--agent-color: var(--f1);">
+                <div class="monkey-avatar" style="border-color: var(--f1); background: rgba(8,145,178,0.05);">⚖️<span class="status-dot active"></span></div>
+                <div style="text-align: center; margin-bottom: 0.3rem;"><span class="cat-tag" style="background: rgba(8,145,178,0.15); border: 1px solid rgba(8,145,178,0.4); color: var(--cat-recepcion);">📋 Recepcion</span></div>
+                <div class="agent-name">Ticket Evaluator</div>
+                <div class="agent-role" style="color: var(--f1);">Evaluador + Tipo</div>
+                <div class="agent-desc">Bloquea solo si confidence = bajo tras enriquecimiento. Una pregunta puntual. No tabla de campos.</div>
+                <div class="agent-tags"><span class="tag">Feature</span><span class="tag">Bug</span><span class="tag">Refactor</span></div>
+                <span class="model-tag haiku">Haiku</span>
+              </div>
+
+              <div class="checkpoint">
+                <div class="checkpoint-icon">🧑‍💼</div>
+                <div class="checkpoint-label">CP1 Aprueba plan</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- FASE 2: Build -->
+        <div class="phase-column">
+          <div class="v-line"></div>
+          <span class="phase-label f2">⚡ Fase 2: Build</span>
+
+          <div class="phase-box f2">
+            <span class="phase-box-label">Construir → Testear</span>
+            <div class="agents-group">
+
+              <div class="agents-row-inline">
+                <div class="agent-card" style="--agent-color: var(--cat-desarrollo);">
+                  <div class="monkey-avatar" style="border-color: var(--cat-desarrollo); background: rgba(236,72,153,0.05);">⚡<span class="status-dot active"></span></div>
+                  <div style="text-align: center; margin-bottom: 0.3rem;"><span class="cat-tag" style="background: rgba(236,72,153,0.15); border: 1px solid rgba(236,72,153,0.4); color: var(--cat-desarrollo);">💻 Desarrollo</span></div>
+                  <div class="agent-name">Feature Builder</div>
+                  <div class="agent-role" style="color: var(--cat-desarrollo);">Si Feature</div>
+                  <div class="agent-desc">Genera Controller, Service, Repository y FormRequest. Escribe en what-worked.md y project-paths.md al terminar.</div>
+                  <div class="agent-tags"><span class="tag">CRUD</span><span class="tag">Patterns</span></div>
+                  <span class="model-tag sonnet">Sonnet</span>
+                </div>
+
+                <span class="or-label">o</span>
+
+                <div class="agent-card" style="--agent-color: #dc2626;">
+                  <div class="monkey-avatar" style="border-color: #dc2626; background: rgba(220,38,38,0.05);">🐛<span class="status-dot idle"></span></div>
+                  <div style="text-align: center; margin-bottom: 0.3rem;"><span class="cat-tag" style="background: rgba(236,72,153,0.15); border: 1px solid rgba(236,72,153,0.4); color: var(--cat-desarrollo);">💻 Desarrollo</span></div>
+                  <div class="agent-name">Bug Hunter</div>
+                  <div class="agent-role" style="color: #dc2626;">Si Bug</div>
+                  <div class="agent-desc">Localiza el bug via git blame + stack trace. Fix minimo. Escribe en what-worked.md y project-paths.md al terminar.</div>
+                  <div class="agent-tags"><span class="tag">Blame</span><span class="tag">Fix</span></div>
+                  <span class="model-tag sonnet">Sonnet</span>
+                </div>
+              </div>
+
+              <div class="flow-arrow-down">⬇ Siempre</div>
+
+              <div class="agent-card" style="--agent-color: var(--cat-qa);">
+                <div class="monkey-avatar" style="border-color: var(--cat-qa); background: rgba(22,163,74,0.05);">🧪<span class="status-dot active"></span></div>
+                <div style="text-align: center; margin-bottom: 0.3rem;"><span class="cat-tag" style="background: rgba(22,163,74,0.15); border: 1px solid rgba(22,163,74,0.4); color: var(--cat-qa);">🧪 QA</span></div>
+                <div class="agent-name">Test Generator</div>
+                <div class="agent-role" style="color: var(--cat-qa);">Tests Obligatorios</div>
+                <div class="agent-desc">Genera tests: happy path, 401, 403, 422 y multi-tenant. Maximo 2 intentos de analisis — si no escribio archivos, escribe directo en el 3ro.</div>
+                <div class="agent-tags"><span class="tag">Happy</span><span class="tag">Auth</span><span class="tag">Tenant</span></div>
+                <span class="model-tag sonnet">Sonnet</span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- FASE 3: Gate + Ship -->
+        <div class="phase-column">
+          <div class="v-line"></div>
+          <span class="phase-label f3">🛡️ Fase 3: Gate + Ship</span>
+
+          <div class="phase-box f3">
+            <span class="phase-box-label">Validar → Abrir PR → Documentar</span>
+            <div class="agents-group">
+
+              <div class="agent-card" style="--agent-color: var(--cat-seguridad);">
+                <div class="monkey-avatar" style="border-color: var(--cat-seguridad); background: rgba(245,158,11,0.05);">🔒<span class="status-dot active"></span></div>
+                <div style="text-align: center; margin-bottom: 0.3rem;"><span class="cat-tag" style="background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.4); color: var(--cat-seguridad);">🔒 Seguridad</span></div>
+                <div class="agent-name">Security Auditor</div>
+                <div class="agent-role" style="color: var(--cat-seguridad);">Gate de Seguridad</div>
+                <div class="agent-desc">Valida multi-tenant, permisos y patrones de seguridad. Si falla, vuelve a F2.</div>
+                <div class="agent-tags"><span class="tag">Tenant</span><span class="tag">Permisos</span></div>
+                <span class="model-tag sonnet">Sonnet</span>
+              </div>
+
+              <div class="flow-arrow-down">⬇ Si pasa</div>
+
+              <div class="agent-card" style="--agent-color: var(--cat-devops);">
+                <div class="monkey-avatar" style="border-color: var(--cat-devops); background: rgba(37,99,235,0.05);">🚀<span class="status-dot active"></span></div>
+                <div style="text-align: center; margin-bottom: 0.3rem;"><span class="cat-tag" style="background: rgba(37,99,235,0.15); border: 1px solid rgba(37,99,235,0.4); color: var(--cat-devops);">🚀 DevOps</span></div>
+                <div class="agent-name">PR Creator</div>
+                <div class="agent-role" style="color: var(--cat-devops);">Abre PR y Para</div>
+                <div class="agent-desc">Crea rama, commits convencionales, abre PR con descripcion. Nunca mergea.</div>
+                <div class="agent-tags"><span class="tag">Branch</span><span class="tag">PR</span><span class="tag">Stop</span></div>
+                <span class="model-tag haiku">Haiku</span>
+              </div>
+
+              <div class="flow-arrow-down">⬇ Siempre</div>
+
+              <div class="agent-card" style="--agent-color: var(--cat-docs);">
+                <div class="monkey-avatar" style="border-color: var(--cat-docs); background: rgba(139,92,246,0.05);">📝<span class="status-dot active"></span></div>
+                <div style="text-align: center; margin-bottom: 0.3rem;"><span class="cat-tag" style="background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.4); color: var(--cat-docs);">📝 Documentacion</span></div>
+                <div class="agent-name">Doc Writer</div>
+                <div class="agent-role" style="color: var(--cat-docs);">Genera Docs</div>
+                <div class="agent-desc">Genera CHANGELOG, session log y docstrings en cada ticket. Siempre corre — no es condicional.</div>
+                <div class="agent-tags"><span class="tag">README</span><span class="tag">Changelog</span></div>
+                <span class="model-tag haiku">Haiku</span>
+              </div>
+
+              <div class="checkpoint">
+                <div class="checkpoint-icon">🧑‍💼</div>
+                <div class="checkpoint-label">CP2 Merge humano</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Memory Section -->
+  <div class="memory-section">
+    <div class="memory-title">🧠 Memoria del Sistema</div>
+    <div class="memory-pills">
+      <span class="memory-pill">CONTEXT.md</span>
+      <span class="memory-pill">what-worked.md</span>
+      <span class="memory-pill">what-failed.md</span>
+      <span class="memory-pill">project-paths.md</span>
+    </div>
+    <div class="memory-note">project-paths.md se actualiza automaticamente por Bug Hunter y Feature Builder</div>
+  </div>
+
+  <div class="footer">
+    🤖 10 agentes en 6 categorias · T-Cuida AI Pipeline v2 · Powered by Claude 🧠
+    <small>Los agentes nunca mergean — el merge siempre es decision humana</small>
+  </div>
+
+</div>
+</body>
+</html>
+
