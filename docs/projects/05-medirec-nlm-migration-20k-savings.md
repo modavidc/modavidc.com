@@ -848,16 +848,58 @@ Cost per query | $20K/year ÷ 10M queries = $0.002 | $0 | Winner: NLM
 
 ---
 
+## Plan de Rollout a Clientes
+
+### Cronograma de Actualización (Mayo 2024)
+
+**Comunicado interno para coordinación de clientes:**
+
+"Saludos, comparto la lista de los clientes que se tienen coordinados para actualizarlos a la última versión de NLM"
+
+**Clientes programados para migración:**
+
+| Cliente | Fecha | Hora |
+|---------|-------|------|
+| GMFS | 24 Mayo | 01:30 PM |
+| Jenifer Cruz Bracero | 20 Mayo | 09:00 AM |
+| Jose Roman Carlo | 20 Mayo | 09:00 AM |
+| North Shore Cardiology | 21 Mayo | 09:00 AM |
+| Wilma Caro | 21 Mayo | 01:30 PM |
+| Riverview Medical Center | 22 Mayo | 10:00 AM |
+| Delia Torres | 22 Mayo | 10:30 AM |
+| Carlos Miranda | 23 Mayo | 09:00 AM |
+| Xiomara Cruz Rincon | 23 Mayo | 09:00 AM |
+| Yasmin Fuentes | 31 Mayo | 08:00 AM |
+| Reynaldo Gomez Adrober | 24 Mayo | 02:00 PM |
+
+**Total clientes en rollout:** 11+ (cronograma de mayo 2024)
+
+**Estrategia:**
+- Rollout programado (no big bang)
+- Ventanas de actualización coordinadas por cliente
+- Support disponible en horarios específicos
+- Comunicación previa con cada cliente
+
+**Implicación:**
+- Planificación detallada de cada actualización
+- Equipo de soporte dedicado por cliente
+- Downtime mínimo coordinado
+- Plan B disponible si hay issues
+
+---
+
 ## Próximos Pasos (Recomendados)
 
-1. Crear ADR-001: Decisión NLM vs LexiComp
-2. Documentar migration script + rollback
-3. Crear runbook: "New drug not in NLM"
-4. Medir performance: LexiComp vs NLM
-5. Post-mortem con equipo (acta en tickets)
+1. ✅ Crear cronograma de rollout a clientes (completado: mayo 2024)
+2. Crear ADR-001: Decisión NLM vs LexiComp
+3. Documentar migration script + rollback
+4. Crear runbook: "New drug not in NLM"
+5. Medir performance: LexiComp vs NLM post-migración
+6. Post-mortem con equipo (acta en tickets)
+7. Monitorear migración de clientes y documentar issues
 
 ---
 
 **Última actualización:** Mayo 12, 2026
-**Versión:** 1.0.0 (Sin documentación interna)
+**Versión:** 2.0 (Con cronograma de rollout a clientes)
 
