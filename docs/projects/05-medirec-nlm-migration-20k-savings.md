@@ -169,46 +169,68 @@ MediRec anunció el cambio a los clientes con un memorando oficial:
 
 ---
 
-## Lo Que Probablemente Quedó Sin Hacer
+## Validaciones Pendientes vs. Completadas
+
+### Validaciones Identificadas (Jun 2023, Julio Cajigas)
+
+Según comunicación interna, quedaba validar:
+
+| Validación | Status | Completitud |
+|------------|--------|-------------|
+| Estructura de datos NLM RxNorm | ✅ Iniciado | Julio coordinó análisis |
+| **Interacciones entre medicamentos** | ⏳ API disponible | Jessel tenía información |
+| **Alertas para mujeres embarazadas** | ✅ Confirmado por NLM | Dr. Bodenreider validó |
+| Comparación 100% medicamentos | ❓ Unknown | No documentado |
+| Testing en staging | ❓ Unknown | No documentado |
+
+---
+
+### ⚠️ Lo Que Probablemente Quedó Sin Hacer
 
 **Basado en lo que dijiste: "acá siempre tenemos el mismo problema... no se termina de implementar ni se documenten las decisiones"**
 
-### ⚠️ POTENCIALMENTE INCOMPLETO
+#### 1. Documentación interna técnica
+- ¿Hay ADR (Architectural Decision Record) de por qué NLM?
+- ¿Hay documentación del análisis de Julio sobre estructura de datos?
+- ¿Dónde está la información de Jessel sobre API de interacciones?
+- ¿Hay runbooks de operación?
 
-1. **Documentación interna técnica**
-   - ¿Hay ADR (Architectural Decision Record) de por qué NLM?
-   - ¿Hay documentación del proceso de migración?
-   - ¿Hay runbooks de operación?
+#### 2. Validación completa de interacciones
+- Email de Julio mencionó "API para atender interacciones"
+- Jessel tenía esta información
+- ❓ ¿Fue implementada en la migración de octubre?
+- ❓ ¿Se comparó con LexiComp?
 
-2. **Validación completa**
-   - ¿Se comparó 100% de medicamentos LexiComp vs NLM?
-   - ¿Se validaron interacciones clínicas?
-   - ¿Se testeó en staging completo?
+#### 3. Validación de embarazo
+- NLM confirmó capacidad (mediante MED-RT CI_with)
+- ❓ ¿Se implementó en octubre?
+- ❓ ¿Se validó clínicamente con equipo?
 
-3. **Data migration scripts**
-   - ¿Hay scripts documentados para migrar datos?
-   - ¿Hay rollback plan si algo falla?
-   - ¿Se documentó el mapeo LexiComp → NLM?
+#### 4. Data migration scripts
+- ¿Hay scripts documentados para migrar datos?
+- ¿Hay rollback plan si algo falla?
+- ¿Se documentó el mapeo LexiComp → NLM?
 
-4. **Decisiones de design**
-   - ¿Por qué 500GB-1TB de storage?
-   - ¿Qué algoritmos de búsqueda se usan?
-   - ¿Cómo se manejan medicamentos que faltan en NLM?
+#### 5. Decisiones de design
+- ¿Por qué 500GB-1TB de storage?
+- ¿Qué algoritmos de búsqueda se usan?
+- ¿Cómo se manejan medicamentos que faltan en NLM?
 
-5. **Plan B: ¿Qué si NLM no tiene un medicamento?**
-   - ¿Fallback a LexiComp?
-   - ¿Búsqueda manual?
-   - ¿Log y alerta?
+#### 6. Plan B: ¿Qué si NLM no tiene un medicamento?
+- ¿Fallback a LexiComp?
+- ¿Búsqueda manual?
+- ¿Log y alerta?
 
-6. **Performance baselines**
-   - ¿Cómo era performance con LexiComp?
-   - ¿Cómo es ahora con NLM?
-   - ¿Se documentaron números?
+#### 7. Performance baselines
+- ¿Cómo era performance con LexiComp?
+- ¿Cómo es ahora con NLM?
+- ¿Se documentaron números?
 
-7. **Soporte post-migración**
-   - ¿Hay proceso documentado para nuevos medicamentos?
-   - ¿Quién mantiene NLM actualizado?
-   - ¿Hay SLA?
+#### 8. Soporte post-migración
+- ¿Hay proceso documentado para nuevos medicamentos?
+- ¿Quién mantiene NLM actualizado?
+- ¿Hay SLA?
+- ¿Se documentó el handoff del equipo de Julio/Jessel/Valentina?
 
 ---
 
@@ -298,9 +320,44 @@ I greatly appreciate any information you can provide.
 
 ---
 
+### Comunicación Interna: Equipo MediRec Validando NLM
+
+**Email de Julio C. Cajigas**
+**Fecha:** 6/1/2023, 8:21 AM
+**Para:** Moises Cedeno
+**CC:** Valentina Cedeño, Sonia M. Roman, Jessel Cajigas, Jarel Cajigas
+
+**Contenido:**
+```
+Compartí con el grupo como va el asunto de analizar la estructura de datos 
+de NML RxNorm. Entiendo que quedaba validar el asunto de las "interacciones" 
+entre medicamentos y las alertas para mujeres embarazadas.
+
+Me indican que hay un API para atender el asunto de las interacciones. 
+Entiendo que la información la había pasado Jessel. Puedes comunicarte con él 
+si no la encuentras.
+
+Saludos,
+Julio
+```
+
+**Contexto:**
+- Equipo interno evaluando NLM RxNorm
+- Validaciones pendientes identificadas:
+  1. **Interacciones entre medicamentos** - API disponible (según Jessel)
+  2. **Alertas para mujeres embarazadas** - Requiere validación
+- Stakeholders involucrados:
+  - Julio C. Cajigas (coordinación)
+  - Valentina Cedeño
+  - Sonia M. Roman
+  - Jessel Cajigas (información sobre API de interacciones)
+  - Jarel Cajigas
+
+---
+
 ### Respuesta de NLM: Confirmación de Capacidades
 
-**Respondido por:** Dr. Olivier Bodenreider
+**Respondido por:** Dr. Olivier Bodenreimer
 **Título:** Senior Scientist, Acting Director, Lister Hill National Center for Biomedical Communications
 **Institución:** National Library of Medicine, NIH
 **Fecha:** 2026-05-12
