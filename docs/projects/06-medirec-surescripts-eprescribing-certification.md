@@ -105,11 +105,84 @@ project.
 
 ---
 
-### Fase 2-4: Development, Testing, Certification (2020-2023)
+### Fase 2: Development Support & API Documentation (2020-2021)
+
+**Email Exchange: API Documentation Inquiry**
+
+**Email 1: Moises pregunta a Rebecca (Development Team)**
+```
+From: Moisés Cedeño (MediRec)
+To: rebecca.bell@surescripts.com
+CC: Julio C. Cajigas, Jarel Cajigas
+
+Hello Rebecca. I am Moisés Cedeño from the MediRec Team.
+
+I am working on the Prescriber E-Prescribing v6.1 project. I was reading the 
+documentation that they have provided me, I see that I have a document where 
+the urls of the web services that I should consume are written but, I do not 
+see in the documents, or any document, where the input parameters and the 
+responses are detailed which returns.
+
+Could you provide me with a document or link where I can consult said 
+documentation in a more detailed way, please?
+
+Regards,
+Moisés Cedeño
+MediRec, Inc.
+```
+
+**Email 2: Rebecca solicita clarificación**
+```
+From: Rebecca Bell <rebecca.bell@surescripts.com>
+
+Hi,
+
+What documents are you specifically referring to? We have multiple places 
+documents can live, so I just want to make sure I am getting you to the 
+right place.
+
+Thanks!
+
+Becca Bell (she/her/hers) | Integration Management Analyst | Surescripts LLC
+O: 612.276.5408
+```
+
+**Email 3: Moises responde con adjuntos**
+```
+From: Moisés Cedeño (MediRec)
+To: Rebecca Bell
+CC: Julio C. Cajigas, Jarel Cajigas
+
+Rebecca,
+
+The documents to which I am referring I send them as an attachment in this 
+email. It's the documentation I have on Surescripts so far.
+
+Thanks!
+
+Moisés Cedeño
+MediRec, Inc.
+```
+
+**Contexto:**
+- **Tema:** Documentación detallada de APIs de E-Prescribing v6.1
+- **Necesidad:** Moises necesitaba especificación de parámetros de entrada y respuestas
+- **Documentación:** Moises tenía documentos parciales (URLs pero sin detalles de payload)
+- **Soporte:** Rebecca Bell como Integration Management Analyst
+
+**Implicación técnica:**
+- Development requería especificaciones API detalladas
+- Documentación de Surescripts puede estar fragmentada
+- Necesidad de coordinación entre equipos (Moises + Rebecca + Julio + Jarel)
+
+---
+
+### Fase 3-4: Testing, Recertification & Final Certification (2021-2023)
 
 **Timeline estimado:**
 - **2020:** Onboarding + setup inicial
-- **2021-2022:** Development de conectividad + testing
+- **2020-2021:** Development support + API integration
+- **2021-2022:** Testing local + staging
 - **2023 (Q3):** Recertificación por cambio LexiComp → NLM
 - **2023 (10/23):** Certificación oficial otorgada
 
