@@ -45,9 +45,79 @@ Reference: PR-21677
 
 ---
 
-## Contexto
+## Historia: Del Onboarding a la Certificación
 
-### ¿Por Qué Se Requería Certificación?
+### Fase 1: Onboarding Inicial (Abril 2020)
+
+**Email de Rebecca Bell (Surescripts)**
+**Fecha:** 13 de abril, 2020, 11:47 AM
+**De:** Rebecca.Bell@surescripts.com
+**Para:** edwin@medirecpr.com, jarel@medirecpr.com, julio@medirecpr.com
+**Asunto:** Surescripts Routing and Directories Welcome Kit
+
+**Contenido:**
+```
+Good morning,
+
+Thank you for taking the time to meet and review your project. As stated on 
+the call, I will be your Integration resource for your E-Prescribing and 
+Directory v6.1 effort. I will complete your staging activation for 
+E-Prescribing, Directory, CancelRx, RxChange, EPCS and RxFill products once 
+I receive your completed Connectivity Questionnaire and CSR.
+
+Please review the email below and attached documentation for information 
+needed for successful connectivity, implementation and testing for your 
+project.
+
+[Documentos adjuntos para conectividad, e-prescribing, y directories...]
+```
+
+**Contexto:**
+- **Fecha:** Abril 13, 2020 (3+ años antes de certificación octubre 2023)
+- **Integration Resource:** Rebecca Bell (Principal contact)
+- **Productos a integrar:**
+  1. E-Prescribing
+  2. Directory v6.1
+  3. CancelRx
+  4. RxChange
+  5. EPCS (Electronic Prescriptions for Controlled Substances)
+  6. RxFill
+
+**Requisitos para empezar:**
+1. Completed Connectivity Questionnaire (mTLS)
+2. CSR (Certificate Signing Request)
+
+**Documentos provistos:**
+
+| Categoría | Documentos |
+|-----------|-----------|
+| **Conectividad** | Questionnaire mTLS, SSL Subscriber Agreement, Auth Guide |
+| **E-Prescribing** | Test msgs (XML), PrescriberTesting.pdf, NCPDP 2017071 Attestation |
+| **Directories** | v6.1 Cert Test Scenarios, Mapping 61to4x |
+| **Admin Console** | E-Prescribing CG 6.3, Translation Matrix, Dir IG 6.1.2, XSD's, Message Manager |
+| **Externo** | NCPDP Implementation Guide v2017071 (requerido) |
+
+**Implicación:**
+- Long-term project: Agosto 2020 - Octubre 2023 (3+ años)
+- Productos complejos: 6 productos diferentes
+- Múltiples estándares: NCPDP 2017071, Surescripts v6.1, mTLS
+- Integration resource dedicado: Rebecca Bell
+
+---
+
+### Fase 2-4: Development, Testing, Certification (2020-2023)
+
+**Timeline estimado:**
+- **2020:** Onboarding + setup inicial
+- **2021-2022:** Development de conectividad + testing
+- **2023 (Q3):** Recertificación por cambio LexiComp → NLM
+- **2023 (10/23):** Certificación oficial otorgada
+
+---
+
+## Contexto de Certificación 2023
+
+### ¿Por Qué Se Requería Recertificación?
 
 Cuando MediRec migró de LexiComp a NLM RxNorm, Surescripts (la plataforma estándar de ePrescribing en USA) requirió recertificación porque:
 
