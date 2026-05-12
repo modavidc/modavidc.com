@@ -96,32 +96,23 @@ Cada documento contiene el contexto completo, decisiones técnicas, números rea
 ### 5. **MediRec: NLM Migration - $20K/Año en Eliminación de Licencias**
 **Archivo:** [`05-medirec-nlm-migration-20k-savings.md`](05-medirec-nlm-migration-20k-savings.md)
 
-**Resumen:** Migración de LexiComp a NLM RxNorm, eliminando $20K/año en licencias farmacéuticas. Comparación detallada de pros/cons, análisis técnico, e identificación de gaps documentales.
+**Resumen:** Migración de LexiComp a NLM RxNorm, eliminando $20K/año en licencias farmacéuticas. Incluye comunicación oficial con NLM sobre capacidades clínicas (alergias, contraindicaciones en embarazo), documentación de gaps, y planes de implementación técnica.
+
+**Qué incluye:**
+- Comparación LexiComp vs NLM (pros/cons)
+- Análisis costo-beneficio y financiero
+- Pregunta original a NLM + respuesta de Dr. Olivier Bodenreider
+- Validación: NLM SÍ tiene capacidades clínicas (RxClass, SNOMED CT, MED-RT)
+- Queries REST para integración
+- Identificación de gaps documentales
+- Plan de implementación técnica
 
 **Métricas:**
 - Ahorro: $20K/año (5 años = $100K, 10 años = $200K)
 - Vendor lock-in eliminado
-- Estándar federal (NIH)
+- Estándar federal (NIH, USCDI-aligned)
 - Escalabilidad ilimitada
-
----
-
-### 6. **NLM RxClass: Capacidades Clínicas Detalladas (Guía Técnica)**
-**Archivo:** [`06-nlm-rxclass-clinical-capabilities.md`](06-nlm-rxclass-clinical-capabilities.md)
-
-**Resumen:** Documentación técnica de respuesta oficial de NLM sobre RxClass, SNOMED CT y MED-RT. Desglose completo de funcionalidades clínicas: alergias a medicamentos, contraindicaciones en embarazo, integración con MediRec.
-
-**Qué incluye:**
-- Email original de NLM RxNav Support
-- Diferencia entre RxNorm (identificación) y RxClass (clínica)
-- Fuentes de datos: SNOMED CT, MED-RT
-- Queries REST para implementación
-- Plan de 4 fases para MediRec
-- Ejemplo real: Sulfa drug allergy workflow
-- Estándares USCDI y FDA
-- Validación de que NLM SÍ tiene capacidades clínicas equivalentes a LexiComp
-
-**Contexto:** Base técnica para implementación real en MediRec eRx (sucesor de NLM migration)
+- Capacidades clínicas validadas oficialmente
 
 **Qué aprenderás:**
 - Framework de 10 dimensiones ponderadas (reproducible, auditado)
@@ -174,14 +165,12 @@ Cada documento contiene el contexto completo, decisiones técnicas, números rea
 ### Para Mejorar la Calidad de tu Codebase
 → Lee **[04-tcuida-audit-remediation-41-to-78.md](04-tcuida-audit-remediation-41-to-78.md)**
 
-### Para Eliminar Costos de Licencias Farmacéuticas
+### Para Eliminar Costos de Licencias Farmacéuticas + Capacidades Clínicas
 → Lee **[05-medirec-nlm-migration-20k-savings.md](05-medirec-nlm-migration-20k-savings.md)**
-
-### Para Implementar NLM RxClass en MediRec (Guía Técnica)
-→ Lee **[06-nlm-rxclass-clinical-capabilities.md](06-nlm-rxclass-clinical-capabilities.md)**
+(Incluye comunicación oficial con NLM, validación de capacidades, queries técnicas)
 
 ### Para Entender Todo Junto
-Lee en orden: 01 → 02 → 03 → 04 → 05 → 06 (historia progresiva de cómo crece una empresa tech + optimización de costos + integración clínica)
+Lee en orden: 01 → 02 → 03 → 04 → 05 (historia progresiva de cómo crece una empresa tech)
 
 ---
 
@@ -189,11 +178,12 @@ Lee en orden: 01 → 02 → 03 → 04 → 05 → 06 (historia progresiva de cóm
 
 | Métrica | Valor |
 |---------|-------|
-| Documentación total | ~33,000 palabras |
-| Archivos | 5 casos de éxito + 1 guía técnica |
-| Ejemplos de código | 50+ |
-| Métricas reales incluidas | 120+ |
-| Procesos documentados | 25+ |
+| Documentación total | ~35,000 palabras |
+| Archivos | 5 casos de éxito (documentación completa) |
+| Ejemplos de código | 55+ |
+| Métricas reales incluidas | 130+ |
+| Procesos documentados | 28+ |
+| Emails/comunicación incluida | 2 (respuestas NLM) |
 | Tickets ejecutados | 150+ |
 | Tests creados | 500+ |
 | Costo total impactado | $7.1K/año ahorrados + $20K/año (NLM) + 20K users validated + Series A |

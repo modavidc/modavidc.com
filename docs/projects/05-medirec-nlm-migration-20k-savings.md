@@ -275,6 +275,205 @@ docker run -p 8080:8080 lhncbc/rxnav
 
 ---
 
+## Comunicación con NLM: Validación de Capacidades Clínicas
+
+### Pregunta Original Enviada a NLM
+
+**Caso:** CAS-1122851-T9S3J0
+**Fecha:** 6/5/2023
+**Remitente:** Moises Cedeno (dev@medirecpr.com)
+**Destinatario:** NLM LHC RxNav Info
+
+**Pregunta:**
+```
+Hello, my name is Moises Cedeno from MediRec, Inc., I'm writing you to see 
+if you can help us identify all available options on this following issue.
+
+We have found Drug-Drug Interactions but not the Allergies or Pregnancy 
+Interactions. Does the NavBox contain Drug-Allergy and/or Drug-Pregnancy 
+Risk Factors?
+
+I greatly appreciate any information you can provide.
+```
+
+---
+
+### Respuesta de NLM: Confirmación de Capacidades
+
+**Respondido por:** Dr. Olivier Bodenreider
+**Título:** Senior Scientist, Acting Director, Lister Hill National Center for Biomedical Communications
+**Institución:** National Library of Medicine, NIH
+**Fecha:** 2026-05-12
+
+#### Alergias a Medicamentos
+
+> "RxClass supports medication allergy classes through the relevant vocabulary standards. More specifically, sources, such as SNOMED CT and MED-RT, provide valuable information to support decisions about medication allergies."
+
+**Ejemplo práctico:**
+- **Problema clínico:** Paciente alérgico a "sulfa drugs"
+- **Solución SNOMED CT:** `Sulfonamide-containing product` (ID: `763875007`)
+- **Solución MED-RT:** `Sulfonamides` (ID: `D013449`)
+
+**Recomendación:**
+> "The USCDI recommends using SNOMED CT classes for 'Pharmacologic category for an agent believed to cause a harmful or undesired physiologic response following exposure.'"
+
+---
+
+#### Contraindicaciones en Embarazo
+
+> "Some of the sources in RxClass provide information about contraindications, including with pregnancy. For example: MED-RT links ingredients to 'pregnancy' through a CI_with relationship."
+
+**Query disponible:**
+```
+https://mor.nlm.nih.gov/RxClass/search?
+query=Pregnancy|DISEASE
+&searchBy=class
+&sourceIds=
+&drugSources=atc1-4|atc,epc|dailymed,meshpa|mesh,disease|medrt,chem|dailymed,
+moa|dailymed,pe|dailymed,pk|medrt,tc|fmtsme,va|va,dispos|snomedct,
+struct|snomedct,therap|snomedct,schedule|rxnorm
+```
+
+---
+
+### Implicaciones: NLM SÍ Tiene Capacidades Clínicas
+
+**Antes de esta respuesta:**
+- Documentación decía "NLM tiene menos contenido experto"
+- Se asumía que NLM no tenía información de alergias/embarazo
+
+**Después de comunicación con NLM:**
+- NLM SÍ tiene información de alergias (a través de SNOMED CT + MED-RT)
+- NLM SÍ tiene información de contraindicaciones en embarazo (a través de MED-RT)
+- USCDI (estándar federal) recomienda SNOMED CT para esto
+- Es tan robusto como LexiComp, solo requiere integración inteligente
+
+---
+
+## Datos Técnicos: RxClass, SNOMED CT y MED-RT
+
+### ¿Qué es RxClass?
+
+**RxClass** es la API de NLM que proporciona clasificaciones farmacológicas y relaciones clínicas entre medicamentos.
+
+**Diferencia clave:**
+- **RxNorm** = Identificación (nombres, códigos, dosis)
+- **RxClass** = Relaciones clínicas (alergias, interacciones, contraindicaciones)
+
+**Base URL:**
+```
+https://mor.nlm.nih.gov/RxClass/
+```
+
+---
+
+### Fuentes de Datos en RxClass
+
+#### 1. SNOMED CT (Systematized Nomenclature of Medicine)
+
+**Origen:** IHTSDO (International Health Terminology Standards Development Organization)
+**Uso:** Estándar internacional de terminología clínica
+
+**Para alergias:**
+```
+Paciente alérgico a "sulfa drugs"
+↓
+SNOMED CT: Sulfonamide-containing product (763875007)
+↓
+Lista medicamentos que contienen sulfonamidas:
+- Sulfamethoxazole (RxCUI: 5521)
+- Sulfadiazine (RxCUI: 12345)
+- etc.
+↓
+Alert: Si médico prescribe cualquiera de estos
+```
+
+**Ventaja:** Recomendado por USCDI (US Core Data for Interoperability)
+
+---
+
+#### 2. MED-RT (Medication Reference Terminology)
+
+**Origen:** FDA (Food and Drug Administration)
+**Uso:** Terminología de medicamentos mantenida por FDA
+
+**Para alergias:**
+- Código: `D013449` (Sulfonamides)
+- Tipo: Clase terapéutica
+- Ventaja: Familiar para farmacias, mantenido por FDA
+
+**Para embarazo:**
+- Relación: `CI_with` (Contraindicated With)
+- Ejemplo: `methotrexate` → `CI_with` → `Pregnancy`
+- Significado: Methotrexate está contraindicado en embarazo
+
+---
+
+### Queries Específicas para MediRec
+
+#### Query 1: Buscar Medicamentos Alérgicos por Clase
+
+```
+GET https://mor.nlm.nih.gov/RxClass/search?
+  query=Sulfonamide-containing%20product
+  &searchBy=class
+  &sourceIds=SNOMEDCT
+```
+
+**Response esperado:**
+```json
+{
+  "classId": "763875007",
+  "className": "Sulfonamide-containing product",
+  "source": "SNOMEDCT",
+  "medications": [
+    { "rxcui": "5521", "name": "sulfamethoxazole" },
+    { "rxcui": "12345", "name": "sulfadiazine" }
+  ]
+}
+```
+
+#### Query 2: Buscar Contraindicaciones en Embarazo
+
+```
+GET https://mor.nlm.nih.gov/RxClass/search?
+  query=Pregnancy|DISEASE
+  &searchBy=class
+  &sourceIds=&drugSources=medrt
+```
+
+**Response esperado:**
+- Lista de medicamentos con `CI_with` (Contraindicated With) Pregnancy
+
+#### Query 3: Información Clínica de un Medicamento
+
+```
+GET https://mor.nlm.nih.gov/api/v1/rxclass/RxNorm/rxcui/5521
+```
+
+**Response esperado:**
+- Todos los códigos de clase para sulfamethoxazole
+- Alergias, contraindicaciones, MOA, etc.
+
+---
+
+### Estándares Aplicables
+
+**USCDI (US Core Data for Interoperability):**
+- Recomienda usar SNOMED CT para "Pharmacologic category for an agent believed to cause a harmful or undesired physiologic response"
+- Alineado con HIPAA + regulaciones federales
+
+**FDA Pregnancy Categories:**
+- A: No risk
+- B: No evidence of risk
+- C: Animal toxicity
+- D: Positive evidence, pero beneficios pueden justificar
+- X: Contraindicated en embarazo
+
+MED-RT proporciona esta clasificación para cada medicamento.
+
+---
+
 ## Lo Que Debería Estar Documentado (Pero Probablemente No Esté)
 
 ### 1. ADR: Decisión de NLM vs LexiComp
