@@ -488,6 +488,47 @@ EPrescribing.exe (V 2.4.1)
 
 ---
 
+### Recertificación con Surescripts
+
+**Email**
+**Fecha:** 9/18/2023, 4:20 PM
+**Para:** Moises
+
+**Contenido:**
+```
+Moises,
+
+Nos contestaron de Surescripts para validar que hay que recertificar unas 
+partes con ellos debido al cambio de NLM. Entiendo que el proceso es igual 
+que la certificación pasada que trabajaste de la versión 2017 donde se 
+someten los archivos y se suben los screenshots.
+
+Si te parece bien, mañana podemos cotejar esto para ver si trabajamos las 
+transacciones que nos requieren para certificar durante este fin de semana 
+o principios de la próxima.
+```
+
+**Contexto:**
+- **Fecha:** 18 de septiembre, 2023 (2 semanas antes de migración)
+- **Vendor:** Surescripts (plataforma estándar de eRx en healthcare USA)
+- **Requerimiento:** Recertificación necesaria debido a cambio de LexiComp → NLM
+- **Precedente:** Certificación anterior (versión 2017) ya completada por Moises
+- **Proceso:** Submit archivos + screenshots (igual que certificación 2017)
+- **Timeline:** Planificado para fin de semana del 18/9 o principios de semana siguiente
+- **Owner:** Moises
+
+**Implicación Técnica:**
+- Surescripts requiere validación/certificación de cambios en datos farmacéuticos
+- Cambio de fuente (LexiComp → NLM) requiere re-validación
+- No era un bloqueador, pero sí un prerequisito para go-live en producción
+- Moises tenía experiencia previa en este proceso (2017)
+
+**Bloqueador Potencial:**
+- Si Surescripts no certificaba antes de 10/1/2023, la migración podría retrasarse
+- 2 semanas para completar recertificación (deadline ajustado)
+
+---
+
 ### Respuesta de NLM: Confirmación de Capacidades
 
 **Respondido por:** Dr. Olivier Bodenreimer
