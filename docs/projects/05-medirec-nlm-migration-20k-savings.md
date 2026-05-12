@@ -397,28 +397,94 @@ Julio
 
 ### Testing & Implementation Planning
 
-**Agenda - eRx NLM Meeting**
-**Fecha:** 9/5/2023, 12:49 PM
-**Tema:** eRx NLM Test Results & Implementation Planning
+**Reunión - eRx NLM Test Results & Implementation**
+**Fecha:** 9/6/2023, 10:50 AM
+**Agenda/Notes:**
 
-**Orden del día:**
-1. ✅ eRx NLM Test Results
-2. ✅ Review Implementation Package Requirements
-3. ✅ Define Implementation Plan and Schedule
-4. ✅ Summary and Action Items
+---
 
-**Contexto:**
-- **Fecha:** Septiembre 5, 2023
-- **Status:** Testing completado, resultados listos para revisar
-- **Objetivo:** Pasar de testing a planning de implementación
-- **Timeline:** Un mes antes de migración oficial (octubre 10, 2024)
-- **Hito:** Decisión final de implementation package y schedule
+#### Resultados de Testing
 
-**Implicación:**
-- Tests de eRx NLM ya ejecutados y con resultados
-- Requisitos de "implementation package" fueron revisados
-- Plan de implementación fue definido
-- Schedule/timeline fue establecido
+| Responsable | Componente | Status | Nota |
+|-------------|-----------|--------|------|
+| **Luis Deliz** | eRx NLM Core | ✅ Bien | Tests corrieron bien, ya migrado a production version |
+| **Kevin Toro** | eRx NLM | ✅ Bien | Tests bien pero **issues de performance en production** |
+| **Kevin Toro (cont)** | Commercial Product/Drug Names | ⚠️ Issue | Performance issue con nombres comerciales |
+| **Loida Miranda** | Pharmacy Integration | ⚠️ En test | Nueva versión causando errores al agregar pharmacies |
+| **Jessel & Moises** | Commercial Drug Names | ✅ Testeado | Validaron cambios para mostrar nombres comerciales |
+
+**Issues Identificados:**
+1. Performance Issues en Commercial Product/Drug Names
+2. Pharmacy addition errors en nueva versión
+3. Requería validación de commercial names display
+
+---
+
+#### Implementation Package Requirements (Version 2.4.1)
+
+**Software:**
+```
+EPrescribing.exe (V 2.4.1)
+```
+
+**Bases de Datos:**
+```
+1. MRNLMDB (Nueva - NLM Database)
+   - Script: MRNLMDB_SCHEMA.sql (crear tablas)
+   - Script: MRNLMDB_Data.SQL (importar datos de NLM)
+
+2. MRRXDB (Actualización - tablas específicas)
+   - tblCoreFrecuencyData.sql
+   - tblCoreRouteData.sql
+   - tblCoreGenDrugData.sql
+   - tblRefPregWarningData.sql (⭐ Contraindicaciones en embarazo)
+   - tblAllergyClassDrugTemplate.sql (⭐ Alergias por clase)
+   - tblRxDetail_RxOrderNumber.sql (modificación)
+```
+
+**Nota técnica:**
+- `tblRefPregWarningData.sql` - Implementa alertas de embarazo (respuesta a pregunta original de Moises)
+- `tblAllergyClassDrugTemplate.sql` - Implementa clasificación de alergias (SNOMED CT/MED-RT)
+
+---
+
+#### Plan de Implementación y Schedule
+
+**Procedimiento Detallado:**
+
+1. **Preparación**
+   - Conectar Customer Server y Doctor Station (2 PCs)
+   - Ejecutar "Current Package" en customer server para actualizar a nueva versión MRNLMDB
+
+2. **Deployment de código**
+   - Copiar folder "Pgms" en Server AutoUpdate Directory
+   - Renombrar copia nueva a "Current_Pgms"
+   - Revisar que folder "Pgms" en Server tiene todas las versiones usadas en Doctor PC
+   - Copiar EPrescribing.Exe & EPrescribing.pdb a folder "Pgms" en Server
+
+3. **Activar AutoUpdate**
+   - Cambiar MRDB.dbo.Prgm_setup.PgmVer a nuevo valor
+
+4. **Distribución a usuarios**
+   - Todos los usuarios cierren y abran abcEHR para actualizar
+
+5. **Validación**
+   - Validar en Doctor PC que versión de eRx se actualizó
+   - Si no actualizó:
+     - Revisar permisos de carpetas
+     - Revisar User Account Control
+     - Troubleshooting adicional
+   - **Test final:** Documentar nueva prescription para "Tomatito Test Patient" para validar que versión "SAVES" correctamente
+
+---
+
+#### Equipos Involucrados
+
+- **Luis Deliz** - Testing core functionality
+- **Kevin Toro** - Performance testing + Commercial names
+- **Loida Miranda** - Pharmacy integration testing
+- **Jessel & Moises** - Commercial drug names validation
+- **Julio C. Cajigas** - Coordinación (implícito)
 
 ---
 
