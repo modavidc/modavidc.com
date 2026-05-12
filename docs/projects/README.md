@@ -169,8 +169,12 @@ Cada documento contiene el contexto completo, decisiones técnicas, números rea
 → Lee **[05-medirec-nlm-migration-20k-savings.md](05-medirec-nlm-migration-20k-savings.md)**
 (Incluye comunicación oficial con NLM, validación de capacidades, queries técnicas)
 
+### Para Entender Certificación de ePrescribing
+→ Lee **[06-medirec-surescripts-eprescribing-certification.md](06-medirec-surescripts-eprescribing-certification.md)**
+(Certificación oficial Surescripts, transacciones, compliance regulatorio)
+
 ### Para Entender Todo Junto
-Lee en orden: 01 → 02 → 03 → 04 → 05 (historia progresiva de cómo crece una empresa tech)
+Lee en orden: 01 → 02 → 03 → 04 → 05 → 06 (historia progresiva de cómo crece una empresa tech)
 
 ---
 
@@ -178,15 +182,16 @@ Lee en orden: 01 → 02 → 03 → 04 → 05 (historia progresiva de cómo crece
 
 | Métrica | Valor |
 |---------|-------|
-| Documentación total | ~35,000 palabras |
-| Archivos | 5 casos de éxito (documentación completa) |
-| Ejemplos de código | 55+ |
-| Métricas reales incluidas | 130+ |
-| Procesos documentados | 28+ |
-| Emails/comunicación incluida | 2 (respuestas NLM) |
+| Documentación total | ~42,000 palabras |
+| Archivos | 6 casos de éxito (documentación completa) |
+| Ejemplos de código | 60+ |
+| Métricas reales incluidas | 145+ |
+| Procesos documentados | 33+ |
+| Emails/comunicación incluida | 4 (NLM + Surescripts) |
+| Certificaciones incluidas | 1 oficial (Surescripts PR-21677) |
 | Tickets ejecutados | 150+ |
 | Tests creados | 500+ |
-| Costo total impactado | $7.1K/año ahorrados + $20K/año (NLM) + 20K users validated + Series A |
+| Costo total impactado | $7.1K/año ahorrados + $20K/año (NLM) + 20K users validated + Series A + Pharma network certification |
 
 ---
 
@@ -255,6 +260,30 @@ Todos estos proyectos comparten principios:
 
 ---
 
+### 6. **MediRec: Certificación ePrescribing con Surescripts**
+**Archivo:** [`06-medirec-surescripts-eprescribing-certification.md`](06-medirec-surescripts-eprescribing-certification.md)
+
+**Resumen:** Certificación oficial de Surescripts para ePrescribing tras migración de LexiComp a NLM. Valida transacciones farmacéuticas, conectividad HTTPS+mTLS, y compliance con estándares de pharma network.
+
+**Qué incluye:**
+- Certificado oficial Surescripts (PR-21677, 10/23/2023)
+- 7 transacciones certificadas (NewRx, RxRenewal, RxChange, Cancel Rx, Status, Error, Verify)
+- ePrescribing CG v6.1.6 (NCPDP standards)
+- Especificaciones técnicas (HTTPS, mTLS)
+- Timeline crítico (solo 22 días post-migración)
+- Implicaciones regulatorias y comerciales
+
+**Métricas:**
+- Certificación otorgada: 10/23/2023
+- Transacciones certificadas: 7/7
+- Timeline: 22 días post-migración NLM
+- Contacto: Tara Collyard (Principal Integration Manager)
+- Status: Production-ready
+
+**Contexto:** Validación externa que migración NLM fue exitosa. Prerequisito para conectar con red de +260K farmacias USA.
+
+---
+
 **Última actualización:** Mayo 12, 2026
-**Versión:** 1.0.0
+**Versión:** 1.0.0 (6 proyectos documentados)
 
