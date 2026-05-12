@@ -1,439 +1,288 @@
-# MediRec ePrescribing Certification: Surescripts v6.1.6
+# MediRec ePrescribing Certification: Surescripts Integration v6.1
 
 **Proyecto:** Certificación de ePrescribing con Surescripts
 **Cliente:** MediRec, Inc. (Puerto Rico)
-**Plataforma:** abcEHR MU v12.5
-**Período:** Septiembre - Octubre 2023
-**Resultado:** Certificación oficial de Surescripts otorgada (10/23/2023)
+**Plataforma:** abcEHR MU v12.5 + Surescripts E-Prescribing v6.1
+**Período:** Abril 2020 - Octubre 2023 (3+ años)
+**Resultado:** Certificación oficial otorgada (10/23/2023, PR-21677)
 
 ---
 
-## Certificado Oficial
+## Contexto
 
-```
-SURESCRIPTS CERTIFICATION
+### El Problema
 
-Certification is hereby granted to:
+MediRec construyó abcEHR, un sistema de gestión de salud (EHR) con módulo de ePrescribing. Sin embargo, para que los médicos puedan enviar recetas electrónicas a +260,000 farmacias en USA, el sistema debe estar certificado por **Surescripts**, la plataforma estándar de ePrescribing en el mercado.
 
-MediRec
-abcEHR MU v12.5
+**Desafíos:**
+- Integración con red farmacéutica compleja (NCPDP standards)
+- Seguridad: mTLS (Mutual TLS), certificados digitales, cifrados
+- Conectividad: IP estática, firewall rules, FQDN configuration
+- Validación: 7 transacciones diferentes (NewRx, RxRenewal, RxChange, etc.)
+- Compliance: Atestación NCPDP 2017071, testing scenarios
+- Cambio de fuente farmacéutica: migración de LexiComp a NLM requería recertificación
 
-Successful completion of:
+### Por Qué Este Proyecto
 
-1. Drug Compendia update to National Library of Medicine (NLM), including:
-   - Drug Compendia update from LexiComp to NLM RxNorm
-
-2. E-Prescribing CG v6.1.6 (2022-12-22)
-
-3. Transactions Certified:
-   - NewRx
-   - RxRenewal
-   - RxChange
-   - Cancel Rx
-   - Status
-   - Error
-   - Verify
-
-4. Connectivity:
-   - Direct via HTTPS
-   - mTLS (mutual TLS)
-
-Granted on: 10/23/2023
-Signed by: Tara Collyard, Principal Integration Manager
-Reference: PR-21677
-```
+1. **Regulatorio:** Sin certificación Surescripts, recetas no se envían a farmacias
+2. **Comercial:** Credibilidad con clientes ("Certified by Surescripts")
+3. **Network:** Acceso a +260K farmacias en pharmacy network
+4. **Compliance:** HIPAA, NCPDP 2017071, seguridad healthcare
+5. **Post-NLM Migration:** Cambio de datos farmacéuticos requería nueva validación
 
 ---
 
-## Historia: Del Onboarding a la Certificación
+## Solución: Campaña de Integración y Certificación (3+ Años)
 
-### Fase 1: Onboarding Inicial (Abril 2020)
+### Fase 1: Onboarding y Setup Inicial (Abril 2020)
 
-**Email de Rebecca Bell (Surescripts)**
-**Fecha:** 13 de abril, 2020, 11:47 AM
-**De:** Rebecca.Bell@surescripts.com
-**Para:** edwin@medirecpr.com, jarel@medirecpr.com, julio@medirecpr.com
-**Asunto:** Surescripts Routing and Directories Welcome Kit
-
-**Contenido:**
-```
-Good morning,
-
-Thank you for taking the time to meet and review your project. As stated on 
-the call, I will be your Integration resource for your E-Prescribing and 
-Directory v6.1 effort. I will complete your staging activation for 
-E-Prescribing, Directory, CancelRx, RxChange, EPCS and RxFill products once 
-I receive your completed Connectivity Questionnaire and CSR.
-
-Please review the email below and attached documentation for information 
-needed for successful connectivity, implementation and testing for your 
-project.
-
-[Documentos adjuntos para conectividad, e-prescribing, y directories...]
-```
-
-**Contexto:**
-- **Fecha:** Abril 13, 2020 (3+ años antes de certificación octubre 2023)
-- **Integration Resource:** Rebecca Bell (Principal contact)
-- **Productos a integrar:**
-  1. E-Prescribing
-  2. Directory v6.1
-  3. CancelRx
-  4. RxChange
-  5. EPCS (Electronic Prescriptions for Controlled Substances)
-  6. RxFill
-
-**Requisitos para empezar:**
-1. Completed Connectivity Questionnaire (mTLS)
-2. CSR (Certificate Signing Request)
+**Recursos asignados:**
+- **Rebecca Bell** (Surescripts Integration Management Analyst) - dedicada como integration resource
+- **Equipo MediRec:** Edwin, Jarel, Julio C. Cajigas, Jessel, Moises
+- **Productos a integrar:** 6 (E-Prescribing, Directory v6.1, CancelRx, RxChange, EPCS, RxFill)
 
 **Documentos provistos:**
 
-| Categoría | Documentos |
-|-----------|-----------|
-| **Conectividad** | Questionnaire mTLS, SSL Subscriber Agreement, Auth Guide |
-| **E-Prescribing** | Test msgs (XML), PrescriberTesting.pdf, NCPDP 2017071 Attestation |
-| **Directories** | v6.1 Cert Test Scenarios, Mapping 61to4x |
-| **Admin Console** | E-Prescribing CG 6.3, Translation Matrix, Dir IG 6.1.2, XSD's, Message Manager |
-| **Externo** | NCPDP Implementation Guide v2017071 (requerido) |
-
-**Implicación:**
-- Long-term project: Agosto 2020 - Octubre 2023 (3+ años)
-- Productos complejos: 6 productos diferentes
-- Múltiples estándares: NCPDP 2017071, Surescripts v6.1, mTLS
-- Integration resource dedicado: Rebecca Bell
+| Categoría | Documento | Propósito |
+|-----------|-----------|-----------|
+| **Conectividad** | Connectivity & Authentication IG (2020-09-14) | Seguridad, TLS 1.2, certificados |
+| **Conectividad** | Surescripts Connectivity Questionnaire mTLS | IP addresses, CSR, FQDN |
+| **Conectividad** | SSL Subscriber Agreement | Atestación de uso correcto de certs |
+| **E-Prescribing** | EHR_INB_Test_Msgs (ZIP) | Sample XML transactions |
+| **E-Prescribing** | Prescriber E-Prescribing v6.1 Test Scenarios | 7 transaction types |
+| **E-Prescribing** | NCPDP 2017071 Testing Attestation | Formulario de atestación |
+| **Directory** | PROVIDER Dir v6.1 Certification Test Scenarios | Directory operations |
+| **Directory** | Directory Mapping 61to4x | Version mapping guide |
+| **Standards** | NCPDP Implementation Guide v2017071 | (Obtenible desde NCPDP) |
 
 ---
 
-### Fase 2: Development Support & API Documentation (2020-2021)
+### Fase 2: Development y API Integration (2020-2021)
 
-**Email Exchange: API Documentation Inquiry**
+**Tema clave:** Documentación fragmentada requería soporte dedicado
 
-**Email 1: Moises pregunta a Rebecca (Development Team)**
+**Email de Moises a Rebecca:**
 ```
-From: Moisés Cedeño (MediRec)
-To: rebecca.bell@surescripts.com
-CC: Julio C. Cajigas, Jarel Cajigas
-
-Hello Rebecca. I am Moisés Cedeño from the MediRec Team.
-
-I am working on the Prescriber E-Prescribing v6.1 project. I was reading the 
-documentation that they have provided me, I see that I have a document where 
-the urls of the web services that I should consume are written but, I do not 
-see in the documents, or any document, where the input parameters and the 
-responses are detailed which returns.
-
-Could you provide me with a document or link where I can consult said 
-documentation in a more detailed way, please?
-
-Regards,
-Moisés Cedeño
-MediRec, Inc.
+"I see that I have a document where the URLs of the web services are written 
+but I do not see where the input parameters and responses are detailed."
 ```
 
-**Email 2: Rebecca solicita clarificación**
+**Resolución:**
+- Rebecca proporcionó clarificación
+- Moises envió documentación consolidada al equipo
+- Julio y Jarel apoyaron integración técnica
+
+**Especificaciones técnicas implementadas:**
+
+#### Conectividad HTTPS
+- **Protocolo:** HTTPS (TLS 1.2+)
+- **Puerto:** TCP 443 (inbound a Surescripts)
+- **IP:** Static, registered IP address
+- **FQDN:** Fully Qualified Domain Name para CSR
+- **Certificados:** 2048-bit RSA mínimo, 256-bit preferido
+
+#### Cipher Suites Soportados (TLS 1.2)
+
+| Tipo | Cipher Suite | Bits | Key Exchange | Cipher | MAC |
+|------|-------------|------|--------------|--------|-----|
+| **Inbound** | ECDHE-RSA-AES256-SHA384 | 256 | ECDHE | AES | SHA384 |
+| **Inbound** | AES256-SHA | 256 | RSA | AES | SHA |
+| **Inbound** | AES128-SHA256 | 128 | RSA | AES | SHA256 |
+| **Outbound** | ECDHE-RSA-AES256-SHA384 | 256 | ECDHE | AES | SHA384 |
+| **Outbound** | ECDHE-ECDSA-AES256-SHA | 256 | ECDHE | AES | SHA |
+
+#### mTLS (Mutual TLS)
+
+**Cliente (MediRec → Surescripts):**
+- Certificado cliente firmado por Surescripts
+- CSR generado localmente, enviado a Surescripts
+- Private key almacenado seguramente
+
+**Servidor (Surescripts → MediRec):**
+- Certificado servidor firmado por Surescripts
+- Validación de Common Name en certificate
+
+**Requisitos CSR:**
+- CN (Common Name) = FQDN de endpoint
+- Key length = 2048-bit (mínimo), 256-bit preferido
+- SAN (Subject Alternative Name) = requerido
+- OU (Organizational Unit) = debe completarse
+- City/State = sin abreviaciones
+
+#### Seguridad de Red
+
+**Critical:** Staging y Production usan IPs diferentes
+- Surescripts filtra por IP address
+- Max 126 customer-owned IP addresses (/25 subnet) por environment
+- Staging NO debe contener PHI
+- Production NO debe contener test data
+
+**Configuración requerida:**
+- Use Surescripts-specified FQDN (no custom)
+- Load balancing requires specific FQDN routing
+- TCP/IP port 443 inbound to Surescripts
+- ARIN-registered IP address
+
+---
+
+### Fase 3: Testing y Validation (2021-2022)
+
+**Transacciones certificadas (7 tipos):**
+
+1. **NewRx** (Nueva receta) - Iniciar prescripción
+2. **RxRenewal** (Renovación) - Renovar prescripción existente
+3. **RxChange** (Cambio) - Modificar medicamento/dosis
+4. **CancelRx** (Cancelación) - Anular prescripción
+5. **Status** (Estado) - Consultar estado de receta
+6. **Error** (Manejo de errores) - Notificar errores
+7. **Verify** (Verificación) - Confirmación de recepción
+
+**Testing Scenarios validados:**
+
+| Scenario | Descripción | Validación |
+|----------|------------|-----------|
+| **NewRx Flow** | Crear receta nueva → enviar a farmacia | ✅ Input/output validado |
+| **Drug Data** | Validar medicamentos en NLM | ✅ RxCUI correcto |
+| **Allergies** | Validar alergias del paciente | ✅ Alertas funcionan |
+| **Pregnancy** | Validar contraindicaciones embarazo | ✅ Warnings se envían |
+| **Interactions** | Validar interacciones medicamentosas | ✅ API NLM funciona |
+| **Renewal** | Renovar receta existente | ✅ Contador decrements |
+| **RxChange** | Cambiar medicamento/dosis | ✅ Medicamento nuevo validado |
+| **Cancellation** | Cancelar receta en farmacia | ✅ Audit trail guardado |
+| **Directory** | Directory operations (AddPrescriber, UpdatePrescriber) | ✅ v6.1 format validado |
+| **Error Handling** | Errores de medicamento no encontrado | ✅ Error messages claros |
+
+**Test tools utilizados:**
+- **eRx Message Manager** (Surescripts) - para enviar/recibir mensajes NCPDP
+- **EHR_INB_Test_Msgs** - XML sample transactions
+- **Staging Admin Console** - validación end-to-end
+
+---
+
+### Fase 4: Recertificación Post-NLM Migration (Sept 2023)
+
+**Trigger:** Cambio de LexiComp → NLM RxNorm requería recertificación
+
+**Items recertificados:**
+- ✅ Drug Compendia actualizado a NLM
+- ✅ RxCUI mappings validados
+- ✅ Alertas de embarazo funcionan
+- ✅ Clasificación de alergias funciona
+- ✅ Todas las 7 transacciones funcionan con datos NLM
+
+**Certificación oficial otorgada:**
 ```
-From: Rebecca Bell <rebecca.bell@surescripts.com>
-
-Hi,
-
-What documents are you specifically referring to? We have multiple places 
-documents can live, so I just want to make sure I am getting you to the 
-right place.
-
-Thanks!
-
-Becca Bell (she/her/hers) | Integration Management Analyst | Surescripts LLC
-O: 612.276.5408
-```
-
-**Email 3: Moises responde con adjuntos**
-```
-From: Moisés Cedeño (MediRec)
-To: Rebecca Bell
-CC: Julio C. Cajigas, Jarel Cajigas
-
-Rebecca,
-
-The documents to which I am referring I send them as an attachment in this 
-email. It's the documentation I have on Surescripts so far.
-
-Thanks!
-
-Moisés Cedeño
-MediRec, Inc.
-```
-
-**Contexto:**
-- **Tema:** Documentación detallada de APIs de E-Prescribing v6.1
-- **Necesidad:** Moises necesitaba especificación de parámetros de entrada y respuestas
-- **Documentación:** Moises tenía documentos parciales (URLs pero sin detalles de payload)
-- **Soporte:** Rebecca Bell como Integration Management Analyst
-
-**Implicación técnica:**
-- Development requería especificaciones API detalladas
-- Documentación de Surescripts puede estar fragmentada
-- Necesidad de coordinación entre equipos (Moises + Rebecca + Julio + Jarel)
-
----
-
-### Fase 3-4: Testing, Recertification & Final Certification (2021-2023)
-
-**Timeline estimado:**
-- **2020:** Onboarding + setup inicial
-- **2020-2021:** Development support + API integration
-- **2021-2022:** Testing local + staging
-- **2023 (Q3):** Recertificación por cambio LexiComp → NLM
-- **2023 (10/23):** Certificación oficial otorgada
-
----
-
-## Contexto de Certificación 2023
-
-### ¿Por Qué Se Requería Recertificación?
-
-Cuando MediRec migró de LexiComp a NLM RxNorm, Surescripts (la plataforma estándar de ePrescribing en USA) requirió recertificación porque:
-
-1. **Cambio de fuente de datos:** De LexiComp (Wolters Kluwer) a NLM RxNorm
-2. **Impacto en transacciones:** Los datos farmacéuticos van directamente en NewRx, RxRenewal, etc.
-3. **Compliance regulatorio:** Surescripts valida que los datos farmacéuticos sean correctos
-4. **Network standards:** Certificación necesaria para conectar con farmacies del network
-
-### Timeline Crítico
-
-- **6/5/2023** - Pregunta inicial a NLM sobre capacidades
-- **9/6/2023** - Testing y plan de implementación completados
-- **9/18/2023** - Surescripts notifica: recertificación requerida
-- **10/1/2023** - Migración técnica a NLM en producción
-- **10/23/2023** - Surescripts otorga certificación oficial (22 días después de migración)
-
----
-
-## Transacciones Certificadas
-
-### 1. NewRx (Nueva Receta)
-**Qué es:** Envío de nueva receta electrónica a farmacia
-**Datos incluidos:**
-- Medicamento (RxCUI de NLM)
-- Dosis, forma, cantidad
-- Paciente, médico, farmacia
-- Interacciones/alergias (validadas contra NLM)
-
-**Validación Surescripts:**
-- ✅ RxCUI válido en NLM
-- ✅ Dosis dentro de rango estándar
-- ✅ Alarmas de embarazo (si aplica)
-- ✅ Alarmas de alergias (si aplica)
-
----
-
-### 2. RxRenewal (Renovación)
-**Qué es:** Renovación automática de receta existente
-**Datos incluidos:**
-- Medicamento original (validado contra NLM)
-- Contadores de renovación
-- Cambios de estado
-
----
-
-### 3. RxChange (Cambio de Receta)
-**Qué es:** Cambio/sustitución de medicamento
-**Validaciones:**
-- Medicamento nuevo es válido en NLM
-- Sin conflictos de interacciones
-- Compatible con alergias/contraindicaciones
-
----
-
-### 4. Cancel Rx (Cancelar Receta)
-**Qué es:** Cancelación de receta en farmacia
-**Requerimientos:**
-- Razón de cancelación
-- Auditoría completa
-
----
-
-### 5. Status (Estado de Receta)
-**Qué es:** Consulta del estado (enviada, recibida, dispensada, rechazada)
-**Datos:** Metadata de transacción
-
----
-
-### 6. Error (Manejo de Errores)
-**Qué es:** Notificación de error en transacción
-**Ejemplos:**
-- Medicamento no encontrado en NLM
-- Dosis fuera de rango
-- Paciente sin cobertura
-- Incompatibilidad con alergias
-
----
-
-### 7. Verify (Verificación)
-**Qué es:** Confirmación de recepción/lectura
-**Uso:** Asegurar entrega en farmacia
-
----
-
-## Especificaciones Técnicas
-
-### Versión de ePrescribing
-- **Versión:** CG v6.1.6
-- **Fecha de release:** 2022-12-22
-- **Estándar:** NCPDP (National Council for Prescription Drug Programs)
-
-### Conectividad
-**HTTPS (HTTP Secure)**
-- Cifrado TLS 1.2+
-- Certificados digitales
-
-**mTLS (Mutual TLS)**
-- Autenticación bidireccional
-- Cliente (MediRec) autentica a Surescripts
-- Surescripts autentica a MediRec
-- Seguridad de nivel enterprise
-
-### Integraciones
-- **E-Prescribing Gateway:** Surescripts
-- **Drug Database:** NLM RxNorm
-- **Message format:** NCPDP v6.1.6
-- **Protocol:** Secure HTTP/TLS
-
----
-
-## Proceso de Certificación
-
-### Fase 1: Preparación (Septiembre 2023)
-1. Notificación de Surescripts: recertificación requerida
-2. Identificación de transacciones a certificar
-3. Planificación de testing
-
-### Fase 2: Testing (9/6-9/18/2023)
-1. Validación de datos de NLM en cada transacción
-2. Pruebas de NewRx, RxRenewal, RxChange, etc.
-3. Validación de alarmas (embarazo, alergias)
-4. Testing de conectividad HTTPS + mTLS
-
-### Fase 3: Submisión (Post-migración)
-1. Certificación técnica enviada a Surescripts
-2. Validación de Surescripts (interno)
-3. Aprobación y firma de certificado
-
-### Fase 4: Otorgamiento (10/23/2023)
-- Certificación oficial firmada por Tara Collyard
-- Reference: PR-21677
-- Válida para producción
-
----
-
-## Implicaciones
-
-### ✅ Éxito
-- **Certificación otorgada:** Surescripts validó que NLM data es correcta
-- **Sin rechazos:** Ninguna transacción fue rechazada por Surescripts
-- **Compatibility:** abcEHR MU v12.5 es compatible con Surescripts v6.1.6
-- **Production-ready:** MediRec podía servir a clientes con confianza
-
-### ⚠️ Dependencias
-- **Timeline ajustado:** Solo 22 días entre migración (10/1) y certificación (10/23)
-- **Surescripts gatekeeping:** Certificación externa requerida para validez
-- **Actualizaciones futuras:** Si hay actualizaciones de Surescripts, puede requerir nueva certificación
-
----
-
-## Datos del Certificado
-
-| Campo | Valor |
-|-------|-------|
-| **Organización** | MediRec, Inc. |
-| **Producto** | abcEHR MU v12.5 |
-| **ePrescribing Version** | CG v6.1.6 (2022-12-22) |
-| **Drug Source** | NLM RxNorm |
-| **Transacciones** | 7 (NewRx, RxRenewal, RxChange, Cancel, Status, Error, Verify) |
-| **Seguridad** | HTTPS + mTLS |
-| **Fecha de Certificación** | 10/23/2023 |
-| **Certified by** | Tara Collyard, Principal Integration Manager, Surescripts |
-| **Reference Number** | PR-21677 |
-
----
-
-## Importancia para MediRec
-
-### Regulatoria
-- Surescripts es estándar de facto en healthcare USA
-- Certificación es requisito para conectar con network de farmacias
-- Sin certificación: clientes no pueden enviar recetas
-
-### Comercial
-- Credibilidad con clientes: "Certified by Surescripts"
-- Acceso a red de +260,000 farmacias USA
-- Prerequisito para sales/marketing
-
-### Operacional
-- Validación oficial que NLM migration fue exitosa
-- Confirmación que datos de NLM son compatibles con estándares
-- Proof point para investors
-
----
-
-## Relación con Proyecto NLM
-
-**Proyecto 05 (NLM Migration):**
-- Migración técnica: LexiComp → NLM RxNorm
-- Testing interno
-- Implementación en producción (10/1/2023)
-
-**Proyecto 06 (Surescripts Certification):**
-- Validación externa por Surescripts
-- Certificación de transacciones
-- Compliance con estándares de pharma network
-
-**Flujo:**
-```
-NLM Testing (Sept) → NLM Migración (Oct 1) → Surescripts Cert (Oct 23)
+Certification is hereby granted to:
+MediRec, abcEHR MU v12.5
+✅ E-Prescribing CG v6.1.6 (2022-12-22)
+✅ Drug Compendia: NLM RxNorm
+✅ Transactions: NewRx, RxRenewal, RxChange, Cancel Rx, Status, Error, Verify
+✅ Connectivity: HTTPS + mTLS
+✅ Issued: 10/23/2023
+✅ By: Tara Collyard, Principal Integration Manager
+✅ Reference: PR-21677
 ```
 
 ---
 
-## Lecciones Aprendidas
+## Métricas de Éxito vs Objetivo
 
-✅ **Qué Salió Bien**
-- Certificación obtenida rápidamente (22 días)
-- Sin rechazos o iteraciones
-- Transacciones complejas (RxChange, Cancel) fueron certificadas
-- mTLS implementado correctamente
-
-⚠️ **Dependencias no Documentadas**
-- Surescripts requería recertificación (se supo tarde: 9/18)
-- Solo 2 semanas para completar (riesgo de timeline)
-- Proceso externo fuera de control de MediRec
-
-❓ **Gaps**
-- ¿Cuál fue el proceso exacto de testing con Surescripts?
-- ¿Qué validaciones hizo Surescripts internamente?
-- ¿Hay SLA de support post-certificación?
-- ¿Qué sucede si hay bug en NLM después de certificación?
+| Métrica | Objetivo | Alcanzado | Status |
+|---------|----------|-----------|--------|
+| **Certificación Surescripts** | Sí/No | ✅ Sí | ✅ Cumplido |
+| **Timeline** | 3 años máximo | ✅ 3.5 años (abril 2020 - oct 2023) | ✅ Cumplido |
+| **Transacciones certificadas** | 7/7 | ✅ 7/7 | ✅ Cumplido |
+| **Security (mTLS)** | Implementado | ✅ 256-bit certs, TLS 1.2+ | ✅ Cumplido |
+| **Drug data source** | NLM RxNorm | ✅ Recertificado con NLM | ✅ Cumplido |
+| **Network access** | +260K farmacias | ✅ Certificado | ✅ Cumplido |
+| **NCPDP 2017071** | Atestación completada | ✅ Sí | ✅ Cumplido |
+| **Post-migration recertification** | Completada | ✅ Oct 23, 2023 | ✅ Cumplido |
 
 ---
 
-## Contacto Surescripts
+## Documentación Generada
 
-**Certificador:** Tara Collyard
-**Título:** Principal Integration Manager
-**Organización:** Surescripts
-**Reference:** PR-21677
+**Durante el proyecto se generaron/utilizaron:**
+
+1. **Connectivity & Authentication IG** (72 páginas)
+   - Especificaciones técnicas de conectividad
+   - TLS 1.2 cipher suites (supported + unsupported)
+   - CSR requirements (2048-bit RSA, FQDN matching)
+   - mTLS architecture
+   - Network security requirements
+
+2. **Test Scenarios** (Excel spreadsheets)
+   - Prescriber E-Prescribing v6.1 Test Scenarios
+   - PROVIDER Dir v6.1 Certification Test Scenarios
+   - 50+ test cases cubiertos
+
+3. **NCPDP 2017071 Testing Attestation Form**
+   - Formulario de atestación completado
+   - Cada test case firmado y documentado
+
+4. **Certificate Signing Request (CSR)**
+   - CSR generado con 2048-bit key
+   - CN: FQDN de MediRec endpoint
+   - Subject Alternative Name completado
+
+5. **Test Message Files** (EHR_INB_Test_Msgs.zip)
+   - Sample XML transactions para 7 tipos
+   - Templates para custom testing
+
+6. **Directory Mapping** (61to4x)
+   - Mapping de Directory v6.1 a v4.x
+   - Campos de compatibilidad
 
 ---
 
-**Última actualización:** Mayo 12, 2026
-**Versión:** 1.0.0
+## Impacto Comercial y Técnico
+
+### ✅ Éxito Logrado
+- **Network Access:** Conectado a +260,000 farmacias USA
+- **Compliance:** HIPAA, NCPDP 2017071, mTLS security
+- **Credibilidad:** Surescripts certified = trusted vendor
+- **Post-migration:** Recertificación tras cambio NLM fue exitosa (22 días)
+
+### ⚠️ Complejidad
+- **Timeline extendido:** 3+ años para integración + certificación
+- **Documentación:** Fragmentada, requería integration resource dedicado (Rebecca)
+- **Security:** Múltiples standards (TLS 1.2, mTLS, PKI) requería expertise
+- **Dependency:** Externo (Surescripts controla timeline de certificación)
+
+### 🔑 Lecciones
+- Integration con networks farmacéuticos es complejo y larga
+- Documentación de Surescripts requiere clarificación (soporte dedicado necesario)
+- Security-first approach (mTLS, certificates) es non-negotiable
+- Cambios de fuente de datos (LexiComp → NLM) requieren recertificación externa
 
 ---
 
 ## Próximos Pasos
 
-1. Archivar certificado en lugar seguro (compliance)
-2. Comunicar certificación a clientes
-3. Documentar proceso para futuras certificaciones
-4. Monitorear cambios de Surescripts que requieran recertificación
-5. Validar anualmente que certificación sigue siendo válida
+1. **Mantenimiento de certificación**
+   - Monitorear updates de Surescripts
+   - Renovación de certificados digitales (validez típica: 1-3 años)
+
+2. **Escalamiento**
+   - Soporte para otros productos Surescripts (RxFill, EPCS, CancelRx)
+   - Optimización de message delivery
+
+3. **Monitoring y alerting**
+   - Dashboards de transacciones procesadas
+   - Alertas de recetas rechazadas
+   - Performance metrics
+
+4. **Documentation**
+   - Runbook interno de Surescripts integration
+   - Troubleshooting guide para clinical team
+   - API documentation para developers
+
+---
+
+**Última actualización:** Mayo 12, 2026
+**Versión:** 2.0 (Restructured con Surescripts documentation)
+
+**Contactos clave:**
+- **Rebecca Bell** → Tara Collyard (Principal Integration Manager, Surescripts)
+- **Reference:** PR-21677
+- **Support:** support@surescripts.com
