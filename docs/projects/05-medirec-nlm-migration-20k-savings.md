@@ -355,6 +355,46 @@ Julio
 
 ---
 
+### Diseño de Base de Datos: eRx New Drugs DB
+
+**Email de Julio C. Cajigas**
+**Fecha:** 6/22/2023, 1:24 PM
+**Para:** Moises, Jarel Cajigas, Jessel Cajigas
+**Asunto:** eRx New Drugs DB Meeting
+
+**Contenido:**
+```
+Hi,
+
+Today at 4:00 PM ET we will have the meeting to continue with the Drugs DB 
+specifications and design discussion.
+
+The required functions were identified and the C# classes associated with them.
+
+Moisés we will cover the population the new Drugs tables with the NLM data.
+
+A meeting invitation will be send in the next minutes.
+
+Regards,
+Julio
+```
+
+**Resumen:**
+- **Fecha:** 22/6/2023, 4:00 PM ET
+- **Tema:** Continuación de especificaciones y diseño de Drugs DB
+- **Completado:** Funciones requeridas identificadas + clases C# asociadas
+- **Pendiente:** Población de tablas con datos de NLM
+- **Responsable:** Moises coordinaría el llenado de tablas
+- **Equipo:** Julio, Jessel, Jarel
+
+**Implicación técnica:**
+- Arquitectura: Clases C# para funciones de Drugs DB
+- Data: Estrategia de carga/población desde NLM
+- Timeline: 22/6/2023 fue un hito en el diseño
+- Objetivo: Nuevo Drugs DB poblado con datos de NLM (en lugar de LexiComp)
+
+---
+
 ### Respuesta de NLM: Confirmación de Capacidades
 
 **Respondido por:** Dr. Olivier Bodenreimer
