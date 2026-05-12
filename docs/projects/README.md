@@ -91,6 +91,38 @@ Cada documento contiene el contexto completo, decisiones técnicas, números rea
 
 **Resumen:** Transformación de codebase "fallido" en production-grade usando framework de scoring personalizado. Aumento de 41/100 a 78/100 (+90%) en 6 meses.
 
+---
+
+### 5. **MediRec: NLM Migration - $20K/Año en Eliminación de Licencias**
+**Archivo:** [`05-medirec-nlm-migration-20k-savings.md`](05-medirec-nlm-migration-20k-savings.md)
+
+**Resumen:** Migración de LexiComp a NLM RxNorm, eliminando $20K/año en licencias farmacéuticas. Comparación detallada de pros/cons, análisis técnico, e identificación de gaps documentales.
+
+**Métricas:**
+- Ahorro: $20K/año (5 años = $100K, 10 años = $200K)
+- Vendor lock-in eliminado
+- Estándar federal (NIH)
+- Escalabilidad ilimitada
+
+---
+
+### 6. **NLM RxClass: Capacidades Clínicas Detalladas (Guía Técnica)**
+**Archivo:** [`06-nlm-rxclass-clinical-capabilities.md`](06-nlm-rxclass-clinical-capabilities.md)
+
+**Resumen:** Documentación técnica de respuesta oficial de NLM sobre RxClass, SNOMED CT y MED-RT. Desglose completo de funcionalidades clínicas: alergias a medicamentos, contraindicaciones en embarazo, integración con MediRec.
+
+**Qué incluye:**
+- Email original de NLM RxNav Support
+- Diferencia entre RxNorm (identificación) y RxClass (clínica)
+- Fuentes de datos: SNOMED CT, MED-RT
+- Queries REST para implementación
+- Plan de 4 fases para MediRec
+- Ejemplo real: Sulfa drug allergy workflow
+- Estándares USCDI y FDA
+- Validación de que NLM SÍ tiene capacidades clínicas equivalentes a LexiComp
+
+**Contexto:** Base técnica para implementación real en MediRec eRx (sucesor de NLM migration)
+
 **Qué aprenderás:**
 - Framework de 10 dimensiones ponderadas (reproducible, auditado)
 - Cómo refactorizar controllers de 3,000 LOC → 22 LOC
@@ -142,8 +174,14 @@ Cada documento contiene el contexto completo, decisiones técnicas, números rea
 ### Para Mejorar la Calidad de tu Codebase
 → Lee **[04-tcuida-audit-remediation-41-to-78.md](04-tcuida-audit-remediation-41-to-78.md)**
 
+### Para Eliminar Costos de Licencias Farmacéuticas
+→ Lee **[05-medirec-nlm-migration-20k-savings.md](05-medirec-nlm-migration-20k-savings.md)**
+
+### Para Implementar NLM RxClass en MediRec (Guía Técnica)
+→ Lee **[06-nlm-rxclass-clinical-capabilities.md](06-nlm-rxclass-clinical-capabilities.md)**
+
 ### Para Entender Todo Junto
-Lee en orden: 01 → 02 → 03 → 04 (historia progresiva de cómo crece una empresa tech)
+Lee en orden: 01 → 02 → 03 → 04 → 05 → 06 (historia progresiva de cómo crece una empresa tech + optimización de costos + integración clínica)
 
 ---
 
@@ -151,14 +189,14 @@ Lee en orden: 01 → 02 → 03 → 04 (historia progresiva de cómo crece una em
 
 | Métrica | Valor |
 |---------|-------|
-| Documentación total | ~27,000 palabras |
-| Archivos | 4 casos de éxito |
-| Ejemplos de código | 40+ |
-| Métricas reales incluidas | 100+ |
-| Procesos documentados | 20+ |
+| Documentación total | ~33,000 palabras |
+| Archivos | 5 casos de éxito + 1 guía técnica |
+| Ejemplos de código | 50+ |
+| Métricas reales incluidas | 120+ |
+| Procesos documentados | 25+ |
 | Tickets ejecutados | 150+ |
 | Tests creados | 500+ |
-| Costo total impactado | $7.1K/año ahorrados + 20K users validated + Series A |
+| Costo total impactado | $7.1K/año ahorrados + $20K/año (NLM) + 20K users validated + Series A |
 
 ---
 
