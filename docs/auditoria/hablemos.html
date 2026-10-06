@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Hablemos — modavidc · Solutions Architect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0b0c0e; --bg-2:#111316; --bg-3:#181a1d;
+  --border:#202227; --border-2:#2a2d33;
+  --text:#eaedf2; --text-2:#9aa0ae; --text-3:#555c6a;
+  --green:oklch(67% 0.17 148); --green-dim:oklch(35% 0.10 148); --green-bg:oklch(16% 0.06 148);
+  --ff-display:'Space Grotesk',sans-serif; --ff-body:'DM Sans',sans-serif; --ff-mono:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);color:var(--text);font-family:var(--ff-body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+.nav{position:sticky;top:0;z-index:100;background:rgba(11,12,14,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-brand{display:flex;align-items:baseline;gap:12px;text-decoration:none}
+.nav-wm{font-family:var(--ff-display);font-size:20px;font-weight:400;letter-spacing:-.025em;color:var(--text)}
+.nav-wm .mo{color:var(--green)}
+.nav-tagline{font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-size:13px;color:var(--text-2);text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:var(--text)}
+.nav-links a.active{color:var(--green)}
+.nav-cta{background:var(--green);color:#0b0c0e;font-size:13px;font-weight:500;padding:8px 18px;border-radius:3px;font-family:var(--ff-body);text-decoration:none;transition:opacity .15s}
+.nav-cta:hover{opacity:.85}
+
+/* MAIN LAYOUT */
+.contact-layout{max-width:1200px;margin:0 auto;padding:72px 48px 96px;display:grid;grid-template-columns:1fr 360px;gap:80px;align-items:start}
+
+/* LEFT — FORM */
+.section-kicker{font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.16em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.section-kicker::before{content:'';display:block;width:24px;height:1px;background:var(--border-2)}
+.contact-h1{font-family:var(--ff-display);font-size:clamp(40px,5vw,64px);font-weight:300;letter-spacing:-.04em;line-height:1.05;margin-bottom:16px}
+.contact-h1 em{color:var(--green);font-style:normal}
+.contact-sub{font-size:16px;color:var(--text-2);line-height:1.65;font-weight:300;margin-bottom:48px;max-width:480px}
+
+/* FORM */
+.form-block{background:var(--bg-2);border:1px solid var(--border);padding:36px}
+.form-group{margin-bottom:20px}
+.form-label{display:block;font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
+.form-input,.form-textarea{width:100%;background:var(--bg-3);border:1px solid var(--border-2);color:var(--text);font-family:var(--ff-body);font-size:14px;padding:12px 14px;border-radius:3px;outline:none;transition:border-color .15s;-webkit-appearance:none;resize:none}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--text-3)}
+.form-input:focus,.form-textarea:focus{border-color:var(--green-dim)}
+.form-textarea{height:140px;line-height:1.6}
+.form-submit{width:100%;background:var(--green);color:#0b0c0e;font-family:var(--ff-body);font-size:15px;font-weight:500;padding:14px 24px;border:none;border-radius:3px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:-.01em;transition:opacity .15s;margin-top:8px}
+.form-submit:hover{opacity:.85}
+.form-submit svg{width:16px;height:16px;fill:currentColor}
+
+/* SUCCESS STATE */
+.form-success{display:none;background:var(--green-bg);border:1px solid var(--green-dim);padding:24px;border-radius:3px;text-align:center;margin-top:16px}
+.form-success p{font-size:14px;color:var(--text-2);line-height:1.65}
+.form-success strong{color:var(--green)}
+
+/* RIGHT — INFO */
+.contact-aside{display:flex;flex-direction:column;gap:1px;position:sticky;top:80px}
+.aside-card{background:var(--bg-2);border:1px solid var(--border);padding:24px}
+.aside-title{font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px}
+.contact-item{display:flex;flex-direction:column;gap:2px;padding:10px 0;border-bottom:1px solid var(--border)}
+.contact-item:last-child{border-bottom:none;padding-bottom:0}
+.contact-item-label{font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase}
+.contact-item-val{font-size:13px;color:var(--text-2)}
+.contact-item-val a{color:var(--green);text-decoration:none;transition:opacity .15s}
+.contact-item-val a:hover{opacity:.7}
+
+/* DISPONIBILIDAD */
+.avail-item{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}
+.avail-item:last-child{border-bottom:none}
+.avail-label{font-size:13px;color:var(--text-2)}
+.avail-val{font-family:var(--ff-mono);font-size:11px;letter-spacing:.06em;padding:3px 8px;border-radius:100px}
+.avail-open{background:var(--green-bg);color:var(--green);border:1px solid var(--green-dim)}
+.avail-neutral{background:var(--bg-3);color:var(--text-3);border:1px solid var(--border-2)}
+
+/* QUOTE */
+.aside-quote{background:var(--bg-3);border:1px solid var(--border);border-left:2px solid var(--green-dim);padding:20px 20px 20px 20px;font-family:var(--ff-display);font-size:14px;font-weight:300;line-height:1.6;color:var(--text-2);font-style:italic}
+
+footer{border-top:1px solid var(--border);padding:28px 48px;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-brand{font-family:var(--ff-display);font-size:15px;font-weight:400;letter-spacing:-.02em}
+.footer-brand .mo{color:var(--green)}
+.footer-copy{font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.06em}
+.footer-links{display:flex;gap:24px;font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.06em}
+.footer-links a{color:var(--text-3);text-decoration:none;transition:color .15s}
+.footer-links a:hover{color:var(--green)}
+
+@media(max-width:900px){
+  .nav-inner,.contact-layout,footer{padding-left:20px;padding-right:20px}
+  .nav-tagline{display:none}
+  .nav-links{gap:16px}
+  .contact-layout{grid-template-columns:1fr;gap:48px;padding-top:48px}
+  .contact-aside{position:static}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="home.html">
+      <div class="nav-wm"><span class="mo">mo</span>davidc</div>
+      <div class="nav-tagline">Honest work. Efficient architectures.</div>
+    </a>
+    <div class="nav-links">
+      <a href="experiencia.html">Experiencia</a>
+      <a href="casos-de-exito.html">Casos de Éxito</a>
+      <a href="metodologia.html">Metodología</a>
+      <a href="testimonios.html">Testimonios</a>
+      <a class="nav-cta active" href="#">Hablemos</a>
+    </div>
+  </div>
+</nav>
+
+<div class="contact-layout">
+
+  <!-- FORM SIDE -->
+  <div>
+    <div class="section-kicker">Contacto</div>
+    <h1 class="contact-h1">Hablemos.</h1>
+    <p class="contact-sub">Cuéntame tu proyecto — si se parece a alguno de los casos de éxito, ya sé cómo ayudarte. Si es nuevo, mejor.</p>
+
+    <div class="form-block">
+      <form id="contactForm" onsubmit="handleSubmit(event)">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div class="form-group">
+            <label class="form-label" for="nombre">Nombre</label>
+            <input class="form-input" type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-input" type="email" id="email" name="email" placeholder="tu@email.com" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="mensaje">Cuéntame tu proyecto</label>
+          <textarea class="form-textarea" id="mensaje" name="mensaje" placeholder="Ej: Necesito un Tech Lead para escalar nuestra plataforma SaaS. Equipo de 5 devs, stack Node + AWS. El mayor problema es que cada vez que alguien se va, perdemos semanas..." required></textarea>
+        </div>
+        <button type="submit" class="form-submit">
+          <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+          Enviar mensaje
+        </button>
+      </form>
+      <div class="form-success" id="formSuccess">
+        <p><strong>Mensaje recibido.</strong><br>Te respondo en menos de 24 horas en <a href="/cdn-cgi/l/email-protection#3f5750535e7f52505b5e49565b5c115c5052" style="color:var(--green)"><span class="__cf_email__" data-cfemail="553d3a393415383a3134233c31367b363a38">[email&#160;protected]</span></a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFO SIDE -->
+  <div class="contact-aside">
+
+    <div class="aside-card">
+      <div class="aside-title">Información de contacto</div>
+      <div class="contact-item">
+        <span class="contact-item-label">Email</span>
+        <span class="contact-item-val"><a href="/cdn-cgi/l/email-protection#eb8384878aab86848f8a9d828f88c5888486"><span class="__cf_email__" data-cfemail="c6aea9aaa786aba9a2a7b0afa2a5e8a5a9ab">[email&#160;protected]</span></a></span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-item-label">Ubicación</span>
+        <span class="contact-item-val">Lima, Perú · remoto global</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-item-label">LinkedIn</span>
+        <span class="contact-item-val"><a href="https://linkedin.com/in/modavidc" target="_blank" rel="noopener">linkedin.com/in/modavidc</a></span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-item-label">GitHub</span>
+        <span class="contact-item-val"><a href="https://github.com/modavidc" target="_blank" rel="noopener">github.com/modavidc</a></span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-item-label">Respuesta</span>
+        <span class="contact-item-val">Menos de 24 horas</span>
+      </div>
+    </div>
+
+    <div class="aside-card">
+      <div class="aside-title">Disponibilidad</div>
+      <div class="avail-item">
+        <span class="avail-label">Proyectos nuevos</span>
+        <span class="avail-val avail-open">Abierto</span>
+      </div>
+      <div class="avail-item">
+        <span class="avail-label">Consultoría técnica</span>
+        <span class="avail-val avail-open">Disponible</span>
+      </div>
+      <div class="avail-item">
+        <span class="avail-label">Freelance</span>
+        <span class="avail-val avail-neutral">Proyectos seleccionados</span>
+      </div>
+    </div>
+
+    <div class="aside-quote">
+      "Si tu problema se parece a uno de los casos de éxito, ya sé cómo ayudarte. Cuéntame el contexto."
+    </div>
+
+    <div style="background:var(--bg-2);border:1px solid var(--border);padding:20px">
+      <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px">Descargar CV</div>
+      <a href="/assets/cv/cv.pdf" download style="display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text-2);font-size:13px;transition:color .15s" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-2)'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Curriculum Vitae · PDF
+        <span style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);margin-left:auto">↓</span>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<div style="border-top:1px solid var(--border)">
+  <footer>
+    <div class="footer-brand"><span class="mo">mo</span>davidc</div>
+    <div class="footer-copy">© 2026 Moisés Cedeño · Todos los derechos reservados.</div>
+    <div class="footer-links">
+      <a href="home.html">Inicio</a>
+      <a href="casos-de-exito.html">Casos de Éxito</a>
+      <a href="metodologia.html">Metodología</a>
+      <a href="testimonios.html">Testimonios</a>
+    </div>
+  </footer>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function handleSubmit(e) {
+  e.preventDefault();
+  const form = document.getElementById('contactForm');
+  const success = document.getElementById('formSuccess');
+  form.style.display = 'none';
+  success.style.display = 'block';
+}
+</script>
+</body>
+</html>

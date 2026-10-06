@@ -41,12 +41,13 @@ export function Navbar() {
           transition: color .15s; letter-spacing: -.005em;
         }
         .nav-links a:hover, .nav-links a.active { color: var(--text); }
-        .nav-cta {
+        .nav-links a.nav-cta, .nav-mobile a.nav-cta {
           background: var(--green); color: #0b0c0e; font-size: 13px; font-weight: 500;
           padding: 8px 18px; border-radius: 3px; font-family: var(--ff-body);
           text-decoration: none; transition: opacity .15s;
+          letter-spacing: -.005em;
         }
-        .nav-cta:hover { opacity: .85; }
+        .nav-links a.nav-cta:hover, .nav-mobile a.nav-cta:hover { opacity: .85; color: #0b0c0e; }
         .nav-hamburger {
           display: none; background: none; border: none; cursor: pointer;
           color: var(--text-2); padding: 4px;

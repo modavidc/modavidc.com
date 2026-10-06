@@ -1,0 +1,714 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Auditoría UX/UI — Grupero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f4ef;
+    --paper:#fbfaf6;
+    --ink:#1a1a1a;
+    --ink-2:#4a4a4a;
+    --muted:#8a8a85;
+    --line:#e3dfd4;
+    --line-2:#d4cfc1;
+    --accent:#1f4d3a;     /* deep green — auditor tone, not the product green */
+    --accent-soft:#e7ede8;
+    --sev-hi:#b23b2a;
+    --sev-hi-bg:#fbece8;
+    --sev-md:#b8832b;
+    --sev-md-bg:#faf1dc;
+    --sev-lo:#3b6b48;
+    --sev-lo-bg:#e7efe8;
+    --sev-nit:#5c5c5c;
+    --sev-nit-bg:#ececea;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  a{color:inherit}
+  .wrap{max-width:1180px;margin:0 auto;padding:56px 48px 120px}
+  /* Header */
+  .masthead{border-bottom:1px solid var(--line);padding-bottom:36px;margin-bottom:48px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end}
+  .kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+  h1.title{font-family:'Fraunces',serif;font-weight:400;font-size:68px;line-height:1.02;letter-spacing:-.02em;margin:0 0 18px;color:var(--ink)}
+  h1.title em{font-style:italic;color:var(--accent)}
+  .dek{font-size:17px;color:var(--ink-2);max-width:640px;margin:0}
+  .meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-align:right;line-height:1.7}
+  .meta b{color:var(--ink);font-weight:500}
+
+  /* Score panel */
+  .scorecard{display:grid;grid-template-columns:260px 1fr;gap:48px;background:var(--paper);border:1px solid var(--line);padding:36px 40px;margin-bottom:64px}
+  .score-big{font-family:'Fraunces',serif;font-size:112px;line-height:.9;letter-spacing:-.04em;color:var(--accent);font-weight:400}
+  .score-big sup{font-size:28px;color:var(--muted);vertical-align:top;margin-left:4px;font-family:'JetBrains Mono',monospace}
+  .score-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:10px}
+  .pillars{display:grid;grid-template-columns:repeat(2,1fr);gap:2px 40px;align-content:center}
+  .pillar{display:grid;grid-template-columns:1fr 40px;align-items:center;padding:10px 0;border-bottom:1px dashed var(--line)}
+  .pillar:last-child,.pillar:nth-last-child(2){border-bottom:none}
+  .pillar-name{font-size:14px;color:var(--ink-2)}
+  .pillar-bar{height:4px;background:var(--line);position:relative;margin-right:10px}
+  .pillar-bar span{position:absolute;inset:0 auto 0 0;background:var(--accent)}
+  .pillar-num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink);text-align:right}
+  .pillar-row{display:grid;grid-template-columns:1fr 80px 40px;align-items:center;padding:10px 0;border-bottom:1px dashed var(--line);gap:12px}
+  .pillar-row:last-child{border-bottom:none}
+
+  /* Section */
+  section{margin-bottom:80px}
+  .sec-head{display:grid;grid-template-columns:110px 1fr;gap:32px;padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:28px}
+  .sec-num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:.1em;padding-top:12px}
+  .sec-title{font-family:'Fraunces',serif;font-weight:400;font-size:34px;letter-spacing:-.015em;margin:0;line-height:1.15}
+  .sec-sub{font-size:15px;color:var(--ink-2);margin:6px 0 0;max-width:760px}
+
+  /* Findings */
+  .findings{display:grid;gap:14px}
+  .finding{display:grid;grid-template-columns:110px 1fr auto;gap:28px;background:var(--paper);border:1px solid var(--line);padding:22px 26px;align-items:start}
+  .finding:hover{border-color:var(--line-2)}
+  .sev{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:5px 9px;border-radius:2px;white-space:nowrap}
+  .sev::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+  .sev.hi{color:var(--sev-hi);background:var(--sev-hi-bg)}
+  .sev.md{color:var(--sev-md);background:var(--sev-md-bg)}
+  .sev.lo{color:var(--sev-lo);background:var(--sev-lo-bg)}
+  .sev.nit{color:var(--sev-nit);background:var(--sev-nit-bg)}
+  .f-body h4{margin:0 0 6px;font-size:17px;font-weight:600;letter-spacing:-.005em}
+  .f-body p{margin:0 0 10px;font-size:14.5px;color:var(--ink-2);line-height:1.55}
+  .f-body .fix{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);display:grid;grid-template-columns:72px 1fr;gap:12px;align-items:baseline}
+  .fix-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+  .fix-text{font-size:14px;color:var(--ink);line-height:1.55}
+  .tag{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;padding-top:2px}
+
+  /* Visual callouts */
+  .mock{background:var(--paper);border:1px solid var(--line);padding:24px;margin:28px 0;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .mock-col{display:flex;flex-direction:column;gap:10px}
+  .mock-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .mock-label.bad{color:var(--sev-hi)}
+  .mock-label.good{color:var(--sev-lo)}
+  .mock-box{border:1px solid var(--line);background:#fff;height:160px;position:relative;overflow:hidden}
+  .placeholder-stripes{background:repeating-linear-gradient(45deg,#f3f0e7,#f3f0e7 6px,#ebe7db 6px,#ebe7db 12px)}
+  .mock-note{font-size:13px;color:var(--ink-2);font-style:italic}
+
+  /* Quick wins */
+  .quick{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:12px}
+  .quick .q{background:var(--paper);border:1px solid var(--line);padding:20px}
+  .quick h5{margin:0 0 10px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .quick ul{margin:0;padding-left:18px;font-size:13.5px;color:var(--ink-2);line-height:1.6}
+  .quick li{margin-bottom:4px}
+
+  /* Priority matrix */
+  .matrix{background:var(--paper);border:1px solid var(--line);padding:36px;margin-top:12px;position:relative}
+  .matrix-grid{position:relative;height:420px;border-left:1px solid var(--line-2);border-bottom:1px solid var(--line-2);margin:0 20px 40px 80px}
+  .axis-y,.axis-x{position:absolute;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .axis-y{left:-64px;top:50%;transform:rotate(-90deg) translateX(50%);transform-origin:center}
+  .axis-y.top{top:0;transform:none;left:-70px}
+  .axis-y.bot{top:auto;bottom:-6px;transform:none;left:-70px}
+  .axis-x.left{bottom:-24px;left:0}
+  .axis-x.right{bottom:-24px;right:0}
+  .axis-x.mid{bottom:-24px;left:50%;transform:translateX(-50%)}
+  .quad{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+  .quad>div{border-right:1px dashed var(--line);border-bottom:1px dashed var(--line);padding:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+  .quad>div:nth-child(2n){border-right:none}
+  .quad>div:nth-child(n+3){border-bottom:none}
+  .dot{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--accent);transform:translate(-50%,-50%);cursor:default}
+  .dot.hi{background:var(--sev-hi)}
+  .dot.md{background:var(--sev-md)}
+  .dot.lo{background:var(--sev-lo)}
+  .dot-label{position:absolute;transform:translate(-50%,-150%);font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink);white-space:nowrap;background:var(--paper);padding:2px 6px;border:1px solid var(--line)}
+
+  /* Summary strip */
+  .counts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:32px 0 0}
+  .ct{padding:20px 24px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:4px}
+  .ct:last-child{border-right:none}
+  .ct-n{font-family:'Fraunces',serif;font-size:40px;line-height:1;letter-spacing:-.02em}
+  .ct-l{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .ct.hi .ct-n{color:var(--sev-hi)}
+  .ct.md .ct-n{color:var(--sev-md)}
+  .ct.lo .ct-n{color:var(--sev-lo)}
+  .ct.nit .ct-n{color:var(--sev-nit)}
+
+  /* Footer */
+  footer{margin-top:80px;padding-top:32px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:24px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.08em}
+
+  /* TOC */
+  .toc{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);margin-bottom:64px;background:var(--paper)}
+  .toc a{padding:18px 20px;border-right:1px solid var(--line);text-decoration:none;display:block;transition:background .15s}
+  .toc a:last-child{border-right:none}
+  .toc a:hover{background:var(--accent-soft)}
+  .toc .n{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--muted);margin-bottom:6px;display:block}
+  .toc .t{font-size:14px;color:var(--ink);font-weight:500}
+
+  /* Inline callout */
+  .pull{border-left:2px solid var(--accent);padding:6px 0 6px 20px;margin:24px 0;font-family:'Fraunces',serif;font-size:20px;line-height:1.4;color:var(--ink);font-style:italic;max-width:720px}
+
+  /* Section intro blurb */
+  .intro{background:var(--paper);border:1px solid var(--line);padding:24px 28px;margin-bottom:20px;font-size:14.5px;color:var(--ink-2);line-height:1.6}
+  .intro strong{color:var(--ink)}
+
+  @media (max-width:900px){
+    .wrap{padding:32px 20px 80px}
+    h1.title{font-size:44px}
+    .masthead,.scorecard{grid-template-columns:1fr}
+    .sec-head{grid-template-columns:1fr}
+    .finding{grid-template-columns:1fr}
+    .quick{grid-template-columns:1fr}
+    .toc{grid-template-columns:1fr 1fr}
+    .counts{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="kicker">Auditoría UX/UI · Landing</div>
+      <h1 class="title">Grupero <em>bajo la lupa</em></h1>
+      <p class="dek">Revisión completa de <b>grupero.modavidc.com</b> — jerarquía, propuesta de valor, conversión, contenido y detalles de implementación. 24 hallazgos accionables, priorizados por impacto.</p>
+    </div>
+    <div class="meta">
+      <div><b>Sitio</b> grupero.modavidc.com</div>
+      <div><b>Tipo</b> Landing de app móvil</div>
+      <div><b>Mercado</b> LATAM · ES</div>
+      <div><b>Fecha</b> 17 Abr 2026</div>
+      <div><b>Dispositivo</b> Desktop + mobile</div>
+    </div>
+  </header>
+
+  <!-- Scorecard -->
+  <div class="scorecard">
+    <div>
+      <div class="score-big">6.8<sup>/10</sup></div>
+      <div class="score-label">Puntuación global</div>
+    </div>
+    <div class="pillars">
+      <div class="pillar-row"><span class="pillar-name">Claridad de propuesta</span><div class="pillar-bar"><span style="width:55%"></span></div><span class="pillar-num">5.5</span></div>
+      <div class="pillar-row"><span class="pillar-name">Jerarquía visual</span><div class="pillar-bar"><span style="width:70%"></span></div><span class="pillar-num">7.0</span></div>
+      <div class="pillar-row"><span class="pillar-name">Prueba social / confianza</span><div class="pillar-bar"><span style="width:30%"></span></div><span class="pillar-num">3.0</span></div>
+      <div class="pillar-row"><span class="pillar-name">Conversión / CTA</span><div class="pillar-bar"><span style="width:60%"></span></div><span class="pillar-num">6.0</span></div>
+      <div class="pillar-row"><span class="pillar-name">Contenido / copy</span><div class="pillar-bar"><span style="width:78%"></span></div><span class="pillar-num">7.8</span></div>
+      <div class="pillar-row"><span class="pillar-name">Estructura de precios</span><div class="pillar-bar"><span style="width:75%"></span></div><span class="pillar-num">7.5</span></div>
+      <div class="pillar-row"><span class="pillar-name">Accesibilidad</span><div class="pillar-bar"><span style="width:65%"></span></div><span class="pillar-num">6.5</span></div>
+      <div class="pillar-row"><span class="pillar-name">Detalles de acabado</span><div class="pillar-bar"><span style="width:72%"></span></div><span class="pillar-num">7.2</span></div>
+    </div>
+  </div>
+
+  <div class="counts">
+    <div class="ct hi"><span class="ct-n">6</span><span class="ct-l">Críticos</span></div>
+    <div class="ct md"><span class="ct-n">9</span><span class="ct-l">Importantes</span></div>
+    <div class="ct lo"><span class="ct-n">6</span><span class="ct-l">Mejoras</span></div>
+    <div class="ct nit"><span class="ct-n">3</span><span class="ct-l">Detalles</span></div>
+  </div>
+
+  <!-- TOC -->
+  <nav class="toc" style="margin-top:48px">
+    <a href="#hero"><span class="n">01</span><span class="t">Hero &amp; propuesta</span></a>
+    <a href="#trust"><span class="n">02</span><span class="t">Confianza &amp; social</span></a>
+    <a href="#features"><span class="n">03</span><span class="t">Funcionalidades</span></a>
+    <a href="#personas"><span class="n">04</span><span class="t">Segmentación</span></a>
+    <a href="#pricing"><span class="n">05</span><span class="t">Precios</span></a>
+    <a href="#mobile"><span class="n">06</span><span class="t">Mobile &amp; acabado</span></a>
+    <a href="#copy"><span class="n">07</span><span class="t">Contenido &amp; tono</span></a>
+    <a href="#priority"><span class="n">08</span><span class="t">Roadmap</span></a>
+  </nav>
+
+  <!-- TL;DR -->
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">TL;DR</div>
+      <div>
+        <h2 class="sec-title">Un producto fuerte detrás de una landing que no termina de convencer</h2>
+        <p class="sec-sub">La ejecución técnica es sólida, el copy tiene personalidad y los screenshots están bien hechos. Los mayores boquetes están en <b>prueba social</b> (hay stats a <code>0</code>), <b>claridad del hero</b> (tarda en explicar el "qué es") y <b>señales de confianza</b> para una app que pide subir un .zip de tu WhatsApp.</p>
+      </div>
+    </div>
+
+    <div class="pull">"La radiografía de tus grupos de WhatsApp" es poética, pero no le dice al visitante qué hace la app en los primeros 3 segundos. La subcopia tiene que hacer más trabajo del que hace hoy.</div>
+
+    <div class="quick">
+      <div class="q">
+        <h5>✓ Qué funciona</h5>
+        <ul>
+          <li>Copy con voz propia (no genérico)</li>
+          <li>Screenshots reales y explicativos</li>
+          <li>Precios claros y justos</li>
+          <li>Segmentación por persona bien pensada</li>
+          <li>Detalle del easter egg "trabajo honesto"</li>
+        </ul>
+      </div>
+      <div class="q">
+        <h5>✗ Qué rompe</h5>
+        <ul>
+          <li>Stats de hero en <code>0</code> — pésima 1ª impresión</li>
+          <li>"100% local y privado" se pierde</li>
+          <li>CTA iOS va a ancla muerta</li>
+          <li>Sin testimonios ni reviews</li>
+          <li>Sin screenshot del flujo real de export</li>
+        </ul>
+      </div>
+      <div class="q">
+        <h5>⚡ Mayor palanca</h5>
+        <ul>
+          <li>Reemplazar stats falsas por señales reales (privacidad, tiempo de análisis, tipos de grupos soportados)</li>
+          <li>Mover "100% local" al hero</li>
+          <li>Añadir 3 testimonios de admins</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 HERO -->
+  <section id="hero">
+    <div class="sec-head">
+      <div class="sec-num">01 / HERO</div>
+      <div>
+        <h2 class="sec-title">El hero no hace el trabajo de un hero</h2>
+        <p class="sec-sub">Es el momento más caro de la página. Tienes 3 segundos para responder: <i>qué es, para quién, por qué me importa, qué hago ahora</i>. Aquí responde el primero a medias.</p>
+      </div>
+    </div>
+
+    <div class="intro">
+      <strong>Diagnóstico:</strong> El titular es evocador pero opaco. "Radiografía" es metáfora, no producto. La subcopia lista síntomas ("quién escribe, quién va...") sin nombrar la solución ("una app que analiza tu export de WhatsApp con IA, 100% local"). El visitante tiene que leer toda la página para entender qué descarga.
+    </div>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="sev hi">Crítico</span>
+        <div class="f-body">
+          <h4>Los stats de hero muestran <code>0</code> — mata credibilidad</h4>
+          <p>"0 Grupos analizados · 0K Mensajes procesados · 0★ Rating en Play Store". Esto es lo peor que puede pasar en la parte más visible del sitio: el visitante concluye "nadie lo usa" en 2 segundos. Si no hay tracción todavía, <b>no muestres métricas de tracción</b>.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Sustituir por <b>señales de producto</b>: "🔒 100% local · 📱 Android disponible · ⚡ Análisis en &lt;30s · 🤖 IA on-device". O quitar la sección entera hasta tener números reales &gt;100.</span></div>
+        </div>
+        <span class="tag">Hero §1</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev hi">Crítico</span>
+        <div class="f-body">
+          <h4>"100% local y privado" debe estar en el hero, no en el screenshot</h4>
+          <p>Estás pidiéndole al usuario que suba un <code>.zip</code> con <b>todos los mensajes de un grupo de WhatsApp</b> — el activo más sensible que tiene. El argumento de privacidad aparece solo como un micro-badge dentro del mockup del teléfono. Debe ser un pilar del hero.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Añadir una fila de 3 chips bajo la subcopia: <code>🔒 100% local</code> <code>🚫 Sin registro</code> <code>📂 Tus datos nunca salen de tu teléfono</code>. Es tu mayor diferenciador vs. competencia cloud.</span></div>
+        </div>
+        <span class="tag">Hero §2</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev md">Importante</span>
+        <div class="f-body">
+          <h4>El titular es poesía, la subcopia es síntomas — falta el producto</h4>
+          <p>Ni el H1 ni el H2 contienen las palabras "app", "IA", "análisis" ni "WhatsApp export". Un visitante escaneando no sabe qué descarga. La metáfora "radiografía" es buena, pero debe acompañarse de la descripción funcional <i>en la misma vista</i>.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Añadir línea de producto explícita sobre o bajo el H1: <i>"App Android que analiza tus chats exportados de WhatsApp con IA, directamente en tu teléfono."</i> — 15 palabras, cero ambigüedad.</span></div>
+        </div>
+        <span class="tag">Hero §3</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev md">Importante</span>
+        <div class="f-body">
+          <h4>CTA de App Store lleva a ancla vacía (<code>#</code>)</h4>
+          <p>El botón "Próximamente en App Store" apunta a <code>href="#"</code>. Hace scroll al top y confunde. Usuarios de iPhone llegan, tocan y no pasa nada.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">O bien (a) deshabilitar el botón visualmente con etiqueta "Próximamente" y <code>pointer-events:none</code>, o (b) abrir un modal de email waitlist para iOS. La segunda captura intención valiosa.</span></div>
+        </div>
+        <span class="tag">Hero CTA</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev lo">Mejora</span>
+        <div class="f-body">
+          <h4>El mockup del teléfono compite con el mensaje</h4>
+          <p>El screenshot del teléfono muestra la pantalla de chat con la IA — pero esa es una feature Pro. Para un usuario en frío, sería más persuasivo ver el resultado <b>principal</b>: el semáforo verde/amarillo/rojo del grupo, que es el valor-ancla que justifica la descarga.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Rotar el hero entre 2 mockups: (1) Semáforo del grupo con score 87, (2) Ranking de participación. La pantalla de IA va más abajo, junto a "Pro".</span></div>
+        </div>
+        <span class="tag">Hero mockup</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 TRUST -->
+  <section id="trust">
+    <div class="sec-head">
+      <div class="sec-num">02 / CONFIANZA</div>
+      <div>
+        <h2 class="sec-title">La página no tiene prueba social — y la necesita urgentemente</h2>
+        <p class="sec-sub">Para una app que pide acceso a conversaciones privadas, la confianza no es opcional. Hoy la página dice "confía en mí" sin dar motivos.</p>
+      </div>
+    </div>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="sev hi">Crítico</span>
+        <div class="f-body">
+          <h4>Cero testimonios, cero reviews, cero logos</h4>
+          <p>No hay un solo testimonial, ningún quote, ninguna captura de review de Play Store, ningún logo de grupo/comunidad que use la app. En una categoría saturada de "herramientas de WhatsApp" dudosas, esto te deja indefenso frente al sesgo de sospecha del visitante.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Crear sección "Qué dicen los admins" con 3–6 quotes cortos (admin de grupo + foto + contexto: "admin de liga de fútbol amateur, 180 miembros"). Si no tienes testimonios aún, publica 3 entrevistas tipo case-study con usuarios reales.</span></div>
+        </div>
+        <span class="tag">Falta global</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev hi">Crítico</span>
+        <div class="f-body">
+          <h4>No hay explicación técnica de la privacidad</h4>
+          <p>Dices "100% local y privado" pero no explicas <i>cómo</i>. ¿El modelo de IA corre on-device? ¿Qué modelo? ¿Con qué framework (MLKit, Gemini Nano, LLM local)? ¿Se borra el <code>.zip</code> después del análisis? Un usuario técnicamente consciente se irá sin esta info.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Sección "Cómo protegemos tus datos" con 4 puntos: (1) El .zip nunca sale de tu teléfono, (2) IA on-device con [modelo], (3) Sin servidores, sin cuentas, (4) Código auditable / política de privacidad enlazada.</span></div>
+        </div>
+        <span class="tag">Falta global</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev md">Importante</span>
+        <div class="f-body">
+          <h4>No hay FAQ visible — y la categoría lo pide a gritos</h4>
+          <p>El footer enlaza a <code>/faq</code> pero no hay FAQ en la landing. Preguntas obvias de tu target: "¿Funciona con chats de 1024 miembros?", "¿Necesito que el chat esté activo?", "¿Me banea WhatsApp por usarlo?", "¿Funciona sin conexión?", "¿Puedo exportar los resultados?". Responderlas en la página quita fricción.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Bloque FAQ antes del footer con 6–8 preguntas tipo acordeón. Evita vaguedad — responde con números ("Sí, hasta 1024 miembros y hasta 3M mensajes").</span></div>
+        </div>
+        <span class="tag">Falta global</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev md">Importante</span>
+        <div class="f-body">
+          <h4>Footer menciona contacto/ayuda pero sin señal de actividad</h4>
+          <p>Enlaces a "Centro de ayuda", "Contacto", "FAQ" existen pero no sabemos si están vivos. Para una app de un solo desarrollador (bien hecha, por cierto), una señal humana — "soy Moisés, respondo en 24h" — genera más confianza que un link genérico.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Añadir foto + nombre + email directo en el footer. "Respondo personalmente en &lt;24h. moises@..." vale más que 3 páginas de soporte.</span></div>
+        </div>
+        <span class="tag">Footer</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 FEATURES -->
+  <section id="features">
+    <div class="sec-head">
+      <div class="sec-num">03 / FEATURES</div>
+      <div>
+        <h2 class="sec-title">La sección de funciones es la mejor parte — con fricciones</h2>
+        <p class="sec-sub">Buen trabajo emparejando screenshot + explicación. El problema es la densidad y el ritmo: 6 features en columna única cansan antes de llegar al precio.</p>
+      </div>
+    </div>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="sev md">Importante</span>
+        <div class="f-body">
+          <h4>6 features en zigzag vertical = scroll fatigue</h4>
+          <p>Panel de salud · Ranking · Alertas · Heatmap · Eventos — cada uno con su mockup de teléfono. En mobile funciona; en desktop desperdicia el viewport horizontal. Cada feature ocupa ~500px de alto.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Desktop: agrupar en grid 2×3 con mockups más pequeños, o en un <b>feature tour interactivo</b> con pestañas (el mockup es uno solo y cambia al hacer click en la feature). Reduce scroll de 3000px a ~1000px.</span></div>
+        </div>
+        <span class="tag">Features §3</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev md">Importante</span>
+        <div class="f-body">
+          <h4>Los mockups no muestran datos realistas</h4>
+          <p>"Fútbol Domingos" con 45 activos, María García, Carlos López... todos los mockups usan los mismos 3–4 nombres. Bien para screenshot unitario, pero en conjunto se siente que es siempre el mismo grupo ficticio.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Variar los contextos: "Papás Colegio Montessori" (educación), "Cena Mensual Amigos" (social), "Running Club CDMX" (deporte), "Equipo Producto Acme" (trabajo). Muestra que la app sirve en múltiples contextos.</span></div>
+        </div>
+        <span class="tag">Features mockups</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev lo">Mejora</span>
+        <div class="f-body">
+          <h4>"Domingos a las 6pm = fuego" es una joya — explótala</h4>
+          <p>Este copy en el heatmap es la voz de la marca. El resto de las descripciones son más secas ("Simple y claro", "El verdadero top del grupo"). Hay una voz aquí que está subexplotada.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Re-escribir las 6 descripciones con la misma energía. Ejemplo para "Ranking": <i>"Quien escribe 500 'jaja' no es el más activo. Quien sí va al asado, sí lo es."</i></span></div>
+        </div>
+        <span class="tag">Features copy</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev lo">Mejora</span>
+        <div class="f-body">
+          <h4>No se ve el "antes" — el problema</h4>
+          <p>Saltas directo a "mira qué bonito es el resultado". Falta mostrar el <b>caos del que vienes</b>: un grupo de WhatsApp con 847 mensajes sin leer, eventos perdidos, no sabes quién participa.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Añadir un split-screen "Sin Grupero vs. Con Grupero" antes de las features. A la izquierda un chat caótico, a la derecha el dashboard limpio. Un solo frame que vende todo.</span></div>
+        </div>
+        <span class="tag">Features intro</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 PERSONAS -->
+  <section id="personas">
+    <div class="sec-head">
+      <div class="sec-num">04 / SEGMENTACIÓN</div>
+      <div>
+        <h2 class="sec-title">"Para cada tipo de admin" — buena idea, ejecución mejorable</h2>
+        <p class="sec-sub">Tres personas (Curador, Participativo, Manager de masas) es un marco útil. Pero los rangos se solapan y el orden implícito de valor no queda claro.</p>
+      </div>
+    </div>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="sev md">Importante</span>
+        <div class="f-body">
+          <h4>Los rangos de tamaño se solapan y confunden</h4>
+          <p>Curador: 100–250. Participativo: 100–300. Mass: 500–1024. ¿Qué pasa si tengo un grupo de 120 que exige participación? ¿Soy Curador o Participativo? El solape resta claridad y pierde poder del marco.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Redefinir por <b>intención del admin</b>, no por tamaño: "Cultiva comunidad" (curador), "Exige resultados" (participativo), "Contiene el caos" (manager). El tamaño es secundario.</span></div>
+        </div>
+        <span class="tag">Personas §1</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev lo">Mejora</span>
+        <div class="f-body">
+          <h4>"Popular" está en la persona del medio — convención dice que sea el plan, no el perfil</h4>
+          <p>Colocar la etiqueta "Popular" sobre una persona es raro — no eres más o menos popular por ser de cierto tipo. La etiqueta pertenece al plan de precios (donde ya está, bien).</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Quitar "Popular" de la columna Participativo. Si quieres destacar una persona, usa "Más común" o simplemente elevar la tarjeta (+ sombra, + tamaño).</span></div>
+        </div>
+        <span class="tag">Personas §2</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev lo">Mejora</span>
+        <div class="f-body">
+          <h4>Falta conectar cada persona con su plan de precios</h4>
+          <p>Acabas de explicarle al usuario que es "El Participativo". Dos secciones después le das 3 planes de precios. Falta el puente: <i>"El Participativo normalmente empieza con Pro."</i></p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Añadir una línea al final de cada tarjeta de persona: "Recomendado: Plan Gratis/Pro/Teams →" con anchor al precio correspondiente.</span></div>
+        </div>
+        <span class="tag">Personas §3</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 PRICING -->
+  <section id="pricing">
+    <div class="sec-head">
+      <div class="sec-num">05 / PRECIOS</div>
+      <div>
+        <h2 class="sec-title">La sección más limpia de la página</h2>
+        <p class="sec-sub">Precios claros, features bien listadas, destacado razonable. Pocos problemas reales, más ajustes finos.</p>
+      </div>
+    </div>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="sev md">Importante</span>
+        <div class="f-body">
+          <h4>No hay toggle mensual/anual — y el anual es tu mejor oferta</h4>
+          <p>"$8/mes o $80/año (2 meses gratis)" está en texto plano. Un toggle mensual↔anual con ahorro visible empuja al plan anual, que es tu retención.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Toggle sobre los 3 planes. Anual por default con banner "Ahorra 17%". Precio grande cambia al alternar.</span></div>
+        </div>
+        <span class="tag">Precios §1</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev lo">Mejora</span>
+        <div class="f-body">
+          <h4>Lista de features larga y sin jerarquía</h4>
+          <p>Pro tiene 11 bullets, todos con el mismo peso visual. El usuario no sabe cuál es el feature <b>ancla</b> ("Resúmenes con IA"?) vs. extras. Listas planas funcionan peor que listas con 1–2 destacados.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Negrita o pill "⭐ destacado" en 1–2 features por plan. Ejemplos: "Resúmenes con IA" en Pro, "Análisis comparativo entre grupos" en Teams.</span></div>
+        </div>
+        <span class="tag">Precios §2</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev lo">Mejora</span>
+        <div class="f-body">
+          <h4>Gratis dice "Análisis ilimitados" — ¿literal? ¿Hay trampa?</h4>
+          <p>"Ilimitado" en el plan gratis genera sospecha automática en un usuario maduro ("¿cuál es el catch?"). Si es literal, genial, pero cuenta el por qué: "análisis ilimitados (se procesan on-device, así que el costo es tuyo, no mío)".</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Añadir una línea bajo Gratis: "No pagamos por servidores de IA — tu teléfono hace el trabajo. Por eso es gratis de verdad."</span></div>
+        </div>
+        <span class="tag">Precios §3</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev nit">Detalle</span>
+        <div class="f-body">
+          <h4>"$8/mes" sin contexto de moneda</h4>
+          <p>¿USD? ¿MXN? Para un mercado LATAM, la ambigüedad importa. $8 USD ≠ $8 MXN.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Prefijar con símbolo: "US$8/mes". Opcionalmente, detectar país y mostrar en moneda local.</span></div>
+        </div>
+        <span class="tag">Precios §4</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 MOBILE / POLISH -->
+  <section id="mobile">
+    <div class="sec-head">
+      <div class="sec-num">06 / MOBILE &amp; ACABADO</div>
+      <div>
+        <h2 class="sec-title">Responsive decente, detalles sueltos</h2>
+        <p class="sec-sub">Hallazgos de acabado técnico y visual en dispositivos reales.</p>
+      </div>
+    </div>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="sev md">Importante</span>
+        <div class="f-body">
+          <h4>El nav no es sticky — pierdes el CTA "Descargar" en el scroll</h4>
+          <p>Después del hero, el botón "Descargar" desaparece hasta llegar al footer. Para una página de 3000px de alto, esto significa que el 70% del tiempo el usuario no tiene cómo convertir sin hacer scroll-to-top.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Nav sticky con el botón "Descargar" visible. En mobile, CTA flotante bottom-right que aparezca después de 1 viewport de scroll.</span></div>
+        </div>
+        <span class="tag">Nav</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev lo">Mejora</span>
+        <div class="f-body">
+          <h4>Verde saturado en todos lados — falta descanso visual</h4>
+          <p>El verde de WhatsApp está en el hero, los badges, los CTAs, el footer grande, los mockups. Todo se siente como <i>un solo acento repetido</i>. Sin jerarquía cromática, todo grita lo mismo.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Reservar el verde saturado <b>solo para CTAs y estados activos</b>. Usar un verde oscuro/neutro (como el de este documento) para headers, y blancos con toque crema para secciones. El CTA resalta más por contraste.</span></div>
+        </div>
+        <span class="tag">Color system</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev lo">Mejora</span>
+        <div class="f-body">
+          <h4>Tipografía sin contraste entre display y body</h4>
+          <p>Todos los titulares y el cuerpo usan la misma familia sans. Un landing que habla de "radiografía" y tiene personalidad se beneficia de un H1 con carácter (una serif editorial, o un sans con mayor peso expresivo).</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Pair type: display en serif con italic (Fraunces, Söhne Display) o sans con variable weight expresiva (General Sans). Body en Inter/sans neutro. Más marca, más memorabilidad.</span></div>
+        </div>
+        <span class="tag">Tipografía</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev nit">Detalle</span>
+        <div class="f-body">
+          <h4>Botones de descarga son imágenes PNG — pierden nitidez en retina y no son accesibles</h4>
+          <p>"Disponible en Google Play" y "Próximamente en App Store" son imágenes. Sin alt accesible para lectores de pantalla en estado idle, y se ven borrosos en displays de alta densidad según qué resolución se sirva.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Usar los SVG oficiales de Google (disponibles en el brand kit de Play Store) y el badge oficial de App Store. Alt text explícito.</span></div>
+        </div>
+        <span class="tag">Assets</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev nit">Detalle</span>
+        <div class="f-body">
+          <h4>Easter egg "trabajo honesto" es encantador pero descontextualizado</h4>
+          <p>Pasar de "descarga la app" a la biografía de un granjero de Ohio (David Brandt, QEPD) es un tonal whiplash. Lo respeto muchísimo — es auténtico — pero un visitante nuevo se pierde.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Mantener el meme pero en hover/tooltip en lugar de modal. O una minipágina dedicada <code>/honest-work</code> enlazada discretamente. Respeta el tributo sin interrumpir la conversión.</span></div>
+        </div>
+        <span class="tag">Footer</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 COPY -->
+  <section id="copy">
+    <div class="sec-head">
+      <div class="sec-num">07 / CONTENIDO &amp; TONO</div>
+      <div>
+        <h2 class="sec-title">El copy es lo más fuerte — y donde más fácil se gana</h2>
+        <p class="sec-sub">"Quién solo está por estar", "Detecta patrones de abandono", "Domingos a 6pm = fuego" — hay alma. El trabajo es desplegar esa voz en todas partes, no solo en los golpes puntuales.</p>
+      </div>
+    </div>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="sev md">Importante</span>
+        <div class="f-body">
+          <h4>Título de cierre "Deja de adivinar. Empieza a saber." está desperdiciado</h4>
+          <p>Es una línea excelente — pero aparece en la última sección, cuando ya decidiste. Esa línea debería estar <b>arriba</b>, como kicker del hero o como H2 del hero.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Subirla al hero como kicker o pre-título. La sección de cierre puede llevar una variante: "Tu grupo ya te está diciendo algo. Descarga Grupero y escúchalo."</span></div>
+        </div>
+        <span class="tag">Copy §1</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev lo">Mejora</span>
+        <div class="f-body">
+          <h4>"No es solo contar mensajes" como H2 de Features es defensivo</h4>
+          <p>Arranca negando algo que el usuario no ha acusado. Un H2 debería afirmar el valor, no defenderse. Compárese con la línea de abajo ("entiende quién realmente participa") — esa es la tesis.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Reemplazar por: "Mide lo que importa, no lo que se ve." O: "El que más escribe no es el que más aporta."</span></div>
+        </div>
+        <span class="tag">Copy §2</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev lo">Mejora</span>
+        <div class="f-body">
+          <h4>Falta un "por qué ahora" / urgencia</h4>
+          <p>La página presenta el producto bien pero no da un motivo para descargar <b>hoy</b> en lugar de en 2 semanas. No necesitas descuentos artificiales — puedes usar estacionalidad ("antes del siguiente evento del grupo"), o el valor del tiempo ("cada día que esperas, más gente inactiva se queda en el grupo").</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Añadir micro-copy bajo el CTA principal: "Tu próximo evento está más cerca de lo que crees." o "Los grupos sanos no se arreglan solos."</span></div>
+        </div>
+        <span class="tag">Copy §3</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 PRIORITY -->
+  <section id="priority">
+    <div class="sec-head">
+      <div class="sec-num">08 / ROADMAP</div>
+      <div>
+        <h2 class="sec-title">Por dónde empezar — matriz impacto / esfuerzo</h2>
+        <p class="sec-sub">Los 6 hallazgos críticos son accionables en un sprint corto. Aquí los tienes mapeados contra el esfuerzo real de implementar.</p>
+      </div>
+    </div>
+
+    <div class="matrix">
+      <div class="matrix-grid">
+        <div class="quad">
+          <div style="text-align:left">Hacer YA</div>
+          <div style="text-align:right">Planificar</div>
+          <div style="text-align:left">Llenadores</div>
+          <div style="text-align:right">Evaluar</div>
+        </div>
+        <!-- Dots: positions x/y in % -->
+        <div class="dot hi" style="left:15%;top:18%"><span class="dot-label">Quitar stats en 0</span></div>
+        <div class="dot hi" style="left:22%;top:28%"><span class="dot-label">Privacidad en hero</span></div>
+        <div class="dot hi" style="left:28%;top:38%"><span class="dot-label">Fix CTA iOS</span></div>
+        <div class="dot hi" style="left:62%;top:15%"><span class="dot-label">Testimonios</span></div>
+        <div class="dot hi" style="left:70%;top:25%"><span class="dot-label">Explicar privacidad técnica</span></div>
+        <div class="dot md" style="left:40%;top:35%"><span class="dot-label">FAQ en landing</span></div>
+        <div class="dot md" style="left:55%;top:45%"><span class="dot-label">Feature tour interactivo</span></div>
+        <div class="dot md" style="left:35%;top:55%"><span class="dot-label">Nav sticky</span></div>
+        <div class="dot md" style="left:50%;top:60%"><span class="dot-label">Toggle precios anual</span></div>
+        <div class="dot lo" style="left:25%;top:75%"><span class="dot-label">Copy de cierre al hero</span></div>
+        <div class="dot lo" style="left:70%;top:70%"><span class="dot-label">Rediseño tipográfico</span></div>
+        <div class="dot lo" style="left:80%;top:80%"><span class="dot-label">Split-screen antes/después</span></div>
+
+        <span class="axis-y top">Impacto alto ↑</span>
+        <span class="axis-y bot">Impacto bajo ↓</span>
+        <span class="axis-x left">← Bajo esfuerzo</span>
+        <span class="axis-x right">Alto esfuerzo →</span>
+      </div>
+    </div>
+
+    <div class="quick" style="margin-top:32px">
+      <div class="q">
+        <h5>Semana 1 · Hacer YA</h5>
+        <ul>
+          <li>Quitar stats de <code>0</code></li>
+          <li>Chips de privacidad en hero</li>
+          <li>Fix botón iOS</li>
+          <li>Producto explícito en subcopia</li>
+          <li>Currency en precios</li>
+        </ul>
+      </div>
+      <div class="q">
+        <h5>Semana 2–3 · Planificar</h5>
+        <ul>
+          <li>Testimonios (3–6 admins reales)</li>
+          <li>Sección técnica de privacidad</li>
+          <li>FAQ con 6–8 preguntas</li>
+          <li>Nav sticky + CTA flotante</li>
+          <li>Toggle precios mensual/anual</li>
+        </ul>
+      </div>
+      <div class="q">
+        <h5>Mes 2 · Evolución</h5>
+        <ul>
+          <li>Feature tour interactivo con tabs</li>
+          <li>Rediseño tipográfico con pair serif/sans</li>
+          <li>Split-screen antes/después</li>
+          <li>Reframe de personas por intención</li>
+          <li>Sistema de color con jerarquía</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>Auditoría · Grupero Landing · 17 Abr 2026</div>
+    <div>24 hallazgos · 6 críticos · 9 importantes · 6 mejoras · 3 detalles</div>
+  </footer>
+
+</div>
+</body>
+</html>

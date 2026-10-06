@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Auditoría v3 — Rediseño Caso Surescripts · modavidc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0d0b;
+    --bg-2:#0f1310;
+    --bg-3:#141914;
+    --bg-hi:#182019;
+    --line:#1f261f;
+    --line-2:#2a322a;
+    --line-3:#384038;
+    --text:#e9eee9;
+    --text-2:#c8d0c8;
+    --muted:#7a847b;
+    --muted-2:#525a52;
+    --accent:#4ade80;
+    --accent-dim:#2f8a52;
+    --warn:#f5c97a;
+    --bad:#f08a7a;
+    --good:#4ade80;
+    --mono:'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sans:'Geist', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  body{font-size:15px;line-height:1.55;letter-spacing:-0.005em}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--accent);color:#0a0d0b}
+
+  /* ───── topbar */
+  .topbar{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);background:rgba(10,13,11,.78);border-bottom:1px solid var(--line)}
+  .topbar-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+  .brand{color:var(--text);font-weight:500}
+  .brand span{color:var(--accent)}
+  .topbar-right{display:flex;gap:18px;align-items:center}
+  .pill{border:1px solid var(--line-2);padding:5px 10px;border-radius:999px;color:var(--muted);font-size:10px}
+  .pill.v3{color:var(--accent);border-color:var(--accent-dim)}
+  .pill.v3::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-right:6px;vertical-align:1px;box-shadow:0 0 8px var(--accent)}
+
+  /* ───── shell */
+  .shell{max-width:1280px;margin:0 auto;padding:60px 28px 120px}
+  .grid{display:grid;grid-template-columns:240px minmax(0,720px) 220px;gap:48px;align-items:start}
+  @media (max-width:1080px){.grid{grid-template-columns:1fr;gap:32px}.side-l,.side-r{display:none}}
+
+  /* ───── hero */
+  .crumb{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin-bottom:22px}
+  .crumb::before{content:"▎";color:var(--accent);margin-right:8px}
+  h1.title{font-size:46px;line-height:1.04;letter-spacing:-.025em;font-weight:500;margin:0 0 18px;color:var(--text);text-wrap:balance}
+  h1.title em{font-style:normal;color:var(--accent)}
+  .lede{font-size:18px;line-height:1.5;color:var(--text-2);max-width:60ch;margin:0 0 26px;text-wrap:pretty;font-weight:300}
+  .meta-row{font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.06em;display:flex;flex-wrap:wrap;gap:14px}
+  .meta-row span::before{content:"·";margin-right:14px;color:var(--muted-2)}
+  .meta-row span:first-child::before{display:none;margin:0}
+
+  /* ───── headline score */
+  .score-card{margin:40px 0 36px;border:1px solid var(--line);background:var(--bg-2);border-radius:4px;overflow:hidden}
+  .score-head{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .score-head .right{color:var(--muted-2)}
+  .score-body{display:grid;grid-template-columns:1fr 1fr 1.1fr;gap:0}
+  @media (max-width:760px){.score-body{grid-template-columns:1fr}}
+  .score-cell{padding:26px 24px;border-right:1px solid var(--line)}
+  @media (max-width:760px){.score-cell{border-right:none;border-bottom:1px solid var(--line)}}
+  .score-cell:last-child{border-right:none}
+  .score-cell .lbl{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+  .score-cell .big{font-family:var(--mono);font-size:54px;line-height:1;font-weight:500;letter-spacing:-.04em;color:var(--text)}
+  .score-cell.now .big{color:var(--accent)}
+  .score-cell .of{font-family:var(--mono);font-size:16px;color:var(--muted);margin-left:6px}
+  .score-cell .note{font-size:12.5px;color:var(--muted);margin-top:10px;line-height:1.5}
+  .delta-pill{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:14px;color:var(--accent);background:rgba(74,222,128,.08);border:1px solid var(--accent-dim);padding:8px 12px;border-radius:4px;margin-bottom:14px;letter-spacing:-.01em}
+  .delta-pill .ar{font-size:14px}
+
+  .verdict-bar{display:flex;border-top:1px solid var(--line);flex-wrap:wrap}
+  .verdict-bar .v{flex:1;min-width:180px;padding:12px 16px;border-right:1px solid var(--line);font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between;color:var(--muted)}
+  .verdict-bar .v:last-child{border-right:none}
+  .verdict-bar .v .n{color:var(--text);font-size:14px;letter-spacing:-.02em;text-transform:none}
+  .verdict-bar .v.good .n{color:var(--good)}
+  .verdict-bar .v.warn .n{color:var(--warn)}
+
+  /* ───── side rails */
+  .side-l, .side-r{position:sticky;top:96px;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+  .side-l .sl-h, .side-r .sr-h{color:var(--muted-2);margin-bottom:14px;font-size:10px}
+  .toc{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;border-left:1px solid var(--line);padding-left:14px}
+  .toc li{display:flex;gap:10px;align-items:baseline}
+  .toc li a{color:var(--muted);transition:color .15s}
+  .toc li a:hover{color:var(--text)}
+  .toc .n{color:var(--muted-2);font-size:10px;min-width:18px}
+  .toc .dlt{margin-left:auto;font-size:10px;color:var(--accent);letter-spacing:0;font-family:var(--mono)}
+  .toc .dlt.flat{color:var(--muted-2)}
+  .toc .dlt.micro{color:var(--muted-2)}
+
+  .side-r{display:flex;flex-direction:column;gap:24px}
+  .legend div{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--line)}
+  .legend .sw{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;vertical-align:1px}
+  .legend .g{background:var(--good)}.legend .w{background:var(--warn)}.legend .b{background:var(--bad)}
+
+  /* ───── category cards */
+  section.cat{padding:42px 0 28px;border-top:1px solid var(--line);scroll-margin-top:90px}
+  section.cat:first-of-type{border-top:none;padding-top:8px}
+  .cat-head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px;flex-wrap:wrap}
+  .cat-num{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.14em}
+  .cat-tag{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-left:auto}
+  h2.cat-title{font-size:26px;line-height:1.15;font-weight:500;letter-spacing:-.02em;margin:0 0 6px;color:var(--text)}
+  .cat-sub{font-size:14px;color:var(--muted);margin:0 0 18px;max-width:60ch}
+
+  /* scoreline */
+  .scoreline2{
+    display:grid;grid-template-columns:1fr auto auto auto;gap:14px;align-items:center;
+    margin:14px 0 24px;padding:12px 16px;border:1px solid var(--line);
+    background:var(--bg-2);border-radius:4px;
+  }
+  @media (max-width:560px){.scoreline2{grid-template-columns:1fr 1fr}}
+  .scoreline2 .bar-wrap{display:flex;flex-direction:column;gap:6px;min-width:0}
+  .bar2{position:relative;height:6px;background:var(--bg-3);border-radius:3px;overflow:hidden}
+  .bar2 .prev{position:absolute;top:0;left:0;height:100%;background:var(--line-3);border-radius:3px}
+  .bar2 .now{position:absolute;top:0;left:0;height:100%;background:var(--accent);border-radius:3px;box-shadow:0 0 6px rgba(74,222,128,.3)}
+  .bar2-labels{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--muted-2);letter-spacing:.1em;text-transform:uppercase}
+  .sv{font-family:var(--mono);font-size:13px;color:var(--muted);min-width:48px;text-align:right;letter-spacing:-.01em}
+  .sv .of{color:var(--muted-2);font-size:11px}
+  .sv.now-v{color:var(--text)}
+  .delta{font-family:var(--mono);font-size:12.5px;color:var(--accent);padding:4px 8px;background:rgba(74,222,128,.08);border:1px solid var(--accent-dim);border-radius:3px;min-width:54px;text-align:center;letter-spacing:-.01em}
+  .delta.flat{color:var(--muted);background:var(--bg-3);border-color:var(--line-2)}
+  .delta.micro{color:var(--muted);background:rgba(74,222,128,.04);border-color:var(--accent-dim)}
+
+  /* panels */
+  .panels{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+  @media (max-width:680px){.panels{grid-template-columns:1fr}}
+  .panel{border:1px solid var(--line);background:var(--bg-2);border-radius:3px;padding:14px 16px}
+  .panel .ph{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .panel.fixed .ph{color:var(--good)}
+  .panel.pending .ph{color:var(--warn)}
+  .panel ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+  .panel li{padding-left:14px;position:relative;font-size:13.5px;line-height:1.5;color:var(--text-2)}
+  .panel.fixed li::before{content:"✓";position:absolute;left:0;color:var(--good);font-family:var(--mono);font-weight:500;font-size:11px;top:1px}
+  .panel.pending li::before{content:"○";position:absolute;left:0;color:var(--warn);font-family:var(--mono);font-weight:500;font-size:11px}
+  .panel li b{color:var(--text);font-weight:500}
+  .panel.fixed{border-color:rgba(74,222,128,.2)}
+
+  /* note */
+  .note{margin-top:14px;font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.02em;line-height:1.6;padding-left:14px;border-left:1px solid var(--line-2)}
+  .note b{color:var(--text-2);font-weight:500}
+  .note.bad{border-left-color:rgba(240,138,122,.4)}
+  .note.bad b{color:var(--bad)}
+
+  /* big delta hero */
+  .hero-deltas{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:18px 0 36px;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:var(--bg-2)}
+  @media (max-width:760px){.hero-deltas{grid-template-columns:repeat(2,1fr)}}
+  .hd{padding:16px 18px;border-right:1px solid var(--line)}
+  .hd:last-child{border-right:none}
+  @media (max-width:760px){.hd:nth-child(2n){border-right:none}.hd:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+  .hd .l{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
+  .hd .v{font-family:var(--mono);font-size:22px;font-weight:500;color:var(--accent);letter-spacing:-.02em;line-height:1}
+  .hd .v.flat{color:var(--text-2)}
+  .hd .s{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.45}
+
+  /* summary table */
+  .summary{margin:60px 0 0;border:1px solid var(--line);background:var(--bg-2);border-radius:4px;overflow:hidden}
+  .sum-head{padding:12px 18px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+  .sum-row{display:grid;grid-template-columns:40px 1fr 70px 70px 70px;gap:0;border-bottom:1px solid var(--line);align-items:center}
+  .sum-row.h{font-family:var(--mono);font-size:10px;color:var(--muted-2);letter-spacing:.14em;text-transform:uppercase}
+  .sum-row.h > div{padding:10px 14px}
+  .sum-row:last-child{border-bottom:none}
+  .sum-row > div{padding:12px 14px;border-right:1px solid var(--line);font-size:13.5px;color:var(--text-2)}
+  .sum-row > div:last-child{border-right:none}
+  .sum-row .n{font-family:var(--mono);font-size:11px;color:var(--muted);text-align:center}
+  .sum-row .name b{color:var(--text);font-weight:500}
+  .sum-row .name span{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
+  .sum-row .prev,.sum-row .now-c,.sum-row .dlt-c{font-family:var(--mono);text-align:right}
+  .sum-row .prev{color:var(--muted)}
+  .sum-row .now-c{color:var(--text)}
+  .sum-row .dlt-c{color:var(--accent)}
+  .sum-row .dlt-c.flat{color:var(--muted-2)}
+
+  /* footer */
+  footer{border-top:1px solid var(--line);margin-top:80px;padding:36px 28px 40px;max-width:1280px;margin-left:auto;margin-right:auto;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+  footer .brand{font-size:18px;font-family:var(--sans);font-weight:500;text-transform:none;letter-spacing:-.01em}
+  .mono{font-family:var(--mono)}
+  .accent{color:var(--accent)}
+  .bad-c{color:var(--bad)}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">mo<span>davidc</span> · auditoría &nbsp;<span style="color:var(--accent-dim)">v3</span></div>
+    <div class="topbar-right">
+      <span>caso · recertificación eprescribing · impl. tsx</span>
+      <span class="pill v3">v3 · ronda 3</span>
+    </div>
+  </div>
+</div>
+
+<main class="shell">
+  <div class="grid">
+
+    <!-- ───── TOC -->
+    <aside class="side-l">
+      <div class="sl-h">▎ Índice · v3</div>
+      <ul class="toc">
+        <li><span class="n">01</span><a href="#c1">Sistema visual</a><span class="dlt micro">+0.2</span></li>
+        <li><span class="n">02</span><a href="#c2">Tipografía</a><span class="dlt flat">0</span></li>
+        <li><span class="n">03</span><a href="#c3">Color &amp; contraste</a><span class="dlt flat">0</span></li>
+        <li><span class="n">04</span><a href="#c4">Layout &amp; retícula</a><span class="dlt micro">+0.2</span></li>
+        <li><span class="n">05</span><a href="#c5">Narrativa</a><span class="dlt micro">+0.2</span></li>
+        <li><span class="n">06</span><a href="#c6">Densidad &amp; escaneo</a><span class="dlt micro">+0.1</span></li>
+        <li><span class="n">07</span><a href="#c7">Componentes UI</a><span class="dlt">+0.7</span></li>
+        <li><span class="n">08</span><a href="#c8">Microcopy</a><span class="dlt micro">+0.2</span></li>
+        <li><span class="n">09</span><a href="#c9">Credibilidad</a><span class="dlt micro">+0.1</span></li>
+        <li><span class="n">10</span><a href="#c10">Nav &amp; A11y</a><span class="dlt micro">+0.4</span></li>
+      </ul>
+    </aside>
+
+    <!-- ───── article -->
+    <article>
+      <div class="crumb">Auditoría · ronda 3 · may 2026</div>
+      <h1 class="title">Re-auditoría del<br/><em>Rediseño v2 implementado</em></h1>
+      <p class="lede">
+        Misma metodología, mismas 10 categorías. Evaluamos qué subió tras implementar
+        el rediseño en React/Next.js y corregir los pendientes de la ronda 2.
+        Los quick wins se ejecutaron; el mayor salto lo lleva Componentes UI.
+      </p>
+      <div class="meta-row">
+        <span>10 categorías comparadas</span>
+        <span>4 pendientes v2 resueltos</span>
+        <span>delta global +0.2</span>
+        <span>nuevos hallazgos · 3</span>
+      </div>
+
+      <!-- ── global score -->
+      <div class="score-card">
+        <div class="score-head">
+          <span>▎ veredicto global · v2 → v3</span>
+          <span class="right">criterios: claridad · jerarquía · prueba · acción</span>
+        </div>
+        <div class="score-body">
+          <div class="score-cell">
+            <div class="lbl">▎ antes · v2</div>
+            <div><span class="big">8.6</span><span class="of">/ 10</span></div>
+            <div class="note">Diseño sólido en HTML estático. Carrusel decorativo, inconsistencia numérica, mezcla ES/EN.</div>
+          </div>
+          <div class="score-cell now">
+            <div class="lbl">▎ ahora · v3</div>
+            <div><span class="big">8.8</span><span class="of">/ 10</span></div>
+            <div class="note">Implementación React fiel al diseño. Carrusel funcional, narrativa consistente, voz en español.</div>
+          </div>
+          <div class="score-cell">
+            <div class="lbl">▎ delta</div>
+            <div class="delta-pill"><span class="ar">↑</span><b>+0.2 puntos</b></div>
+            <div class="note">Ronda conservadora. Mayor salto: <b style="color:var(--accent)">Componentes UI (+0.7)</b>. Sin regresiones. 3 hallazgos nuevos.</div>
+          </div>
+        </div>
+        <div class="verdict-bar">
+          <div class="v good"><span>Pasa de</span><span class="n">8.6 → 8.8</span></div>
+          <div class="v good"><span>Top fix</span><span class="n">Carrusel funcional</span></div>
+          <div class="v good"><span>Top fix</span><span class="n">"9 capas" resuelto</span></div>
+          <div class="v warn"><span>Bloqueo 9+</span><span class="n">Testimonio real</span></div>
+        </div>
+      </div>
+
+      <!-- highlights -->
+      <div class="hero-deltas" aria-label="Highlights de la implementación">
+        <div class="hd">
+          <div class="l">Categorías que suben</div>
+          <div class="v">7 / 10</div>
+          <div class="s">3 estables, cero regresiones. Los cambios son incrementales.</div>
+        </div>
+        <div class="hd">
+          <div class="l">Mejor delta</div>
+          <div class="v">+0.7</div>
+          <div class="s">Componentes UI: carrusel funcional con teclado, lightbox y zoom.</div>
+        </div>
+        <div class="hd">
+          <div class="l">Pendientes v2 resueltos</div>
+          <div class="v">4 / 5</div>
+          <div class="s">Queda pendiente el testimonio real. El resto aterrizó.</div>
+        </div>
+        <div class="hd">
+          <div class="l">Nuevos hallazgos</div>
+          <div class="v flat">3</div>
+          <div class="s">dl anidado, aria-hidden ausente, PR-21677 en hero fuera de escala.</div>
+        </div>
+      </div>
+
+      <!-- ─────────── 01 ─────────── -->
+      <section class="cat" id="c1">
+        <div class="cat-head"><span class="cat-num">01</span><h2 class="cat-title">Sistema visual &amp; identidad</h2><span class="cat-tag">Visual System</span></div>
+        <p class="cat-sub">Coherencia del lenguaje gráfico y consistencia de elementos.</p>
+        <div class="scoreline2">
+          <div class="bar-wrap">
+            <div class="bar2"><span class="prev" style="width:83%"></span><span class="now" style="width:85%"></span></div>
+            <div class="bar2-labels"><span>v2 — 8.3</span><span>v3 — 8.5</span></div>
+          </div>
+          <span class="sv">8.3<span class="of"> /10</span></span>
+          <span class="sv now-v">8.5<span class="of"> /10</span></span>
+          <span class="delta micro">↑ +0.2</span>
+        </div>
+        <div class="panels">
+          <div class="panel fixed">
+            <div class="ph">Qué se mantiene / mejoró</div>
+            <ul>
+              <li>Las 3 superficies (bg, bg-2, bg-hi) se usan consistentemente en cards, nodos y secciones.</li>
+              <li>Variables CSS del site (<code>--green</code>, <code>--border</code>) mapeadas correctamente al diseño.</li>
+              <li>El lenguaje visual es coherente entre el hero, el diagrama y las cards.</li>
+            </ul>
+          </div>
+          <div class="panel pending">
+            <div class="ph">Queda pendiente</div>
+            <ul>
+              <li>El <b>ss-toc-h</b> usa <code>var(--border-2)</code> como color de texto — queda casi invisible (#2a2d33). Debería ser <code>var(--text-3)</code>.</li>
+              <li>Regla de qué superficie usar cuándo no está documentada como token.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="note"><b>Estable.</b> El salto visual viene de la implementación fiel al mockup, no de cambios nuevos.</div>
+      </section>
+
+      <!-- ─────────── 02 ─────────── -->
+      <section class="cat" id="c2">
+        <div class="cat-head"><span class="cat-num">02</span><h2 class="cat-title">Tipografía</h2><span class="cat-tag">Type</span></div>
+        <p class="cat-sub">Escala, pareo y legibilidad en bloques largos.</p>
+        <div class="scoreline2">
+          <div class="bar-wrap">
+            <div class="bar2"><span class="prev" style="width:87%"></span><span class="now" style="width:87%"></span></div>
+            <div class="bar2-labels"><span>v2 — 8.7</span><span>v3 — 8.7</span></div>
+          </div>
+          <span class="sv">8.7<span class="of"> /10</span></span>
+          <span class="sv now-v">8.7<span class="of"> /10</span></span>
+          <span class="delta flat">0</span>
+        </div>
+        <div class="panels">
+          <div class="panel fixed">
+            <div class="ph">Qué se mantiene</div>
+            <ul>
+              <li>H1 54px con <code>font-family: var(--ff-display)</code> (Space Grotesk), diferente a body (DM Sans) — pareo correcto.</li>
+              <li>TL;DR 21px / weight 300 — escaneable antes del primer scroll.</li>
+              <li>Body 15.5px / 1.7 en bloques de prosa — legible en textos largos.</li>
+            </ul>
+          </div>
+          <div class="panel pending">
+            <div class="ph">Queda pendiente</div>
+            <ul>
+              <li>Falta escala intermedia entre H2 (32px) y body (15.5px) para subtítulos de cards.</li>
+              <li>El mono mayúsculo sigue en ~12 contextos distintos sin roles definidos.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─────────── 03 ─────────── -->
+      <section class="cat" id="c3">
+        <div class="cat-head"><span class="cat-num">03</span><h2 class="cat-title">Color &amp; contraste</h2><span class="cat-tag">Color</span></div>
+        <p class="cat-sub">Paleta y uso semántico del acento sobre fondo oscuro.</p>
+        <div class="scoreline2">
+          <div class="bar-wrap">
+            <div class="bar2"><span class="prev" style="width:82%"></span><span class="now" style="width:82%"></span></div>
+            <div class="bar2-labels"><span>v2 — 8.2</span><span>v3 — 8.2</span></div>
+          </div>
+          <span class="sv">8.2<span class="of"> /10</span></span>
+          <span class="sv now-v">8.2<span class="of"> /10</span></span>
+          <span class="delta flat">0</span>
+        </div>
+        <div class="panels">
+          <div class="panel fixed">
+            <div class="ph">Qué se mantiene</div>
+            <ul>
+              <li>Verde (<code>--green</code> oklch 67% 0.17 148) usado para dato, decisión y estado activo — no decoración.</li>
+              <li>Contraste body sobre fondo: suficiente para lectura cómoda.</li>
+            </ul>
+          </div>
+          <div class="panel pending">
+            <div class="ph">Queda pendiente</div>
+            <ul>
+              <li>Sin tono ámbar para "El desafío". La sección de riesgo se lee neutral, igual que las secciones positivas.</li>
+              <li><code>var(--text-3)</code> (#555c6a) en elementos secundarios: contraste ~3.5:1 sobre <code>--bg</code> — no llega a AA.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="note"><b>Sin cambios.</b> El pendiente de ámbar sigue siendo el fix más visible disponible con bajo esfuerzo.</div>
+      </section>
+
+      <!-- ─────────── 04 ─────────── -->
+      <section class="cat" id="c4">
+        <div class="cat-head"><span class="cat-num">04</span><h2 class="cat-title">Layout &amp; retícula</h2><span class="cat-tag">Grid</span></div>
+        <p class="cat-sub">Uso del viewport y ritmo vertical.</p>
+        <div class="scoreline2">
+          <div class="bar-wrap">
+            <div class="bar2"><span class="prev" style="width:80%"></span><span class="now" style="width:82%"></span></div>
+            <div class="bar2-labels"><span>v2 — 8.0</span><span>v3 — 8.2</span></div>
+          </div>
+          <span class="sv">8.0<span class="of"> /10</span></span>
+          <span class="sv now-v">8.2<span class="of"> /10</span></span>
+          <span class="delta micro">↑ +0.2</span>
+        </div>
+        <div class="panels">
+          <div class="panel fixed">
+            <div class="ph">Qué se mejoró</div>
+            <ul>
+              <li>El grid <b>220px + minmax(0,1fr)</b> implementado fielmente — TOC y artículo se alinean bien.</li>
+              <li><b>Breakout</b> de arquitectura funciona: -44px en cada lado amplía el diagrama fuera de la columna.</li>
+              <li>Ritmo vertical 80px entre secciones, respetado en producción.</li>
+            </ul>
+          </div>
+          <div class="panel pending">
+            <div class="ph">Queda pendiente</div>
+            <ul>
+              <li>El bloque "Resultado" podría hacer breakout igual que arquitectura para que las 4 cards respiren más.</li>
+              <li>En viewports &gt;1600px siguen apareciendo bandas vacías a los costados.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─────────── 05 ─────────── -->
+      <section class="cat" id="c5">
+        <div class="cat-head"><span class="cat-num">05</span><h2 class="cat-title">Narrativa &amp; storytelling</h2><span class="cat-tag">Story</span></div>
+        <p class="cat-sub">Arco del caso, claridad de problema, rol y conclusiones.</p>
+        <div class="scoreline2">
+          <div class="bar-wrap">
+            <div class="bar2"><span class="prev" style="width:94%"></span><span class="now" style="width:96%"></span></div>
+            <div class="bar2-labels"><span>v2 — 9.4</span><span>v3 — 9.6</span></div>
+          </div>
+          <span class="sv">9.4<span class="of"> /10</span></span>
+          <span class="sv now-v">9.6<span class="of"> /10</span></span>
+          <span class="delta micro">↑ +0.2</span>
+        </div>
+        <div class="panels">
+          <div class="panel fixed">
+            <div class="ph">Qué se resolvió</div>
+            <ul>
+              <li><b>"9 capas técnicas"</b> reemplazado por "Múltiples capas técnicas, validación coordinada y cero margen para bloqueos" — sin inconsistencia numérica.</li>
+              <li>El bullet 06 del desafío ahora menciona las <b>260 páginas</b> de documentación — dato concreto y honesto.</li>
+              <li>Pull-quote centrado implementado con tipografía correcta.</li>
+            </ul>
+          </div>
+          <div class="panel pending">
+            <div class="ph">Queda pendiente</div>
+            <ul>
+              <li>Pull-quote atribuido a "Cierre del engagement, Oct 2023" — sigue siendo auto-cita. Sin voz externa.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="note"><b>El fix más limpio de la ronda.</b> Cambiar el subtítulo resolvió la inconsistencia más visible del documento.</div>
+      </section>
+
+      <!-- ─────────── 06 ─────────── -->
+      <section class="cat" id="c6">
+        <div class="cat-head"><span class="cat-num">06</span><h2 class="cat-title">Densidad informativa &amp; escaneo</h2><span class="cat-tag">Scannability</span></div>
+        <p class="cat-sub">Velocidad de comprensión para un lector apurado.</p>
+        <div class="scoreline2">
+          <div class="bar-wrap">
+            <div class="bar2"><span class="prev" style="width:87%"></span><span class="now" style="width:88%"></span></div>
+            <div class="bar2-labels"><span>v2 — 8.7</span><span>v3 — 8.8</span></div>
+          </div>
+          <span class="sv">8.7<span class="of"> /10</span></span>
+          <span class="sv now-v">8.8<span class="of"> /10</span></span>
+          <span class="delta micro">↑ +0.1</span>
+        </div>
+        <div class="panels">
+          <div class="panel fixed">
+            <div class="ph">Qué se mantiene</div>
+            <ul>
+              <li>Hero metrics (7/7, 260K+, 22 días, PR-21677) visibles antes del primer scroll.</li>
+              <li>Criterio en 4 cards, deliverables en grid 3x2, bullets numerados — estructura modular.</li>
+            </ul>
+          </div>
+          <div class="panel pending">
+            <div class="ph">Nuevo hallazgo</div>
+            <ul>
+              <li><b>PR-21677 en el hero</b> tiene <code>font-size: 30px</code> inline vs los otros 3 cells a 44px — ruptura de uniformidad dentro del propio hero.</li>
+              <li>Algunas card descriptions todavía pasan de 3 líneas en viewport estándar.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="note"><b>Acción fácil:</b> unificar el font-size de las 4 celdas del hero. Si PR-21677 no cabe a 44px, reducir todos a 36px y compensar con el label.</div>
+      </section>
+
+      <!-- ─────────── 07 ─────────── -->
+      <section class="cat" id="c7">
+        <div class="cat-head"><span class="cat-num">07</span><h2 class="cat-title">Componentes UI</h2><span class="cat-tag">Components</span></div>
+        <p class="cat-sub">Chips, carrusel, callouts, stats, diagrama.</p>
+        <div class="scoreline2">
+          <div class="bar-wrap">
+            <div class="bar2"><span class="prev" style="width:85%"></span><span class="now" style="width:92%"></span></div>
+            <div class="bar2-labels"><span>v2 — 8.5</span><span>v3 — 9.2</span></div>
+          </div>
+          <span class="sv">8.5<span class="of"> /10</span></span>
+          <span class="sv now-v">9.2<span class="of"> /10</span></span>
+          <span class="delta">↑ +0.7</span>
+        </div>
+        <div class="panels">
+          <div class="panel fixed">
+            <div class="ph">Qué se resolvió</div>
+            <ul>
+              <li><b>EvidenceCarousel</b> implementado con teclado (←/→), dots clickables, lightbox con zoom y navegación. Ya no es decorativo.</li>
+              <li>El diagrama de arquitectura (nodos, flechas con gradient, chips por capa) está implementado en CSS puro, responsive.</li>
+              <li>Botones del carrusel (‹ ›) funcionan — prev/next con estado correcto.</li>
+            </ul>
+          </div>
+          <div class="panel pending">
+            <div class="ph">Queda pendiente</div>
+            <ul>
+              <li>El carrusel no responde a <b>swipe táctil</b> (touch events). En mobile se navega solo con dots.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="note"><b>Mayor delta de la ronda.</b> El carrusel pasó de "decoración HTML" a componente React completamente funcional.</div>
+      </section>
+
+      <!-- ─────────── 08 ─────────── -->
+      <section class="cat" id="c8">
+        <div class="cat-head"><span class="cat-num">08</span><h2 class="cat-title">Microcopy &amp; voz</h2><span class="cat-tag">Voice</span></div>
+        <p class="cat-sub">Tono y precisión técnica.</p>
+        <div class="scoreline2">
+          <div class="bar-wrap">
+            <div class="bar2"><span class="prev" style="width:90%"></span><span class="now" style="width:92%"></span></div>
+            <div class="bar2-labels"><span>v2 — 9.0</span><span>v3 — 9.2</span></div>
+          </div>
+          <span class="sv">9.0<span class="of"> /10</span></span>
+          <span class="sv now-v">9.2<span class="of"> /10</span></span>
+          <span class="delta micro">↑ +0.2</span>
+        </div>
+        <div class="panels">
+          <div class="panel fixed">
+            <div class="ph">Qué se resolvió</div>
+            <ul>
+              <li><b>"integration resources"</b> reemplazado por "técnicos de integración asignados por Surescripts" — voz completamente en español.</li>
+              <li>El challengeClosing ahora explica las <b>260 páginas</b> con precisión: "no era documentación deficiente, era densa".</li>
+              <li>El framing correcto de "Recertificación" propagado en título, body y badge.</li>
+            </ul>
+          </div>
+          <div class="panel pending">
+            <div class="ph">Queda pendiente</div>
+            <ul>
+              <li>Los tooltips de Surescripts y NCPDP (<code>title</code> nativo) siguen siendo poco descubribles en mobile.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─────────── 09 ─────────── -->
+      <section class="cat" id="c9">
+        <div class="cat-head"><span class="cat-num">09</span><h2 class="cat-title">Credibilidad &amp; prueba</h2><span class="cat-tag">Proof</span></div>
+        <p class="cat-sub">Evidencia verificable y atribución.</p>
+        <div class="scoreline2">
+          <div class="bar-wrap">
+            <div class="bar2"><span class="prev" style="width:82%"></span><span class="now" style="width:83%"></span></div>
+            <div class="bar2-labels"><span>v2 — 8.2</span><span>v3 — 8.3</span></div>
+          </div>
+          <span class="sv">8.2<span class="of"> /10</span></span>
+          <span class="sv now-v">8.3<span class="of"> /10</span></span>
+          <span class="delta micro">↑ +0.1</span>
+        </div>
+        <div class="panels">
+          <div class="panel fixed">
+            <div class="ph">Qué se mejoró</div>
+            <ul>
+              <li>El carrusel funcional hace la sección "Prueba" más creíble: las imágenes reales pueden verse completas en lightbox.</li>
+              <li>4 slides con evidencia real: certificado, código, Postman y arquitectura AWS.</li>
+            </ul>
+          </div>
+          <div class="panel pending">
+            <div class="ph">Queda pendiente (bloqueo para 9+)</div>
+            <ul>
+              <li><b>Testimonio real</b> de Tara Collyard (Integration Manager Surescripts) o del cliente MediRec. El pull-quote actual es auto-cita.</li>
+              <li>No hay referencia externa al cliente. Una URL de MediRec o logo verificable elevaría la credibilidad.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="note"><b>Límite estructural:</b> sin una voz externa este score no pasa de 8.5. Es el único bloqueo para llegar a 9+.</div>
+      </section>
+
+      <!-- ─────────── 10 ─────────── -->
+      <section class="cat" id="c10">
+        <div class="cat-head"><span class="cat-num">10</span><h2 class="cat-title">Navegación, IA &amp; A11y</h2><span class="cat-tag">Nav · A11y</span></div>
+        <p class="cat-sub">Recorrido de la página, mobile y lectores de pantalla.</p>
+        <div class="scoreline2">
+          <div class="bar-wrap">
+            <div class="bar2"><span class="prev" style="width:74%"></span><span class="now" style="width:78%"></span></div>
+            <div class="bar2-labels"><span>v2 — 7.4</span><span>v3 — 7.8</span></div>
+          </div>
+          <span class="sv">7.4<span class="of"> /10</span></span>
+          <span class="sv now-v">7.8<span class="of"> /10</span></span>
+          <span class="delta micro">↑ +0.4</span>
+        </div>
+        <div class="panels">
+          <div class="panel fixed">
+            <div class="ph">Qué se resolvió</div>
+            <ul>
+              <li>El carrusel responde a <b>teclado</b> (←/→ y Esc en lightbox) — implementado en el componente React.</li>
+              <li><b>Progress bar</b> funcional con scroll tracking real (no estático).</li>
+              <li>TOC scroll-spy activo: resalta la sección visible con <code>useEffect</code> + scroll listener.</li>
+            </ul>
+          </div>
+          <div class="panel pending">
+            <div class="ph">Hallazgos nuevos en esta ronda</div>
+            <ul>
+              <li><b><code>&lt;dl&gt;</code> mal anidado:</b> el meta-strip usa <code>&lt;dl&gt;&lt;dl&gt;&lt;dt&gt;&lt;dd&gt;</code> — <code>&lt;dl&gt;</code> no puede ser hijo directo de otro <code>&lt;dl&gt;</code>. Debe ser <code>&lt;div&gt;&lt;dt&gt;&lt;dd&gt;</code>.</li>
+              <li><b><code>▎</code> sin <code>aria-hidden</code>:</b> los decorativos en eyebrow, TOC header y meta-strip son anunciados por lectores de pantalla.</li>
+              <li><b>TOC mobile sin sustituto:</b> bajo 1080px desaparece sin reemplazo. Pendiente desde v2.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="note bad"><b>Nuevos:</b> los hallazgos de dl y aria-hidden son regresiones de esta ronda — se introdujeron al implementar. Esfuerzo bajo, impacto real en accesibilidad.</div>
+      </section>
+
+      <!-- ───── summary table -->
+      <div class="summary">
+        <div class="sum-head">▎ resumen comparativo · 10 categorías · v2 → v3</div>
+        <div class="sum-row h">
+          <div>#</div><div>Categoría</div><div style="text-align:right">v2</div><div style="text-align:right">v3</div><div style="text-align:right">Δ</div>
+        </div>
+        <div class="sum-row"><div class="n">01</div><div class="name"><b>Sistema visual</b><span>ss-toc-h color incorrecto (nuevo)</span></div><div class="prev">8.3</div><div class="now-c">8.5</div><div class="dlt-c">+0.2</div></div>
+        <div class="sum-row"><div class="n">02</div><div class="name"><b>Tipografía</b><span>Sin cambios en escala</span></div><div class="prev">8.7</div><div class="now-c">8.7</div><div class="dlt-c flat">0</div></div>
+        <div class="sum-row"><div class="n">03</div><div class="name"><b>Color &amp; contraste</b><span>Sin ámbar; pendiente desde v2</span></div><div class="prev">8.2</div><div class="now-c">8.2</div><div class="dlt-c flat">0</div></div>
+        <div class="sum-row"><div class="n">04</div><div class="name"><b>Layout &amp; retícula</b><span>Grid y breakout implementados fielmente</span></div><div class="prev">8.0</div><div class="now-c">8.2</div><div class="dlt-c">+0.2</div></div>
+        <div class="sum-row"><div class="n">05</div><div class="name"><b>Narrativa</b><span>"9 capas" resuelto, 260 páginas mencionadas</span></div><div class="prev">9.4</div><div class="now-c">9.6</div><div class="dlt-c">+0.2</div></div>
+        <div class="sum-row"><div class="n">06</div><div class="name"><b>Densidad &amp; escaneo</b><span>PR-21677 en hero fuera de escala (nuevo)</span></div><div class="prev">8.7</div><div class="now-c">8.8</div><div class="dlt-c">+0.1</div></div>
+        <div class="sum-row"><div class="n">07</div><div class="name"><b>Componentes UI</b><span>Carrusel funcional: teclado, lightbox, zoom</span></div><div class="prev">8.5</div><div class="now-c">9.2</div><div class="dlt-c">+0.7</div></div>
+        <div class="sum-row"><div class="n">08</div><div class="name"><b>Microcopy &amp; voz</b><span>"integration resources" en español; challengeClosing honesto</span></div><div class="prev">9.0</div><div class="now-c">9.2</div><div class="dlt-c">+0.2</div></div>
+        <div class="sum-row"><div class="n">09</div><div class="name"><b>Credibilidad</b><span>Lightbox eleva la prueba; falta testimonio</span></div><div class="prev">8.2</div><div class="now-c">8.3</div><div class="dlt-c">+0.1</div></div>
+        <div class="sum-row"><div class="n">10</div><div class="name"><b>Nav &amp; A11y</b><span>Carrusel con teclado; dl anidado y aria-hidden nuevos</span></div><div class="prev">7.4</div><div class="now-c">7.8</div><div class="dlt-c">+0.4</div></div>
+        <div class="sum-row" style="background:var(--bg-hi)"><div class="n" style="color:var(--accent)">∑</div><div class="name"><b style="color:var(--accent)">Global</b><span>Sin regresiones · 7/10 suben</span></div><div class="prev">8.6</div><div class="now-c" style="color:var(--accent)">8.8</div><div class="dlt-c">+0.2</div></div>
+      </div>
+
+      <!-- Ronda 4 pendientes -->
+      <div class="summary" style="margin-top:36px">
+        <div class="sum-head">▎ ronda 4 · pendientes priorizados</div>
+        <div class="sum-row" style="grid-template-columns:40px 1fr 110px 110px">
+          <div class="n">01</div>
+          <div class="name"><b>Corregir dl anidado en meta-strip</b><span>Reemplazar <code>&lt;dl&gt;</code> hijos por <code>&lt;div&gt;&lt;dt&gt;&lt;dd&gt;</code>. Regresión introducida en la implementación.</span></div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--good);letter-spacing:.1em;text-transform:uppercase;text-align:right">Impacto A11y</div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--good);letter-spacing:.1em;text-transform:uppercase;text-align:right">Esfuerzo bajo</div>
+        </div>
+        <div class="sum-row" style="grid-template-columns:40px 1fr 110px 110px">
+          <div class="n">02</div>
+          <div class="name"><b>Añadir aria-hidden a decorativos ▎</b><span>En ss-crumb, ss-toc-h, ss-sec-eyebrow. Dos líneas por elemento.</span></div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--good);letter-spacing:.1em;text-transform:uppercase;text-align:right">Impacto A11y</div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--good);letter-spacing:.1em;text-transform:uppercase;text-align:right">Esfuerzo bajo</div>
+        </div>
+        <div class="sum-row" style="grid-template-columns:40px 1fr 110px 110px">
+          <div class="n">03</div>
+          <div class="name"><b>Unificar font-size hero metrics</b><span>PR-21677 está en 30px; los otros cells en 44px. Uniformar a 36px o ajustar PR-21677 con letter-spacing.</span></div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--warn);letter-spacing:.1em;text-transform:uppercase;text-align:right">Impacto visual</div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--good);letter-spacing:.1em;text-transform:uppercase;text-align:right">Esfuerzo bajo</div>
+        </div>
+        <div class="sum-row" style="grid-template-columns:40px 1fr 110px 110px">
+          <div class="n">04</div>
+          <div class="name"><b>Ámbar en "El desafío"</b><span>Diferenciar visualmente la sección de riesgo de las secciones de solución. Pendiente desde v2.</span></div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--warn);letter-spacing:.1em;text-transform:uppercase;text-align:right">Impacto medio</div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--good);letter-spacing:.1em;text-transform:uppercase;text-align:right">Esfuerzo bajo</div>
+        </div>
+        <div class="sum-row" style="grid-template-columns:40px 1fr 110px 110px">
+          <div class="n">05</div>
+          <div class="name"><b>TOC mobile sin sustituto</b><span>Bajo 1080px la TOC desaparece. Botón flotante con drawer de secciones, o mini sticky bar arriba.</span></div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--good);letter-spacing:.1em;text-transform:uppercase;text-align:right">Impacto alto</div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--warn);letter-spacing:.1em;text-transform:uppercase;text-align:right">Esfuerzo medio</div>
+        </div>
+        <div class="sum-row" style="grid-template-columns:40px 1fr 110px 110px">
+          <div class="n">06</div>
+          <div class="name"><b>Conseguir un testimonio real</b><span>Frase de Tara Collyard o del cliente MediRec. Único bloqueante estructural para llegar a 9+.</span></div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--good);letter-spacing:.1em;text-transform:uppercase;text-align:right">Impacto alto</div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--warn);letter-spacing:.1em;text-transform:uppercase;text-align:right">Esfuerzo medio</div>
+        </div>
+      </div>
+
+    </article>
+
+    <!-- ───── right rail -->
+    <aside class="side-r">
+      <div>
+        <div class="sr-h">▎ Lectura del delta</div>
+        <div class="legend">
+          <div><span><span class="sw g"></span>≥ +0.5</span><span>cambio notable</span></div>
+          <div><span><span class="sw w"></span>+0.1 – +0.4</span><span>incremental</span></div>
+          <div><span><span class="sw b"></span>0</span><span>sin cambio</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="sr-h">▎ Método</div>
+        <div style="font-family:var(--sans);text-transform:none;font-size:13px;color:var(--text-2);line-height:1.55;letter-spacing:0">
+          Mismas 10 categorías y rubrica que las rondas anteriores. Diff visual entre
+          <code style="font-family:var(--mono);font-size:11.5px;background:var(--bg-3);border:1px solid var(--line-2);padding:1px 5px;border-radius:3px;color:var(--text)">Rediseño(2).html</code>
+          y la implementación en
+          <code style="font-family:var(--mono);font-size:11.5px;background:var(--bg-3);border:1px solid var(--line-2);padding:1px 5px;border-radius:3px;color:var(--text)">surescripts-detail.tsx</code>.
+        </div>
+      </div>
+      <div>
+        <div class="sr-h">▎ Para llegar a 9+</div>
+        <div style="font-family:var(--sans);text-transform:none;font-size:13px;color:var(--text-2);line-height:1.55;letter-spacing:0">
+          Solo queda un bloqueo estructural: <b>el testimonio real</b>. Los demás pendientes son correcciones técnicas que suben décimas, no puntos enteros.
+        </div>
+      </div>
+      <div>
+        <div class="sr-h">▎ Ronda 3 resueltos</div>
+        <div style="font-family:var(--sans);text-transform:none;font-size:13px;color:var(--text-2);line-height:1.55;letter-spacing:0">
+          "9 capas" corregido, "integration resources" en español, carrusel funcional con keyboard + lightbox.
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</main>
+
+<footer>
+  <div>
+    <div class="brand">mo<span style="color:var(--accent)">davidc</span> · auditoría v3</div>
+    <div style="margin-top:6px">10 categorías · 7 mejoras · veredicto <span style="color:var(--accent)">8.8 / 10</span></div>
+  </div>
+  <div style="text-align:right">
+    <div>auditor · diseño externo</div>
+    <div>mayo 2026 · lima, perú</div>
+  </div>
+</footer>
+
+</body>
+</html>

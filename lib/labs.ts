@@ -1,31 +1,4 @@
-import labsJson from "@/data/labs.json"
 import sideProjectsJson from "@/data/side-projects.json"
-import { getProjectBySlug, type Project } from "@/lib/projects"
-
-// ============================================
-// LABS (AWS Pillars - sistema original)
-// ============================================
-export type LabStatus = "Planned" | "In Progress" | "Shipped"
-
-export type Lab = {
-  slug: string
-  status: LabStatus
-  statusNote?: string
-  focus?: string
-  project?: Project
-}
-
-const rawLabs = labsJson as Array<{
-  slug: string
-  status: LabStatus
-  statusNote?: string
-  focus?: string
-}>
-
-export const labs: Lab[] = rawLabs.map((l) => ({
-  ...l,
-  project: getProjectBySlug(l.slug),
-}))
 
 // ============================================
 // SIDE PROJECTS (Proyectos personales)

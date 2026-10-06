@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/private/', '/admin/'],
     },
-    sitemap: 'https://moises.dev/sitemap.xml',
+    sitemap: 'https://modavidc.com/sitemap.xml',
   }
 } 

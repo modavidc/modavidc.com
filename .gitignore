@@ -25,3 +25,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# personal, not for a public repo
+docs/personal/
+docs/job-applications/
+docs/career/CV_LINKEDIN.md
+docs/raw/
+docs/CV_OPENLOOP*.md

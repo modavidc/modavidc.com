@@ -1,0 +1,12 @@
+────────────────────┬─────────────────────────────────────────────────────────────────────────────┬──────────────────────────────────────┐                                
+  │         Idea         │                                Cómo se vería                                │                 Tech                 │                                
+  ├──────────────────────┼─────────────────────────────────────────────────────────────────────────────┼──────────────────────────────────────┤                                
+  │ Terminal interactiva │ Visitante escribe comandos como about, projects, skills y ve output animado │ xterm.js o custom                    │                                
+  ├──────────────────────┼─────────────────────────────────────────────────────────────────────────────┼──────────────────────────────────────┤                                
+  │ Diagramas animados   │ Arquitectura de un proyecto que se va dibujando paso a paso                 │ React Flow + Framer Motion           │                                
+  ├──────────────────────┼─────────────────────────────────────────────────────────────────────────────┼──────────────────────────────────────┤                                
+  │ Chat AI sobre ti     │ "Pregúntale a Moisés" - responde con tu info, CV, proyectos                 │ API de Claude/OpenAI con tu contexto │                                
+  ├──────────────────────┼─────────────────────────────────────────────────────────────────────────────┼──────────────────────────────────────┤                                
+  │ Timeline animado     │ Tu experiencia que se va construyendo como un git log                       │ Custom + animaciones
+  ├──────────────────────┼─────────────────────────────────────────────────────────────────────────────┼──────────────────────────────────────┤
+  │ Página "Ahora" (/status) │ Sección tipo "now page": qué estás leyendo/escuchando/construyendo/aprendiendo, con formulario público para que visitantes sugieran recomendaciones y panel de moderación para aprobarlas antes de publicar. Existió una versión demo (v0.dev, datos falsos, sin DB real) que se eliminó al publicar v0.2.0 por no estar terminada — documentado acá para retomar si vale la pena. │ Next.js + DB real (Postgres/Prisma) para persistir sugerencias, auth simple en el panel de moderación    

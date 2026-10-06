@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>SPEC: Caso Detail — Surescripts · modavidc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/*
+  SPEC: caso-detail — Surescripts Certification
+  ─────────────────────────────────────────────
+  Propuesta de rediseño. Combina:
+  ✓ Narrativa actual (6 secciones)
+  ✓ Story player (4 pasos SVG, conservado)
+  + Evidencia visual: zona de screenshots reales (NUEVO)
+  + Métricas resultado: cards grandes, no texto corrido (NUEVO)
+  + Deliverables: lista visual escaneable (NUEVO)
+
+  Para implementar necesitamos:
+  → Screenshots reales de Surescripts portal / certificado / test results
+  → O Excalidraw exports si no hay capturas disponibles
+
+  Estructura de página:
+  1. Hero (breadcrumb + título + metric tag)
+  2. Meta grid (cliente / año / categoría)
+  3. Story player (4 pasos, SVG inline)
+  4. [NUEVO] Evidencia visual (3 paneles screenshot)
+  5. Narrativa: Contexto, Problema, Criterio, Ejecución
+  6. [NUEVO] Resultado: 4 metric cards
+  7. Lo que dejé: chips visuales
+  8. Stack
+  9. CTA
+*/
+
+:root {
+  --bg:#0b0c0e; --bg-2:#111316; --bg-3:#181a1d;
+  --border:#202227; --border-2:#2a2d33;
+  --text:#eaedf2; --text-2:#9aa0ae; --text-3:#555c6a;
+  --green:oklch(67% 0.17 148);
+  --green-dim:oklch(35% 0.10 148);
+  --green-bg:oklch(16% 0.06 148);
+  --violet:oklch(67% 0.17 290);
+  --violet-bg:oklch(16% 0.06 290);
+  --amber:oklch(72% 0.14 68);
+  --amber-bg:oklch(16% 0.06 68);
+  --red:oklch(63% 0.18 22);
+  --ff-display:'Space Grotesk',sans-serif;
+  --ff-body:'DM Sans',sans-serif;
+  --ff-mono:'DM Mono',monospace;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);color:var(--text);font-family:var(--ff-body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* ── NAV ── */
+.nav{position:sticky;top:0;z-index:100;background:rgba(11,12,14,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-brand{display:flex;align-items:baseline;gap:12px;text-decoration:none}
+.nav-wm{font-family:var(--ff-display);font-size:20px;font-weight:400;letter-spacing:-.025em;color:var(--text)}
+.nav-wm .mo{color:var(--green)}
+.nav-tagline{font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-size:13px;color:var(--text-2);text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:var(--text)}
+.nav-links a.active{color:var(--green)}
+.nav-cta{background:var(--green);color:#0b0c0e;font-size:13px;font-weight:500;padding:8px 18px;border-radius:3px;font-family:var(--ff-body);text-decoration:none}
+
+/* ── SPEC BANNER ── */
+.spec-banner{background:oklch(25% 0.08 68);border-bottom:1px solid oklch(40% 0.10 68);padding:10px 48px;font-family:var(--ff-mono);font-size:11px;color:oklch(80% 0.12 68);letter-spacing:.06em;display:flex;align-items:center;gap:12px}
+.spec-banner strong{color:oklch(90% 0.14 68)}
+
+/* ── PAGE HEADER ── */
+.page-header{max-width:760px;margin:0 auto;padding:56px 48px 0}
+
+.breadcrumb{display:inline-flex;align-items:center;gap:6px;font-family:var(--ff-mono);font-size:11px;color:var(--text-3);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;margin-bottom:28px;transition:color .15s}
+.breadcrumb:hover{color:var(--text-2)}
+
+.section-kicker{font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
+
+.page-h1{font-family:var(--ff-display);font-size:clamp(26px,4vw,40px);font-weight:400;letter-spacing:-.03em;line-height:1.15;margin-bottom:14px}
+
+.page-subtitle{font-size:clamp(16px,2.5vw,22px);font-weight:300;color:var(--text-2);letter-spacing:-.01em;line-height:1.4;margin-bottom:20px}
+
+.metric-tag{display:inline-block;font-family:var(--ff-mono);font-size:11px;letter-spacing:.06em;padding:4px 12px;border-radius:3px;background:var(--green-bg);color:var(--green);border:1px solid var(--green-dim)}
+.metric-tag.neutral{background:var(--bg-3);color:var(--text-2);border-color:var(--border-2)}
+
+/* ── PAGE WRAP ── */
+.page-wrap{max-width:760px;margin:0 auto;padding:0 48px 96px}
+
+/* ── META GRID ── */
+.meta-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:40px}
+.meta-cell{background:var(--bg-2);padding:18px 22px}
+.meta-label{font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+.meta-value{font-size:14px;color:var(--text-2)}
+
+/* ── STORY PLAYER ── */
+.story-player{border:1px solid var(--border);overflow:hidden;margin-top:48px}
+.story-controls{display:flex;align-items:center;gap:10px;padding:10px 18px;border-bottom:1px solid var(--border);background:var(--bg-3)}
+.story-dots{display:flex;gap:5px;flex:1;align-items:center}
+.story-dot{height:5px;border-radius:3px;background:var(--border-2);border:none;cursor:pointer;padding:0;transition:width .22s,background .22s}
+.story-dot.done{background:var(--green-dim)}
+.story-dot.active{width:22px;background:var(--green)}
+.story-dot.todo{width:5px}
+.story-counter{font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;white-space:nowrap}
+.story-play{font-family:var(--ff-mono);font-size:10px;letter-spacing:.1em;padding:4px 12px;border-radius:3px;cursor:pointer;text-transform:uppercase;background:var(--bg-2);color:var(--text-3);border:1px solid var(--border-2)}
+.story-nav-btn{font-family:var(--ff-mono);font-size:13px;padding:3px 10px;border-radius:3px;background:var(--bg-3);color:var(--text-2);border:1px solid var(--border-2);cursor:pointer}
+.story-visual{height:200px;overflow:hidden;border-bottom:1px solid var(--border);background:var(--bg)}
+.story-text{padding:16px 20px 20px;background:var(--bg-2)}
+.story-step-title{font-family:var(--ff-mono);font-size:10px;color:var(--green);letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px}
+.story-step-body{font-size:13px;color:var(--text-2);line-height:1.7;font-weight:300}
+
+/* ── EVIDENCE ZONE (NUEVO) ── */
+/*
+  Zona de evidencia visual. Aquí van screenshots reales.
+  Si no hay screenshot, va un placeholder con descripción de qué debería ir.
+  Opciones por orden de preferencia:
+  1. Screenshot real del portal/herramienta
+  2. Export Excalidraw del diagrama
+  3. Placeholder con descripción (lo que tenemos ahora)
+*/
+.evidence-zone{margin-top:48px;display:flex;flex-direction:column;gap:8px}
+.evidence-label{font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
+.evidence-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.evidence-grid.three{grid-template-columns:1fr 1fr 1fr}
+.evidence-panel{background:var(--bg-2);border:1px solid var(--border);overflow:hidden;position:relative}
+.evidence-panel.featured{grid-column:1/-1}
+.evidence-img{width:100%;aspect-ratio:16/9;background:var(--bg-3);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.evidence-img.tall{aspect-ratio:4/3}
+.evidence-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:24px;text-align:center}
+.evidence-placeholder-icon{font-family:var(--ff-mono);font-size:24px;color:var(--border-2)}
+.evidence-placeholder-label{font-family:var(--ff-mono);font-size:9px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase;line-height:1.6}
+.evidence-caption{padding:10px 14px;border-top:1px solid var(--border)}
+.evidence-caption-title{font-family:var(--ff-mono);font-size:10px;color:var(--text-2);letter-spacing:.06em;margin-bottom:2px}
+.evidence-caption-sub{font-size:12px;color:var(--text-3);line-height:1.5}
+
+/* ── NARRATIVE SECTIONS ── */
+.narrative{display:flex;flex-direction:column;gap:40px;margin-top:48px}
+.narrative-section{padding-bottom:40px;border-bottom:1px solid var(--border)}
+.narrative-section:last-child{border-bottom:none}
+.narrative-kicker{font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
+.narrative-body{font-size:15px;color:var(--text-2);line-height:1.78;font-weight:300}
+.narrative-body.highlight{color:var(--text)}
+
+/* ── OUTCOME METRICS (NUEVO) ── */
+/*
+  Reemplaza el párrafo de "Resultado" con cards visuales.
+  Más escaneable para el visitante que lee en diagonal.
+*/
+.outcome-metrics{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:16px}
+.outcome-card{background:var(--bg-2);padding:22px 24px}
+.outcome-number{font-family:var(--ff-mono);font-size:32px;font-weight:500;color:var(--green);letter-spacing:-.02em;line-height:1;margin-bottom:6px}
+.outcome-number.large{font-size:40px}
+.outcome-number.medium{font-size:26px}
+.outcome-number.neutral{color:var(--text-2)}
+.outcome-label{font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}
+.outcome-detail{font-size:12px;color:var(--text-3);line-height:1.5}
+
+/* ── DELIVERABLES (NUEVO) ── */
+/*
+  Reemplaza el párrafo de "Lo que dejé" con items visuales.
+  Permite escanear rápido qué assets entregables existen.
+*/
+.deliverables{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.deliverable-item{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;background:var(--bg-2);border:1px solid var(--border);border-left:3px solid var(--green-dim)}
+.deliverable-icon{font-family:var(--ff-mono);font-size:14px;color:var(--green-dim);flex-shrink:0;margin-top:1px}
+.deliverable-title{font-size:13px;color:var(--text);margin-bottom:2px;font-weight:400}
+.deliverable-desc{font-size:12px;color:var(--text-3);line-height:1.5}
+
+/* ── STACK ── */
+.stack-wrap{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.stack-tag{font-family:var(--ff-mono);font-size:11px;color:var(--text-2);background:var(--bg-3);border:1px solid var(--border-2);padding:3px 10px;border-radius:3px;letter-spacing:.04em}
+
+/* ── CTA ── */
+.cta-footer{border-top:1px solid var(--border);padding-top:32px;display:flex;gap:12px;margin-top:40px}
+.btn{font-family:var(--ff-body);font-size:14px;font-weight:500;padding:11px 22px;border-radius:3px;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;letter-spacing:-.01em;text-decoration:none;transition:opacity .15s}
+.btn:hover{opacity:.85}
+.btn-primary{background:var(--green);color:#0b0c0e}
+.btn-secondary{background:transparent;color:var(--text);border:1px solid var(--border-2)}
+
+/* ── DIVIDER ── */
+.spacer{height:48px}
+.divider-label{font-family:var(--ff-mono);font-size:9px;color:var(--border-2);letter-spacing:.2em;text-transform:uppercase;text-align:center;padding:6px 0;border-top:1px dashed var(--border);border-bottom:1px dashed var(--border);margin:32px 0}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border);padding:28px 48px;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-brand{font-family:var(--ff-display);font-size:15px;font-weight:400;letter-spacing:-.02em}
+.footer-brand .mo{color:var(--green)}
+.footer-copy{font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.06em}
+
+@media(max-width:700px){
+  .nav-inner,.page-header,.page-wrap{padding-left:20px;padding-right:20px}
+  .nav-tagline{display:none}
+  .evidence-grid,.evidence-grid.three{grid-template-columns:1fr}
+  .evidence-panel.featured{grid-column:auto}
+  .outcome-metrics{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+  SPEC BANNER — solo en prototype, no en prod
+══════════════════════════════════════════ -->
+<div class="spec-banner">
+  <strong>SPEC v1 · caso-detail</strong>
+  &nbsp;·&nbsp; Propuesta de rediseño para casos de éxito &nbsp;·&nbsp;
+  Nuevo: evidencia visual + métricas outcome + deliverables escaneable
+  &nbsp;·&nbsp; Pendiente de aprobación antes de implementar
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="home.html">
+      <div class="nav-wm"><span class="mo">mo</span>davidc</div>
+      <div class="nav-tagline">Criterio · Contexto · Intención</div>
+    </a>
+    <div class="nav-links">
+      <a href="experiencia.html">Experiencia</a>
+      <a href="casos-de-exito.html" class="active">Casos de Éxito</a>
+      <a href="metodologia.html">Metodología</a>
+      <a href="testimonios.html">Testimonios</a>
+      <a class="nav-cta" href="hablemos.html">Hablemos</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+  SECCIÓN 1 — HERO
+══════════════════════════════════════════ -->
+<div class="page-header">
+
+  <a class="breadcrumb" href="casos-de-exito.html">← Casos de éxito</a>
+
+  <h1 class="page-h1">Certificación ePrescribing Surescripts</h1>
+  <p class="page-subtitle">Acceso a +260K farmacias en Estados Unidos</p>
+  <div class="section-kicker">Healthcare · Regulatory Integration · 2020–2023</div>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+  SECCIÓN 2 — META GRID
+══════════════════════════════════════════ -->
+<div class="page-wrap">
+
+  <div class="meta-grid">
+    <div class="meta-cell">
+      <div class="meta-label">Cliente</div>
+      <div class="meta-value">MediRec, Inc.</div>
+    </div>
+    <div class="meta-cell">
+      <div class="meta-label">Año</div>
+      <div class="meta-value">2020-2023</div>
+    </div>
+    <div class="meta-cell">
+      <div class="meta-label">Categoría</div>
+      <div class="meta-value">Healthcare · Integration</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+    SECCIÓN 3 — STORY PLAYER
+    Conservado tal cual. 4 pasos con SVG.
+    En implementación: componente CasoStory de React.
+  ══════════════════════════════════════════ -->
+  <div class="story-player" style="margin-top:48px">
+    <div class="story-controls">
+      <div class="story-dots">
+        <button class="story-dot done" style="width:5px" onclick="goStep(0)"></button>
+        <button class="story-dot done" style="width:5px" onclick="goStep(1)"></button>
+        <button class="story-dot active" style="width:22px" onclick="goStep(2)"></button>
+        <button class="story-dot todo" style="width:5px" onclick="goStep(3)"></button>
+      </div>
+      <span class="story-counter">3 / 4</span>
+      <button class="story-play">▶ Play</button>
+      <button class="story-nav-btn">←</button>
+      <button class="story-nav-btn">→</button>
+    </div>
+    <!-- Visual del paso 3: 7 transacciones -->
+    <div class="story-visual">
+      <svg width="100%" height="100%" viewBox="0 0 760 200">
+        <rect width="760" height="200" fill="#0b0c0e"/>
+        <text x="30" y="18" font-family="monospace" font-size="9" fill="#555c6a" letter-spacing="2">7 TRANSACCIONES · TODAS CERTIFICADAS</text>
+        <rect x="30" y="28" width="94" height="80" rx="3" fill="oklch(16% 0.06 148)" stroke="oklch(67% 0.17 148)" stroke-width="1"/>
+        <text x="77" y="50" font-family="monospace" font-size="9" font-weight="500" fill="oklch(67% 0.17 148)" text-anchor="middle">NewRx</text>
+        <text x="77" y="64" font-family="monospace" font-size="7" fill="#555c6a" text-anchor="middle">receta nueva</text>
+        <text x="77" y="94" font-family="monospace" font-size="22" fill="oklch(67% 0.17 148)" text-anchor="middle">✓</text>
+        <rect x="131" y="28" width="94" height="80" rx="3" fill="oklch(16% 0.06 148)" stroke="oklch(67% 0.17 148)" stroke-width="1"/>
+        <text x="178" y="50" font-family="monospace" font-size="9" font-weight="500" fill="oklch(67% 0.17 148)" text-anchor="middle">RxRenewal</text>
+        <text x="178" y="64" font-family="monospace" font-size="7" fill="#555c6a" text-anchor="middle">renovación</text>
+        <text x="178" y="94" font-family="monospace" font-size="22" fill="oklch(67% 0.17 148)" text-anchor="middle">✓</text>
+        <rect x="232" y="28" width="94" height="80" rx="3" fill="oklch(16% 0.06 148)" stroke="oklch(67% 0.17 148)" stroke-width="1"/>
+        <text x="279" y="50" font-family="monospace" font-size="9" font-weight="500" fill="oklch(67% 0.17 148)" text-anchor="middle">RxChange</text>
+        <text x="279" y="64" font-family="monospace" font-size="7" fill="#555c6a" text-anchor="middle">cambio</text>
+        <text x="279" y="94" font-family="monospace" font-size="22" fill="oklch(67% 0.17 148)" text-anchor="middle">✓</text>
+        <rect x="333" y="28" width="94" height="80" rx="3" fill="oklch(16% 0.06 148)" stroke="oklch(67% 0.17 148)" stroke-width="1"/>
+        <text x="380" y="50" font-family="monospace" font-size="9" font-weight="500" fill="oklch(67% 0.17 148)" text-anchor="middle">CancelRx</text>
+        <text x="380" y="64" font-family="monospace" font-size="7" fill="#555c6a" text-anchor="middle">cancelar</text>
+        <text x="380" y="94" font-family="monospace" font-size="22" fill="oklch(67% 0.17 148)" text-anchor="middle">✓</text>
+        <rect x="434" y="28" width="94" height="80" rx="3" fill="oklch(16% 0.06 148)" stroke="oklch(67% 0.17 148)" stroke-width="1"/>
+        <text x="481" y="50" font-family="monospace" font-size="9" font-weight="500" fill="oklch(67% 0.17 148)" text-anchor="middle">Status</text>
+        <text x="481" y="64" font-family="monospace" font-size="7" fill="#555c6a" text-anchor="middle">estado</text>
+        <text x="481" y="94" font-family="monospace" font-size="22" fill="oklch(67% 0.17 148)" text-anchor="middle">✓</text>
+        <rect x="535" y="28" width="94" height="80" rx="3" fill="oklch(16% 0.06 148)" stroke="oklch(67% 0.17 148)" stroke-width="1"/>
+        <text x="582" y="50" font-family="monospace" font-size="9" font-weight="500" fill="oklch(67% 0.17 148)" text-anchor="middle">Error</text>
+        <text x="582" y="64" font-family="monospace" font-size="7" fill="#555c6a" text-anchor="middle">errores</text>
+        <text x="582" y="94" font-family="monospace" font-size="22" fill="oklch(67% 0.17 148)" text-anchor="middle">✓</text>
+        <rect x="636" y="28" width="94" height="80" rx="3" fill="oklch(16% 0.06 148)" stroke="oklch(67% 0.17 148)" stroke-width="1"/>
+        <text x="683" y="50" font-family="monospace" font-size="9" font-weight="500" fill="oklch(67% 0.17 148)" text-anchor="middle">Verify</text>
+        <text x="683" y="64" font-family="monospace" font-size="7" fill="#555c6a" text-anchor="middle">verificar</text>
+        <text x="683" y="94" font-family="monospace" font-size="22" fill="oklch(67% 0.17 148)" text-anchor="middle">✓</text>
+        <rect x="30" y="122" width="700" height="58" rx="3" fill="#111316" stroke="#202227"/>
+        <text x="50" y="144" font-family="monospace" font-size="9" fill="#555c6a">certificadas</text>
+        <text x="50" y="166" font-family="monospace" font-size="26" font-weight="500" fill="oklch(67% 0.17 148)">7/7</text>
+        <line x1="132" y1="130" x2="132" y2="174" stroke="#202227" stroke-width="1"/>
+        <text x="152" y="143" font-family="monospace" font-size="8" fill="#9aa0ae">mTLS · TLS 1.2+ · ECDHE-RSA-AES256-SHA384</text>
+        <text x="152" y="158" font-family="monospace" font-size="8" fill="#9aa0ae">NCPDP 2017071 · testing exhaustivo Surescripts</text>
+        <text x="152" y="171" font-family="monospace" font-size="7" fill="#555c6a">EHR_INB_Test_Msgs · drug data validation · aprobación individual por transacción</text>
+        <line x1="540" y1="130" x2="540" y2="174" stroke="#202227" stroke-width="1"/>
+        <text x="560" y="145" font-family="monospace" font-size="8" fill="#555c6a">timeline</text>
+        <text x="560" y="162" font-family="monospace" font-size="11" font-weight="500" fill="oklch(67% 0.17 148)">2020 → 2023</text>
+      </svg>
+    </div>
+    <div class="story-text">
+      <div class="story-step-title">7 transacciones — todas certificadas</div>
+      <p class="story-step-body">Cada transacción: diseño, desarrollo, testing exhaustivo contra entorno Surescripts y aprobación individual. NewRx, RxRenewal, RxChange, CancelRx, Status, Error, Verify. 2020 a 2023.</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+    SECCIÓN 4 — EVIDENCIA VISUAL (NUEVO)
+    ─────────────────────────────────────────
+    Zona de 3 paneles de evidencia.
+    Assets pendientes de capturar:
+    A. Screenshot del portal Surescripts con la certificación activa
+    B. Email/documento oficial de certificación (PR-21677)
+    C. Test matrix con resultados de las 7 transacciones
+       Alternativa: Excalidraw del diagrama de conectividad
+    ─────────────────────────────────────────
+    Discusión de implementación:
+    - Si tienes screenshots: usar <img> en .evidence-img
+    - Si tienes Excalidraw: exportar SVG e insertar inline
+    - Si no hay nada: mantener placeholder con descripción
+    ─────────────────────────────────────────
+  ══════════════════════════════════════════ -->
+  <div class="evidence-zone">
+    <div class="evidence-label">Evidencia</div>
+
+    <div class="evidence-grid">
+
+      <!-- Panel A: Stats de red Surescripts — FEATURED (imagen real) -->
+      <div class="evidence-panel featured">
+        <div class="evidence-img" style="aspect-ratio:auto;height:280px">
+          <img src="../../../public/assets/ss-network-stats.png"
+               alt="Surescripts network stats: 2.64 billion e-prescriptions, 93% CancelRx success, 32.9M RxChange"
+               style="width:100%;height:100%;object-fit:cover;object-position:top">
+        </div>
+        <div class="evidence-caption">
+          <div class="evidence-caption-title">La red a la que MediRec se certificó</div>
+          <div class="evidence-caption-sub">2.64 mil millones de recetas/año · 99.998% uptime · Virtually all U.S. pharmacies · Fuente: surescripts.com</div>
+        </div>
+      </div>
+
+      <!-- Panel B: EHR value props — "Expand your reach" (imagen real) -->
+      <div class="evidence-panel">
+        <div class="evidence-img" style="aspect-ratio:auto;height:260px">
+          <img src="../../../public/assets/ss-ehr-value.png"
+               alt="Surescripts: Manage prescriptions safely, securely & efficiently — Expand your reach"
+               style="width:100%;height:100%;object-fit:cover;object-position:top">
+        </div>
+        <div class="evidence-caption">
+          <div class="evidence-caption-title">Lo que la certificación desbloquea para EHRs</div>
+          <div class="evidence-caption-sub">"Connect to virtually all U.S. pharmacies" · "Improve patient safety" · Fuente: surescripts.com</div>
+        </div>
+      </div>
+
+      <!-- Panel C: Certificado real — aún pendiente -->
+      <div class="evidence-panel">
+        <div class="evidence-img tall">
+          <!-- ASSET PENDIENTE: Screenshot del portal Surescripts o email PR-21677 -->
+          <!-- Este es el único panel que aún necesita un asset propio -->
+          <div class="evidence-placeholder">
+            <div class="evidence-placeholder-icon">[ img ]</div>
+            <div class="evidence-placeholder-label">
+              Pendiente:<br>
+              Email / portal de certificación<br>
+              PR-21677 · 10/23/2023<br>
+              <br>
+              O: test matrix con resultados<br>
+              de las 7 transacciones
+            </div>
+          </div>
+        </div>
+        <div class="evidence-caption">
+          <div class="evidence-caption-title">Certificación oficial PR-21677</div>
+          <div class="evidence-caption-sub">Surescripts CG v6.1.6 · abcEHR · Oct 2023</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+    SECCIÓN 5 — NARRATIVA (6 bloques)
+    Igual que ahora. Sin cambios en copy.
+  ══════════════════════════════════════════ -->
+  <div class="narrative">
+
+    <div class="narrative-section">
+      <div class="narrative-kicker">Contexto</div>
+      <p class="narrative-body">MediRec construyó abcEHR con módulo de ePrescribing. Para que los médicos enviaran recetas a +260K farmacias USA, el sistema necesitaba certificación Surescripts, estándar regulatorio del mercado. Integración compleja con requisitos de seguridad, conectividad y validación clínica.</p>
+    </div>
+
+    <div class="narrative-section">
+      <div class="narrative-kicker">El problema</div>
+      <p class="narrative-body">Surescripts es ecosystem complejo con documentación fragmentada. Requisitos de seguridad (mTLS, certificados, TLS 1.2+), IP estática, FQDN específica, validación de 7 tipos de transacciones, compliance NCPDP 2017071. Timeline: 3+ años (abril 2020 a octubre 2023).</p>
+    </div>
+
+    <div class="narrative-section">
+      <div class="narrative-kicker">Mi criterio</div>
+      <p class="narrative-body">Integración regulatoria requiere seguir el proceso exacto de Surescripts, sin shortcuts. Trabajé con integration resource dedicada (Rebecca Bell, luego Tara Collyard). Fases: onboarding, desarrollo de conectividad (mTLS, CSR, ciphers), testing exhaustivo de 7 transacciones (NewRx, RxRenewal, RxChange, CancelRx, Status, Error, Verify), recertificación post-NLM.</p>
+    </div>
+
+    <div class="narrative-section">
+      <div class="narrative-kicker">La ejecución</div>
+      <p class="narrative-body">Fase 1 (2020): Onboarding, documentación de requisitos. Fase 2 (2020-2021): Desarrollo de API, certificados mTLS, TLS 1.2+ ciphers (ECDHE-RSA-AES256-SHA384, etc). Fase 3 (2021-2022): Testing de 7 transacciones con EHR_INB_Test_Msgs, validación de drug data. Fase 4 (Sept 2023): Recertificación post-migración NLM.</p>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════
+    SECCIÓN 6 — RESULTADO (NUEVO: metric cards)
+    Reemplaza el párrafo de texto corrido con
+    4 cards visuales escaneables.
+    El texto se puede mantener debajo si se quiere
+    el detalle narrativo.
+  ══════════════════════════════════════════ -->
+  <div style="padding-bottom:40px;border-bottom:1px solid var(--border)">
+    <div class="narrative-kicker" style="margin-top:40px">Resultado</div>
+
+    <div class="outcome-metrics">
+      <div class="outcome-card">
+        <div class="outcome-label">Transacciones</div>
+        <div class="outcome-number large">7/7</div>
+        <div class="outcome-detail">NewRx, RxRenewal, RxChange, CancelRx, Status, Error, Verify. Todas certificadas.</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-label">Red de farmacias</div>
+        <div class="outcome-number large">260K+</div>
+        <div class="outcome-detail">Farmacias USA accesibles desde abcEHR. Pharmacy network completa de Surescripts.</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-label">Recertificación post-NLM</div>
+        <div class="outcome-number medium">22 días</div>
+        <div class="outcome-detail">Tras migración de LexiComp a NLM, recertificación completada sin bloqueo regulatorio.</div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-label">Certificación oficial</div>
+        <div class="outcome-number medium neutral">PR-21677</div>
+        <div class="outcome-detail">Otorgada el 10/23/2023. mTLS 256-bit, TLS 1.2+, NCPDP 2017071 compliant.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════
+    SECCIÓN 7 — LO QUE DEJÉ (NUEVO: deliverables)
+    Reemplaza el párrafo con items escaneable.
+    Cada item es un entregable concreto.
+  ══════════════════════════════════════════ -->
+  <div style="padding-bottom:40px;border-bottom:1px solid var(--border);margin-top:40px">
+    <div class="narrative-kicker">Lo que dejé</div>
+
+    <div class="deliverables">
+      <div class="deliverable-item">
+        <div class="deliverable-icon">📄</div>
+        <div>
+          <div class="deliverable-title">Connectivity &amp; Authentication Guide — 72 páginas</div>
+          <div class="deliverable-desc">Documentación completa de conectividad: mTLS setup, cipher suites, IP estática, FQDN, troubleshooting. El equipo puede renovar certificados sin mí.</div>
+        </div>
+      </div>
+      <div class="deliverable-item">
+        <div class="deliverable-icon">🔑</div>
+        <div>
+          <div class="deliverable-title">Certificate Signing Request template</div>
+          <div class="deliverable-desc">Template para renovación de certificados mTLS. Usado en 2024, preparado para 2027. Proceso documentado paso a paso.</div>
+        </div>
+      </div>
+      <div class="deliverable-item">
+        <div class="deliverable-icon">🧪</div>
+        <div>
+          <div class="deliverable-title">Test scenarios — 50+ casos</div>
+          <div class="deliverable-desc">Suite de test cases para las 7 transacciones. Incluye casos edge, manejo de errores, y escenarios de recertificación. Reutilizables en futuras actualizaciones de spec.</div>
+        </div>
+      </div>
+      <div class="deliverable-item">
+        <div class="deliverable-icon">🗺</div>
+        <div>
+          <div class="deliverable-title">Directory mapping v6.1 to v4.x</div>
+          <div class="deliverable-desc">Mapeo de campos entre versiones de Surescripts. Útil si en el futuro se necesita soporte de versiones legacy o migración hacia adelante.</div>
+        </div>
+      </div>
+      <div class="deliverable-item">
+        <div class="deliverable-icon">📋</div>
+        <div>
+          <div class="deliverable-title">Runbook interno de integración Surescripts</div>
+          <div class="deliverable-desc">Procedimientos operativos: cómo renovar certificados, qué hacer si cambia un spec, cómo contactar al support de Surescripts, pasos para una nueva recertificación.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+    SECCIÓN 8 — STACK
+  ══════════════════════════════════════════ -->
+  <div style="margin-top:40px">
+    <div class="narrative-kicker">Stack</div>
+    <div class="stack-wrap">
+      <span class="stack-tag">Surescripts CG v6.1.6</span>
+      <span class="stack-tag">mTLS</span>
+      <span class="stack-tag">TLS 1.2</span>
+      <span class="stack-tag">HTTPS</span>
+      <span class="stack-tag">NCPDP 2017071</span>
+      <span class="stack-tag">ECDHE-RSA</span>
+      <span class="stack-tag">PKI</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+    SECCIÓN 9 — CTA
+  ══════════════════════════════════════════ -->
+  <div class="cta-footer">
+    <a href="casos-de-exito.html" class="btn btn-secondary">← Todos los casos</a>
+    <a href="hablemos.html" class="btn btn-primary">Hablemos de tu proyecto →</a>
+  </div>
+
+</div><!-- /.page-wrap -->
+
+<!-- ══════════════════════════════════════════
+  FOOTER
+══════════════════════════════════════════ -->
+<footer>
+  <div class="footer-brand"><span class="mo">mo</span>davidc</div>
+  <div class="footer-copy">© 2024 Moisés Cedeño · Lima, Perú</div>
+</footer>
+
+</body>
+</html>

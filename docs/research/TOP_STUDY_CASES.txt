@@ -1,0 +1,125 @@
+Study Case 1
+Migración de proveedor propietario y reducción de riesgo operativo
+
+Contexto
+Sistema clínico core dependiente de una base de datos farmacéutica propietaria utilizada en múltiples flujos críticos.
+
+Problema
+Altos costos de licenciamiento, dependencia total del proveedor y riesgo ante cambios de contrato o indisponibilidad del servicio.
+
+Riesgos identificados
+
+Interrupción de operación clínica durante la migración.
+
+Incompatibilidad con integraciones existentes.
+
+Impacto reputacional ante fallos en producción.
+
+Decisiones clave
+
+Evitar una migración “big bang” y ejecutar un cambio progresivo.
+
+Mantener interfaces existentes para no afectar usuarios finales.
+
+Priorizar una alternativa open source con respaldo institucional.
+
+Rol y responsabilidad
+Responsable técnico del diseño y ejecución de la migración sin impacto operativo.
+
+Tecnologías
+NLM, MySQL, APIs REST.
+
+Solución
+Migración completa desde LexiComp a NLM, adaptación de integraciones y validaciones de compatibilidad funcional.
+
+Impacto
+
+Ahorro aproximado de USD 20,000 anuales en licencias.
+
+Eliminación de dependencia crítica de proveedor.
+
+Mayor control y auditabilidad de datos clínicos.
+
+Study Case 2
+Optimización FinOps en infraestructura cloud sobredimensionada
+
+Contexto
+Sistema productivo en AWS diseñado para una escala futura que no se materializó.
+
+Problema
+Costos elevados sin correlación con el uso real del sistema.
+
+Riesgos identificados
+
+Caídas de servicio durante la optimización.
+
+Subdimensionamiento de recursos críticos.
+
+Incumplimiento de SLA.
+
+Decisiones clave
+
+Optimizar antes de escalar.
+
+Reducir recursos de forma gradual con monitoreo continuo.
+
+Mantener márgenes de seguridad en componentes críticos.
+
+Rol y responsabilidad
+Responsable del análisis, rediseño y ejecución de la optimización de infraestructura.
+
+Tecnologías
+AWS (EC2, RDS, S3).
+
+Solución
+Reestructuración de instancias, eliminación de recursos ociosos y consolidación de entornos.
+
+Impacto
+
+Reducción de costos AWS en 58%.
+
+Capacidad operativa mantenida.
+
+Infraestructura más eficiente y gobernable.
+
+Study Case 3
+Estabilización de código heredado e integraciones críticas
+
+Contexto
+Sistema RX desarrollado en C# con múltiples integraciones externas críticas (eRx, FHIR, PREIS).
+
+Problema
+Código heredado poco documentado, errores difíciles de rastrear y alto impacto ante fallos.
+
+Riesgos identificados
+
+Fallas en integraciones críticas con impacto directo en usuarios.
+
+Reescritura total con alto riesgo y sin retorno inmediato.
+
+Baja visibilidad de errores en producción.
+
+Decisiones clave
+
+Evitar reescritura completa del sistema.
+
+Refactorización progresiva enfocada en puntos críticos.
+
+Mejorar observabilidad antes de agregar nuevas funcionalidades.
+
+Rol y responsabilidad
+Responsable de estabilizar y evolucionar el sistema sin interrumpir operación.
+
+Tecnologías
+C#, .NET Framework, REST, XML, JSON, mTLS.
+
+Solución
+Validaciones previas al envío, manejo explícito de errores y mejora del monitoreo.
+
+Impacto
+
+Reducción de incidentes en producción.
+
+Mayor confiabilidad en integraciones críticas.
+
+Plataforma preparada para evolución controlada.

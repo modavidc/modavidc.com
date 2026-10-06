@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Certificación ePrescribing Surescripts · modavidc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --bg:#0b0c0e; --bg-2:#111316; --bg-3:#181a1d;
+  --border:#202227; --border-2:#2a2d33;
+  --text:#eaedf2; --text-2:#9aa0ae; --text-3:#555c6a;
+  --green:oklch(67% 0.17 148);
+  --green-dim:oklch(35% 0.10 148);
+  --green-bg:oklch(16% 0.06 148);
+  --ff-display:'Space Grotesk',sans-serif;
+  --ff-body:'DM Sans',sans-serif;
+  --ff-mono:'DM Mono',monospace;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);color:var(--text);font-family:var(--ff-body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* ── NAV ── */
+.nav{position:sticky;top:0;z-index:100;background:rgba(11,12,14,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-brand{display:flex;align-items:baseline;gap:12px;text-decoration:none}
+.nav-wm{font-family:var(--ff-display);font-size:20px;font-weight:400;letter-spacing:-.025em;color:var(--text)}
+.nav-wm .mo{color:var(--green)}
+.nav-tagline{font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-size:13px;color:var(--text-2);text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:var(--text)}
+.nav-links a.active{color:var(--green)}
+.nav-cta{background:var(--green);color:#0b0c0e;font-size:13px;font-weight:500;padding:8px 18px;border-radius:3px;font-family:var(--ff-body);text-decoration:none}
+
+/* ── HERO ── */
+.page-header{max-width:760px;margin:0 auto;padding:56px 48px 0}
+
+.breadcrumb{display:inline-flex;align-items:center;gap:6px;font-family:var(--ff-mono);font-size:11px;color:var(--text-3);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;margin-bottom:28px;transition:color .15s}
+.breadcrumb:hover{color:var(--text-2)}
+
+.page-h1{font-family:var(--ff-display);font-size:clamp(26px,4vw,40px);font-weight:400;letter-spacing:-.03em;line-height:1.15;margin-bottom:14px}
+
+.page-subtitle{font-size:clamp(16px,2.5vw,22px);font-weight:300;color:var(--text-2);letter-spacing:-.01em;line-height:1.4;margin-bottom:20px}
+
+.section-kicker{font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase}
+
+/* ── PAGE WRAP ── */
+.page-wrap{max-width:760px;margin:0 auto;padding:0 48px 96px}
+
+/* ── NARRATIVE ── */
+.narrative{display:flex;flex-direction:column;gap:0;margin-top:56px}
+
+.narrative-section{padding:0 0 40px;border-bottom:1px solid var(--border);margin-bottom:40px}
+.narrative-section:last-child{border-bottom:none;margin-bottom:0}
+
+.narrative-kicker{font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px}
+
+.narrative-body{font-size:15px;color:var(--text-2);line-height:1.78;font-weight:300}
+.narrative-body + .narrative-body{margin-top:14px}
+
+.narrative-list{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:6px}
+.narrative-list li{font-size:15px;color:var(--text-2);font-weight:300;line-height:1.6;padding-left:18px;position:relative}
+.narrative-list li::before{content:"";position:absolute;left:0;top:.72em;width:5px;height:1px;background:var(--green-dim)}
+
+/* ── RESULTADO BLOCK ── */
+.resultado-block{margin-top:16px;display:flex;flex-direction:column;gap:12px}
+
+.cert-card{background:var(--bg-2);border:1px solid var(--border);border-left:3px solid var(--green);padding:20px 24px;display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
+.cert-card-left{}
+.cert-label{font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+.cert-title{font-size:15px;color:var(--text);font-weight:400;margin-bottom:4px}
+.cert-sub{font-family:var(--ff-mono);font-size:12px;color:var(--text-3);letter-spacing:.04em}
+.cert-badge{font-family:var(--ff-mono);font-size:11px;color:var(--green);background:var(--green-bg);border:1px solid var(--green-dim);padding:4px 12px;border-radius:3px;white-space:nowrap;flex-shrink:0;align-self:flex-start}
+
+.tx-block{background:var(--bg-2);border:1px solid var(--border);padding:20px 24px}
+.tx-label{font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+.tx-grid{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.tx-chip{font-family:var(--ff-mono);font-size:11px;color:var(--green);background:var(--green-bg);border:1px solid var(--green-dim);padding:4px 12px;border-radius:3px;letter-spacing:.04em}
+.tx-score{font-family:var(--ff-mono);font-size:13px;color:var(--text-3);letter-spacing:.06em}
+.tx-score strong{color:var(--green);font-size:18px}
+
+.impact-block{background:var(--bg-2);border:1px solid var(--border);padding:20px 24px}
+.impact-label{font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+.impact-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.impact-list li{font-size:14px;color:var(--text-2);font-weight:300;line-height:1.5;padding-left:18px;position:relative}
+.impact-list li::before{content:"";position:absolute;left:0;top:.68em;width:5px;height:1px;background:var(--green)}
+
+/* ── LO QUE DEJÉ ── */
+.deliverables-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.deliverables-list li{font-size:15px;color:var(--text-2);font-weight:300;line-height:1.6;padding-left:18px;position:relative}
+.deliverables-list li::before{content:"";position:absolute;left:0;top:.72em;width:5px;height:1px;background:var(--green-dim)}
+
+.narrative-closing{font-size:14px;color:var(--text-3);font-weight:300;line-height:1.7;margin-top:16px;font-style:italic}
+
+/* ── OUTCOME METRICS ── */
+.outcome-metrics{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:16px}
+.outcome-card{background:var(--bg-2);padding:22px 24px}
+.outcome-number{font-family:var(--ff-mono);font-size:32px;font-weight:500;color:var(--green);letter-spacing:-.02em;line-height:1;margin-bottom:6px}
+.outcome-number.large{font-size:40px}
+.outcome-number.medium{font-size:26px}
+.outcome-number.neutral{color:var(--text-2)}
+.outcome-label{font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}
+.outcome-detail{font-size:12px;color:var(--text-3);line-height:1.5}
+
+/* ── META GRID ── */
+.meta-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:40px}
+.meta-cell{background:var(--bg-2);padding:18px 22px}
+.meta-label{font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+.meta-value{font-size:14px;color:var(--text-2)}
+
+/* ── ARQUITECTURA TÉCNICA ── */
+.arch-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:16px}
+.arch-group{background:var(--bg-2);padding:18px 22px}
+.arch-group-label{font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+.arch-tags{display:flex;flex-wrap:wrap;gap:5px}
+.arch-tag{font-family:var(--ff-mono);font-size:11px;color:var(--text-2);background:var(--bg-3);border:1px solid var(--border-2);padding:3px 10px;border-radius:3px;letter-spacing:.04em}
+
+/* ── STACK ── */
+.stack-wrap{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.stack-tag{font-family:var(--ff-mono);font-size:11px;color:var(--text-2);background:var(--bg-3);border:1px solid var(--border-2);padding:3px 10px;border-radius:3px;letter-spacing:.04em}
+
+/* ── EVIDENCE ZONE ── */
+.evidence-zone{margin-top:48px;display:flex;flex-direction:column;gap:8px}
+.evidence-label{font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
+.evidence-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.evidence-panel{background:var(--bg-2);border:1px solid var(--border);overflow:hidden;position:relative}
+.evidence-panel.featured{grid-column:1/-1}
+.evidence-img{width:100%;background:var(--bg-3);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.evidence-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:32px;text-align:center;height:200px}
+.evidence-placeholder-icon{font-family:var(--ff-mono);font-size:24px;color:var(--border-2)}
+.evidence-placeholder-label{font-family:var(--ff-mono);font-size:9px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase;line-height:1.6}
+.evidence-caption{padding:10px 14px;border-top:1px solid var(--border)}
+.evidence-caption-title{font-family:var(--ff-mono);font-size:10px;color:var(--text-2);letter-spacing:.06em;margin-bottom:2px}
+.evidence-caption-sub{font-size:12px;color:var(--text-3);line-height:1.5}
+
+@media(max-width:700px){
+  .evidence-grid{grid-template-columns:1fr}
+  .evidence-panel.featured{grid-column:auto}
+}
+
+/* ── CTA ── */
+.cta-footer{border-top:1px solid var(--border);padding-top:32px;display:flex;gap:12px;margin-top:40px}
+.btn{font-family:var(--ff-body);font-size:14px;font-weight:500;padding:11px 22px;border-radius:3px;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;letter-spacing:-.01em;text-decoration:none;transition:opacity .15s}
+.btn:hover{opacity:.85}
+.btn-primary{background:var(--green);color:#0b0c0e}
+.btn-secondary{background:transparent;color:var(--text);border:1px solid var(--border-2)}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border);padding:28px 48px;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-brand{font-family:var(--ff-display);font-size:15px;font-weight:400;letter-spacing:-.02em}
+.footer-brand .mo{color:var(--green)}
+.footer-copy{font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.06em}
+
+@media(max-width:700px){
+  .nav-inner,.page-header,.page-wrap{padding-left:20px;padding-right:20px}
+  .nav-tagline{display:none}
+  .cert-card{flex-direction:column;gap:12px}
+  .tx-grid{gap:5px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="home.html">
+      <div class="nav-wm"><span class="mo">mo</span>davidc</div>
+      <div class="nav-tagline">Criterio · Contexto · Intención</div>
+    </a>
+    <div class="nav-links">
+      <a href="experiencia.html">Experiencia</a>
+      <a href="casos-de-exito.html" class="active">Casos de Éxito</a>
+      <a href="metodologia.html">Metodología</a>
+      <a href="testimonios.html">Testimonios</a>
+      <a class="nav-cta" href="hablemos.html">Hablemos</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-header">
+  <a class="breadcrumb" href="casos-de-exito.html">← Casos de éxito</a>
+  <h1 class="page-h1">Recertificación ePrescribing Surescripts</h1>
+  <p class="page-subtitle">Nueva arquitectura de integración clínica para abcEHR</p>
+  <p style="font-size:13px;color:var(--text-3);font-weight:300;margin-bottom:20px;font-family:var(--ff-mono);letter-spacing:.04em">+260K farmacias USA · NCPDP SCRIPT 2017071 · 7/7 transacciones certificadas</p>
+  <div class="section-kicker">Healthcare · Regulatory Integration · 2020–2023</div>
+</div>
+
+<!-- CONTENIDO -->
+<div class="page-wrap">
+  <div class="meta-grid">
+    <div class="meta-cell">
+      <div class="meta-label">Cliente</div>
+      <div class="meta-value">MediRec, Inc.</div>
+    </div>
+    <div class="meta-cell">
+      <div class="meta-label">Año</div>
+      <div class="meta-value">2020–2023</div>
+    </div>
+    <div class="meta-cell">
+      <div class="meta-label">Categoría</div>
+      <div class="meta-value">Healthcare · Integration</div>
+    </div>
+  </div>
+
+  <!-- EVIDENCIA VISUAL -->
+  <div class="evidence-zone">
+    <div class="evidence-label">Evidencia</div>
+    <div class="evidence-grid">
+
+      <!-- Panel A: Stats de la red — imagen real, span completo -->
+      <div class="evidence-panel featured">
+        <div class="evidence-img" style="height:280px">
+          <img src="../../../public/assets/ss-network-stats.png"
+               alt="Surescripts network stats: 2.64 billion e-prescriptions, 93% CancelRx success, 32.9M RxChange"
+               style="width:100%;height:100%;object-fit:cover;object-position:top">
+        </div>
+        <div class="evidence-caption">
+          <div class="evidence-caption-title">La red a la que MediRec se certificó</div>
+          <div class="evidence-caption-sub">2.64 mil millones de recetas/año · 99.998% uptime · Virtually all U.S. pharmacies · Fuente: surescripts.com</div>
+        </div>
+      </div>
+
+      <!-- Panel B: Valor para EHRs — imagen real -->
+      <div class="evidence-panel">
+        <div class="evidence-img" style="height:260px">
+          <img src="../../../public/assets/ss-ehr-value.png"
+               alt="Surescripts: Manage prescriptions safely, securely & efficiently — Expand your reach"
+               style="width:100%;height:100%;object-fit:cover;object-position:top">
+        </div>
+        <div class="evidence-caption">
+          <div class="evidence-caption-title">Lo que la certificación desbloquea para EHRs</div>
+          <div class="evidence-caption-sub">"Connect to virtually all U.S. pharmacies" · "Improve patient safety" · Fuente: surescripts.com</div>
+        </div>
+      </div>
+
+      <!-- Panel C: Certificado PR-21677 — pendiente screenshot real -->
+      <div class="evidence-panel">
+        <div class="evidence-img">
+          <div class="evidence-placeholder">
+            <div class="evidence-placeholder-icon">[ img ]</div>
+            <div class="evidence-placeholder-label">
+              Pendiente:<br>
+              Email / portal de certificación<br>
+              PR-21677 · 10/23/2023
+            </div>
+          </div>
+        </div>
+        <div class="evidence-caption">
+          <div class="evidence-caption-title">Certificación oficial PR-21677</div>
+          <div class="evidence-caption-sub">Surescripts CG v6.1.6 · abcEHR · Oct 2023</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="narrative">
+
+    <!-- El contexto -->
+    <div class="narrative-section">
+      <div class="narrative-kicker">El contexto</div>
+      <p class="narrative-body">MediRec ya contaba con integración ePrescribing en abcEHR, pero la evolución de los estándares regulatorios de Surescripts y NCPDP requería una recertificación completa de la plataforma.</p>
+      <p class="narrative-body" style="margin-top:16px">La actualización implicaba adaptar la integración existente hacia nuevas versiones del estándar clínico, mantener compatibilidad operativa y garantizar continuidad sobre workflows reales de prescripción electrónica.</p>
+      <p class="narrative-body" style="margin-top:16px">El objetivo era conservar conectividad con la red nacional de farmacias de Estados Unidos sin interrumpir la operación clínica.</p>
+    </div>
+
+    <!-- El desafío -->
+    <div class="narrative-section">
+      <div class="narrative-kicker">El desafío</div>
+      <p class="narrative-body">La migración involucraba múltiples capas técnicas y regulatorias:</p>
+      <ul class="narrative-list">
+        <li>actualización de transacciones NCPDP SCRIPT,</li>
+        <li>adaptación de XMLs clínicos y estructuras legacy,</li>
+        <li>nueva API de integración desarrollada desde cero,</li>
+        <li>compatibilidad entre sistema desktop .NET y nueva API Laravel,</li>
+        <li>mTLS y certificados X.509,</li>
+        <li>TLS 1.2+ y hardening de conectividad,</li>
+        <li>validación individual de transacciones clínicas,</li>
+        <li>testing coordinado con Surescripts,</li>
+        <li>y recertificación completa post-migración NLM.</li>
+      </ul>
+      <p class="narrative-body" style="margin-top:16px">Además, gran parte del proceso dependía de documentación fragmentada, validaciones manuales y troubleshooting coordinado directamente con el equipo de integración de Surescripts.</p>
+    </div>
+
+    <!-- Mi rol -->
+    <div class="narrative-section">
+      <div class="narrative-kicker">Mi rol</div>
+      <p class="narrative-body">Lideré técnicamente la migración y recertificación de la integración ePrescribing.</p>
+      <p class="narrative-body" style="margin-top:16px">El trabajo incluyó:</p>
+      <ul class="narrative-list">
+        <li>diseño e implementación de una nueva API en Laravel para integración Surescripts,</li>
+        <li>adaptación de workflows clínicos existentes,</li>
+        <li>actualización de XMLs y transacciones regulatorias,</li>
+        <li>integración entre backend Laravel y aplicación desktop .NET utilizada por médicos,</li>
+        <li>implementación de conectividad segura vía mTLS,</li>
+        <li>troubleshooting regulatorio,</li>
+        <li>coordinación de pruebas de certificación,</li>
+        <li>y soporte técnico durante el proceso completo de validación oficial.</li>
+      </ul>
+      <p class="narrative-body" style="margin-top:16px">También trabajé directamente con los integration resources asignados por Surescripts durante el ciclo completo de certificación y recertificación.</p>
+    </div>
+
+    <!-- Resultado -->
+    <div class="narrative-section">
+      <div class="narrative-kicker">Resultado</div>
+
+      <div class="outcome-metrics">
+        <div class="outcome-card">
+          <div class="outcome-label">Transacciones</div>
+          <div class="outcome-number large">7/7</div>
+          <div class="outcome-detail">NewRx, RxRenewal, RxChange, CancelRx, Status, Error, Verify. Todas certificadas.</div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-label">Red de farmacias</div>
+          <div class="outcome-number large">260K+</div>
+          <div class="outcome-detail">Farmacias USA accesibles desde abcEHR. Pharmacy network completa de Surescripts.</div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-label">Recertificación post-NLM</div>
+          <div class="outcome-number medium">22 días</div>
+          <div class="outcome-detail">Tras migración de LexiComp a NLM, recertificación completada sin bloqueo regulatorio.</div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-label">Certificación oficial</div>
+          <div class="outcome-number medium neutral">PR-21677</div>
+          <div class="outcome-detail">Otorgada el 10/23/2023. mTLS 256-bit, TLS 1.2+, NCPDP 2017071 compliant.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lo que dejé -->
+    <div class="narrative-section">
+      <div class="narrative-kicker">Lo que dejé</div>
+      <ul class="deliverables-list">
+        <li>Runbook interno de integración</li>
+        <li>Guías de conectividad y autenticación</li>
+        <li>Templates CSR y manejo de certificados</li>
+        <li>Suite de test scenarios</li>
+        <li>Mapping entre versiones de directorios</li>
+        <li>Procedimientos de renovación y recertificación</li>
+        <li>Base API desacoplada para futuras actualizaciones regulatorias</li>
+      </ul>
+      <p class="narrative-closing">El equipo quedó preparado para operar y mantener la integración sin dependencia directa de mí.</p>
+    </div>
+
+    <!-- Arquitectura técnica -->
+    <div class="narrative-section">
+      <div class="narrative-kicker">Arquitectura técnica</div>
+      <div class="arch-grid">
+        <div class="arch-group">
+          <div class="arch-group-label">Backend &amp; APIs</div>
+          <div class="arch-tags">
+            <span class="arch-tag">PHP 7.3 / 8.0</span>
+            <span class="arch-tag">Laravel 8</span>
+            <span class="arch-tag">JWT Auth</span>
+            <span class="arch-tag">Guzzle HTTP</span>
+            <span class="arch-tag">Spatie Array-to-XML</span>
+          </div>
+        </div>
+        <div class="arch-group">
+          <div class="arch-group-label">Desktop Integration</div>
+          <div class="arch-tags">
+            <span class="arch-tag">C#</span>
+            <span class="arch-tag">.NET</span>
+            <span class="arch-tag">REST API consumer</span>
+          </div>
+        </div>
+        <div class="arch-group">
+          <div class="arch-group-label">Infraestructura</div>
+          <div class="arch-tags">
+            <span class="arch-tag">Docker</span>
+            <span class="arch-tag">AWS</span>
+            <span class="arch-tag">HTTPS + mTLS</span>
+            <span class="arch-tag">TLS 1.2</span>
+            <span class="arch-tag">PKI / X.509</span>
+          </div>
+        </div>
+        <div class="arch-group">
+          <div class="arch-group-label">Calidad y observabilidad</div>
+          <div class="arch-tags">
+            <span class="arch-tag">PHPUnit</span>
+            <span class="arch-tag">Mockery</span>
+            <span class="arch-tag">Swagger / OpenAPI</span>
+            <span class="arch-tag">Sentry</span>
+          </div>
+        </div>
+        <div class="arch-group" style="grid-column:1/-1">
+          <div class="arch-group-label">Compliance</div>
+          <div class="arch-tags">
+            <span class="arch-tag">Surescripts CG</span>
+            <span class="arch-tag">NCPDP SCRIPT 2017071</span>
+            <span class="arch-tag">EPCS workflows</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="cta-footer">
+    <a href="casos-de-exito.html" class="btn btn-secondary">← Todos los casos</a>
+    <a href="hablemos.html" class="btn btn-primary">Hablemos de tu proyecto →</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-brand"><span class="mo">mo</span>davidc</div>
+  <div class="footer-copy">© 2024 Moisés Cedeño · Lima, Perú</div>
+</footer>
+
+</body>
+</html>

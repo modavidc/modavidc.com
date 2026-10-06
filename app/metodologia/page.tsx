@@ -1,230 +1,215 @@
+import Link from 'next/link'
+
 export default function MetodologiaPage() {
   return (
-    <div className="page-wrap">
+    <div>
 
-      {/* ── HERO ── */}
-      <div className="page-section" style={{paddingTop:'72px'}}>
+      {/* HERO */}
+      <div className="page-header">
         <div className="section-kicker">Metodología</div>
-        <h1 className="page-h1" style={{fontSize:'clamp(36px,5vw,64px)'}}>
-          Así es cómo trabajo — y por qué<br />importa más que el <em>stack</em> que elijo.
-        </h1>
-        <p className="page-sub" style={{marginBottom:'32px'}}>
-          IA para velocidad. Documentación para continuidad. Criterio para que el proyecto no dependa de mí. Cada proyecto queda en mejor estado del que lo encontré.
-        </p>
-        <div className="hero-pull">
-          Cuando termino un proyecto, el equipo <strong>no me necesita para seguir</strong> — eso no es accidental, es el objetivo desde el día uno.
+        <h1 className="page-h1">No es solo escribir buen código.<br />Es tomar las <em>decisiones correctas.</em></h1>
+        <p className="page-sub">8 años de proyectos me enseñaron cuándo la solución obvia es la solución equivocada. Aquí está el sistema que uso para tomar las decisiones correctas y para que el equipo pueda seguir tomándolas con criterio propio.</p>
+        <div className="page-meta">
+          <span>Lima, remoto</span>
+          <span>Healthcare · SaaS</span>
+          <span>8 años · 20K+ usuarios en producción</span>
         </div>
+        <p className="lead-quote">El stack es una <em>consecuencia</em> de la decisión, no la decisión.</p>
       </div>
 
-      {/* ── PILARES ── */}
-      <section className="page-section">
-        <div className="section-kicker">Los tres pilares</div>
-        <h2 className="section-h2">IA + Contexto + <em>Criterio</em></h2>
-        <p className="section-sub">No es un proceso lineal — es un sistema donde cada pilar refuerza a los otros.</p>
+      {/* PROCESO 4 FASES */}
+      <section className="section">
+        <div className="section-kicker">El proceso · de día 1 a entrega</div>
+        <h2 className="section-h2">Cuatro fases, <em>doce semanas</em></h2>
+        <p className="section-sub">Lo que pasa cuando entro a un proyecto. No es un workflow ágil genérico: es la secuencia específica con la que llevo un sistema de "algo está roto" a "el equipo lo opera con criterio propio".</p>
+
+        <div className="process">
+          <div className="process-cell">
+            <div className="process-num"><b>01</b>Diagnóstico</div>
+            <div className="process-h">Mapear lo real</div>
+            <div className="process-when">Semana 1</div>
+            <div className="process-body">Entrevistas con el equipo, lectura del repo y del cloud bill, mapeo de la deuda técnica priorizada por costo de negocio. No hay decisiones aún, solo verdad.</div>
+            <div className="process-out"><b>Output</b>Documento de 2 páginas: 3 hallazgos críticos, con costo y consecuencia.</div>
+          </div>
+          <div className="process-cell">
+            <div className="process-num"><b>02</b>ADR raíz</div>
+            <div className="process-h">Decidir, escrito</div>
+            <div className="process-when">Semana 2</div>
+            <div className="process-body">Las decisiones arquitectónicas críticas quedan en un ADR público con contexto, alternativas evaluadas y consecuencias aceptadas. El equipo discute la decisión antes de que sea irreversible.</div>
+            <div className="process-out"><b>Output</b>1 ADR raíz + plantilla para los que vengan después.</div>
+          </div>
+          <div className="process-cell">
+            <div className="process-num"><b>03</b>Ejecución</div>
+            <div className="process-h">Equipo decide en parejas</div>
+            <div className="process-when">Semanas 3–8</div>
+            <div className="process-body">Cada PR de impacto se asocia a un ADR. Pair-review con un dev del equipo. La IA acelera el código y el ADR garantiza que cada commit tenga intención defendible.</div>
+            <div className="process-out"><b>Output</b>PRs con ADR enlazado, métricas semanales contra baseline.</div>
+          </div>
+          <div className="process-cell">
+            <div className="process-num"><b>04</b>Transferencia</div>
+            <div className="process-h">Handoff con ownership</div>
+            <div className="process-when">Semanas 9–12</div>
+            <div className="process-body">Runbook por servicio, on-call rotativo, lectura conjunta del primer reporte mensual. La transferencia es la entrega: si el equipo no puede decidir por su cuenta, el proyecto no terminó.</div>
+            <div className="process-out"><b>Output</b>Runbook + reporte de impacto + handoff doc firmado.</div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3 PILARES */}
+      <section className="section">
+        <div className="section-kicker">Los tres pilares · en profundidad</div>
+        <h2 className="section-h2">Decidir, operar, <em>medir.</em></h2>
+        <p className="section-sub">Tres verbos, tres pilares. No son principios decorativos: son la forma concreta en que opero cada fase del proceso.</p>
 
         <div className="pilares-grid">
-          <div className="pilar-card">
-            <div className="pilar-icon">
-              <div className="pilar-icon-mark">
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                  <path d="M8 2L10 6H14L11 9L12 13L8 11L4 13L5 9L2 6H6L8 2Z" stroke="currentColor" strokeWidth="1.2" fill="none"/>
-                </svg>
-              </div>
-              IA para velocidad
-            </div>
-            <div className="pilar-title">Velocidad con criterio</div>
-            <div className="pilar-body">Uso IA como acelerador del trabajo técnico, no como sustituto del juicio. La diferencia es que puedo entregar en 3 semanas lo que antes tardaba 3 meses — sin sacrificar la calidad de la arquitectura.</div>
-            <div className="pilar-items">
-              <div className="pilar-item"><strong>Generación de código</strong> — acelero scaffolding, tests y boilerplate repetitivo</div>
-              <div className="pilar-item"><strong>Análisis</strong> — reviso dependencias, surface patterns y deuda técnica con mayor velocidad</div>
-              <div className="pilar-item"><strong>Documentación</strong> — genero primeros borradores de ADRs y runbooks que luego refino</div>
+          <div className="pilar-cell">
+            <div className="pilar-num"><span className="dot"></span><span className="pilar-verb">01 · DECIDIR</span></div>
+            <div className="pilar-h">Liderazgo <em>técnico.</em></div>
+            <div className="pilar-body">Decido, priorizo, lidero. Defino la arquitectura, priorizo la deuda técnica con criterio de negocio y formo al equipo para que tome cada decisión, no solo el código. El equipo entrega más porque entiende mejor, no porque va más rápido.</div>
+            <div className="pilar-evidence">
+              <div className="pilar-evidence-label">Artefactos</div>
+              <div className="pilar-evidence-text">• Plantilla ADR pública<br />• Runbook por servicio<br />• Repo de referencia con guías</div>
             </div>
           </div>
-          <div className="pilar-card">
-            <div className="pilar-icon">
-              <div className="pilar-icon-mark">
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                  <rect x="2" y="2" width="12" height="12" rx="1" stroke="currentColor" strokeWidth="1.2"/>
-                  <line x1="5" y1="6" x2="11" y2="6" stroke="currentColor" strokeWidth="1.2"/>
-                  <line x1="5" y1="9" x2="9" y2="9" stroke="currentColor" strokeWidth="1.2"/>
-                </svg>
-              </div>
-              Contexto documentado
-            </div>
-            <div className="pilar-title">Documentación que vive</div>
-            <div className="pilar-body">No escribo documentación para que exista — la escribo para que cualquier dev pueda tomar el control del sistema sin necesitarme. ADRs, runbooks y guías de contribución como ciudadanos de primera clase del proyecto.</div>
-            <div className="pilar-items">
-              <div className="pilar-item"><strong>ADRs</strong> — cada decisión de arquitectura documentada con contexto y alternativas evaluadas</div>
-              <div className="pilar-item"><strong>Runbooks</strong> — guías operacionales para incidentes, deploys y rollbacks</div>
-              <div className="pilar-item"><strong>Onboarding</strong> — cualquier dev nuevo productivo en menos de 48 horas</div>
+          <div className="pilar-cell">
+            <div className="pilar-num"><span className="dot"></span><span className="pilar-verb">02 · OPERAR</span></div>
+            <div className="pilar-h">IA con <em>criterio.</em></div>
+            <div className="pilar-body">Uso IA para acortar tiempos de entrega sin comprometer la arquitectura. La herramienta amplifica el criterio: la velocidad sin criterio es ruido. Combinar las dos es lo que entrego.</div>
+            <div className="pilar-evidence">
+              <div className="pilar-evidence-label">Toolchain IA</div>
+              <div className="pilar-evidence-text">• Claude · Cursor · Aider<br />• Validación: tests + ADR review humano<br />• Cada decisión pasa revisión antes del merge</div>
             </div>
           </div>
-          <div className="pilar-card">
-            <div className="pilar-icon">
-              <div className="pilar-icon-mark">
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                  <circle cx="8" cy="8" r="5" stroke="currentColor" strokeWidth="1.2"/>
-                  <circle cx="8" cy="8" r="2" fill="currentColor"/>
-                </svg>
-              </div>
-              Criterio técnico
-            </div>
-            <div className="pilar-title">Criterio, no herramientas</div>
-            <div className="pilar-body">La IA me da velocidad pero no me da criterio. Saber cuándo no usar un framework, cuándo construir internamente, cuándo la solución simple gana — eso viene de 8 años de proyectos reales.</div>
-            <div className="pilar-items">
-              <div className="pilar-item"><strong>Build vs. buy</strong> — análisis de TCO real antes de adoptar una dependencia</div>
-              <div className="pilar-item"><strong>Simplicidad intencional</strong> — la arquitectura más simple que resuelve el problema</div>
-              <div className="pilar-item"><strong>ROI técnico</strong> — cada decisión tiene un argumento de negocio</div>
+          <div className="pilar-cell">
+            <div className="pilar-num"><span className="dot"></span><span className="pilar-verb">03 · MEDIR</span></div>
+            <div className="pilar-h">Resultados <em>medibles.</em></div>
+            <div className="pilar-body">−58% en factura AWS. $20K/año menos en licencias farmacéuticas. Cada decisión técnica tiene un impacto en el negocio: ese impacto se mide, se documenta y se reporta.</div>
+            <div className="pilar-evidence">
+              <div className="pilar-evidence-label">Loop de medición</div>
+              <div className="pilar-evidence-text">• ROI técnico antes de adoptar cualquier dependencia<br />• Métricas desde el día uno<br />• Reporte mensual al equipo</div>
             </div>
           </div>
+        </div>
+
+        <div className="bridge">
+          <div className="bridge-label">Los pilares,<br />aplicados</div>
+          <div className="bridge-text">Los tres pilares no son teoría. Abajo, <strong>dos casos donde se aplicaron uno por uno</strong>, con el pilar predominante etiquetado y el número que lo respalda. <em>Decidir antes que optimizar</em> en uno, <em>medir antes de declarar éxito</em> en el otro.</div>
         </div>
       </section>
 
-      {/* ── CASO REAL ── */}
-      <section className="page-section">
-        <div className="section-kicker">Caso real</div>
-        <h2 className="section-h2">De 3 semanas a <em>48 horas</em></h2>
-        <p className="section-sub">Cómo el sistema funcionó en un proyecto real — con números.</p>
+      {/* CASOS APLICADOS */}
+      <section className="section">
+        <div className="section-kicker">En la práctica · pilares aplicados</div>
+        <h2 className="section-h2">Criterio técnico con <em>números reales</em></h2>
+        <p className="section-sub">Dos casos, dos pilares predominantes, dos métricas defendibles. Click para el caso completo.</p>
 
-        <div className="caso-real">
-          <div className="caso-real-label">Caso real · T-Cuida · SaaS IoT</div>
-          <div className="caso-real-h">De la idea al App Store en 3 semanas</div>
-          <p className="caso-real-body">
-            Se necesitaba construir una plataforma SaaS completa — wearables, GPS, dashboard real-time, comunicación familiar — en tiempo récord. Con el sistema de IA + documentación desde el día uno, pude generar el registro de arquitectura completo en las primeras 48 horas. Eso permitió que cualquier colaborador externo pudiera integrarse al proyecto sin fricción.<br /><br />
-            El resultado: de cero a App Store + Play Store en 3 semanas. Con documentación que permitió que el equipo tomara ownership inmediato al entregarlo.
-          </p>
-          <div className="caso-kpis">
-            <div className="caso-kpi">
-              <div className="caso-kpi-val">3</div>
-              <div className="caso-kpi-label">Semanas · entrega total</div>
+        <div className="cases-applied">
+          <Link className="case-applied" href="/casos-de-exito/detail/medirec-aws">
+            <div className="case-applied-pilar">Pilar 03 · Medir</div>
+            <div className="case-applied-h">−58% en factura AWS en 90 días</div>
+            <div className="case-applied-body">Plataforma con 20K+ usuarios activos. La factura AWS crecía más rápido de lo que nadie podía explicar. Identifiqué instancias sobredimensionadas, eliminé recursos huérfanos y reestructuré el modelo de reservas. Uptime al 100% durante todo el proceso. El equipo tomó ownership del nuevo modelo de gobernanza desde el día de la entrega.</div>
+            <div className="case-applied-numbers">
+              <div className="case-num"><span className="case-num-val">−58%</span><span className="case-num-label">factura</span></div>
+              <div className="case-num"><span className="case-num-val">100%</span><span className="case-num-label">uptime</span></div>
+              <div className="case-num"><span className="case-num-val">20K+</span><span className="case-num-label">usuarios</span></div>
             </div>
-            <div className="caso-kpi">
-              <div className="caso-kpi-val">48h</div>
-              <div className="caso-kpi-label">Onboarding de dev nuevo</div>
+          </Link>
+          <Link className="case-applied" href="/casos-de-exito/detail/licencias-farmaceuticas">
+            <div className="case-applied-pilar">Pilar 01 · Decidir</div>
+            <div className="case-applied-h">$20K/año menos en licencias, sin perder cobertura</div>
+            <div className="case-applied-body">Sistema de validación farmacéutica en healthcare. La dependencia de LexComp costaba $20K/año. La decisión no era técnica: era clínica. Pregunté a NLM (Dr. Olivier Bodenreider) directamente. Respuesta: sí tienen capacidades para alergias, contraindicaciones y embarazo. Con ese dato, la migración dejó de ser riesgo y se volvió decisión obvia.</div>
+            <div className="case-applied-numbers">
+              <div className="case-num"><span className="case-num-val">−$20K</span><span className="case-num-label">/año</span></div>
+              <div className="case-num"><span className="case-num-val">0</span><span className="case-num-label">downtime</span></div>
+              <div className="case-num"><span className="case-num-val">&gt;97%</span><span className="case-num-label">cobertura clínica</span></div>
             </div>
-            <div className="caso-kpi">
-              <div className="caso-kpi-val">0</div>
-              <div className="caso-kpi-label">Dependencia de persona</div>
-            </div>
-          </div>
+          </Link>
         </div>
       </section>
 
-      {/* ── PROCESO ── */}
-      <section className="page-section">
-        <div className="section-kicker">El proceso</div>
-        <h2 className="section-h2">Del problema a la solución <em>documentada</em></h2>
-        <p className="section-sub">Cuatro fases en cada proyecto — sin importar el tamaño.</p>
+      {/* DOS MODOS DE TRABAJO */}
+      <section className="section">
+        <div className="section-kicker">Por qué importa el rol</div>
+        <h2 className="section-h2">Dos modos de trabajo · <em>cuándo pedir cuál</em></h2>
+        <p className="section-sub">No es una cuestión de seniority. Es una cuestión de qué tipo de problema estás resolviendo, y ambos modos son necesarios.</p>
 
-        <div className="process-flow">
-          <div className="process-step">
-            <div className="step-num">01 · Diagnóstico</div>
-            <div className="step-title">Entender el sistema existente</div>
-            <div className="step-body">Mapeo de deuda técnica, dependencias críticas y riesgos antes de escribir una línea. El problema real no siempre es el problema reportado.</div>
+        <div className="modes-intro">
+          <div className="modes-frame">Hay momentos en los que necesitas <strong>ejecutar bien</strong>: una feature definida, un bug acotado, una migración con scope claro. Para eso, un <strong>dev senior</strong> es exactamente lo correcto: rápido, confiable, fluido en el stack.</div>
+          <div className="modes-frame">Hay otros momentos en los que necesitas <strong>liderar la decisión antes de ejecutar</strong>: cuestionar el reporte, conectar al negocio, dejar criterio escrito para que el equipo siga decidiendo. Para eso, un <strong>Tech Lead con criterio</strong>.</div>
+        </div>
+
+        <div className="dual-block">
+          <div className="dual-cell exec">
+            <div className="dual-label"><span className="lab-num">Modo 01</span> · Ejecución senior</div>
+            <div className="dual-sub">mejor cuando el problema ya está bien planteado</div>
+            <div className="dual-list">
+              <div className="dual-item"><strong>Implementa la solución acordada</strong> — la conversación de qué hacer ya pasó</div>
+              <div className="dual-item"><strong>Optimiza el código</strong> — limpio, performante, testeado</div>
+              <div className="dual-item"><strong>Entrega features con velocidad</strong> — la velocidad es el activo</div>
+              <div className="dual-item"><strong>Documenta lo que hizo</strong> — para que el siguiente entienda el qué</div>
+            </div>
           </div>
-          <div className="process-step">
-            <div className="step-num">02 · Arquitectura</div>
-            <div className="step-title">Diseñar antes de construir</div>
-            <div className="step-body">ADRs escritos antes del código. Cada decisión de arquitectura con alternativas evaluadas, contexto y criterio de negocio documentados.</div>
-          </div>
-          <div className="process-step">
-            <div className="step-num">03 · Entrega</div>
-            <div className="step-title">Iterar con contexto</div>
-            <div className="step-body">Sprints cortos con CI/CD desde el primer día. Cada deploy es auditado y documentado. La velocidad no sacrifica la calidad de la arquitectura.</div>
-          </div>
-          <div className="process-step">
-            <div className="step-num">04 · Transferencia</div>
-            <div className="step-title">El equipo toma ownership</div>
-            <div className="step-body">Entrego cuando el equipo puede continuar sin mí. Runbook completo, guía de contribución, onboarding documentado. Cualquier dev productivo en 48h.</div>
+          <div className="dual-cell lead">
+            <div className="dual-label"><span className="lab-num">Modo 02</span> · Tech Lead con criterio</div>
+            <div className="dual-sub">mejor cuando el problema aún no está bien planteado</div>
+            <div className="dual-list">
+              <div className="dual-item"><strong>Cuestiona el problema primero</strong> — el reporte casi nunca es la causa raíz</div>
+              <div className="dual-item"><strong>Conecta cada decisión al negocio</strong> — −58% AWS, $20K/año en licencias</div>
+              <div className="dual-item"><strong>Lidera para que el equipo decida</strong> — no para que dependa de él</div>
+              <div className="dual-item"><strong>Documenta el criterio</strong> — el porqué, con contexto y argumento</div>
+            </div>
           </div>
         </div>
 
-        <div className="video-block">
-          <div className="video-header">
-            <div className="video-title">Del problema a la solución documentada</div>
-            <div className="video-coming">Próximamente</div>
-          </div>
-          <div className="video-placeholder">
-            <button className="video-play" aria-label="Reproducir">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--text-2)"><path d="M8 5v14l11-7z"/></svg>
-            </button>
-            <div className="video-caption">Velocidad + Documentación + Criterio<br />Cómo construyo software que cualquier dev puede mantener</div>
-          </div>
-        </div>
+        <div className="modes-closer"><strong>Ambos modos son necesarios.</strong> La diferencia es saber cuándo pedir cuál. Los proyectos costosos son casi siempre los que pidieron ejecución cuando hacía falta criterio.</div>
       </section>
 
-      {/* ── RIESGOS ── */}
-      <section className="page-section">
-        <div className="section-kicker">Lo que elimino · Lo que garantizo</div>
-        <h2 className="section-h2">Riesgos que <em>elimino</em></h2>
-        <p className="section-sub">Cada uno de estos es un patrón que he visto en proyectos reales — y que el proceso está diseñado para prevenir.</p>
-
-        <div className="riesgos-grid">
-          <div className="riesgos-col bad">
-            <div className="riesgos-head bad">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <circle cx="6" cy="6" r="5" stroke="currentColor"/>
-                <line x1="4" y1="4" x2="8" y2="8" stroke="currentColor" strokeWidth="1.2"/>
-                <line x1="8" y1="4" x2="4" y2="8" stroke="currentColor" strokeWidth="1.2"/>
-              </svg>
-              Riesgos que elimino
-            </div>
-            <div className="riesgo-item"><strong>Fuga de conocimiento</strong> — cuando el dev que llevaba el proyecto ya no está disponible</div>
-            <div className="riesgo-item"><strong>Onboarding lento</strong> — semanas para que un dev nuevo entienda por qué las cosas son como son</div>
-            <div className="riesgo-item"><strong>Dependencia de persona</strong> — no podrás escalar sin esa persona clave</div>
-            <div className="riesgo-item"><strong>Decisiones sin contexto</strong> — código sin documentar por qué se tomó esa decisión</div>
-          </div>
-          <div className="riesgos-col good">
-            <div className="riesgos-head good">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <circle cx="6" cy="6" r="5" stroke="currentColor"/>
-                <path d="M3.5 6L5.5 8L8.5 4" stroke="currentColor" strokeWidth="1.2"/>
-              </svg>
-              Lo que garantizo
-            </div>
-            <div className="riesgo-item"><strong>ADRs completos</strong> — cada decisión de arquitectura con contexto, alternativas y criterio de negocio</div>
-            <div className="riesgo-item"><strong>Onboarding rápido</strong> — cualquier dev nuevo productivo en menos de 48 horas con la documentación entregada</div>
-            <div className="riesgo-item"><strong>Sistema que escala</strong> — arquitectura que el equipo puede mantener y extender sin mí</div>
-            <div className="riesgo-item"><strong>Listo para crecer</strong> — infraestructura y prácticas que soportan el crecimiento futuro</div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── REGLAS + CTA ── */}
-      <section className="page-section">
-        <div className="section-kicker">Principios</div>
+      {/* TRES REGLAS INNEGOCIABLES */}
+      <section className="section">
+        <div className="section-kicker">Criterio · Contexto · Intención</div>
         <h2 className="section-h2">Tres reglas <em>innegociables</em></h2>
-        <p className="section-sub">Son los valores que no negocio en ningún proyecto, sin importar el deadline.</p>
+        <p className="section-sub">Los valores que no negocio en ningún proyecto, sin importar el deadline ni el stack.</p>
 
         <div className="reglas-grid">
-          <div className="regla-card">
-            <div className="regla-num">01</div>
-            <div className="regla-title">Si no está escrito, no pasó</div>
-            <div className="regla-body">Cada decisión importante que no está documentada es deuda técnica disfrazada de velocidad. La documentación no es un extra — es parte del entregable desde el sprint uno.</div>
+          <div className="regla-cell">
+            <div className="regla-cell-num"><b>01</b> · CRITERIO</div>
+            <div className="regla-h">Criterio antes que stack</div>
+            <div className="regla-body">Evalúo el resto de las alternativas antes de decidir. No es una guerra de stacks: es una decisión técnica defendible. El stack es el que mejor se ajusta, no el que más conozco.</div>
           </div>
-          <div className="regla-card">
-            <div className="regla-num">02</div>
-            <div className="regla-title">Mínimo 2 opciones evaluadas</div>
-            <div className="regla-body">No existe una única solución a un problema de arquitectura. Siempre evalúo al menos dos alternativas y documento por qué elegí la que elegí — con criterio técnico y de negocio.</div>
+          <div className="regla-cell">
+            <div className="regla-cell-num"><b>02</b> · CONTEXTO</div>
+            <div className="regla-h">Contexto documentado</div>
+            <div className="regla-body">Cada decisión importante queda escrita en un ADR. El equipo siguiente debe poder entender por qué se hizo cada elección. Si no está en un ADR, no existe el criterio.</div>
           </div>
-          <div className="regla-card">
-            <div className="regla-num">03</div>
-            <div className="regla-title">IA como herramienta, no muleta</div>
-            <div className="regla-body">La IA me da velocidad. El criterio técnico y el juicio de arquitectura son míos. Reviso, valido y refino cada output antes de que entre al proyecto. El estándar no baja.</div>
-          </div>
-        </div>
-
-        <div className="cta-band cta-band--accent">
-          <div>
-            <h3 className="cta-band-h">¿Tu próximo proyecto o<br />rescatando uno <em>existente</em>?</h3>
-            <p className="cta-band-sub">Si tu problema es nuevo o ya tienes un sistema que necesita mejorar — el resultado es el mismo: un sistema que escala sin depender de nadie.</p>
-          </div>
-          <div className="cta-band-btns">
-            <a className="btn btn-primary" href="mailto:moisesdavidaaron@gmail.com">Hablemos →</a>
-            <a className="btn btn-secondary" href="/casos-de-exito">Ver todos los casos</a>
+          <div className="regla-cell">
+            <div className="regla-cell-num"><b>03</b> · INTENCIÓN</div>
+            <div className="regla-h">Intención en cada línea</div>
+            <div className="regla-body">La IA no reemplaza la intención. Cada línea de código tiene un propósito claro, validado y revisable. Si la IA escribe algo que yo no defendería, no entra al merge.</div>
           </div>
         </div>
       </section>
+
+      {/* CTA BIFURCADO */}
+      <div className="cta-bifurcado">
+        <div className="section-kicker">¿Tu próximo paso?</div>
+        <h2 className="cta-bifurcado-h">¿Empezar uno nuevo,<br />o <em>rescatar uno existente?</em></h2>
+        <p className="cta-bifurcado-sub">Dos caminos distintos requieren conversaciones distintas. Cuéntame en cuál estás.</p>
+
+        <div className="cta-paths">
+          <Link className="cta-path new" href="/contact?ctx=nuevo">
+            <div className="cta-path-label">Camino 01 · Proyecto nuevo</div>
+            <div className="cta-path-h">Empezar uno <em>nuevo</em></div>
+            <div className="cta-path-body">Hay una idea, hay un equipo, hay urgencia. Necesitas decisiones arquitectónicas correctas desde el día 1 y un Tech Lead que lidere mientras el equipo crece. Trabajemos juntos los primeros 3–6 meses críticos.</div>
+            <div className="cta-path-cta">Hablemos del nuevo proyecto →</div>
+          </Link>
+          <Link className="cta-path rescue" href="/contact?ctx=rescate">
+            <div className="cta-path-label">Camino 02 · Rescate</div>
+            <div className="cta-path-h">Rescatar el <em>actual</em></div>
+            <div className="cta-path-body">Hay un sistema que ya existe pero algo está roto: deuda técnica, factura cloud descontrolada, equipo dependiente de una persona. Necesitas un diagnóstico honesto y un plan ejecutable, no un reescribir desde cero.</div>
+            <div className="cta-path-cta">Hablemos del rescate →</div>
+          </Link>
+        </div>
+      </div>
 
     </div>
   )

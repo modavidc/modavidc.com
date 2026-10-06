@@ -4,16 +4,19 @@ const base = 'https://modavidc.com'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const casosIds = [
-    'medirec-aws',
-    'licencias-farmaceuticas',
-    'lab-middleware',
-    'gov-tech-preis',
-    'tcuida-iot',
-    'dashboard-emergencias',
-    'tcpip-bridge',
-    'medirec-mobile',
-    'el-estoico',
+    'colegio-santa-angela-seguridad',
     'grupero',
+    'indexum-agrotech',
+    'indexum-autoservicio',
+    'licencias-farmaceuticas',
+    'medirec-aws',
+    'medirec-backup-dr',
+    'ores-laboratory-api',
+    'preis-integration',
+    'surescripts-certification',
+    't-cuida-audit',
+    't-cuida-multitenant',
+    'vipapp-patient-ehr',
   ]
 
   const labsSlugs = ['el-estoico', 'modavidc-com']

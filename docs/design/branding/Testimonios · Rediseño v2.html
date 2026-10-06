@@ -1,0 +1,757 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Testimonios — modavidc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0d0b;
+    --bg-2:#0f1310;
+    --bg-3:#141914;
+    --bg-hi:#182019;
+    --line:#1f261f;
+    --line-2:#2a322a;
+    --line-3:#384038;
+    --text:#e9eee9;
+    --text-2:#c8d0c8;
+    --muted:#7a847b;
+    --muted-2:#525a52;
+    --accent:#4ade80;
+    --accent-dim:#2f8a52;
+    --accent-soft:rgba(74,222,128,.08);
+    --amber:#f5c97a;
+    --amber-dim:#7a5e26;
+    --amber-soft:rgba(245,201,122,.08);
+    --mono:'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sans:'Geist', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  body{font-size:15px;line-height:1.55;letter-spacing:-0.005em}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--accent);color:#0a0d0b}
+
+  /* progress bar */
+  .progress{position:fixed;top:0;left:0;height:2px;background:var(--accent);width:0;z-index:50;transition:width .1s linear;box-shadow:0 0 8px var(--accent)}
+
+  /* ───── topbar */
+  .topbar{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);background:rgba(10,13,11,.78);border-bottom:1px solid var(--line)}
+  .topbar-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 32px}
+  .brand{font-weight:500;font-size:18px;letter-spacing:-.015em}
+  .brand span{color:var(--accent)}
+  nav.nav{display:flex;gap:28px;align-items:center;font-size:13.5px;color:var(--text-2)}
+  nav.nav a{transition:color .15s}
+  nav.nav a:hover{color:var(--text)}
+  nav.nav a.active{color:var(--text);position:relative}
+  nav.nav a.active::after{content:"";position:absolute;left:0;right:0;bottom:-19px;height:1px;background:var(--accent)}
+  .cta{background:var(--accent);color:#0a0d0b;padding:8px 14px;border-radius:4px;font-weight:500;font-size:13.5px;transition:filter .15s}
+  .cta:hover{filter:brightness(1.1)}
+
+  /* ───── shell */
+  .shell{max-width:1280px;margin:0 auto;padding:80px 32px 0}
+
+  /* ───── hero · pull-quote */
+  .hero{padding:8px 0 64px;border-bottom:1px solid var(--line);margin-bottom:48px}
+  .eyebrow{
+    font-family:var(--mono);font-size:11px;color:var(--muted);
+    letter-spacing:.18em;text-transform:uppercase;margin-bottom:24px;
+    display:flex;align-items:center;justify-content:center;gap:12px;
+  }
+  .eyebrow::before, .eyebrow::after{content:"";width:24px;height:1px;background:var(--line-3)}
+  .hero-pq-wrap{text-align:center;max-width:1020px;margin:0 auto;position:relative}
+  .pq-mark{
+    font-family:var(--sans);font-size:140px;line-height:.5;color:var(--accent);
+    opacity:.3;font-weight:500;letter-spacing:-.04em;
+    margin-bottom:22px;height:60px;display:block;
+  }
+  h1.pq{
+    font-size:54px;line-height:1.08;letter-spacing:-.028em;font-weight:400;
+    margin:0 0 28px;color:var(--text);text-wrap:balance;
+  }
+  h1.pq em{font-style:normal;color:var(--accent);font-weight:500}
+  .pq-cite{
+    font-family:var(--mono);font-size:12px;color:var(--muted);
+    letter-spacing:.12em;text-transform:uppercase;
+    display:inline-flex;align-items:center;gap:14px;
+    padding-top:22px;border-top:1px solid var(--line);
+  }
+  .pq-cite b{color:var(--text);font-weight:500;letter-spacing:-.01em;font-family:var(--sans);text-transform:none;font-size:15px}
+  .pq-cite .dot{width:4px;height:4px;border-radius:50%;background:var(--muted-2)}
+
+  .hero-stats{
+    display:flex;justify-content:center;gap:48px;flex-wrap:wrap;
+    margin-top:48px;padding-top:32px;border-top:1px dashed var(--line);
+  }
+  .hero-stat{text-align:center}
+  .hero-stat .v{font-family:var(--mono);font-size:26px;color:var(--accent);font-weight:500;letter-spacing:-.02em;line-height:1}
+  .hero-stat .l{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-top:10px}
+
+  /* ───── filters */
+  .filter-row{
+    position:sticky;top:57px;z-index:20;background:var(--bg);
+    padding:14px 0 16px;margin-bottom:36px;
+    border-bottom:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
+  }
+  .filters{display:flex;gap:8px;flex-wrap:wrap}
+  .filter{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:7px 14px;border:1px solid var(--line-2);border-radius:999px;
+    font-size:13px;color:var(--text-2);background:transparent;cursor:pointer;
+    transition:all .15s;font-family:var(--sans);letter-spacing:-.005em;
+  }
+  .filter:hover{border-color:var(--line-3);color:var(--text)}
+  .filter.active{background:var(--accent);color:#0a0d0b;border-color:var(--accent);font-weight:500}
+  .filter .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+  .filter.active .dot{background:#0a0d0b}
+  .filter .cnt{font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:4px}
+  .filter.active .cnt{color:rgba(10,13,11,.6)}
+  .filter-meta{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+  .filter-meta span{color:var(--text-2)}
+
+  /* ───── featured testimonial */
+  .featured{
+    margin-bottom:56px;border:1px solid var(--accent-dim);
+    background:
+      radial-gradient(circle at 6% 18%, rgba(74,222,128,.06), transparent 36%),
+      radial-gradient(circle at 94% 82%, rgba(74,222,128,.04), transparent 38%),
+      var(--bg-2);
+    border-radius:8px;overflow:hidden;
+    display:grid;grid-template-columns:1.2fr 1fr;gap:0;align-items:stretch;
+  }
+  @media (max-width:980px){.featured{grid-template-columns:1fr}}
+  .feat-l{padding:44px 46px 38px;display:flex;flex-direction:column;justify-content:space-between;gap:26px}
+  @media (max-width:680px){.feat-l{padding:28px 24px 24px}}
+  .feat-tag{
+    display:inline-flex;align-items:center;gap:10px;align-self:flex-start;
+    font-family:var(--mono);font-size:10.5px;color:var(--accent);letter-spacing:.16em;text-transform:uppercase;
+    padding:5px 10px;border:1px solid var(--accent-dim);border-radius:3px;background:var(--accent-soft);
+  }
+  .feat-tag::before{content:"★";color:var(--accent)}
+
+  .feat-quote{
+    font-family:var(--sans);font-size:25px;line-height:1.45;font-weight:300;
+    letter-spacing:-.015em;color:var(--text);margin:14px 0 6px;text-wrap:pretty;
+    border:none;padding:0;font-style:normal;
+  }
+  .feat-quote::before{content:open-quote;color:var(--accent);font-size:1.1em;margin-right:4px}
+  .feat-quote::after{content:close-quote;color:var(--accent);margin-left:2px}
+  .feat-quote em{color:var(--accent);font-style:normal;font-weight:500}
+
+  .feat-author{
+    display:flex;align-items:center;gap:16px;margin-top:12px;
+    padding-top:22px;border-top:1px solid var(--line);
+  }
+  .feat-mono{
+    width:58px;height:58px;border-radius:50%;
+    border:1px solid var(--accent-dim);background:var(--accent-soft);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--sans);font-size:23px;font-weight:500;color:var(--accent);
+    letter-spacing:-.02em;flex-shrink:0;
+  }
+  .feat-id{flex:1;min-width:0;font-style:normal}
+  .feat-id .nm{font-size:17px;font-weight:500;color:var(--text);letter-spacing:-.01em;line-height:1.2}
+  .feat-id .ro{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:5px}
+  .feat-id .ro b{color:var(--text-2);font-weight:500}
+
+  .feat-r{
+    background:#0c0f0d;border-left:1px solid var(--line);
+    display:flex;flex-direction:column;
+  }
+  @media (max-width:980px){.feat-r{border-left:none;border-top:1px solid var(--line)}}
+  .feat-r-bar{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:10px 16px;border-bottom:1px solid var(--line);
+    font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--muted);
+  }
+  .feat-r-body{flex:1;padding:26px 30px;display:flex;flex-direction:column;gap:22px}
+  .feat-r-section{display:flex;flex-direction:column;gap:8px}
+  .feat-r-l{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+  .feat-r-v{font-family:var(--mono);font-size:15px;color:var(--text);letter-spacing:-.005em;line-height:1.45}
+  .feat-r-v .ac{color:var(--accent)}
+  .feat-r-metrics{display:grid;grid-template-columns:1fr 1fr;gap:18px 20px;margin-top:4px}
+  .feat-r-m .lbl{font-family:var(--mono);font-size:9.5px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
+  .feat-r-m .num{font-family:var(--mono);font-size:20px;color:var(--accent);font-weight:500;letter-spacing:-.02em;line-height:1}
+  .feat-r-foot{
+    padding:13px 18px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10.5px;color:var(--muted);
+    letter-spacing:.12em;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;
+  }
+  .feat-r-foot a{color:var(--accent)}
+  .feat-r-foot a:hover{filter:brightness(1.15)}
+
+  /* ───── grid */
+  .grid{
+    display:grid;grid-template-columns:repeat(3, 1fr);gap:18px;
+    margin-bottom:24px;
+  }
+  @media (max-width:1080px){.grid{grid-template-columns:repeat(2, 1fr)}}
+  @media (max-width:680px){.grid{grid-template-columns:1fr}}
+
+  /* ───── testimonio card */
+  .card{
+    background:var(--bg-2);border:1px solid var(--line);border-radius:6px;
+    overflow:hidden;display:flex;flex-direction:column;
+    transition:border-color .2s, transform .2s;
+    position:relative;padding:24px 22px 18px;
+    min-height:282px;
+  }
+  .card:hover{border-color:var(--line-3);transform:translateY(-2px)}
+  .card.featured-row{border-top:2px solid var(--accent-dim)}
+
+  .card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:10px}
+  .ctx{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px}
+  .ctx::before{content:"";display:block;width:18px;height:1px;background:var(--line-3)}
+  .yr{font-family:var(--mono);font-size:10px;color:var(--muted-2);letter-spacing:.14em}
+
+  .card-quote{
+    font-family:var(--sans);font-size:15px;line-height:1.55;color:var(--text);
+    font-weight:300;font-style:normal;margin:0 0 18px;padding:0;border:none;flex:1;
+    text-wrap:pretty;
+  }
+  .card-quote::before{content:open-quote;color:var(--accent);margin-right:2px}
+  .card-quote::after{content:close-quote;color:var(--accent);margin-left:2px}
+  .card-quote em{color:var(--accent);font-style:normal;font-weight:500}
+
+  .card-author{
+    display:flex;align-items:center;gap:12px;padding-top:14px;border-top:1px solid var(--line);font-style:normal;
+  }
+  .mono-av{
+    width:40px;height:40px;border-radius:50%;
+    border:1px solid var(--line-2);background:var(--bg-3);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--sans);font-size:15px;font-weight:500;color:var(--text-2);
+    letter-spacing:-.02em;flex-shrink:0;
+  }
+  .card.accent .mono-av{border-color:var(--accent-dim);background:var(--accent-soft);color:var(--accent)}
+  .card-id{flex:1;min-width:0}
+  .card-id .nm{font-size:13.5px;font-weight:500;color:var(--text);letter-spacing:-.005em;line-height:1.25}
+  .card-id .ro{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+  .card-id .ro b{color:var(--text-2);font-weight:500}
+
+  .card-foot{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-top:12px;padding-top:12px;border-top:1px dashed var(--line-2);gap:10px;
+  }
+  .metric-chip{
+    font-family:var(--mono);font-size:10.5px;color:var(--accent);
+    padding:3px 8px;border:1px solid var(--accent-dim);border-radius:3px;
+    background:var(--accent-soft);letter-spacing:.02em;
+  }
+  .metric-chip.neutral{color:var(--text-2);border-color:var(--line-2);background:var(--bg-3)}
+  .card-link{
+    font-family:var(--mono);font-size:11px;color:var(--muted);
+    letter-spacing:.06em;display:inline-flex;align-items:center;gap:6px;
+    transition:color .15s;white-space:nowrap;
+  }
+  .card-link:hover{color:var(--accent)}
+  .card-link .a{display:inline-block;transition:transform .15s}
+  .card-link:hover .a{transform:translateX(2px)}
+  .card-link.muted{color:var(--muted-2);font-style:italic;font-family:var(--sans);font-size:11.5px;letter-spacing:0}
+
+  /* ───── section dividers */
+  .section-rule{
+    display:flex;align-items:center;gap:14px;margin:32px 0 22px;
+    font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;
+  }
+  .section-rule::before{content:"";flex:0 0 24px;height:1px;background:var(--line-3)}
+  .section-rule::after{content:"";flex:1;height:1px;background:var(--line)}
+  .section-rule .cnt{font-family:var(--mono);font-size:10.5px;color:var(--muted-2);letter-spacing:.14em;margin-left:auto;padding-left:14px}
+  .section-rule .cnt::before{content:"";display:inline-block;width:24px;height:1px;background:var(--line);vertical-align:4px;margin-right:14px}
+  .section-rule.first{margin-top:0}
+
+  /* ───── end CTA */
+  .end-cta{
+    margin:64px 0 80px;padding:56px 48px;
+    border:1px solid var(--line);border-radius:8px;
+    background:
+      radial-gradient(circle at 80% 50%, rgba(74,222,128,.06), transparent 50%),
+      linear-gradient(180deg, var(--bg-2), var(--bg));
+    display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;
+  }
+  @media (max-width:680px){.end-cta{padding:32px 24px}}
+  .end-cta h3{font-size:28px;line-height:1.2;font-weight:500;letter-spacing:-.022em;margin:0 0 10px;color:var(--text);max-width:26ch;text-wrap:balance}
+  .end-cta h3 em{font-style:normal;color:var(--accent)}
+  .end-cta p{margin:0;color:var(--muted);font-size:14.5px;max-width:42ch;line-height:1.55}
+  .end-cta .actions{display:flex;gap:12px;flex-wrap:wrap}
+  .end-cta .actions a{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 18px;border-radius:5px;font-size:14px;font-weight:500;
+    border:1px solid var(--line-3);color:var(--text);transition:all .15s;
+  }
+  .end-cta .actions a:hover{border-color:var(--text-2)}
+  .end-cta .actions a.primary{background:var(--accent);color:#0a0d0b;border-color:var(--accent)}
+  .end-cta .actions a.primary:hover{filter:brightness(1.1)}
+
+  /* ───── footer */
+  footer{
+    border-top:1px solid var(--line);padding:48px 32px 32px;
+    max-width:1280px;margin:0 auto;
+    display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;
+  }
+  @media (max-width:760px){footer{grid-template-columns:1fr 1fr;gap:28px}}
+  footer .col-h{font-family:var(--mono);font-size:10px;color:var(--muted-2);letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px}
+  footer .col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:13.5px;color:var(--text-2)}
+  footer .col ul a:hover{color:var(--accent)}
+  footer .brand-col .brand{font-size:24px;margin-bottom:8px}
+  footer .brand-col .sub{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;line-height:1.6}
+
+  .footer-bottom{
+    max-width:1280px;margin:0 auto;padding:16px 32px 32px;
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:var(--mono);font-size:10.5px;color:var(--muted-2);letter-spacing:.14em;text-transform:uppercase;
+    border-top:1px solid var(--line);
+  }
+  .topnote{text-align:center;font-family:var(--mono);font-size:10.5px;color:var(--muted-2);letter-spacing:.14em;text-transform:uppercase;margin-top:16px;padding-bottom:8px}
+
+  /* hidden helper for filters */
+  .card.hidden{display:none}
+
+  /* responsive */
+  @media (max-width:760px){
+    h1.pq{font-size:34px}
+    .feat-quote{font-size:19px}
+    .pq-mark{font-size:90px;height:42px;margin-bottom:12px}
+    .hero-stats{gap:28px}
+  }
+</style>
+</head>
+<body data-screen-label="07 Testimonios">
+
+<div class="progress" id="progress"></div>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a href="home.html" class="brand">mo<span>davidc</span></a>
+    <nav class="nav">
+      <a href="experiencia.html">Experiencia</a>
+      <a href="Casos · Rediseño.html">Casos de Éxito</a>
+      <a href="metodologia.html">Metodología</a>
+      <a href="testimonios.html" class="active">Testimonios</a>
+      <a href="hablemos.html" class="cta">Hablemos</a>
+    </nav>
+  </div>
+</div>
+
+<main class="shell">
+
+  <!-- HERO · PULL-QUOTE -->
+  <section class="hero">
+    <div class="eyebrow">Testimonios · 8 años de relaciones de trabajo</div>
+    <div class="hero-pq-wrap">
+      <span class="pq-mark" aria-hidden="true">"</span>
+      <h1 class="pq">La capacidad de absorber contexto y devolverlo en decisiones técnicas es lo que separa a un dev senior de un <em>Tech Lead.</em> Moisés hizo esa transición en mi equipo.</h1>
+      <div class="pq-cite">
+        <b>Michael Terrones</b>
+        <span class="dot"></span>
+        <span>Lead · Indexum</span>
+        <span class="dot"></span>
+        <span>2018 — 2020</span>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="v">11</div><div class="l">Referencias</div></div>
+      <div class="hero-stat"><div class="v">5</div><div class="l">Sectores</div></div>
+      <div class="hero-stat"><div class="v">4</div><div class="l">Empresas</div></div>
+      <div class="hero-stat"><div class="v">8 años</div><div class="l">Track record</div></div>
+    </div>
+  </section>
+
+  <!-- FILTERS -->
+  <div class="filter-row">
+    <div class="filters">
+      <button class="filter active" data-f="all">Todos<span class="cnt">11</span></button>
+      <button class="filter" data-f="healthcare"><span class="dot"></span>Healthcare / IoT<span class="cnt">5</span></button>
+      <button class="filter" data-f="product"><span class="dot"></span>Producto / SaaS<span class="cnt">1</span></button>
+      <button class="filter" data-f="clients"><span class="dot"></span>Clientes Web<span class="cnt">2</span></button>
+      <button class="filter" data-f="peers"><span class="dot"></span>Colegas &amp; Mentoría<span class="cnt">3</span></button>
+    </div>
+    <div class="filter-meta">▎ ordenado por <span>sector</span></div>
+  </div>
+
+  <!-- FEATURED TESTIMONIAL · Julio (MediRec Director) -->
+  <article class="featured" aria-label="Testimonio destacado" data-cat="healthcare">
+    <div class="feat-l">
+      <span class="feat-tag">testimonio destacado · medirec</span>
+      <blockquote class="feat-quote">
+        Moisés lideró la reducción de nuestra factura AWS de $912 a $318 mensuales. Pero lo que realmente importa es <em>cómo</em> lo hizo: cuatro fases auditadas, respaldos defensivos antes de tocar nada, y documentación que mi equipo puede mantener sin él.
+      </blockquote>
+      <div class="feat-author">
+        <div class="feat-mono" aria-hidden="true">J</div>
+        <cite class="feat-id">
+          <div class="nm">Julio</div>
+          <div class="ro">Director · <b>MediRec, Inc.</b> · 2023 — 2024</div>
+        </cite>
+      </div>
+    </div>
+    <div class="feat-r">
+      <div class="feat-r-bar">
+        <span>▎ contexto del trabajo</span>
+        <span>medirec · 5 años</span>
+      </div>
+      <div class="feat-r-body">
+        <div class="feat-r-section">
+          <span class="feat-r-l">Rol durante la colaboración</span>
+          <span class="feat-r-v">Tech Lead · <span class="ac">AWS &amp; FinOps</span></span>
+        </div>
+        <div class="feat-r-section">
+          <span class="feat-r-l">Proyectos referenciables</span>
+          <span class="feat-r-v">Auditoría AWS · ePrescribing · Licencias NLM · PREIS</span>
+        </div>
+        <div class="feat-r-metrics">
+          <div class="feat-r-m"><div class="lbl">Factura AWS</div><div class="num">−65%</div></div>
+          <div class="feat-r-m"><div class="lbl">Ahorro anual</div><div class="num">$7.1K</div></div>
+          <div class="feat-r-m"><div class="lbl">Downtime</div><div class="num">0h</div></div>
+          <div class="feat-r-m"><div class="lbl">Documentación</div><div class="num" style="font-size:14px">Transferida</div></div>
+        </div>
+      </div>
+      <div class="feat-r-foot">
+        <span>caso completo</span>
+        <a href="caso/medirec-aws.html">Ver caso AWS →</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- GRID · main testimonials -->
+
+  <!-- ─── Healthcare / IoT ─── -->
+  <div class="section-rule first">
+    <span>Healthcare &amp; IoT · MediRec, T-Cuida</span>
+    <span class="cnt">4 más en este sector</span>
+  </div>
+
+  <div class="grid" id="grid">
+
+    <!-- Jessel · MediRec Compliance -->
+    <article class="card accent" data-cat="healthcare">
+      <div class="card-head">
+        <span class="ctx">MediRec · Compliance</span>
+        <span class="yr">2023</span>
+      </div>
+      <blockquote class="card-quote">
+        En Compliance no perdonamos atajos. Moisés llevó la recertificación de ePrescribing y la migración de licencias farmacéuticas a NLM <em>sin un solo incidente regulatorio</em>. Validó técnica y clínicamente cada decisión antes de tocar producción.
+      </blockquote>
+      <cite class="card-author">
+        <div class="mono-av" aria-hidden="true">J</div>
+        <div class="card-id">
+          <div class="nm">Jessel</div>
+          <div class="ro">Compliance Lead · <b>MediRec</b></div>
+        </div>
+      </cite>
+      <div class="card-foot">
+        <span class="metric-chip">PR-21677 · 0 incidencias</span>
+        <a class="card-link" href="Caso Surescripts · Rediseño.html">Ver caso <span class="a">→</span></a>
+      </div>
+    </article>
+
+    <!-- Karen · T-Cuida CEO -->
+    <article class="card accent" data-cat="healthcare">
+      <div class="card-head">
+        <span class="ctx">T-Cuida · CEO</span>
+        <span class="yr">2022 — 2024</span>
+      </div>
+      <blockquote class="card-quote">
+        Cuando construyes una startup de salud desde cero, necesitas a alguien que piense más allá del código. Moisés entendió la visión de T-Cuida <em>desde el día uno</em> — no solo entregó software, ayudó a definir qué software valía la pena construir.
+      </blockquote>
+      <cite class="card-author">
+        <div class="mono-av" aria-hidden="true">K</div>
+        <div class="card-id">
+          <div class="nm">Karen</div>
+          <div class="ro">CEO · <b>T-Cuida</b></div>
+        </div>
+      </cite>
+      <div class="card-foot">
+        <span class="metric-chip">+400% throughput IoT</span>
+        <a class="card-link" href="caso/lab-middleware.html">Ver bridge <span class="a">→</span></a>
+      </div>
+    </article>
+
+    <!-- Luiggi · T-Cuida QA -->
+    <article class="card" data-cat="healthcare">
+      <div class="card-head">
+        <span class="ctx">T-Cuida · QA</span>
+        <span class="yr">2023</span>
+      </div>
+      <blockquote class="card-quote">
+        Trabajé bajo Moisés en T-Cuida como QA. Lo que aprecié es que <em>defendía el tiempo necesario</em> para hacer las cosas bien — incluso cuando la presión empujaba a saltarse pasos. Me hizo mejor profesional sin que se sintiera como mentoría formal.
+      </blockquote>
+      <cite class="card-author">
+        <div class="mono-av" aria-hidden="true">L</div>
+        <div class="card-id">
+          <div class="nm">Luiggi</div>
+          <div class="ro">QA Engineer · <b>T-Cuida</b></div>
+        </div>
+      </cite>
+      <div class="card-foot">
+        <span class="metric-chip">0 defectos en producción</span>
+        <a class="card-link" href="metodologia.html">Ver método <span class="a">→</span></a>
+      </div>
+    </article>
+
+    <!-- Arístides · T-Cuida investigador -->
+    <article class="card" data-cat="healthcare">
+      <div class="card-head">
+        <span class="ctx">T-Cuida · Investigación</span>
+        <span class="yr">2022 — 2023</span>
+      </div>
+      <blockquote class="card-quote">
+        Como investigador, lo que más valoro de Moisés es su <em>rigor técnico</em>. Cuando le presenté el problema del bridge TCP/IP, no solo lo resolvió — me explicó por qué la solución funcionaba, y dejó la documentación que cualquier equipo podía retomar.
+      </blockquote>
+      <cite class="card-author">
+        <div class="mono-av" aria-hidden="true">A</div>
+        <div class="card-id">
+          <div class="nm">Arístides</div>
+          <div class="ro">Investigador · <b>T-Cuida</b></div>
+        </div>
+      </cite>
+      <div class="card-foot">
+        <span class="metric-chip">TCP/IP Bridge documentado</span>
+        <a class="card-link" href="caso/lab-middleware.html">Ver bridge <span class="a">→</span></a>
+      </div>
+    </article>
+
+    <!-- ─── Producto / SaaS ─── -->
+    <div class="section-rule" style="grid-column:1/-1">
+      <span>Producto &amp; SaaS · Indexum</span>
+      <span class="cnt">jefe directo · 2018 — 2020</span>
+    </div>
+
+    <!-- Michael Terrones · Indexum Lead -->
+    <article class="card accent" data-cat="product">
+      <div class="card-head">
+        <span class="ctx">Indexum · Lead</span>
+        <span class="yr">2018 — 2020</span>
+      </div>
+      <blockquote class="card-quote">
+        Moisés se incorporó como dev senior y en 6 meses ya estaba liderando arquitectura. La capacidad de absorber contexto y devolverlo en <em>decisiones técnicas</em> es lo que separa a un dev senior de un Tech Lead. Él hizo esa transición en mi equipo.
+      </blockquote>
+      <cite class="card-author">
+        <div class="mono-av" aria-hidden="true">MT</div>
+        <div class="card-id">
+          <div class="nm">Michael Terrones</div>
+          <div class="ro">Lead · <b>Indexum</b></div>
+        </div>
+      </cite>
+      <div class="card-foot">
+        <span class="metric-chip">Promoción · 6 meses</span>
+        <a class="card-link" href="experiencia.html">Ver experiencia <span class="a">→</span></a>
+      </div>
+    </article>
+
+    <!-- ─── Clientes Web ─── -->
+    <div class="section-rule" style="grid-column:1/-1">
+      <span>Clientes Web · Consultas profesionales</span>
+      <span class="cnt">2 clientes referidos</span>
+    </div>
+
+    <!-- Gabriel Niezen Matos · WordPress -->
+    <article class="card" data-cat="clients">
+      <div class="card-head">
+        <span class="ctx">Cliente · Web profesional</span>
+        <span class="yr">2024</span>
+      </div>
+      <blockquote class="card-quote">
+        Necesitaba una web profesional en tiempo récord para lanzar mi consulta. Moisés <em>respondía cualquier ajuste el mismo día</em> y me explicó cada decisión técnica de forma que entendí qué estaba pagando.
+      </blockquote>
+      <cite class="card-author">
+        <div class="mono-av" aria-hidden="true">GN</div>
+        <div class="card-id">
+          <div class="nm">Gabriel Niezen Matos</div>
+          <div class="ro">Cliente · <b>Web profesional</b></div>
+        </div>
+      </cite>
+      <div class="card-foot">
+        <span class="metric-chip">Site live · 2 semanas</span>
+        <a class="card-link" href="labs.html">Ver labs <span class="a">→</span></a>
+      </div>
+    </article>
+
+    <!-- José Dergan · WordPress -->
+    <article class="card" data-cat="clients">
+      <div class="card-head">
+        <span class="ctx">Cliente · Web personal</span>
+        <span class="yr">2024 — 2025</span>
+      </div>
+      <blockquote class="card-quote">
+        Gabriel me recomendó a Moisés para mi web. Trabajamos tres semanas en remoto y <em>cada llamada cerraba un milestone concreto</em>. Ningún "casi terminamos" eterno.
+      </blockquote>
+      <cite class="card-author">
+        <div class="mono-av" aria-hidden="true">JD</div>
+        <div class="card-id">
+          <div class="nm">José Dergan</div>
+          <div class="ro">Cliente · <b>Web personal</b></div>
+        </div>
+      </cite>
+      <div class="card-foot">
+        <span class="metric-chip">3 sprints · entregado</span>
+        <a class="card-link" href="labs.html">Ver labs <span class="a">→</span></a>
+      </div>
+    </article>
+
+    <!-- ─── Colegas & Mentoría ─── -->
+    <div class="section-rule" style="grid-column:1/-1">
+      <span>Colegas &amp; Mentoría · Relaciones largas</span>
+      <span class="cnt">3 voces que me conocen bien</span>
+    </div>
+
+    <!-- Samuel · primo / ex-colega -->
+    <article class="card" data-cat="peers">
+      <div class="card-head">
+        <span class="ctx">Ex-colega · 4 proyectos</span>
+        <span class="yr">2020 — 2022</span>
+      </div>
+      <blockquote class="card-quote">
+        Trabajé con Moisés antes de que fuera Tech Lead. Lo recomendaría como colega <em>no</em> por ser mi primo — sino porque <em>mantiene la palabra que da</em>. Si dice que entrega el viernes, entrega el viernes.
+      </blockquote>
+      <cite class="card-author">
+        <div class="mono-av" aria-hidden="true">S</div>
+        <div class="card-id">
+          <div class="nm">Samuel</div>
+          <div class="ro">Engineer · <b>Ex-colega &amp; familia</b></div>
+        </div>
+      </cite>
+      <div class="card-foot">
+        <span class="metric-chip neutral">4 proyectos · 2 años</span>
+        <span class="card-link muted">relación de confianza</span>
+      </div>
+    </article>
+
+    <!-- Romaira · ex-colega reciente -->
+    <article class="card accent" data-cat="peers">
+      <div class="card-head">
+        <span class="ctx">Colega · 2025</span>
+        <span class="yr">2025</span>
+      </div>
+      <blockquote class="card-quote">
+        Trabajé con Moisés en el último año. Lo que más me sorprendió fue su <em>disciplina con la documentación</em>: cada decisión técnica importante quedaba escrita. Eso transformó cómo el equipo onboardeaba a nuevos miembros.
+      </blockquote>
+      <cite class="card-author">
+        <div class="mono-av" aria-hidden="true">R</div>
+        <div class="card-id">
+          <div class="nm">Romaira</div>
+          <div class="ro">Engineer · <b>Colega reciente</b></div>
+        </div>
+      </cite>
+      <div class="card-foot">
+        <span class="metric-chip">Onboarding 48h</span>
+        <a class="card-link" href="metodologia.html">Ver método <span class="a">→</span></a>
+      </div>
+    </article>
+
+    <!-- Heymis · mentee -->
+    <article class="card" data-cat="peers">
+      <div class="card-head">
+        <span class="ctx">Mentee · Mentoría informal</span>
+        <span class="yr">2024 — 2025</span>
+      </div>
+      <blockquote class="card-quote">
+        Moisés me ayudó con problemas de código durante meses — <em>sin pedir nada a cambio</em>. No solo respondía la pregunta puntual: me hacía entender el porqué. Es el tipo de mentor que cualquier dev junior quiere tener cerca.
+      </blockquote>
+      <cite class="card-author">
+        <div class="mono-av" aria-hidden="true">H</div>
+        <div class="card-id">
+          <div class="nm">Heymis</div>
+          <div class="ro">Dev · <b>Mentoría informal</b></div>
+        </div>
+      </cite>
+      <div class="card-foot">
+        <span class="metric-chip">+1 año mentoría</span>
+        <a class="card-link" href="pensamiento.html">Ver enfoque <span class="a">→</span></a>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="topnote">▎ 11 / 11 referencias · jefes · colegas · subordinados · clientes</div>
+
+  <!-- CTA -->
+  <div class="end-cta">
+    <div>
+      <h3>¿Te suena alguna de estas <em>historias?</em></h3>
+      <p>Si tu proyecto se parece a uno de los casos referenciados arriba — ya sé cómo abordarlo. Hablemos del tuyo.</p>
+    </div>
+    <div class="actions">
+      <a href="Casos · Rediseño.html">Ver casos de éxito</a>
+      <a href="hablemos.html" class="primary">Hablemos →</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="col brand-col">
+    <div class="brand">mo<span style="color:var(--accent)">davidc</span></div>
+    <div class="sub">Criterio, contexto e intención<br/>Tech Lead · Arquitecto de soluciones</div>
+  </div>
+  <div class="col">
+    <div class="col-h">Sitio</div>
+    <ul>
+      <li><a href="experiencia.html">Experiencia</a></li>
+      <li><a href="Casos · Rediseño.html">Casos de éxito</a></li>
+      <li><a href="metodologia.html">Metodología</a></li>
+      <li><a href="testimonios.html">Testimonios</a></li>
+    </ul>
+  </div>
+  <div class="col">
+    <div class="col-h">Contacto</div>
+    <ul>
+      <li><a href="/cdn-cgi/l/email-protection#91f9fefdf0d1fcfef5f0e7f8f5f2bff2fefc">Email</a></li>
+      <li><a href="https://linkedin.com/in/modavidc" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a href="https://github.com/modavidc" target="_blank" rel="noopener">GitHub</a></li>
+    </ul>
+  </div>
+  <div class="col">
+    <div class="col-h">Ubicación</div>
+    <ul>
+      <li>Lima · Perú</li>
+      <li>Remote · USA / LATAM</li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span>© 2026 Moisés Cedeño</span>
+  <span>11 referencias · 5 sectores · 8 años</span>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // progress bar
+  const pb = document.getElementById('progress');
+  const onScroll = () => {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    pb.style.width = (h.scrollTop / Math.max(max,1) * 100) + '%';
+  };
+  document.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  // filters
+  const filterBtns = document.querySelectorAll('.filter');
+  const cards = document.querySelectorAll('.card[data-cat]');
+  const sectionRules = document.querySelectorAll('.section-rule');
+  const featured = document.querySelector('.featured');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.f;
+      cards.forEach(c => {
+        const cats = (c.dataset.cat || '').split(' ');
+        const show = f === 'all' || cats.includes(f);
+        c.classList.toggle('hidden', !show);
+      });
+      // hide section rules when filtering to keep things tidy
+      sectionRules.forEach(r => r.style.display = (f === 'all') ? '' : 'none');
+      // hide featured when filter doesn't match
+      if (featured) {
+        const fcats = (featured.dataset.cat || '').split(' ');
+        featured.style.display = (f === 'all' || fcats.includes(f)) ? '' : 'none';
+      }
+    });
+  });
+</script>
+</body>
+</html>

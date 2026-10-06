@@ -60,9 +60,9 @@ export default function Home() {
               <div className="kpi-sub">Migración NLMI · 2024</div>
             </div>
             <div className="kpi-cell">
-              <div className="kpi-val green">-70%</div>
-              <div className="kpi-label">Tiempo de resultados clínicos</div>
-              <div className="kpi-sub">Lab Middleware · 2022</div>
+              <div className="kpi-val green">40K+</div>
+              <div className="kpi-label">Órdenes de laboratorio/mes</div>
+              <div className="kpi-sub">ORES API · 2022</div>
             </div>
             <div className="kpi-cell">
               <div className="kpi-val">20K+</div>
@@ -70,9 +70,9 @@ export default function Home() {
               <div className="kpi-sub">Sistemas multi-tenant</div>
             </div>
             <div className="kpi-cell">
-              <div className="kpi-val green">-200%</div>
-              <div className="kpi-label">Tiempo de respuesta</div>
-              <div className="kpi-sub">T-Cuida · 3min → 1min</div>
+              <div className="kpi-val green">&lt;0.2%</div>
+              <div className="kpi-label">Error rate bajo carga</div>
+              <div className="kpi-sub">T-Cuida · 20K usuarios validados</div>
             </div>
           </div>
         </div>
@@ -134,14 +134,14 @@ export default function Home() {
               <div className="problema-q">¿Tu factura AWS sube cada mes sin que nadie sepa exactamente por qué?</div>
               <div className="problema-a">
                 <strong>Gobierno de costos cloud sin tocar la disponibilidad.</strong> En MediRec identifiqué instancias sobredimensionadas, eliminé recursos huérfanos y reestructuré el modelo de reservas. Resultado: <strong>-58% en factura AWS</strong> en 90 días, plataforma al 100% de uptime.
-                <br /><Link className="problema-link" href="/casos-de-exito/medirec-aws">Ver caso completo →</Link>
+                <br /><Link className="problema-link" href="/casos-de-exito/detail/medirec-aws">Ver caso completo →</Link>
               </div>
             </div>
             <div className="problema-item">
               <div className="problema-q">¿Pagas licencias de software que podrías eliminar sin perder funcionalidad?</div>
               <div className="problema-a">
                 <strong>Migro dependencias costosas a alternativas sin comprometer el producto.</strong> Migré LexComp a NLMI en un sistema Healthcare crítico, eliminando <strong>$20k/año</strong> en licencias farmacéuticas con cero pérdida de integridad clínica.
-                <br /><Link className="problema-link" href="/casos-de-exito/licencias-farmaceuticas">Ver caso completo →</Link>
+                <br /><Link className="problema-link" href="/casos-de-exito/detail/licencias-farmaceuticas">Ver caso completo →</Link>
               </div>
             </div>
             <div className="problema-item">
@@ -202,7 +202,7 @@ export default function Home() {
           </div>
 
           <div style={{ marginTop: "20px", textAlign: "center" }}>
-            <Link className="btn btn-secondary" href="/testimonials" style={{ fontSize: "13px" }}>Ver los 6 testimonios →</Link>
+            <Link className="btn btn-secondary" href="/testimonials" style={{ fontSize: "13px" }}>Ver los 11 testimonios →</Link>
           </div>
         </section>
       </div>
@@ -242,14 +242,14 @@ export default function Home() {
             </div>
             <div className="caso-card">
               <div className="caso-meta">
-                <span>Work · SaaS</span>
-                <span>2023</span>
+                <span>Work · Healthcare</span>
+                <span>2022</span>
               </div>
-              <div className="caso-title">Lab Middleware: -70% en tiempo de resultados clínicos</div>
-              <div className="caso-body">Middleware de integración de laboratorio que redujo el tiempo de entrega de resultados clínicos de 6 horas a menos de 90 minutos. Stack: Node + HL7 + AWS Lambda.</div>
+              <div className="caso-title">Cómo automaticé 40K órdenes de laboratorio al mes</div>
+              <div className="caso-body">API centralizada en Laravel que conecta doctores con 25+ laboratorios externos. El doctor crea la orden, el lab la ve en minutos, el resultado vuelve automático. De 5 días a 4 horas.</div>
               <div className="caso-foot">
-                <span className="cat-badge cat-violet"><span className="dot" />Healthcare</span>
-                <Link className="caso-link" href="/casos-de-exito/detail/lab-middleware">Ver caso →</Link>
+                <span className="metric-tag">De 5 días a 4h · 40K+ órdenes/mes</span>
+                <Link className="caso-link" href="/casos-de-exito/detail/ores-laboratory-api">Ver caso →</Link>
               </div>
             </div>
             <div className="caso-card">
@@ -297,7 +297,7 @@ export default function Home() {
             </div>
             <div className="cta-aside-item">
               <span className="cta-aside-label"><Mail size={13} style={{ display: "inline", marginRight: "6px", verticalAlign: "middle" }} />Email</span>
-              <span className="cta-aside-val"><a href="mailto:moisesdavidaaron@gmail.com">moisesdavidaaron@gmail.com</a></span>
+              <span className="cta-aside-val"><a href="mailto:moisesdavidaaron@gmail.com?subject=Consulta%20Tech%20Lead&body=Hola%20Mois%C3%A9s%2C%0A%0Avi%20tu%20portfolio%20y%20me%20gustar%C3%ADa%20hablar%20sobre...">moisesdavidaaron@gmail.com</a></span>
             </div>
             <div className="cta-aside-item">
               <span className="cta-aside-label"><Linkedin size={13} style={{ display: "inline", marginRight: "6px", verticalAlign: "middle" }} />LinkedIn</span>

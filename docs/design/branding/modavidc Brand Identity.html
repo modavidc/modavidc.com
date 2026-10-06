@@ -1,0 +1,1703 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>modavidc — Brand Identity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ─────────────────────────────────────────── */
+:root {
+  --bg:         #0b0c0e;
+  --bg-2:       #111316;
+  --bg-3:       #181a1d;
+  --border:     #202227;
+  --border-2:   #2a2d33;
+
+  --text:       #eaedf2;
+  --text-2:     #9aa0ae;
+  --text-3:     #555c6a;
+
+  /* Brand primary */
+  --green:      oklch(67% 0.17 148);
+  --green-dim:  oklch(35% 0.10 148);
+  --green-bg:   oklch(16% 0.06 148);
+
+  /* Categoricals — same chroma, varied hue */
+  --blue:       oklch(67% 0.17 240);
+  --blue-bg:    oklch(16% 0.06 240);
+  --violet:     oklch(67% 0.17 290);
+  --violet-bg:  oklch(16% 0.06 290);
+  --amber:      oklch(72% 0.14 68);
+  --amber-bg:   oklch(16% 0.06 68);
+
+  /* Semantic */
+  --red:        oklch(63% 0.18 22);
+  --red-bg:     oklch(16% 0.07 22);
+
+  /* Type */
+  --ff-display: 'Space Grotesk', sans-serif;
+  --ff-body:    'DM Sans', sans-serif;
+  --ff-mono:    'DM Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--bg); color: var(--text); font-family: var(--ff-body); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+/* ─── LAYOUT ─────────────────────────────────────────── */
+.page { max-width: 1200px; margin: 0 auto; padding: 0 48px 120px; }
+
+/* ─── CHAPTER HEADER ─────────────────────────────────── */
+.chapter {
+  display: grid; grid-template-columns: 72px 1fr; gap: 0;
+  border-bottom: 1px solid var(--border); margin: 80px 0 40px;
+  padding-bottom: 20px; align-items: end;
+}
+.ch-num { font-family: var(--ff-mono); font-size: 11px; color: var(--text-3); letter-spacing: .16em; padding-bottom: 3px; }
+.ch-title { font-family: var(--ff-display); font-size: 13px; font-weight: 500; color: var(--text-2); letter-spacing: .02em; }
+.ch-desc { grid-column: 2; font-size: 13px; color: var(--text-3); margin-top: 6px; line-height: 1.5; }
+
+/* ─── COVER ──────────────────────────────────────────── */
+.cover {
+  min-height: 100vh; display: flex; flex-direction: column;
+  justify-content: space-between; padding: 48px 0 56px;
+  border-bottom: 1px solid var(--border);
+}
+.cover-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.cover-label { font-family: var(--ff-mono); font-size: 11px; color: var(--text-3); letter-spacing: .16em; text-transform: uppercase; }
+.cover-date { font-family: var(--ff-mono); font-size: 11px; color: var(--text-3); letter-spacing: .1em; }
+.cover-center { flex: 1; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 0; }
+.cover-wordmark {
+  font-family: var(--ff-display); font-size: clamp(72px, 12vw, 140px);
+  font-weight: 300; letter-spacing: -.04em; color: var(--text); line-height: 1;
+  display: flex; align-items: baseline; gap: 0;
+}
+.cover-wordmark .mo { color: var(--green); }
+.cover-tagline {
+  font-family: var(--ff-mono); font-size: 13px; color: var(--text-3);
+  letter-spacing: .18em; text-transform: uppercase; margin-top: 20px; text-align: center;
+}
+.cover-tagline em { color: var(--text-2); font-style: normal; }
+.cover-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+.cover-name { font-size: 13px; color: var(--text-3); }
+.cover-name strong { color: var(--text-2); font-weight: 500; }
+.cover-toc { font-family: var(--ff-mono); font-size: 11px; color: var(--text-3); text-align: right; line-height: 2; letter-spacing: .06em; }
+
+/* ─── LOGO SECTION ───────────────────────────────────── */
+.logo-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--border); }
+.logo-cell {
+  background: var(--bg-2); padding: 40px 32px;
+  display: flex; flex-direction: column; gap: 32px;
+}
+.logo-cell.dark-bg  { background: var(--bg); }
+.logo-cell.light-bg { background: #f0f1f3; }
+.logo-cell.green-bg { background: var(--green); }
+.logo-cell-label { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); letter-spacing: .14em; text-transform: uppercase; }
+.logo-cell.light-bg .logo-cell-label { color: #6b7280; }
+.logo-cell.green-bg .logo-cell-label { color: rgba(0,0,0,.45); }
+
+/* Wordmark component */
+.wm { font-family: var(--ff-display); font-weight: 400; letter-spacing: -.025em; color: var(--text); display: flex; align-items: baseline; }
+.wm .accent { color: var(--green); }
+.wm-lg { font-size: 36px; }
+.wm-md { font-size: 24px; }
+.wm-sm { font-size: 16px; }
+.wm.on-light { color: #111316; }
+.wm.on-light .accent { color: oklch(50% 0.17 148); }
+.wm.on-green { color: #0b0c0e; }
+.wm.on-green .accent { color: rgba(0,0,0,.6); }
+
+/* Mark component — SVG-based */
+.mark { display: flex; align-items: center; }
+.lockup { display: flex; align-items: center; gap: 10px; }
+.lockup-divider { width: 1px; background: var(--border-2); align-self: stretch; }
+.lockup-divider.on-light { background: #d1d5db; }
+.lockup-divider.on-green { background: rgba(0,0,0,.2); }
+.lockup-sub { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; line-height: 1.5; }
+.lockup-sub.on-dark { color: var(--text-3); }
+.lockup-sub.on-light { color: #6b7280; }
+.lockup-sub.on-green { color: rgba(0,0,0,.5); }
+
+/* Don'ts */
+.dont-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.dont-cell { background: var(--bg-2); padding: 24px 20px; display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
+.dont-mark { font-size: 11px; font-family: var(--ff-mono); letter-spacing: .1em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; }
+.dont-mark.no { color: var(--red); }
+.dont-mark.no::before { content: '✕'; }
+.dont-example { font-family: var(--ff-display); font-size: 22px; font-weight: 500; opacity: .4; letter-spacing: -.01em; }
+.dont-reason { font-size: 12px; color: var(--text-3); line-height: 1.5; }
+
+/* ─── COLOR SECTION ──────────────────────────────────── */
+.color-system { display: grid; grid-template-columns: repeat(5,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 1px; }
+.color-system.row2 { grid-template-columns: repeat(4,1fr); }
+.cswatch { background: var(--bg-2); padding: 0 0 20px; overflow: hidden; }
+.cswatch-block { height: 80px; margin-bottom: 16px; }
+.cswatch-name { font-family: var(--ff-display); font-size: 14px; font-weight: 500; padding: 0 16px; margin-bottom: 4px; }
+.cswatch-role { font-size: 12px; color: var(--text-3); padding: 0 16px; margin-bottom: 10px; line-height: 1.4; }
+.cswatch-values { padding: 0 16px; display: flex; flex-direction: column; gap: 2px; }
+.cswatch-val { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); letter-spacing: .06em; }
+.cswatch-val .val { color: var(--text-2); }
+
+/* Usage rules */
+.color-rules { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.crule { background: var(--bg-2); padding: 20px 24px; }
+.crule-head { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--green); margin-bottom: 10px; }
+.crule-item { font-size: 13px; color: var(--text-2); margin-bottom: 6px; padding-left: 14px; position: relative; line-height: 1.5; }
+.crule-item::before { content: '—'; position: absolute; left: 0; color: var(--text-3); font-size: 10px; top: 5px; }
+
+/* ─── TYPE SECTION ───────────────────────────────────── */
+.type-specimen { border: 1px solid var(--border); background: var(--bg-2); padding: 32px; margin-bottom: 1px; display: grid; grid-template-columns: 180px 1fr; gap: 32px; align-items: start; }
+.type-specimen + .type-specimen { border-top: none; }
+.type-meta { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); letter-spacing: .12em; text-transform: uppercase; line-height: 2.2; }
+.type-meta strong { color: var(--text-2); display: block; font-size: 12px; margin-bottom: 8px; font-weight: 500; letter-spacing: .06em; }
+.type-sample { line-height: 1.1; letter-spacing: -.03em; font-weight: 300; }
+.type-sample-sm { font-size: 14px; line-height: 1.65; letter-spacing: 0; font-weight: 400; color: var(--text-2); max-width: 560px; }
+.type-sample-mono { font-family: var(--ff-mono); font-size: 13px; color: var(--green); line-height: 1.7; font-weight: 400; letter-spacing: .04em; }
+
+/* Type scale */
+.type-scale { border: 1px solid var(--border); background: var(--bg-2); padding: 28px 32px; }
+.ts-row { display: flex; align-items: baseline; gap: 20px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.ts-row:last-child { border-bottom: none; }
+.ts-size { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); width: 80px; flex-shrink: 0; letter-spacing: .1em; }
+.ts-weight { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); width: 60px; flex-shrink: 0; }
+.ts-use { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); width: 140px; flex-shrink: 0; letter-spacing: .06em; }
+
+/* ─── COMPONENTS ─────────────────────────────────────── */
+.comp-row { display: grid; grid-template-columns: 200px 1fr; gap: 0; border-bottom: 1px solid var(--border); align-items: start; }
+.comp-row:first-child { border-top: 1px solid var(--border); }
+.comp-label { padding: 24px; border-right: 1px solid var(--border); font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); letter-spacing: .12em; text-transform: uppercase; }
+.comp-content { padding: 24px 28px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+/* Buttons */
+.btn {
+  font-family: var(--ff-body); font-size: 14px; font-weight: 500;
+  padding: 10px 20px; border-radius: 4px; border: none; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 8px; letter-spacing: -.01em;
+  transition: opacity .15s;
+}
+.btn:hover { opacity: .85; }
+.btn-primary   { background: var(--green); color: #0b0c0e; }
+.btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border-2); }
+.btn-ghost     { background: transparent; color: var(--text-2); padding: 10px 0; }
+.btn-ghost:hover { color: var(--text); opacity: 1; }
+.btn-sm { font-size: 12px; padding: 7px 14px; }
+
+/* Badges */
+.badge {
+  font-family: var(--ff-mono); font-size: 11px; letter-spacing: .08em;
+  padding: 3px 10px; border-radius: 100px; display: inline-flex; align-items: center; gap: 5px;
+}
+.badge-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+.badge-green  { background: var(--green-bg);  color: var(--green); }
+.badge-blue   { background: var(--blue-bg);   color: var(--blue); }
+.badge-violet { background: var(--violet-bg); color: var(--violet); }
+.badge-amber  { background: var(--amber-bg);  color: var(--amber); }
+.badge-neutral { background: var(--bg-3); color: var(--text-2); border: 1px solid var(--border-2); }
+
+/* Metric badges */
+.metric {
+  font-family: var(--ff-mono); font-size: 12px; font-weight: 500;
+  padding: 4px 10px; border-radius: 3px; letter-spacing: .04em;
+}
+.metric-primary { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-dim); }
+.metric-neutral { background: var(--bg-3); color: var(--text-2); border: 1px solid var(--border-2); }
+
+/* Tags */
+.tag-item { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); letter-spacing: .12em; text-transform: uppercase; }
+
+/* Section pill */
+.section-pill {
+  display: inline-flex; align-items: center;
+  background: var(--bg-3); border: 1px solid var(--border-2);
+  padding: 4px 12px; border-radius: 100px;
+  font-family: var(--ff-mono); font-size: 11px; color: var(--text-2);
+  letter-spacing: .1em; text-transform: uppercase;
+}
+
+/* Cards */
+.card {
+  background: var(--bg-2); border: 1px solid var(--border);
+  padding: 20px 22px; border-radius: 4px;
+}
+.card-meta { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 10px; display: flex; justify-content: space-between; }
+.card-title { font-family: var(--ff-display); font-size: 16px; font-weight: 500; letter-spacing: -.01em; margin-bottom: 8px; }
+.card-body { font-size: 13px; color: var(--text-2); line-height: 1.6; margin-bottom: 14px; }
+.card-foot { display: flex; align-items: center; justify-content: space-between; }
+.card-link { font-family: var(--ff-mono); font-size: 11px; color: var(--green); letter-spacing: .06em; text-decoration: none; display: flex; align-items: center; gap: 4px; }
+
+/* KPI mini */
+.kpi-row { display: flex; gap: 1px; }
+.kpi {
+  background: var(--bg-3); border: 1px solid var(--border);
+  padding: 18px 20px; flex: 1;
+}
+.kpi-val { font-family: var(--ff-display); font-size: 28px; font-weight: 500; letter-spacing: -.03em; line-height: 1; }
+.kpi-val.primary { color: var(--green); }
+.kpi-val.neutral  { color: var(--text); }
+.kpi-label { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); letter-spacing: .1em; text-transform: uppercase; margin-top: 6px; }
+
+/* ─── VOICE ──────────────────────────────────────────── */
+.voice-hero {
+  background: var(--bg-2); border: 1px solid var(--border);
+  padding: 60px 48px; text-align: center; margin-bottom: 1px;
+}
+.voice-tagline {
+  font-family: var(--ff-display); font-size: clamp(32px, 5vw, 56px);
+  font-weight: 300; letter-spacing: -.03em; color: var(--text); line-height: 1.15;
+}
+.voice-tagline em { color: var(--green); font-style: normal; }
+.voice-tagline .sep { color: var(--text-3); margin: 0 8px; }
+
+.voice-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.voice-cell { background: var(--bg-2); padding: 24px 28px; }
+.voice-head { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--green); margin-bottom: 14px; }
+.voice-pair { margin-bottom: 12px; }
+.voice-no { font-size: 13px; color: var(--red); margin-bottom: 3px; text-decoration: line-through; opacity: .6; }
+.voice-yes { font-size: 13px; color: var(--text); }
+
+/* ─── USAGE IN CONTEXT ───────────────────────────────── */
+.mini-hero {
+  background: var(--bg); border: 1px solid var(--border);
+  padding: 60px 48px; position: relative;
+}
+.mini-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 72px;
+}
+.mini-nav-wm { font-family: var(--ff-display); font-size: 18px; font-weight: 400; letter-spacing: -.025em; }
+.mini-nav-wm .accent { color: var(--green); }
+.mini-nav-tagline { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); letter-spacing: .12em; text-transform: uppercase; }
+.mini-nav-links { display: flex; gap: 24px; font-size: 13px; color: var(--text-2); }
+.mini-nav-cta { background: var(--green); color: #0b0c0e; font-size: 13px; font-weight: 500; padding: 8px 18px; border-radius: 3px; font-family: var(--ff-body); }
+.mini-kicker { font-family: var(--ff-mono); font-size: 11px; color: var(--text-3); letter-spacing: .16em; text-transform: uppercase; margin-bottom: 16px; }
+.mini-h1 { font-family: var(--ff-display); font-size: clamp(40px, 5.5vw, 64px); font-weight: 300; letter-spacing: -.04em; line-height: 1.05; margin-bottom: 20px; max-width: 700px; }
+.mini-sub { font-size: 16px; color: var(--text-2); max-width: 540px; line-height: 1.65; margin-bottom: 36px; }
+.mini-ctas { display: flex; gap: 12px; align-items: center; }
+.mini-kpis { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; margin-top: 56px; background: var(--border); border: 1px solid var(--border); }
+.mini-kpi { background: var(--bg-2); padding: 20px; }
+.mini-kpi-val { font-family: var(--ff-display); font-size: 28px; font-weight: 500; letter-spacing: -.03em; line-height: 1; margin-bottom: 4px; }
+.mini-kpi-val.hi { color: var(--green); }
+.mini-kpi-lbl { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); letter-spacing: .1em; text-transform: uppercase; }
+
+/* ─── FOOTER ─────────────────────────────────────────── */
+.page-footer {
+  margin-top: 80px; padding-top: 24px; border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between;
+  font-family: var(--ff-mono); font-size: 11px; color: var(--text-3); letter-spacing: .06em;
+}
+
+/* ─── MISC ───────────────────────────────────────────── */
+.note { font-size: 13px; color: var(--text-3); line-height: 1.65; margin-top: 16px; font-family: var(--ff-mono); letter-spacing: .02em; }
+.note strong { color: var(--text-2); font-weight: 500; }
+.section-spacer { height: 1px; background: var(--border); margin: 40px 0; }
+hr.thin { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+
+@media(max-width:900px){
+  .page { padding: 0 20px 80px; }
+  .logo-grid { grid-template-columns: 1fr; }
+  .color-system { grid-template-columns: 1fr 1fr; }
+  .type-specimen { grid-template-columns: 1fr; }
+  .voice-grid, .dont-grid { grid-template-columns: 1fr 1fr; }
+  .mini-kpis { grid-template-columns: 1fr 1fr; }
+  .comp-row { grid-template-columns: 1fr; }
+  .comp-label { border-right: none; border-bottom: 1px solid var(--border); }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══════════════════════════════════════════════════
+     COVER
+═══════════════════════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-top">
+    <span class="cover-label">Brand Identity System · v1.0</span>
+    <span class="cover-date">Abril 2026</span>
+  </div>
+
+  <div class="cover-center">
+    <div class="cover-wordmark">
+      <span class="mo">mo</span>davidc
+    </div>
+    <div class="cover-tagline">
+      <em>Criterio</em> &nbsp;·&nbsp; <em>Contexto</em> &nbsp;·&nbsp; <em>Intención</em>
+    </div>
+  </div>
+
+  <div class="cover-bottom">
+    <div class="cover-name"><strong>Moisés Cedeño</strong> — Tech Lead · AWS & FinOps</div>
+    <div class="cover-toc">
+      01 Logo &amp; Marca<br>
+      02 Sistema de color<br>
+      03 Tipografía<br>
+      04 Voz &amp; tono<br>
+      05 Componentes<br>
+      06 Home · Hero<br>
+      07 Experiencia<br>
+      08 Casos de Éxito<br>
+      09 Metodología<br>
+      10 Testimonios<br>
+      11 Hablemos<br>
+      12 Pensamiento · Blog list<br>
+      13 Blog Post Detail
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     01 LOGO
+═══════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="ch-num">01</div>
+  <div>
+    <div class="ch-title">Logo &amp; Marca</div>
+    <div class="ch-desc">Wordmark principal, marca tipográfica y variaciones por fondo.</div>
+  </div>
+</div>
+
+<!-- Wordmark + mark en tres fondos -->
+<div class="logo-grid">
+
+  <!-- Dark (principal) -->
+  <div class="logo-cell dark-bg">
+    <div class="logo-cell-label">Uso principal · fondo oscuro</div>
+
+    <!-- Mark -->
+    <div class="mark">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="48" height="48" rx="8" fill="#181a1d"/>
+        <rect x="11" y="11" width="26" height="26" rx="3" fill="none" stroke="#202227" stroke-width="1"/>
+        <!-- stylized m -->
+        <path d="M14 32 L14 20 L21 27 L28 20 L28 32" stroke="oklch(67% 0.17 148)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="34" cy="32" r="2" fill="oklch(67% 0.17 148)"/>
+      </svg>
+    </div>
+
+    <!-- Wordmark -->
+    <div class="wm wm-lg"><span class="accent">mo</span>davidc</div>
+
+    <!-- Lockup -->
+    <div class="lockup">
+      <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="48" height="48" rx="8" fill="#181a1d"/>
+        <rect x="11" y="11" width="26" height="26" rx="3" fill="none" stroke="#202227" stroke-width="1"/>
+        <path d="M14 32 L14 20 L21 27 L28 20 L28 32" stroke="oklch(67% 0.17 148)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="34" cy="32" r="2" fill="oklch(67% 0.17 148)"/>
+      </svg>
+      <div class="lockup-divider"></div>
+      <div class="lockup-sub on-dark">Tech Lead<br>AWS &amp; FinOps</div>
+    </div>
+  </div>
+
+  <!-- Light -->
+  <div class="logo-cell light-bg">
+    <div class="logo-cell-label" style="color:#6b7280">Uso en fondo claro</div>
+
+    <div class="mark">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="48" height="48" rx="8" fill="#e8eaed"/>
+        <rect x="11" y="11" width="26" height="26" rx="3" fill="none" stroke="#c9cdd4" stroke-width="1"/>
+        <path d="M14 32 L14 20 L21 27 L28 20 L28 32" stroke="oklch(50% 0.17 148)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="34" cy="32" r="2" fill="oklch(50% 0.17 148)"/>
+      </svg>
+    </div>
+
+    <div class="wm wm-lg on-light"><span class="accent">mo</span>davidc</div>
+
+    <div class="lockup">
+      <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="48" height="48" rx="8" fill="#e8eaed"/>
+        <rect x="11" y="11" width="26" height="26" rx="3" fill="none" stroke="#c9cdd4" stroke-width="1"/>
+        <path d="M14 32 L14 20 L21 27 L28 20 L28 32" stroke="oklch(50% 0.17 148)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="34" cy="32" r="2" fill="oklch(50% 0.17 148)"/>
+      </svg>
+      <div class="lockup-divider on-light"></div>
+      <div class="lockup-sub on-light">Tech Lead<br>AWS &amp; FinOps</div>
+    </div>
+  </div>
+
+  <!-- Green bg -->
+  <div class="logo-cell green-bg">
+    <div class="logo-cell-label">Uso en verde de marca</div>
+
+    <div class="mark">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="48" height="48" rx="8" fill="rgba(0,0,0,.15)"/>
+        <rect x="11" y="11" width="26" height="26" rx="3" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1"/>
+        <path d="M14 32 L14 20 L21 27 L28 20 L28 32" stroke="rgba(0,0,0,.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="34" cy="32" r="2" fill="rgba(0,0,0,.7)"/>
+      </svg>
+    </div>
+
+    <div class="wm wm-lg on-green"><span class="accent">mo</span>davidc</div>
+
+    <div class="lockup">
+      <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="48" height="48" rx="8" fill="rgba(0,0,0,.15)"/>
+        <rect x="11" y="11" width="26" height="26" rx="3" fill="none" stroke="rgba(0,0,0,.2)" stroke-width="1"/>
+        <path d="M14 32 L14 20 L21 27 L28 20 L28 32" stroke="rgba(0,0,0,.7)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="34" cy="32" r="2" fill="rgba(0,0,0,.7)"/>
+      </svg>
+      <div class="lockup-divider on-green"></div>
+      <div class="lockup-sub on-green">Tech Lead<br>AWS &amp; FinOps</div>
+    </div>
+  </div>
+</div>
+
+<!-- Escalas -->
+<div style="border:1px solid var(--border);border-top:none;background:var(--bg-2);padding:28px 32px;">
+  <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:20px;">Escala del wordmark</div>
+  <div style="display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:baseline;gap:20px;">
+      <span style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);width:60px;flex-shrink:0;">140px</span>
+      <div class="wm" style="font-size:60px;"><span class="accent">mo</span>davidc</div>
+    </div>
+    <hr class="thin">
+    <div style="display:flex;align-items:baseline;gap:20px;">
+      <span style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);width:60px;flex-shrink:0;">36px</span>
+      <div class="wm" style="font-size:36px;"><span class="accent">mo</span>davidc</div>
+    </div>
+    <hr class="thin">
+    <div style="display:flex;align-items:baseline;gap:20px;">
+      <span style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);width:60px;flex-shrink:0;">20px</span>
+      <div class="wm" style="font-size:20px;"><span class="accent">mo</span>davidc</div>
+      <span style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;">← Navbar</span>
+    </div>
+    <hr class="thin">
+    <div style="display:flex;align-items:baseline;gap:20px;">
+      <span style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);width:60px;flex-shrink:0;">14px</span>
+      <div class="wm" style="font-size:14px;"><span class="accent">mo</span>davidc</div>
+      <span style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;">← Footer / watermark</span>
+    </div>
+  </div>
+</div>
+
+<!-- Don'ts -->
+<div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin:24px 0 12px;">No hacer</div>
+<div class="dont-grid">
+  <div class="dont-cell">
+    <span class="dont-mark no">No</span>
+    <div class="dont-example" style="font-family:var(--ff-display);font-size:24px;letter-spacing:-.01em;">DM</div>
+    <div class="dont-reason">No usar iniciales que no corresponden al nombre público ni al dominio.</div>
+  </div>
+  <div class="dont-cell">
+    <span class="dont-mark no">No</span>
+    <div class="dont-example" style="font-family:var(--ff-display);font-size:24px;letter-spacing:.1em;text-transform:uppercase;">MODAVIDC</div>
+    <div class="dont-reason">No usar mayúsculas. El wordmark es siempre en minúsculas.</div>
+  </div>
+  <div class="dont-cell">
+    <span class="dont-mark no">No</span>
+    <div class="dont-example" style="font-size:24px;font-weight:700;">modavidc</div>
+    <div class="dont-reason">No usar font-weight 700+ en el wordmark. Solo 300–400.</div>
+  </div>
+  <div class="dont-cell">
+    <span class="dont-mark no">No</span>
+    <div class="dont-example" style="font-family:var(--ff-display);font-size:24px;color:oklch(67% 0.17 240);">modavidc</div>
+    <div class="dont-reason">No usar otros colores de acento en el wordmark. Solo verde primario.</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     02 COLOR
+═══════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="ch-num">02</div>
+  <div>
+    <div class="ch-title">Sistema de color</div>
+    <div class="ch-desc">1 primario de marca + 3 categóricos + base neutra. Todos los acentos comparten la misma chroma y luminosidad, solo varía el hue.</div>
+  </div>
+</div>
+
+<!-- Primarios -->
+<div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px;">Primario de marca</div>
+<div class="color-system" style="grid-template-columns:2fr 1fr 1fr 1fr;">
+  <div class="cswatch">
+    <div class="cswatch-block" style="background:var(--green)"></div>
+    <div class="cswatch-name" style="color:var(--green)">Verde — Brand Primary</div>
+    <div class="cswatch-role">CTAs, acento principal, KPI destacado, links hover, borders activos, marca del wordmark.</div>
+    <div class="cswatch-values">
+      <div class="cswatch-val">oklch <span class="val">67% 0.17 148</span></div>
+      <div class="cswatch-val">hex <span class="val">#34d675</span></div>
+      <div class="cswatch-val">uso <span class="val">Solo 1 color destacado por pantalla</span></div>
+    </div>
+  </div>
+  <div class="cswatch">
+    <div class="cswatch-block" style="background:var(--green-dim)"></div>
+    <div class="cswatch-name">Verde dim</div>
+    <div class="cswatch-role">Borders activos, separadores en contexto de marca.</div>
+    <div class="cswatch-values">
+      <div class="cswatch-val">oklch <span class="val">35% 0.10 148</span></div>
+    </div>
+  </div>
+  <div class="cswatch">
+    <div class="cswatch-block" style="background:var(--green-bg)"></div>
+    <div class="cswatch-name">Verde bg</div>
+    <div class="cswatch-role">Fondo de badges de métrica, highlights de código, hover states.</div>
+    <div class="cswatch-values">
+      <div class="cswatch-val">oklch <span class="val">16% 0.06 148</span></div>
+    </div>
+  </div>
+  <div class="cswatch" style="display:flex;flex-direction:column;gap:0;padding:0;">
+    <div style="height:40px;background:var(--green)"></div>
+    <div style="height:40px;background:var(--green-dim)"></div>
+    <div style="flex:1;background:var(--green-bg)"></div>
+    <div style="padding:12px 16px 16px;">
+      <div class="cswatch-name">Escala</div>
+      <div class="cswatch-role">Tono completo de la marca primaria.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Categóricos -->
+<div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin:24px 0 8px;">Colores categóricos — solo para etiquetas de Casos de Éxito</div>
+<div class="color-system" style="margin-bottom:24px;">
+  <div class="cswatch">
+    <div class="cswatch-block" style="background:var(--blue)"></div>
+    <div class="cswatch-name" style="color:var(--blue)">Azul — SaaS / Cloud</div>
+    <div class="cswatch-role">Exclusivo para etiqueta de categoría "SaaS" y "Cloud".</div>
+    <div class="cswatch-values">
+      <div class="cswatch-val">oklch <span class="val">67% 0.17 240</span></div>
+    </div>
+  </div>
+  <div class="cswatch">
+    <div class="cswatch-block" style="background:var(--violet)"></div>
+    <div class="cswatch-name" style="color:var(--violet)">Violeta — Healthcare</div>
+    <div class="cswatch-role">Exclusivo para etiqueta de categoría "Healthcare".</div>
+    <div class="cswatch-values">
+      <div class="cswatch-val">oklch <span class="val">67% 0.17 290</span></div>
+    </div>
+  </div>
+  <div class="cswatch">
+    <div class="cswatch-block" style="background:var(--amber)"></div>
+    <div class="cswatch-name" style="color:var(--amber)">Amber — Mobile / IoT</div>
+    <div class="cswatch-role">Exclusivo para etiqueta de categoría "Mobile" e "IoT".</div>
+    <div class="cswatch-values">
+      <div class="cswatch-val">oklch <span class="val">72% 0.14 68</span></div>
+    </div>
+  </div>
+  <div class="cswatch">
+    <div class="cswatch-block" style="background:var(--red)"></div>
+    <div class="cswatch-name" style="color:var(--red)">Rojo — FinOps / Error</div>
+    <div class="cswatch-role">Etiqueta "FinOps" y estados de error/alerta del sistema.</div>
+    <div class="cswatch-values">
+      <div class="cswatch-val">oklch <span class="val">63% 0.18 22</span></div>
+    </div>
+  </div>
+  <div class="cswatch">
+    <div class="cswatch-block" style="background:var(--bg-3);border:1px solid var(--border)"></div>
+    <div class="cswatch-name">Neutro</div>
+    <div class="cswatch-role">Etiquetas sin categoría, badges de estado secundario.</div>
+    <div class="cswatch-values">
+      <div class="cswatch-val">oklch <span class="val">18% 0.005 240</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Base -->
+<div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px;">Base — fondos y texto</div>
+<div class="color-system" style="grid-template-columns:repeat(7,1fr);margin-bottom:0;">
+  <div class="cswatch">
+    <div class="cswatch-block" style="background:var(--bg)"></div>
+    <div class="cswatch-name" style="font-size:12px;">BG</div>
+    <div class="cswatch-values"><div class="cswatch-val"><span class="val">#0b0c0e</span></div></div>
+  </div>
+  <div class="cswatch">
+    <div class="cswatch-block" style="background:var(--bg-2)"></div>
+    <div class="cswatch-name" style="font-size:12px;">Surface</div>
+    <div class="cswatch-values"><div class="cswatch-val"><span class="val">#111316</span></div></div>
+  </div>
+  <div class="cswatch">
+    <div class="cswatch-block" style="background:var(--bg-3)"></div>
+    <div class="cswatch-name" style="font-size:12px;">Surface 2</div>
+    <div class="cswatch-values"><div class="cswatch-val"><span class="val">#181a1d</span></div></div>
+  </div>
+  <div class="cswatch">
+    <div class="cswatch-block" style="background:var(--border)"></div>
+    <div class="cswatch-name" style="font-size:12px;">Border</div>
+    <div class="cswatch-values"><div class="cswatch-val"><span class="val">#202227</span></div></div>
+  </div>
+  <div class="cswatch">
+    <div class="cswatch-block" style="background:var(--text-3)"></div>
+    <div class="cswatch-name" style="font-size:12px;">Text 3</div>
+    <div class="cswatch-values"><div class="cswatch-val"><span class="val">#555c6a</span></div></div>
+  </div>
+  <div class="cswatch">
+    <div class="cswatch-block" style="background:var(--text-2)"></div>
+    <div class="cswatch-name" style="font-size:12px;">Text 2</div>
+    <div class="cswatch-values"><div class="cswatch-val"><span class="val">#9aa0ae</span></div></div>
+  </div>
+  <div class="cswatch">
+    <div class="cswatch-block" style="background:var(--text)"></div>
+    <div class="cswatch-name" style="font-size:12px;">Text</div>
+    <div class="cswatch-values"><div class="cswatch-val"><span class="val">#eaedf2</span></div></div>
+  </div>
+</div>
+
+<div class="color-rules" style="border-top:none;">
+  <div class="crule">
+    <div class="crule-head">Reglas de uso del color primario</div>
+    <div class="crule-item">Un solo elemento "verde" por sección — el más importante</div>
+    <div class="crule-item">Todos los CTAs primarios usan verde de fondo, texto oscuro</div>
+    <div class="crule-item">El KPI más importante de cada pantalla es el único en verde</div>
+    <div class="crule-item">Links en hover y elementos activos del nav usan verde</div>
+    <div class="crule-item">Los íconos de plataforma (LinkedIn, GitHub) usan sus colores propios solo en el ícono, nunca como color de card o border</div>
+  </div>
+  <div class="crule">
+    <div class="crule-head">Reglas de uso de categóricos</div>
+    <div class="crule-item">Los 4 categóricos se usan <em>solo</em> en etiquetas de Casos de Éxito</div>
+    <div class="crule-item">Nunca en CTAs, títulos, métricas ni KPIs</div>
+    <div class="crule-item">Nunca como color de borde de tarjetas (solo los filtros)</div>
+    <div class="crule-item">Nunca repetir el verde de marca en contextos categóricos — reservar para marca</div>
+    <div class="crule-item">Colores de testimonios: ícono de plataforma en su color, card en fondo neutro del sistema</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     03 TIPOGRAFÍA
+═══════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="ch-num">03</div>
+  <div>
+    <div class="ch-title">Tipografía</div>
+    <div class="ch-desc">Stack de 3 familias con roles bien definidos. Space Grotesk para display, DM Sans para cuerpo, DM Mono para código y etiquetas.</div>
+  </div>
+</div>
+
+<div class="type-specimen">
+  <div class="type-meta">
+    <strong>Space Grotesk</strong>
+    Display / Headings<br>
+    Google Fonts<br>
+    Weights: 300 · 400 · 500<br><br>
+    Usar en:<br>
+    H1 · H2 · H3<br>
+    Wordmark<br>
+    KPI numbers<br>
+    Card titles<br>
+  </div>
+  <div>
+    <div class="type-sample" style="font-family:var(--ff-display);font-size:clamp(48px,7vw,80px);color:var(--text);">
+      Lidero equipos.<br>Construyo software acelerado por IA<br><span style="color:var(--green);">con criterio e intención.</span>
+    </div>
+    <div style="display:flex;gap:40px;margin-top:24px;flex-wrap:wrap;">
+      <div>
+        <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;">Light 300</div>
+        <div style="font-family:var(--ff-display);font-size:32px;font-weight:300;letter-spacing:-.03em;">Efficient architecture</div>
+      </div>
+      <div>
+        <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;">Regular 400</div>
+        <div style="font-family:var(--ff-display);font-size:32px;font-weight:400;letter-spacing:-.03em;">Efficient architecture</div>
+      </div>
+      <div>
+        <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;">Medium 500</div>
+        <div style="font-family:var(--ff-display);font-size:32px;font-weight:500;letter-spacing:-.03em;">Efficient architecture</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="type-specimen">
+  <div class="type-meta">
+    <strong>DM Sans</strong>
+    Body / UI<br>
+    Google Fonts<br>
+    Weights: 300 · 400 · 500 · 600<br><br>
+    Usar en:<br>
+    Párrafos<br>
+    Subtítulos<br>
+    Botones<br>
+    Labels de form<br>
+    Nav items<br>
+  </div>
+  <div>
+    <div class="type-sample-sm" style="font-size:18px;color:var(--text);">
+      Construyo software que escala sin depender de quién lo creó. 8+ años en Healthcare, SaaS e IoT entregando sistemas que cualquier dev puede mantener desde el primer día.
+    </div>
+    <div style="margin-top:20px;display:flex;gap:32px;flex-wrap:wrap;">
+      <div style="font-size:14px;color:var(--text-2);line-height:1.65;max-width:320px;">
+        Body text regular — lectura cómoda a 14–16px. DM Sans tiene proporciones equilibradas, excelente en dark themes. Kerning natural, no necesita tracking adicional.
+      </div>
+      <div>
+        <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;">Pesos</div>
+        <div style="font-size:18px;font-weight:300;margin-bottom:4px;">Light 300 — secciones hero</div>
+        <div style="font-size:18px;font-weight:400;margin-bottom:4px;">Regular 400 — body</div>
+        <div style="font-size:18px;font-weight:500;margin-bottom:4px;">Medium 500 — labels, buttons</div>
+        <div style="font-size:18px;font-weight:600;">SemiBold 600 — card titles</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="type-specimen">
+  <div class="type-meta">
+    <strong>DM Mono</strong>
+    Code / Labels<br>
+    Google Fonts<br>
+    Weights: 300 · 400 · 500<br><br>
+    Usar en:<br>
+    Section kickers<br>
+    Métricas/badges<br>
+    Valores de código<br>
+    Fechas y meta<br>
+    Nav monospace<br>
+  </div>
+  <div>
+    <div class="type-sample-mono" style="font-size:18px;">
+      -58% AWS cost · +8 años · 48h onboarding<br>
+      Tech Lead · AWS &amp; FinOps<br>
+      <span style="color:var(--text-3);">// oklch(67% 0.17 148) — brand green</span><br>
+      <span style="color:var(--text-2);">CASOS DE ÉXITO · ABR 2026 · LIMA, PERÚ</span>
+    </div>
+    <div style="margin-top:20px;display:flex;gap:32px;flex-wrap:wrap;align-items:baseline;">
+      <div>
+        <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;">Section kicker (uppercase)</div>
+        <div style="font-family:var(--ff-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3);">CASOS DE ÉXITO</div>
+      </div>
+      <div>
+        <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;">Métrica</div>
+        <div style="font-family:var(--ff-mono);font-size:16px;color:var(--green);">-58%</div>
+      </div>
+      <div>
+        <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;">Meta / fecha</div>
+        <div style="font-family:var(--ff-mono);font-size:12px;color:var(--text-3);">Work · 2023</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Type scale -->
+<div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin:24px 0 8px;">Escala tipográfica completa</div>
+<div class="type-scale">
+  <div class="ts-row">
+    <span class="ts-size">80–120px</span>
+    <span class="ts-weight">300</span>
+    <span class="ts-use">H1 hero display</span>
+    <span style="font-family:var(--ff-display);font-size:clamp(32px,5vw,60px);font-weight:300;letter-spacing:-.04em;color:var(--text);">Moisés Cedeño</span>
+  </div>
+  <div class="ts-row">
+    <span class="ts-size">40–64px</span>
+    <span class="ts-weight">300–400</span>
+    <span class="ts-use">H1 de página</span>
+    <span style="font-family:var(--ff-display);font-size:clamp(24px,4vw,44px);font-weight:300;letter-spacing:-.03em;">Impacto medible</span>
+  </div>
+  <div class="ts-row">
+    <span class="ts-size">28–36px</span>
+    <span class="ts-weight">400</span>
+    <span class="ts-use">H2 de sección</span>
+    <span style="font-family:var(--ff-display);font-size:clamp(20px,3vw,28px);font-weight:400;letter-spacing:-.02em;">Casos de éxito recientes</span>
+  </div>
+  <div class="ts-row">
+    <span class="ts-size">18–22px</span>
+    <span class="ts-weight">400–500</span>
+    <span class="ts-use">H3 / card title</span>
+    <span style="font-family:var(--ff-display);font-size:19px;font-weight:500;letter-spacing:-.01em;">Cómo reduje 58% la factura AWS</span>
+  </div>
+  <div class="ts-row">
+    <span class="ts-size">16–18px</span>
+    <span class="ts-weight">400</span>
+    <span class="ts-use">Body grande</span>
+    <span style="font-size:16px;font-weight:400;color:var(--text-2);">Sistemas que funcionan cuando yo no estoy.</span>
+  </div>
+  <div class="ts-row">
+    <span class="ts-size">14–15px</span>
+    <span class="ts-weight">400</span>
+    <span class="ts-use">Body regular</span>
+    <span style="font-size:14px;color:var(--text-2);">Re-arquitectura y gobernanza de costos en plataforma Healthcare.</span>
+  </div>
+  <div class="ts-row">
+    <span class="ts-size">11–13px</span>
+    <span class="ts-weight">400–500</span>
+    <span class="ts-use">Small / caption</span>
+    <span style="font-size:12px;color:var(--text-3);">Feedback real de proyectos documentados. Algunos detalles modificados por NDA.</span>
+  </div>
+  <div class="ts-row" style="border-bottom:none;">
+    <span class="ts-size">10–11px</span>
+    <span class="ts-weight">Mono 400</span>
+    <span class="ts-use">Label / kicker</span>
+    <span style="font-family:var(--ff-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);">CASOS DE ÉXITO · 2023</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     04 VOZ Y TONO
+═══════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="ch-num">04</div>
+  <div>
+    <div class="ch-title">Voz &amp; tono</div>
+    <div class="ch-desc">El copy de marca. Qué decir, cómo decirlo, qué evitar.</div>
+  </div>
+</div>
+
+<div class="voice-hero">
+  <div class="voice-tagline">
+    Criterio<span class="sep">·</span><em>Contexto</em><span class="sep">·</span><em>Intención</em>
+  </div>
+  <div style="font-family:var(--ff-mono);font-size:12px;color:var(--text-3);margin-top:20px;letter-spacing:.1em;">Tagline canónico · usar en navbar, foto hero y footer del sitio</div>
+</div>
+
+<div style="background:var(--bg-2);border:1px solid var(--border);border-top:none;padding:28px 32px;margin-bottom:24px;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;">
+    <div>
+      <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px;">Headline del hero</div>
+      <div style="font-family:var(--ff-display);font-size:22px;font-weight:300;letter-spacing:-.02em;line-height:1.3;color:var(--text);">Lidero equipos. Construyo software<br>acelerado por IA con criterio e intención.</div>
+      <div style="font-size:12px;color:var(--text-3);margin-top:10px;font-family:var(--ff-mono);">Claim de metodología. Solo en el hero del sitio web.</div>
+    </div>
+    <div>
+      <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px;">Título profesional canónico</div>
+      <div style="font-family:var(--ff-display);font-size:22px;font-weight:400;letter-spacing:-.02em;line-height:1.3;color:var(--text);">Tech Lead<br><span style="color:var(--green);">AWS &amp; FinOps</span></div>
+      <div style="font-size:12px;color:var(--text-3);margin-top:10px;font-family:var(--ff-mono);">Mismo en web, LinkedIn, GitHub, tarjeta de visita.</div>
+    </div>
+  </div>
+</div>
+
+<div class="voice-grid">
+  <div class="voice-cell">
+    <div class="voice-head">Directa, sin rodeos</div>
+    <div class="voice-pair">
+      <div class="voice-no">"Soy un profesional apasionado por la tecnología"</div>
+      <div class="voice-yes">"Reduje 58% la factura AWS de MediRec."</div>
+    </div>
+    <div class="voice-pair">
+      <div class="voice-no">"Tengo experiencia en diversas áreas del desarrollo"</div>
+      <div class="voice-yes">"8+ años en Healthcare, SaaS e IoT."</div>
+    </div>
+  </div>
+  <div class="voice-cell">
+    <div class="voice-head">Confiada, no arrogante</div>
+    <div class="voice-pair">
+      <div class="voice-no">"No solo entrego código"</div>
+      <div class="voice-yes">"Entrego sistemas que funcionan cuando no estoy."</div>
+    </div>
+    <div class="voice-pair">
+      <div class="voice-no">"Creo que podría ayudarte con..."</div>
+      <div class="voice-yes">"Esto es exactamente lo que resuelvo."</div>
+    </div>
+  </div>
+  <div class="voice-cell">
+    <div class="voice-head">Española, con personalidad</div>
+    <div class="voice-pair">
+      <div class="voice-no">"Contact Me" / "Send a Message"</div>
+      <div class="voice-yes">"Hablemos." / "Cuéntame tu proyecto."</div>
+    </div>
+    <div class="voice-pair">
+      <div class="voice-no">"All rights reserved."</div>
+      <div class="voice-yes">"Moisés Cedeño · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5d3532313c1d3032393c2b34393e733e3230">[email&#160;protected]</a>"</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     05 COMPONENTES
+═══════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="ch-num">05</div>
+  <div>
+    <div class="ch-title">Componentes</div>
+    <div class="ch-desc">Sistema de botones, badges, métricas y cards — todos sobre la misma base.</div>
+  </div>
+</div>
+
+<!-- Botones -->
+<div class="comp-row">
+  <div class="comp-label">Botones</div>
+  <div class="comp-content" style="flex-direction:column;align-items:flex-start;gap:20px;">
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+      <button class="btn btn-primary">Hablemos</button>
+      <button class="btn btn-primary">Ver casos de éxito →</button>
+      <button class="btn btn-primary btn-sm">Enviar mensaje</button>
+      <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;margin-left:8px;">Primario — CTAs de conversión</div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+      <button class="btn btn-secondary">Ver todos los casos</button>
+      <button class="btn btn-secondary btn-sm">Ver caso →</button>
+      <button class="btn btn-secondary btn-sm">Descargar CV</button>
+      <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;margin-left:8px;">Secundario — acciones alternativas</div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;">
+      <button class="btn btn-ghost">Ver metodología completa →</button>
+      <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;">Ghost — nav / links contextuales</div>
+    </div>
+  </div>
+</div>
+
+<!-- Badges categóricos -->
+<div class="comp-row">
+  <div class="comp-label">Badges de categoría</div>
+  <div class="comp-content">
+    <span class="badge badge-green"><span class="badge-dot"></span>FinOps</span>
+    <span class="badge badge-blue"><span class="badge-dot"></span>SaaS</span>
+    <span class="badge badge-violet"><span class="badge-dot"></span>Healthcare</span>
+    <span class="badge badge-amber"><span class="badge-dot"></span>Mobile</span>
+    <span class="badge badge-neutral">Personal</span>
+  </div>
+</div>
+
+<!-- Badges de métrica -->
+<div class="comp-row">
+  <div class="comp-label">Badges de métrica</div>
+  <div class="comp-content">
+    <span class="metric metric-primary">-58% AWS bill</span>
+    <span class="metric metric-primary">-$20k/año</span>
+    <span class="metric metric-primary">+400% speed</span>
+    <span class="metric metric-neutral">100% ownership</span>
+    <span class="metric metric-neutral">2 months delivery</span>
+    <span class="metric metric-neutral">Work · 2023</span>
+  </div>
+</div>
+
+<!-- Section pills -->
+<div class="comp-row">
+  <div class="comp-label">Section pills</div>
+  <div class="comp-content">
+    <span class="section-pill">Casos de Éxito</span>
+    <span class="section-pill">Metodología</span>
+    <span class="section-pill">Testimonios</span>
+    <span class="section-pill">Experiencia</span>
+    <span class="section-pill">Contacto</span>
+    <span class="section-pill">Ahora</span>
+  </div>
+</div>
+
+<!-- KPIs -->
+<div class="comp-row">
+  <div class="comp-label">KPI blocks</div>
+  <div class="comp-content" style="flex-direction:column;gap:0;padding:0;width:100%;">
+    <div style="padding:16px 24px;font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;">El KPI más importante en verde — el resto en neutro</div>
+    <div class="kpi-row" style="margin:0 24px 24px;">
+      <div class="kpi">
+        <div class="kpi-val primary">-58%</div>
+        <div class="kpi-label">Factura AWS</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-val neutral">+8</div>
+        <div class="kpi-label">Años exp.</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-val neutral">20K+</div>
+        <div class="kpi-label">Usuarios</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-val neutral">48h</div>
+        <div class="kpi-label">Onboarding</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-val neutral">-$20K</div>
+        <div class="kpi-label">Licencias/año</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card -->
+<div class="comp-row" style="border-bottom:1px solid var(--border);">
+  <div class="comp-label">Work card</div>
+  <div class="comp-content" style="flex-direction:column;align-items:stretch;gap:0;padding:24px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div class="card">
+        <div class="card-meta">
+          <span>Work</span>
+          <span>2023</span>
+        </div>
+        <div class="card-title">Cómo reduje 58% la factura AWS de MediRec</div>
+        <div class="card-body">Re-arquitectura y gobernanza de costos en plataforma Healthcare con 20K+ usuarios.</div>
+        <div class="card-foot">
+          <span class="metric metric-primary">-58% AWS bill</span>
+          <a class="card-link" href="#">Ver caso →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-meta">
+          <span>Work</span>
+          <span>2024</span>
+        </div>
+        <div class="card-title">Cómo eliminé $20k/año en licencias farmacéuticas</div>
+        <div class="card-body">Migración de LexComp a NLMI sin perder integridad clínica ni cobertura de datos.</div>
+        <div class="card-foot">
+          <span class="metric metric-neutral">-$20k/año</span>
+          <a class="card-link" href="#">Ver caso →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     06 EN CONTEXTO
+═══════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="ch-num">06</div>
+  <div>
+    <div class="ch-title">En contexto — Home · Hero</div>
+    <div class="ch-desc">El sistema aplicado: wordmark, tagline, tipografía, color y KPIs tal como se verían en el sitio.</div>
+  </div>
+</div>
+
+<div class="mini-hero">
+  <!-- Nav -->
+  <div class="mini-nav">
+    <div>
+      <div style="display:flex;align-items:baseline;gap:12px;">
+        <div class="mini-nav-wm"><span class="accent">mo</span>davidc</div>
+        <div class="mini-nav-tagline">Criterio · Contexto · Intención</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:32px;">
+      <div class="mini-nav-links">
+        <span>Experiencia</span>
+        <span>Casos de Éxito</span>
+        <span>Metodología</span>
+        <span>Testimonios</span>
+      </div>
+      <div class="mini-nav-cta">Hablemos</div>
+    </div>
+  </div>
+
+  <!-- Hero content -->
+  <div style="max-width:800px;">
+    <div class="mini-kicker">Tech Lead · Arquitecto de Soluciones · AWS &amp; FinOps</div>
+    <div class="mini-h1">
+      Lidero equipos.<br>
+      Construyo software acelerado por IA<br>
+      <span style="color:var(--green);">con criterio e intención.</span>
+    </div>
+    <div class="mini-sub">
+      +8 años en Healthcare, SaaS e IoT entregando sistemas que cualquier dev puede mantener desde el primer día. Sin documentación muerta. Sin dependencia de persona.
+    </div>
+    <div class="mini-ctas">
+      <button class="btn btn-primary">Hablemos →</button>
+      <button class="btn btn-secondary">Ver casos de éxito</button>
+    </div>
+  </div>
+
+  <!-- KPIs -->
+  <div class="mini-kpis">
+    <div class="mini-kpi">
+      <div class="mini-kpi-val hi">-58%</div>
+      <div class="mini-kpi-lbl">Factura AWS · MediRec</div>
+    </div>
+    <div class="mini-kpi">
+      <div class="mini-kpi-val">+8</div>
+      <div class="mini-kpi-lbl">Años de experiencia</div>
+    </div>
+    <div class="mini-kpi">
+      <div class="mini-kpi-val">20K+</div>
+      <div class="mini-kpi-lbl">Usuarios en producción</div>
+    </div>
+    <div class="mini-kpi">
+      <div class="mini-kpi-val">48h</div>
+      <div class="mini-kpi-lbl">Onboarding de dev nuevo</div>
+    </div>
+  </div>
+</div>
+
+<div style="background:var(--bg-2);border:1px solid var(--border);border-top:none;padding:20px 28px;font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.06em;display:flex;gap:40px;flex-wrap:wrap;">
+  <span>Wordmark: Space Grotesk 400 · 20px · <span style="color:var(--text-2);">modavidc</span> (lowercase siempre)</span>
+  <span>Tagline: DM Mono 10px · uppercase · color: text-3</span>
+  <span>H1: Space Grotesk 300 · -.04em tracking</span>
+  <span>CTA primario: verde de marca · texto #0b0c0e</span>
+  <span>KPI destacado: verde · resto neutro</span>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     07 EN CONTEXTO — EXPERIENCIA
+═══════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="ch-num">07</div>
+  <div>
+    <div class="ch-title">En contexto — Experiencia</div>
+    <div class="ch-desc">Page header + timeline con dot verde en posición actual + KPI strip de 4 celdas.</div>
+  </div>
+</div>
+
+<div style="background:var(--bg);border:1px solid var(--border);padding:48px;">
+  <div style="max-width:800px;margin-bottom:56px;padding-bottom:40px;border-bottom:1px solid var(--border);">
+    <div style="font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:10px;"><span style="display:block;width:24px;height:1px;background:var(--border-2)"></span>Experiencia</div>
+    <h1 style="font-family:var(--ff-display);font-size:clamp(36px,5vw,60px);font-weight:300;letter-spacing:-.04em;line-height:1.05;margin-bottom:14px;">+8 años construyendo sistemas<br><span style="color:var(--green);">que escalan.</span></h1>
+    <p style="font-size:16px;color:var(--text-2);line-height:1.65;max-width:560px;">Healthcare, SaaS e IoT. Cada rol con un resultado medible.</p>
+  </div>
+  <div style="position:relative;">
+    <div style="position:absolute;left:159px;top:8px;bottom:0;width:1px;background:var(--border)"></div>
+    <!-- Actual -->
+    <div style="display:grid;grid-template-columns:148px 1fr;gap:32px;margin-bottom:2px;position:relative;">
+      <div style="text-align:right;padding-top:28px;position:relative;">
+        <span style="font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.08em;display:block;margin-bottom:4px;">1 año</span>
+        <span style="font-family:var(--ff-mono);font-size:12px;color:var(--green);letter-spacing:.04em;display:block;">2024 — hoy</span>
+        <div style="position:absolute;right:-22px;top:30px;width:12px;height:12px;border-radius:50%;background:var(--green);border:2px solid var(--green);box-shadow:0 0 0 4px var(--green-bg);z-index:1;"></div>
+      </div>
+      <div style="background:var(--bg-2);border:1px solid var(--green-dim);padding:28px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;gap:16px;">
+          <div style="font-family:var(--ff-display);font-size:18px;font-weight:500;letter-spacing:-.01em;">Tech Lead / Solutions Architect</div>
+          <span style="font-family:var(--ff-mono);font-size:11px;letter-spacing:.08em;padding:3px 10px;border-radius:100px;background:var(--green-bg);color:var(--green);border:1px solid var(--green-dim);display:inline-flex;align-items:center;gap:5px;flex-shrink:0;"><span style="width:5px;height:5px;border-radius:50%;background:var(--green);display:block;"></span>Actual</span>
+        </div>
+        <div style="font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;">T-Cuida · SaaS IoT · Lima</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:18px;">
+          <li style="font-size:13.5px;color:var(--text-2);padding-left:18px;position:relative;line-height:1.55;"><span style="position:absolute;left:0;font-family:var(--ff-mono);font-size:10px;color:var(--text-3);top:4px;">—</span>Arquitectura multi-tenant validada a <strong style="color:var(--text);">20K usuarios</strong></li>
+          <li style="font-size:13.5px;color:var(--text-2);padding-left:18px;position:relative;line-height:1.55;"><span style="position:absolute;left:0;font-family:var(--ff-mono);font-size:10px;color:var(--text-3);top:4px;">—</span>Reducción <strong style="color:var(--text);">-200%</strong> tiempo de respuesta clínico (3min → 1min)</li>
+        </ul>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;background:var(--bg-3);border:1px solid var(--border);border-radius:2px;">AWS</span>
+          <span style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;background:var(--bg-3);border:1px solid var(--border);border-radius:2px;">Next.js</span>
+          <span style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;background:var(--bg-3);border:1px solid var(--border);border-radius:2px;">PostgreSQL</span>
+          <span style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;background:var(--bg-3);border:1px solid var(--border);border-radius:2px;">IoT</span>
+        </div>
+      </div>
+    </div>
+    <!-- Anterior -->
+    <div style="display:grid;grid-template-columns:148px 1fr;gap:32px;position:relative;">
+      <div style="text-align:right;padding-top:28px;position:relative;">
+        <span style="font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.08em;display:block;margin-bottom:4px;">3 años</span>
+        <span style="font-family:var(--ff-mono);font-size:12px;color:var(--text-2);letter-spacing:.04em;display:block;">2021 — 2024</span>
+        <div style="position:absolute;right:-22px;top:30px;width:12px;height:12px;border-radius:50%;background:var(--border-2);border:2px solid var(--border-2);z-index:1;"></div>
+      </div>
+      <div style="background:var(--bg-2);border:1px solid var(--border);padding:28px;">
+        <div style="font-family:var(--ff-display);font-size:18px;font-weight:500;letter-spacing:-.01em;margin-bottom:6px;">Senior Backend Engineer</div>
+        <div style="font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;">MediRec · Healthcare SaaS · Lima</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:18px;">
+          <li style="font-size:13.5px;color:var(--text-2);padding-left:18px;position:relative;line-height:1.55;"><span style="position:absolute;left:0;font-family:var(--ff-mono);font-size:10px;color:var(--text-3);top:4px;">—</span><strong style="color:var(--text);">-65% factura AWS</strong> en 90 días, zero downtime</li>
+          <li style="font-size:13.5px;color:var(--text-2);padding-left:18px;position:relative;line-height:1.55;"><span style="position:absolute;left:0;font-family:var(--ff-mono);font-size:10px;color:var(--text-3);top:4px;">—</span>Migración LexComp → NLMI, <strong style="color:var(--text);">-$20k/año</strong> en licencias</li>
+        </ul>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;background:var(--bg-3);border:1px solid var(--border);border-radius:2px;">AWS</span>
+          <span style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;background:var(--bg-3);border:1px solid var(--border);border-radius:2px;">Node.js</span>
+          <span style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;background:var(--bg-3);border:1px solid var(--border);border-radius:2px;">HL7</span>
+          <span style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;background:var(--bg-3);border:1px solid var(--border);border-radius:2px;">FinOps</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- KPI strip -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:40px;">
+    <div style="background:var(--bg-2);padding:24px;">
+      <div style="font-family:var(--ff-display);font-size:32px;font-weight:500;letter-spacing:-.04em;line-height:1;color:var(--green);margin-bottom:6px;">8+</div>
+      <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;">Años de experiencia</div>
+    </div>
+    <div style="background:var(--bg-2);padding:24px;">
+      <div style="font-family:var(--ff-display);font-size:32px;font-weight:500;letter-spacing:-.04em;line-height:1;margin-bottom:6px;">5+</div>
+      <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;">Roles documentados</div>
+    </div>
+    <div style="background:var(--bg-2);padding:24px;">
+      <div style="font-family:var(--ff-display);font-size:32px;font-weight:500;letter-spacing:-.04em;line-height:1;margin-bottom:6px;">3</div>
+      <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;">Industrias principales</div>
+    </div>
+    <div style="background:var(--bg-2);padding:24px;">
+      <div style="font-family:var(--ff-display);font-size:32px;font-weight:500;letter-spacing:-.04em;line-height:1;margin-bottom:6px;">Lima</div>
+      <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;">Disponible remote</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     08 EN CONTEXTO — CASOS DE ÉXITO
+═══════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="ch-num">08</div>
+  <div>
+    <div class="ch-title">En contexto — Casos de Éxito</div>
+    <div class="ch-desc">Page header + filtros de categoría + grid de 3 columnas. Cada card con imagen SVG, meta, título, body y métrica.</div>
+  </div>
+</div>
+
+<div style="background:var(--bg);border:1px solid var(--border);padding:48px 48px 40px;">
+  <div style="padding-bottom:40px;border-bottom:1px solid var(--border);margin-bottom:0;">
+    <div style="font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:10px;"><span style="display:block;width:24px;height:1px;background:var(--border-2)"></span>Casos de Éxito</div>
+    <h1 style="font-family:var(--ff-display);font-size:clamp(36px,5vw,56px);font-weight:300;letter-spacing:-.04em;line-height:1.05;margin-bottom:14px;">Problemas reales.<br><span style="color:var(--green);">Resultados medibles.</span></h1>
+    <p style="font-size:16px;color:var(--text-2);line-height:1.65;max-width:560px;">Cada caso documentado con contexto, decisiones tomadas y métricas verificables.</p>
+  </div>
+  <!-- Filters -->
+  <div style="padding:24px 0;display:flex;gap:6px;flex-wrap:wrap;">
+    <button style="font-family:var(--ff-mono);font-size:11px;letter-spacing:.08em;padding:6px 14px;border-radius:100px;border:1px solid var(--green);background:var(--green);color:#0b0c0e;cursor:pointer;">Todos</button>
+    <button style="font-family:var(--ff-mono);font-size:11px;letter-spacing:.08em;padding:6px 14px;border-radius:100px;border:1px solid var(--border-2);background:transparent;color:var(--text-2);cursor:pointer;display:inline-flex;align-items:center;gap:6px;"><span style="width:5px;height:5px;border-radius:50%;background:var(--green);display:block;"></span>FinOps</button>
+    <button style="font-family:var(--ff-mono);font-size:11px;letter-spacing:.08em;padding:6px 14px;border-radius:100px;border:1px solid var(--border-2);background:transparent;color:var(--text-2);cursor:pointer;display:inline-flex;align-items:center;gap:6px;"><span style="width:5px;height:5px;border-radius:50%;background:var(--violet);display:block;"></span>Healthcare</button>
+    <button style="font-family:var(--ff-mono);font-size:11px;letter-spacing:.08em;padding:6px 14px;border-radius:100px;border:1px solid var(--border-2);background:transparent;color:var(--text-2);cursor:pointer;display:inline-flex;align-items:center;gap:6px;"><span style="width:5px;height:5px;border-radius:50%;background:var(--blue);display:block;"></span>SaaS</button>
+    <button style="font-family:var(--ff-mono);font-size:11px;letter-spacing:.08em;padding:6px 14px;border-radius:100px;border:1px solid var(--border-2);background:transparent;color:var(--text-2);cursor:pointer;display:inline-flex;align-items:center;gap:6px;"><span style="width:5px;height:5px;border-radius:50%;background:var(--amber);display:block;"></span>Mobile / IoT</button>
+  </div>
+  <!-- Grid 3 col -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);">
+    <!-- Card 1 -->
+    <div style="background:var(--bg-2);display:flex;flex-direction:column;">
+      <div style="height:160px;background:var(--bg-3);overflow:hidden;">
+        <svg viewBox="0 0 400 160" style="width:100%;height:100%;display:block;" preserveAspectRatio="xMidYMid slice">
+          <rect width="400" height="160" fill="#111316"/>
+          <rect x="20" y="30" width="60" height="80" rx="3" fill="#181a1d" stroke="#202227"/>
+          <text x="30" y="52" font-family="monospace" font-size="8" fill="#555c6a">Antes</text>
+          <text x="26" y="92" font-family="monospace" font-size="18" font-weight="500" fill="#555c6a">$912</text>
+          <path d="M88 70 L112 70" stroke="oklch(67% 0.17 148)" stroke-width="2"/>
+          <polygon points="110,65 118,70 110,75" fill="oklch(67% 0.17 148)"/>
+          <rect x="120" y="30" width="60" height="80" rx="3" fill="#181a1d" stroke="oklch(67% 0.17 148)" stroke-width="1.5"/>
+          <text x="130" y="52" font-family="monospace" font-size="8" fill="oklch(67% 0.17 148)">Ahora</text>
+          <text x="126" y="92" font-family="monospace" font-size="18" font-weight="500" fill="oklch(67% 0.17 148)">$318</text>
+          <text x="210" y="62" font-family="monospace" font-size="10" fill="#9aa0ae">-65%</text>
+          <text x="210" y="80" font-family="monospace" font-size="8" fill="#555c6a">$7.1K ahorrado/año</text>
+        </svg>
+      </div>
+      <div style="padding:20px 22px 0;">
+        <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between;margin-bottom:14px;"><span>Work · Infrastructure</span><span>2023</span></div>
+        <div style="font-family:var(--ff-display);font-size:16px;font-weight:500;letter-spacing:-.01em;margin-bottom:8px;line-height:1.25;">Del caos al control: Auditoría y optimización AWS sin downtime</div>
+        <div style="font-size:13px;color:var(--text-2);line-height:1.65;margin-bottom:16px;">4 fases, 90 días, zero downtime. Infraestructura 100% documentada.</div>
+      </div>
+      <div style="padding:0 22px 20px;display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-family:var(--ff-mono);font-size:11px;letter-spacing:.04em;padding:3px 8px;border-radius:3px;background:var(--green-bg);color:var(--green);border:1px solid var(--green-dim);">-65% AWS · $7.1K/año</span>
+        <a style="font-family:var(--ff-mono);font-size:11px;color:var(--green);letter-spacing:.06em;text-decoration:none;">Ver caso →</a>
+      </div>
+    </div>
+    <!-- Card 2 -->
+    <div style="background:var(--bg-2);display:flex;flex-direction:column;">
+      <div style="height:160px;background:var(--bg-3);overflow:hidden;">
+        <svg viewBox="0 0 400 160" style="width:100%;height:100%;display:block;" preserveAspectRatio="xMidYMid slice">
+          <rect width="400" height="160" fill="#111316"/>
+          <text x="20" y="46" font-family="monospace" font-size="9" fill="#555c6a">ANTES: LexComp</text>
+          <rect x="20" y="56" width="110" height="40" rx="3" fill="#181a1d" stroke="#2a2d33"/>
+          <text x="36" y="81" font-family="monospace" font-size="11" fill="#9aa0ae">$20k / año</text>
+          <text x="145" y="79" font-family="monospace" font-size="18" fill="oklch(67% 0.17 148)">→</text>
+          <text x="175" y="46" font-family="monospace" font-size="9" fill="oklch(67% 0.17 148)">DESPUÉS: NLMI</text>
+          <rect x="175" y="56" width="110" height="40" rx="3" fill="#181a1d" stroke="oklch(67% 0.17 148)" stroke-width="1.5"/>
+          <text x="203" y="81" font-family="monospace" font-size="11" fill="oklch(67% 0.17 148)">$0 / año</text>
+          <text x="20" y="126" font-family="monospace" font-size="8" fill="#555c6a">0 pérdida de integridad clínica · RxNorm preservado</text>
+        </svg>
+      </div>
+      <div style="padding:20px 22px 0;">
+        <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between;margin-bottom:14px;"><span>Work · Healthcare</span><span>2024</span></div>
+        <div style="font-family:var(--ff-display);font-size:16px;font-weight:500;letter-spacing:-.01em;margin-bottom:8px;line-height:1.25;">$20k/año en licencias farmacéuticas eliminadas sin perder cobertura clínica</div>
+        <div style="font-size:13px;color:var(--text-2);line-height:1.65;margin-bottom:16px;">Migración LexComp → NLMI con integridad clínica total.</div>
+      </div>
+      <div style="padding:0 22px 20px;display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-family:var(--ff-mono);font-size:11px;letter-spacing:.04em;padding:3px 8px;border-radius:3px;background:var(--bg-3);color:var(--text-2);border:1px solid var(--border-2);">-$20k/año</span>
+        <a style="font-family:var(--ff-mono);font-size:11px;color:var(--green);letter-spacing:.06em;text-decoration:none;">Ver caso →</a>
+      </div>
+    </div>
+    <!-- Card 3 -->
+    <div style="background:var(--bg-2);display:flex;flex-direction:column;">
+      <div style="height:160px;background:var(--bg-3);overflow:hidden;">
+        <svg viewBox="0 0 400 160" style="width:100%;height:100%;display:block;" preserveAspectRatio="xMidYMid slice">
+          <rect width="400" height="160" fill="#111316"/>
+          <rect x="20" y="22" width="360" height="110" rx="4" fill="#181a1d" stroke="#202227"/>
+          <text x="40" y="42" font-family="monospace" font-size="8" fill="#555c6a">LOAD TEST · 20K USERS</text>
+          <rect x="40" y="52" width="38" height="50" rx="2" fill="#0b0c0e" stroke="#202227"/>
+          <text x="47" y="70" font-family="monospace" font-size="7" fill="#555c6a">10%</text>
+          <rect x="92" y="52" width="38" height="50" rx="2" fill="#0b0c0e" stroke="#202227"/>
+          <text x="99" y="70" font-family="monospace" font-size="7" fill="#555c6a">20%</text>
+          <rect x="144" y="52" width="38" height="50" rx="2" fill="#0b0c0e" stroke="oklch(67% 0.17 148)" stroke-width="1.5"/>
+          <text x="149" y="70" font-family="monospace" font-size="7" fill="oklch(67% 0.17 148)">30%</text>
+          <text x="215" y="72" font-family="monospace" font-size="9" fill="oklch(67% 0.17 148)">Error rate</text>
+          <text x="215" y="90" font-family="monospace" font-size="16" font-weight="500" fill="oklch(67% 0.17 148)">&lt;0.2%</text>
+          <text x="215" y="108" font-family="monospace" font-size="8" fill="#555c6a">$672–$1,065/mes</text>
+        </svg>
+      </div>
+      <div style="padding:20px 22px 0;">
+        <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between;margin-bottom:14px;"><span>Work · SaaS</span><span>2024</span></div>
+        <div style="font-family:var(--ff-display);font-size:16px;font-weight:500;letter-spacing:-.01em;margin-bottom:8px;line-height:1.25;">Multi-Tenant SaaS validado a 20K usuarios — cost envelope claro</div>
+        <div style="font-size:13px;color:var(--text-2);line-height:1.65;margin-bottom:16px;">6 semanas de load testing. Error rate &lt;0.2%. Proyecciones para Series A.</div>
+      </div>
+      <div style="padding:0 22px 20px;display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-family:var(--ff-mono);font-size:11px;letter-spacing:.04em;padding:3px 8px;border-radius:3px;background:var(--bg-3);color:var(--text-2);border:1px solid var(--border-2);">20K users · &lt;0.2% error</span>
+        <a style="font-family:var(--ff-mono);font-size:11px;color:var(--green);letter-spacing:.06em;text-decoration:none;">Ver caso →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     09 EN CONTEXTO — METODOLOGÍA
+═══════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="ch-num">09</div>
+  <div>
+    <div class="ch-title">En contexto — Metodología</div>
+    <div class="ch-desc">Page header + pilares grid de 3 columnas + caso real con KPIs destacados.</div>
+  </div>
+</div>
+
+<div style="background:var(--bg);border:1px solid var(--border);padding:48px;">
+  <div style="max-width:720px;margin-bottom:48px;padding-bottom:40px;border-bottom:1px solid var(--border);">
+    <div style="font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:10px;"><span style="display:block;width:24px;height:1px;background:var(--border-2)"></span>Metodología</div>
+    <h1 style="font-family:var(--ff-display);font-size:clamp(32px,5vw,56px);font-weight:300;letter-spacing:-.04em;line-height:1.05;margin-bottom:14px;">No es solo escribir buen código.<br>Es tomar las <span style="color:var(--green);">decisiones correctas</span>.</h1>
+    <p style="font-size:16px;color:var(--text-2);line-height:1.65;max-width:560px;">+8 años de proyectos reales enseñan cuándo la solución obvia es la solución equivocada.</p>
+  </div>
+  <!-- Pilares -->
+  <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px;">Los tres ejes</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:2px;">
+    <div style="background:var(--bg-2);padding:32px 28px;">
+      <div style="font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:10px;"><span style="width:28px;height:28px;border:1px solid var(--border-2);border-radius:3px;display:flex;align-items:center;justify-content:center;color:var(--blue);flex-shrink:0;">↗</span>Liderazgo técnico</div>
+      <div style="font-family:var(--ff-display);font-size:18px;font-weight:500;letter-spacing:-.01em;margin-bottom:10px;">Decido, priorizo, lidero</div>
+      <div style="font-size:13px;color:var(--text-2);line-height:1.7;margin-bottom:16px;">Defino la arquitectura, priorizo la deuda técnica con criterio de negocio y lidero al equipo para que ejecute con contexto.</div>
+      <span style="font-family:var(--ff-mono);font-size:11px;letter-spacing:.04em;padding:4px 10px;border-radius:3px;background:var(--bg-3);color:var(--text-2);border:1px solid var(--border-2);display:inline-block;">3 años como Tech Lead · SaaS &amp; IoT</span>
+    </div>
+    <div style="background:var(--bg-2);padding:32px 28px;">
+      <div style="font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:10px;"><span style="width:28px;height:28px;border:1px solid var(--border-2);border-radius:3px;display:flex;align-items:center;justify-content:center;color:var(--green);font-family:var(--ff-mono);font-size:11px;flex-shrink:0;">IA</span>IA con criterio</div>
+      <div style="font-family:var(--ff-display);font-size:18px;font-weight:500;letter-spacing:-.01em;margin-bottom:10px;">La herramienta amplifica el criterio</div>
+      <div style="font-size:13px;color:var(--text-2);line-height:1.7;margin-bottom:16px;">Uso IA para comprimir tiempo sin comprometer arquitectura. Yo pongo el criterio, la intención y la experiencia.</div>
+      <span style="font-family:var(--ff-mono);font-size:11px;letter-spacing:.04em;padding:4px 10px;border-radius:3px;background:var(--green-bg);color:var(--green);border:1px solid var(--green-dim);display:inline-block;">+8 años de criterio técnico detrás</span>
+    </div>
+    <div style="background:var(--bg-2);padding:32px 28px;">
+      <div style="font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:10px;"><span style="width:28px;height:28px;border:1px solid var(--border-2);border-radius:3px;display:flex;align-items:center;justify-content:center;color:var(--violet);flex-shrink:0;">⌬</span>Resultados medibles</div>
+      <div style="font-family:var(--ff-display);font-size:18px;font-weight:500;letter-spacing:-.01em;margin-bottom:10px;">Cada decisión tiene un número</div>
+      <div style="font-size:13px;color:var(--text-2);line-height:1.7;margin-bottom:16px;">-65% AWS. $20k/yr menos en licencias. Cada decisión técnica tiene un impacto en el negocio — se documenta.</div>
+      <span style="font-family:var(--ff-mono);font-size:11px;letter-spacing:.04em;padding:4px 10px;border-radius:3px;background:var(--green-bg);color:var(--green);border:1px solid var(--green-dim);display:inline-block;">Resultados comprobados · Healthcare &amp; SaaS</span>
+    </div>
+  </div>
+  <!-- Caso real -->
+  <div style="background:var(--bg-2);border:1px solid var(--border);border-left:2px solid var(--green-dim);padding:32px 36px;">
+    <div style="font-family:var(--ff-mono);font-size:10px;color:var(--green);letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px;">En la práctica · MediRec · 2023</div>
+    <div style="font-family:var(--ff-display);font-size:24px;font-weight:300;letter-spacing:-.03em;margin-bottom:10px;">Gobierno de costos AWS <span style="color:var(--green);">sin parar la operación.</span></div>
+    <p style="font-size:14px;color:var(--text-2);line-height:1.7;margin-bottom:20px;max-width:640px;">4 fases en 90 días: auditoría completa, respaldos defensivos, eliminación de recursos huérfanos, right-sizing.</p>
+    <div style="display:flex;gap:1px;">
+      <div style="background:var(--bg-3);border:1px solid var(--border);padding:16px 20px;flex:1;"><div style="font-family:var(--ff-display);font-size:28px;font-weight:500;letter-spacing:-.04em;line-height:1;color:var(--green);margin-bottom:4px;">-65%</div><div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;">Factura AWS</div></div>
+      <div style="background:var(--bg-3);border:1px solid var(--border);padding:16px 20px;flex:1;"><div style="font-family:var(--ff-display);font-size:28px;font-weight:500;letter-spacing:-.04em;line-height:1;margin-bottom:4px;">0h</div><div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;">Downtime</div></div>
+      <div style="background:var(--bg-3);border:1px solid var(--border);padding:16px 20px;flex:1;"><div style="font-family:var(--ff-display);font-size:28px;font-weight:500;letter-spacing:-.04em;line-height:1;margin-bottom:4px;">90</div><div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;">Días de ejecución</div></div>
+      <div style="background:var(--bg-3);border:1px solid var(--border);padding:16px 20px;flex:1;"><div style="font-family:var(--ff-display);font-size:28px;font-weight:500;letter-spacing:-.04em;line-height:1;margin-bottom:4px;">$21K</div><div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;">Ahorrado en 3 años</div></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     10 EN CONTEXTO — TESTIMONIOS
+═══════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="ch-num">10</div>
+  <div>
+    <div class="ch-title">En contexto — Testimonios</div>
+    <div class="ch-desc">Page header + testimonio featured full-width (2 col con métrica) + grid 2×2 de cards regulares.</div>
+  </div>
+</div>
+
+<div style="background:var(--bg);border:1px solid var(--border);padding:48px;">
+  <div style="padding-bottom:40px;border-bottom:1px solid var(--border);margin-bottom:40px;">
+    <div style="font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:10px;"><span style="display:block;width:24px;height:1px;background:var(--border-2)"></span>Testimonios</div>
+    <h1 style="font-family:var(--ff-display);font-size:clamp(32px,5vw,56px);font-weight:300;letter-spacing:-.04em;line-height:1.05;margin-bottom:14px;">Lo que dicen quienes han<br>trabajado <span style="color:var(--green);">conmigo.</span></h1>
+    <p style="font-size:16px;color:var(--text-2);line-height:1.65;max-width:560px;margin-bottom:16px;">Feedback real de equipos y líderes con los que he colaborado. Impacto medible, documentación transferible.</p>
+    <div style="display:inline-flex;align-items:center;gap:8px;font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.08em;padding:6px 12px;background:var(--bg-3);border:1px solid var(--border-2);"><span style="width:5px;height:5px;border-radius:50%;background:var(--text-3);display:block;"></span>Algunos datos modificados por NDA — métricas verificables en casos de éxito</div>
+  </div>
+  <!-- Featured -->
+  <div style="background:var(--bg-2);border:1px solid var(--border);padding:32px 28px;display:grid;grid-template-columns:1fr 240px;gap:40px;margin-bottom:1px;">
+    <div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+        <div style="width:40px;height:40px;border-radius:3px;background:var(--bg-3);border:1px solid var(--border-2);display:flex;align-items:center;justify-content:center;font-family:var(--ff-display);font-size:14px;font-weight:500;color:var(--text-2);flex-shrink:0;">DT</div>
+        <div><div style="font-size:13px;font-weight:500;">Director de TI</div><div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;">MediRec · Healthcare SaaS</div></div>
+        <div style="margin-left:auto;display:flex;align-items:center;gap:6px;font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.08em;"><span style="width:5px;height:5px;border-radius:50%;background:var(--blue);display:block;"></span>LinkedIn</div>
+      </div>
+      <div style="font-family:var(--ff-display);font-size:18px;font-weight:300;letter-spacing:-.01em;line-height:1.6;color:var(--text);margin-bottom:24px;position:relative;padding-left:20px;"><span style="position:absolute;left:0;top:-4px;font-family:var(--ff-display);font-size:32px;color:var(--green);line-height:1;">"</span>Moisés lideró la reducción de nuestra factura AWS en un 58%. No solo optimizó costos — documentó cada decisión de arquitectura para que el equipo pudiera mantenerlos sin depender de él.</div>
+      <div style="border-top:1px solid var(--border);padding-top:14px;display:flex;align-items:flex-end;justify-content:space-between;">
+        <div><div style="font-size:13px;font-weight:500;margin-bottom:2px;">Director de TI</div><div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;">Plataforma Healthcare · MediRec · 2023</div></div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
+          <span style="font-family:var(--ff-mono);font-size:10px;letter-spacing:.04em;padding:2px 7px;border-radius:3px;background:var(--green-bg);color:var(--green);border:1px solid var(--green-dim);">-65% AWS</span>
+          <span style="font-family:var(--ff-mono);font-size:10px;letter-spacing:.08em;padding:2px 8px;border-radius:100px;background:var(--green-bg);color:var(--green);display:inline-flex;align-items:center;gap:4px;"><span style="width:4px;height:4px;border-radius:50%;background:currentColor;"></span>FinOps</span>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;justify-content:center;gap:10px;padding-left:40px;border-left:1px solid var(--border);">
+      <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px;">Resultado verificable</div>
+      <div style="font-family:var(--ff-display);font-size:44px;font-weight:500;letter-spacing:-.04em;line-height:1;color:var(--green);">-65%</div>
+      <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;">Factura AWS · MediRec</div>
+    </div>
+  </div>
+  <!-- 2 col -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-top:none;">
+    <div style="background:var(--bg-2);padding:28px;display:flex;flex-direction:column;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+        <div style="width:36px;height:36px;border-radius:3px;background:var(--bg-3);border:1px solid var(--border-2);display:flex;align-items:center;justify-content:center;font-family:var(--ff-display);font-size:13px;font-weight:500;color:var(--text-2);">PO</div>
+        <div style="display:flex;align-items:center;gap:6px;font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.08em;"><span style="width:5px;height:5px;border-radius:50%;background:var(--blue);display:block;"></span>LinkedIn</div>
+      </div>
+      <div style="font-family:var(--ff-display);font-size:15px;font-weight:300;letter-spacing:-.01em;line-height:1.6;color:var(--text);flex:1;position:relative;padding-left:16px;"><span style="position:absolute;left:0;top:-4px;font-size:24px;color:var(--green);line-height:1;">"</span>El nuevo dev estuvo productivo en menos de 48 horas gracias al registro de decisiones que Moisés implementó.</div>
+      <div style="border-top:1px solid var(--border);padding-top:14px;margin-top:20px;display:flex;align-items:flex-end;justify-content:space-between;">
+        <div><div style="font-size:13px;font-weight:500;">Product Owner</div><div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;">Healthcare · Lima · 2023</div></div>
+        <span style="font-family:var(--ff-mono);font-size:10px;letter-spacing:.08em;padding:2px 8px;border-radius:100px;background:var(--violet-bg);color:var(--violet);display:inline-flex;align-items:center;gap:4px;"><span style="width:4px;height:4px;border-radius:50%;background:currentColor;"></span>Healthcare</span>
+      </div>
+    </div>
+    <div style="background:var(--bg-2);padding:28px;display:flex;flex-direction:column;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+        <div style="width:36px;height:36px;border-radius:3px;background:var(--bg-3);border:1px solid var(--border-2);display:flex;align-items:center;justify-content:center;font-family:var(--ff-display);font-size:13px;font-weight:500;color:var(--text-2);">CTO</div>
+        <div style="display:flex;align-items:center;gap:6px;font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.08em;"><span style="width:5px;height:5px;border-radius:50%;background:var(--blue);display:block;"></span>LinkedIn</div>
+      </div>
+      <div style="font-family:var(--ff-display);font-size:15px;font-weight:300;letter-spacing:-.01em;line-height:1.6;color:var(--text);flex:1;position:relative;padding-left:16px;"><span style="position:absolute;left:0;top:-4px;font-size:24px;color:var(--green);line-height:1;">"</span>Moisés no solo entregó el sistema — entregó documentación que hace que cualquier dev pueda contribuir desde el día uno.</div>
+      <div style="border-top:1px solid var(--border);padding-top:14px;margin-top:20px;display:flex;align-items:flex-end;justify-content:space-between;">
+        <div><div style="font-size:13px;font-weight:500;">CTO</div><div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;">SaaS IoT · Miami · 2024</div></div>
+        <span style="font-family:var(--ff-mono);font-size:10px;letter-spacing:.08em;padding:2px 8px;border-radius:100px;background:var(--blue-bg);color:var(--blue);display:inline-flex;align-items:center;gap:4px;"><span style="width:4px;height:4px;border-radius:50%;background:currentColor;"></span>SaaS</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     11 EN CONTEXTO — HABLEMOS
+═══════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="ch-num">11</div>
+  <div>
+    <div class="ch-title">En contexto — Hablemos</div>
+    <div class="ch-desc">Page header + canales priorizados (WhatsApp primario, Email, LinkedIn) + aside de disponibilidad.</div>
+  </div>
+</div>
+
+<div style="background:var(--bg);border:1px solid var(--border);padding:48px;">
+  <div style="padding-bottom:40px;border-bottom:1px solid var(--border);margin-bottom:48px;">
+    <div style="font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:10px;"><span style="display:block;width:24px;height:1px;background:var(--border-2)"></span>Contacto</div>
+    <h1 style="font-family:var(--ff-display);font-size:clamp(32px,5vw,56px);font-weight:300;letter-spacing:-.04em;line-height:1.05;margin-bottom:14px;">¿Tienes un problema<br><span style="color:var(--green);">técnico que resolver?</span></h1>
+    <p style="font-size:16px;color:var(--text-2);line-height:1.65;max-width:540px;">Si tu plataforma AWS está fuera de control o necesitas criterio técnico real, cuéntamelo.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 300px;gap:64px;">
+    <!-- Canales -->
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:center;gap:20px;padding:24px;background:var(--bg);border:1px solid var(--border);border-left:3px solid var(--green);">
+        <div style="width:40px;height:40px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.526 5.845L.057 23.885a.5.5 0 0 0 .638.606l6.208-1.633A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.9a9.9 9.9 0 0 1-5.031-1.369l-.361-.214-3.735.982.998-3.648-.235-.374A9.86 9.86 0 0 1 2.1 12C2.1 6.533 6.533 2.1 12 2.1S21.9 6.533 21.9 12 17.467 21.9 12 21.9z"/></svg>
+        </div>
+        <div style="flex:1;"><div style="font-family:var(--ff-display);font-size:16px;font-weight:500;color:var(--text);margin-bottom:3px;">WhatsApp</div><div style="font-size:13px;color:var(--text-2);">La forma más rápida — respondo en minutos</div></div>
+        <div style="font-family:var(--ff-mono);font-size:11px;color:var(--green);letter-spacing:.08em;">Abrir →</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:20px;padding:24px;background:var(--bg-2);border:1px solid var(--border);">
+        <div style="width:40px;height:40px;border-radius:50%;background:var(--bg-3);border:1px solid var(--border-2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="color:var(--text-2)"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </div>
+        <div style="flex:1;"><div style="font-family:var(--ff-display);font-size:16px;font-weight:500;color:var(--text);margin-bottom:3px;">Email</div><div style="font-size:13px;color:var(--text-2);">moisesdavidaaron@gmail.com</div></div>
+        <div style="font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.08em;">Copiar →</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:20px;padding:24px;background:var(--bg-2);border:1px solid var(--border);">
+        <div style="width:40px;height:40px;border-radius:50%;background:#0A66C2;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </div>
+        <div style="flex:1;"><div style="font-family:var(--ff-display);font-size:16px;font-weight:500;color:var(--text);margin-bottom:3px;">LinkedIn</div><div style="font-size:13px;color:var(--text-2);">linkedin.com/in/modavidc</div></div>
+        <div style="font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.08em;">Ver perfil →</div>
+      </div>
+    </div>
+    <!-- Aside -->
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div style="background:var(--bg-2);border:1px solid var(--border);padding:24px;">
+        <div style="font-family:var(--ff-mono);font-size:9px;color:var(--text-3);letter-spacing:.16em;text-transform:uppercase;padding-bottom:10px;border-bottom:1px solid var(--border);margin-bottom:14px;">Disponibilidad</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;"><span style="font-size:12px;color:var(--text-3);">Estado</span><span style="font-family:var(--ff-mono);font-size:11px;letter-spacing:.08em;padding:3px 10px;border-radius:100px;background:var(--green-bg);color:var(--green);border:1px solid var(--green-dim);display:inline-flex;align-items:center;gap:5px;"><span style="width:5px;height:5px;border-radius:50%;background:var(--green);display:block;"></span>Disponible</span></div>
+          <div style="display:flex;justify-content:space-between;gap:12px;"><span style="font-size:12px;color:var(--text-3);">Respuesta</span><span style="font-size:13px;color:var(--text-2);">WhatsApp · &lt;30 min</span></div>
+          <div style="display:flex;justify-content:space-between;gap:12px;"><span style="font-size:12px;color:var(--text-3);">Timezone</span><span style="font-size:13px;color:var(--text-2);">Lima · UTC-5</span></div>
+          <div style="display:flex;justify-content:space-between;gap:12px;"><span style="font-size:12px;color:var(--text-3);">Modalidad</span><span style="font-size:13px;color:var(--text-2);">Remote · async-friendly</span></div>
+        </div>
+      </div>
+      <div style="background:var(--bg-2);border:1px solid var(--border);padding:24px;">
+        <div style="font-family:var(--ff-mono);font-size:9px;color:var(--text-3);letter-spacing:.16em;text-transform:uppercase;padding-bottom:10px;border-bottom:1px solid var(--border);margin-bottom:14px;">Trabajo mejor en</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="font-size:13px;color:var(--text-2);padding-left:14px;position:relative;"><span style="position:absolute;left:0;font-family:var(--ff-mono);font-size:10px;color:var(--text-3);top:2px;">—</span>AWS / infraestructura cloud</div>
+          <div style="font-size:13px;color:var(--text-2);padding-left:14px;position:relative;"><span style="position:absolute;left:0;font-family:var(--ff-mono);font-size:10px;color:var(--text-3);top:2px;">—</span>FinOps y gobierno de costos</div>
+          <div style="font-size:13px;color:var(--text-2);padding-left:14px;position:relative;"><span style="position:absolute;left:0;font-family:var(--ff-mono);font-size:10px;color:var(--text-3);top:2px;">—</span>Arquitectura Healthcare / SaaS</div>
+          <div style="font-size:13px;color:var(--text-2);padding-left:14px;position:relative;"><span style="position:absolute;left:0;font-family:var(--ff-mono);font-size:10px;color:var(--text-3);top:2px;">—</span>Tech Lead fractional</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     12 EN CONTEXTO — PENSAMIENTO / BLOG LIST
+═══════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="ch-num">12</div>
+  <div>
+    <div class="ch-title">En contexto — Pensamiento · Blog list</div>
+    <div class="ch-desc">Page header + filtros de categoría + grid de 3 artículos. Cada card: badge, título, extracto, fecha y tiempo de lectura.</div>
+  </div>
+</div>
+
+<div style="background:var(--bg);border:1px solid var(--border);padding:48px 48px 40px;">
+  <div style="max-width:800px;padding-bottom:48px;border-bottom:1px solid var(--border);margin-bottom:0;">
+    <div style="font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:10px;"><span style="display:block;width:24px;height:1px;background:var(--border-2)"></span>Pensamiento</div>
+    <h1 style="font-family:var(--ff-display);font-size:clamp(32px,5vw,56px);font-weight:300;letter-spacing:-.04em;line-height:1.05;margin-bottom:16px;">Escritos sobre arquitectura, <span style="color:var(--green);">SaaS</span> y sistemas que escalan.</h1>
+    <p style="font-size:16px;color:var(--text-2);line-height:1.65;max-width:560px;">Documentación de decisiones técnicas reales, análisis de patrones que funcionan y opiniones sobre cómo construir software que dure.</p>
+  </div>
+  <!-- Filters -->
+  <div style="padding:24px 0;display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid var(--border);">
+    <button style="font-family:var(--ff-mono);font-size:11px;letter-spacing:.08em;padding:6px 14px;border-radius:100px;border:1px solid var(--green);background:var(--green);color:#0b0c0e;cursor:pointer;">Todos</button>
+    <button style="font-family:var(--ff-mono);font-size:11px;letter-spacing:.08em;padding:6px 14px;border-radius:100px;border:1px solid var(--border-2);background:transparent;color:var(--text-2);cursor:pointer;">FinOps</button>
+    <button style="font-family:var(--ff-mono);font-size:11px;letter-spacing:.08em;padding:6px 14px;border-radius:100px;border:1px solid var(--border-2);background:transparent;color:var(--text-2);cursor:pointer;">Arquitectura</button>
+    <button style="font-family:var(--ff-mono);font-size:11px;letter-spacing:.08em;padding:6px 14px;border-radius:100px;border:1px solid var(--border-2);background:transparent;color:var(--text-2);cursor:pointer;">Liderazgo</button>
+    <button style="font-family:var(--ff-mono);font-size:11px;letter-spacing:.08em;padding:6px 14px;border-radius:100px;border:1px solid var(--border-2);background:transparent;color:var(--text-2);cursor:pointer;">IA</button>
+  </div>
+  <!-- Grid -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-top:none;">
+    <div style="background:var(--bg-2);padding:28px;display:flex;flex-direction:column;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <span style="font-family:var(--ff-mono);font-size:10px;letter-spacing:.08em;padding:2px 8px;border-radius:100px;background:var(--green-bg);color:var(--green);display:inline-flex;align-items:center;gap:4px;"><span style="width:4px;height:4px;border-radius:50%;background:currentColor;"></span>FinOps</span>
+        <span style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.06em;">8 min</span>
+      </div>
+      <div style="font-family:var(--ff-display);font-size:17px;font-weight:500;letter-spacing:-.01em;line-height:1.3;margin-bottom:10px;">Cómo audité $912/mes en AWS y lo bajé a $318 sin downtime</div>
+      <div style="font-size:13px;color:var(--text-2);line-height:1.65;flex:1;margin-bottom:20px;">4 fases, 90 días, zero downtime. El playbook completo de gobierno de costos cloud que usé en MediRec.</div>
+      <div style="border-top:1px solid var(--border);padding-top:14px;display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.06em;">Mayo 2026</span>
+        <a style="font-family:var(--ff-mono);font-size:11px;color:var(--green);letter-spacing:.06em;text-decoration:none;">Leer →</a>
+      </div>
+    </div>
+    <div style="background:var(--bg-2);padding:28px;display:flex;flex-direction:column;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <span style="font-family:var(--ff-mono);font-size:10px;letter-spacing:.08em;padding:2px 8px;border-radius:100px;background:var(--blue-bg);color:var(--blue);display:inline-flex;align-items:center;gap:4px;"><span style="width:4px;height:4px;border-radius:50%;background:currentColor;"></span>Arquitectura</span>
+        <span style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.06em;">6 min</span>
+      </div>
+      <div style="font-family:var(--ff-display);font-size:17px;font-weight:500;letter-spacing:-.01em;line-height:1.3;margin-bottom:10px;">Multi-tenant SaaS a 20K usuarios: el test de carga que convenció al inversor</div>
+      <div style="font-size:13px;color:var(--text-2);line-height:1.65;flex:1;margin-bottom:20px;">JMeter + k6, 3 escenarios de concurrencia y un cost envelope claro para la due diligence de Series A.</div>
+      <div style="border-top:1px solid var(--border);padding-top:14px;display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.06em;">Abril 2026</span>
+        <a style="font-family:var(--ff-mono);font-size:11px;color:var(--green);letter-spacing:.06em;text-decoration:none;">Leer →</a>
+      </div>
+    </div>
+    <div style="background:var(--bg-2);padding:28px;display:flex;flex-direction:column;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <span style="font-family:var(--ff-mono);font-size:10px;letter-spacing:.08em;padding:2px 8px;border-radius:100px;background:var(--amber-bg);color:var(--amber);display:inline-flex;align-items:center;gap:4px;"><span style="width:4px;height:4px;border-radius:50%;background:currentColor;"></span>Liderazgo</span>
+        <span style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.06em;">5 min</span>
+      </div>
+      <div style="font-family:var(--ff-display);font-size:17px;font-weight:500;letter-spacing:-.01em;line-height:1.3;margin-bottom:10px;">Por qué uso IA en cada proyecto — y por qué eso no es lo que piensas</div>
+      <div style="font-size:13px;color:var(--text-2);line-height:1.65;flex:1;margin-bottom:20px;">La herramienta amplifica el criterio. Pero el criterio tiene que estar ahí primero. Una opinión directa.</div>
+      <div style="border-top:1px solid var(--border);padding-top:14px;display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.06em;">Marzo 2026</span>
+        <a style="font-family:var(--ff-mono);font-size:11px;color:var(--green);letter-spacing:.06em;text-decoration:none;">Leer →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     13 EN CONTEXTO — BLOG POST DETAIL
+═══════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="ch-num">13</div>
+  <div>
+    <div class="ch-title">En contexto — Blog Post Detail</div>
+    <div class="ch-desc">Post header + layout de lectura (contenido principal + sidebar) + navegación prev/next.</div>
+  </div>
+</div>
+
+<div style="background:var(--bg);border:1px solid var(--border);padding:0;">
+  <!-- Post header -->
+  <div style="padding:56px 48px 44px;border-bottom:1px solid var(--border);">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+      <span style="font-family:var(--ff-mono);font-size:10px;letter-spacing:.08em;padding:2px 8px;border-radius:100px;background:var(--green-bg);color:var(--green);display:inline-flex;align-items:center;gap:4px;"><span style="width:4px;height:4px;border-radius:50%;background:currentColor;"></span>FinOps</span>
+      <span style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.08em;">8 min lectura · Mayo 2026</span>
+    </div>
+    <h1 style="font-family:var(--ff-display);font-size:clamp(30px,5vw,48px);font-weight:300;letter-spacing:-.04em;line-height:1.05;margin-bottom:18px;max-width:760px;">Cómo audité $912/mes en AWS<br>y lo bajé a $318 <span style="color:var(--green);">sin downtime</span></h1>
+    <p style="font-size:16px;color:var(--text-2);line-height:1.65;max-width:620px;">4 fases, 90 días, zero downtime. El playbook completo de gobierno de costos cloud que usé en MediRec.</p>
+  </div>
+  <!-- Body + sidebar -->
+  <div style="display:grid;grid-template-columns:1fr 260px;gap:0;">
+    <div style="padding:44px 48px;border-right:1px solid var(--border);">
+      <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px;">El problema</div>
+      <h2 style="font-family:var(--ff-display);font-size:22px;font-weight:400;letter-spacing:-.02em;margin-bottom:12px;">Nadie sabía qué corría en cada servidor</h2>
+      <p style="font-size:15px;color:var(--text-2);line-height:1.75;margin-bottom:18px;">Cuando entré al proyecto, MediRec tenía 15+ instancias EC2 corriendo 24/7 sin documentación, sin tagging y sin métricas de uso reales. Factura: $912/mes y subiendo.</p>
+      <!-- Metric highlight -->
+      <div style="background:var(--bg-2);border:1px solid var(--border);border-left:2px solid var(--green-dim);padding:18px 22px;margin-bottom:24px;display:flex;gap:28px;align-items:center;">
+        <div><div style="font-family:var(--ff-display);font-size:36px;font-weight:500;letter-spacing:-.04em;line-height:1;color:var(--green);">-65%</div><div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;margin-top:3px;">Factura AWS</div></div>
+        <div><div style="font-family:var(--ff-display);font-size:36px;font-weight:500;letter-spacing:-.04em;line-height:1;">0h</div><div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;margin-top:3px;">Downtime</div></div>
+        <div><div style="font-family:var(--ff-display);font-size:36px;font-weight:500;letter-spacing:-.04em;line-height:1;">90</div><div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;margin-top:3px;">Días</div></div>
+      </div>
+      <!-- Fases -->
+      <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px;">Las 4 fases</div>
+      <div style="display:flex;flex-direction:column;gap:1px;margin-bottom:24px;">
+        <div style="background:var(--bg-2);border:1px solid var(--border);padding:14px 18px;display:flex;gap:14px;align-items:flex-start;"><span style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase;min-width:56px;padding-top:2px;">01</span><div><div style="font-size:14px;font-weight:500;margin-bottom:3px;">Auditoría completa</div><div style="font-size:13px;color:var(--text-2);line-height:1.55;">Inventario, huérfanos, análisis CloudWatch. Sin tocar nada.</div></div></div>
+        <div style="background:var(--bg-2);border:1px solid var(--border);border-top:none;padding:14px 18px;display:flex;gap:14px;align-items:flex-start;"><span style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase;min-width:56px;padding-top:2px;">02</span><div><div style="font-size:14px;font-weight:500;margin-bottom:3px;">Respaldos defensivos</div><div style="font-size:13px;color:var(--text-2);line-height:1.55;">AMIs y snapshots antes de eliminar. Política documentada.</div></div></div>
+        <div style="background:var(--bg-2);border:1px solid var(--green-dim);border-top:none;padding:14px 18px;display:flex;gap:14px;align-items:flex-start;"><span style="font-family:var(--ff-mono);font-size:10px;color:var(--green);letter-spacing:.12em;text-transform:uppercase;min-width:56px;padding-top:2px;">03</span><div><div style="font-size:14px;font-weight:500;margin-bottom:3px;">Eliminación de huérfanos</div><div style="font-size:13px;color:var(--text-2);line-height:1.55;">EBS sin asignar, EIPs sin uso, snapshots obsoletos. Solo esto: -$280/mes.</div></div></div>
+        <div style="background:var(--bg-2);border:1px solid var(--green-dim);border-top:none;padding:14px 18px;display:flex;gap:14px;align-items:flex-start;"><span style="font-family:var(--ff-mono);font-size:10px;color:var(--green);letter-spacing:.12em;text-transform:uppercase;min-width:56px;padding-top:2px;">04</span><div><div style="font-size:14px;font-weight:500;margin-bottom:3px;">Right-sizing + reservas</div><div style="font-size:13px;color:var(--text-2);line-height:1.55;">Instancias redimensionadas + Reserved Instances. -$314 adicionales.</div></div></div>
+      </div>
+    </div>
+    <!-- Sidebar -->
+    <div style="padding:44px 28px;background:var(--bg-2);display:flex;flex-direction:column;gap:20px;">
+      <div>
+        <div style="font-family:var(--ff-mono);font-size:9px;color:var(--text-3);letter-spacing:.16em;text-transform:uppercase;padding-bottom:8px;border-bottom:1px solid var(--border);margin-bottom:12px;">Resultado del caso</div>
+        <div style="font-family:var(--ff-display);font-size:28px;font-weight:500;letter-spacing:-.04em;line-height:1;color:var(--green);margin-bottom:2px;">$318</div>
+        <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;">vs $912 antes · -$7.1K/año</div>
+      </div>
+      <div>
+        <div style="font-family:var(--ff-mono);font-size:9px;color:var(--text-3);letter-spacing:.16em;text-transform:uppercase;padding-bottom:8px;border-bottom:1px solid var(--border);margin-bottom:12px;">Tecnologías</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;">
+          <span style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;background:var(--bg-3);border:1px solid var(--border);border-radius:2px;">AWS EC2</span>
+          <span style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;background:var(--bg-3);border:1px solid var(--border);border-radius:2px;">CloudWatch</span>
+          <span style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;background:var(--bg-3);border:1px solid var(--border);border-radius:2px;">Cost Explorer</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:var(--ff-mono);font-size:9px;color:var(--text-3);letter-spacing:.16em;text-transform:uppercase;padding-bottom:8px;border-bottom:1px solid var(--border);margin-bottom:12px;">¿Tu caso es similar?</div>
+        <a style="display:block;background:var(--green);color:#0b0c0e;font-family:var(--ff-body);font-size:13px;font-weight:500;padding:10px 16px;text-align:center;text-decoration:none;border-radius:3px;">Hablemos →</a>
+      </div>
+    </div>
+  </div>
+  <!-- Prev / Next -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-top:1px solid var(--border);">
+    <div style="background:var(--bg-2);padding:22px 28px;">
+      <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;">← Anterior</div>
+      <div style="font-family:var(--ff-display);font-size:14px;font-weight:400;letter-spacing:-.01em;color:var(--text-2);">Por qué uso IA en cada proyecto</div>
+    </div>
+    <div style="background:var(--bg-2);padding:22px 28px;text-align:right;">
+      <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;">Siguiente →</div>
+      <div style="font-family:var(--ff-display);font-size:14px;font-weight:400;letter-spacing:-.01em;color:var(--text-2);">Multi-tenant SaaS a 20K usuarios</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     QUICK REFERENCE
+═══════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="ch-num">Ref</div>
+  <div>
+    <div class="ch-title">Quick reference — para Claude Code</div>
+    <div class="ch-desc">Valores exactos para implementar en el codebase. Copiar directo.</div>
+  </div>
+</div>
+
+<div style="background:var(--bg-2);border:1px solid var(--border);padding:28px 32px;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;">
+    <div>
+      <div style="font-family:var(--ff-mono);font-size:10px;color:var(--green);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px;">CSS Variables</div>
+      <pre style="font-family:var(--ff-mono);font-size:12px;color:var(--text-2);line-height:2;background:var(--bg-3);padding:20px;border-radius:3px;overflow-x:auto;">--brand-green:   oklch(67% 0.17 148);
+--brand-bg:      #0b0c0e;
+--brand-surface: #111316;
+--brand-border:  #202227;
+--brand-text:    #eaedf2;
+--brand-text-2:  #9aa0ae;
+--brand-text-3:  #555c6a;
+
+/* categóricos — solo filtros */
+--cat-finops:    oklch(63% 0.18 22);
+--cat-saas:      oklch(67% 0.17 240);
+--cat-health:    oklch(67% 0.17 290);
+--cat-mobile:    oklch(72% 0.14 68);</pre>
+    </div>
+    <div>
+      <div style="font-family:var(--ff-mono);font-size:10px;color:var(--green);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px;">Google Fonts import</div>
+      <pre style="font-family:var(--ff-mono);font-size:12px;color:var(--text-2);line-height:2;background:var(--bg-3);padding:20px;border-radius:3px;overflow-x:auto;">Space Grotesk: 300, 400, 500
+→ Headlines, wordmark, KPIs
+
+DM Sans: 300, 400, 500, 600
+→ Body, UI, botones, nav
+
+DM Mono: 300, 400, 500
+→ Labels, métricas, código</pre>
+      <div style="font-family:var(--ff-mono);font-size:10px;color:var(--green);letter-spacing:.14em;text-transform:uppercase;margin:20px 0 14px;">Wordmark</div>
+      <pre style="font-family:var(--ff-mono);font-size:12px;color:var(--text-2);line-height:2;background:var(--bg-3);padding:20px;border-radius:3px;overflow-x:auto;">&lt;span&gt;
+  &lt;span style="color:var(--brand-green)"&gt;mo&lt;/span&gt;davidc
+&lt;/span&gt;
+font: Space Grotesk 400
+size: 20px (navbar) / 18px (footer)</pre>
+    </div>
+  </div>
+</div>
+
+
+<div class="page-footer">
+  <span>modavidc — Brand Identity System · v1.0 · Abril 2026</span>
+  <span>Criterio · Contexto · Intención</span>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

@@ -1,0 +1,3 @@
+  - Inglés hablado - ¿cómo estás en calls en vivo?                                                                                      
+  - Gestión de personas formal - ¿has hecho 1:1s, performance reviews?                                                                  
+  - Comunicación ejecutiva - ¿puedes presentar a un C-level en 5 min?                                                                   

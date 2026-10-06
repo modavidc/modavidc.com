@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Testimonios — modavidc · Solutions Architect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0b0c0e; --bg-2:#111316; --bg-3:#181a1d;
+  --border:#202227; --border-2:#2a2d33;
+  --text:#eaedf2; --text-2:#9aa0ae; --text-3:#555c6a;
+  --green:oklch(67% 0.17 148); --green-dim:oklch(35% 0.10 148); --green-bg:oklch(16% 0.06 148);
+  --blue:oklch(67% 0.17 240); --blue-bg:oklch(16% 0.06 240);
+  --violet:oklch(67% 0.17 290); --violet-bg:oklch(16% 0.06 290);
+  --amber:oklch(72% 0.14 68); --amber-bg:oklch(16% 0.06 68);
+  --ff-display:'Space Grotesk',sans-serif; --ff-body:'DM Sans',sans-serif; --ff-mono:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);color:var(--text);font-family:var(--ff-body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+.nav{position:sticky;top:0;z-index:100;background:rgba(11,12,14,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-brand{display:flex;align-items:baseline;gap:12px;text-decoration:none}
+.nav-wm{font-family:var(--ff-display);font-size:20px;font-weight:400;letter-spacing:-.025em;color:var(--text)}
+.nav-wm .mo{color:var(--green)}
+.nav-tagline{font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-size:13px;color:var(--text-2);text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:var(--text)}
+.nav-links a.active{color:var(--green)}
+.nav-cta{background:var(--green);color:#0b0c0e;font-size:13px;font-weight:500;padding:8px 18px;border-radius:3px;font-family:var(--ff-body);text-decoration:none;transition:opacity .15s}
+.nav-cta:hover{opacity:.85}
+
+/* HEADER */
+.page-header{max-width:1200px;margin:0 auto;padding:72px 48px 64px;border-bottom:1px solid var(--border)}
+.section-kicker{font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.16em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.section-kicker::before{content:'';display:block;width:24px;height:1px;background:var(--border-2)}
+.page-h1{font-family:var(--ff-display);font-size:clamp(36px,5vw,60px);font-weight:300;letter-spacing:-.04em;line-height:1.05;margin-bottom:16px}
+.page-h1 em{color:var(--green);font-style:normal}
+.page-sub{font-size:16px;color:var(--text-2);max-width:600px;line-height:1.65;font-weight:300;margin-bottom:20px}
+.nda-note{display:inline-flex;align-items:center;gap:8px;font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.08em;padding:6px 12px;background:var(--bg-3);border:1px solid var(--border-2)}
+.nda-note::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--text-3);display:block;flex-shrink:0}
+
+/* MAIN GRID */
+.page-wrap{max-width:1200px;margin:0 auto;padding:0 48px 96px}
+.testimonios-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:48px}
+
+/* TESTIMONIAL CARD — sistema del sitio, no screenshots */
+.test-card{background:var(--bg-2);padding:32px 28px;display:flex;flex-direction:column;gap:0;transition:background .15s}
+.test-card:hover{background:var(--bg-3)}
+.test-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;gap:12px}
+.test-avatar{width:40px;height:40px;border-radius:3px;background:var(--bg-3);border:1px solid var(--border-2);display:flex;align-items:center;justify-content:center;font-family:var(--ff-display);font-size:16px;font-weight:500;color:var(--text-2);flex-shrink:0}
+.test-platform{display:flex;align-items:center;gap:6px;font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.08em}
+.platform-dot{width:5px;height:5px;border-radius:50%}
+.test-quote{font-family:var(--ff-display);font-size:16px;font-weight:300;letter-spacing:-.01em;line-height:1.6;color:var(--text);margin-bottom:24px;flex:1;position:relative;padding-left:16px}
+.test-quote::before{content:'"';position:absolute;left:0;top:-4px;font-family:var(--ff-display);font-size:28px;color:var(--green);line-height:1}
+.test-meta{border-top:1px solid var(--border);padding-top:16px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.test-person{}
+.test-name{font-size:13px;font-weight:500;margin-bottom:2px}
+.test-role{font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;line-height:1.4}
+.test-badges{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.cat-badge{font-family:var(--ff-mono);font-size:10px;letter-spacing:.08em;padding:2px 8px;border-radius:100px;display:inline-flex;align-items:center;gap:4px}
+.cat-badge .dot{width:4px;height:4px;border-radius:50%;background:currentColor;flex-shrink:0}
+.cat-green{background:var(--green-bg);color:var(--green)}
+.cat-blue{background:var(--blue-bg);color:var(--blue)}
+.cat-violet{background:var(--violet-bg);color:var(--violet)}
+.cat-amber{background:var(--amber-bg);color:var(--amber)}
+.metric-small{font-family:var(--ff-mono);font-size:10px;letter-spacing:.04em;padding:2px 7px;border-radius:3px;background:var(--green-bg);color:var(--green);border:1px solid var(--green-dim)}
+
+/* FEATURED — ancho completo */
+.test-card.featured{grid-column:1 / -1;background:var(--bg-2);display:grid;grid-template-columns:1fr 240px;gap:40px}
+.test-card.featured .test-quote{font-size:20px;padding-left:20px}
+.test-card.featured .test-quote::before{font-size:36px}
+
+/* SECTION DIVIDER */
+.section-div{max-width:1200px;margin:0 auto;padding:56px 48px 0}
+.sec-kicker{font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.16em;text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;gap:10px}
+.sec-kicker::before{content:'';display:block;width:24px;height:1px;background:var(--border-2)}
+.sec-h{font-family:var(--ff-display);font-size:clamp(22px,3vw,32px);font-weight:300;letter-spacing:-.03em;margin-bottom:10px}
+.sec-sub{font-size:14px;color:var(--text-2);line-height:1.65;margin-bottom:32px;max-width:560px}
+
+/* METRICAS STRIP */
+.metrics-strip{max-width:1200px;margin:0 auto;padding:48px 48px 0}
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.metric-cell{background:var(--bg-2);padding:24px}
+.metric-val{font-family:var(--ff-display);font-size:36px;font-weight:500;letter-spacing:-.04em;line-height:1;margin-bottom:6px}
+.metric-val.green{color:var(--green)}
+.metric-lbl{font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase}
+.metric-ctx{font-size:12px;color:var(--text-3);margin-top:3px}
+
+/* CTA */
+.cta-band{max-width:1200px;margin:48px auto 0;padding:0 48px 96px}
+.cta-inner{background:var(--bg-2);border:1px solid var(--border);padding:48px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+.cta-h{font-family:var(--ff-display);font-size:clamp(22px,3vw,32px);font-weight:300;letter-spacing:-.03em;line-height:1.2;margin-bottom:10px}
+.cta-h em{color:var(--green);font-style:normal}
+.cta-sub{font-size:14px;color:var(--text-2);line-height:1.65;max-width:520px}
+.cta-btns{display:flex;gap:12px;flex-shrink:0}
+.btn{font-family:var(--ff-body);font-size:14px;font-weight:500;padding:11px 22px;border-radius:3px;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;letter-spacing:-.01em;text-decoration:none;transition:opacity .15s;white-space:nowrap}
+.btn:hover{opacity:.85}
+.btn-primary{background:var(--green);color:#0b0c0e}
+.btn-secondary{background:transparent;color:var(--text);border:1px solid var(--border-2)}
+
+footer{border-top:1px solid var(--border);padding:28px 48px;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-brand{font-family:var(--ff-display);font-size:15px;font-weight:400;letter-spacing:-.02em}
+.footer-brand .mo{color:var(--green)}
+.footer-copy{font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.06em}
+.footer-links{display:flex;gap:24px;font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.06em}
+.footer-links a{color:var(--text-3);text-decoration:none;transition:color .15s}
+.footer-links a:hover{color:var(--green)}
+
+@media(max-width:900px){
+  .nav-inner,.page-header,.page-wrap,.section-div,.metrics-strip,.cta-band,footer{padding-left:20px;padding-right:20px}
+  .nav-tagline{display:none}
+  .nav-links{gap:16px}
+  .testimonios-grid{grid-template-columns:1fr}
+  .test-card.featured{grid-template-columns:1fr}
+  .metrics-grid{grid-template-columns:1fr 1fr}
+  .cta-inner{grid-template-columns:1fr;gap:24px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="home.html">
+      <div class="nav-wm"><span class="mo">mo</span>davidc</div>
+      <div class="nav-tagline">Honest work. Efficient architectures.</div>
+    </a>
+    <div class="nav-links">
+      <a href="experiencia.html">Experiencia</a>
+      <a href="casos-de-exito.html">Casos de Éxito</a>
+      <a href="metodologia.html">Metodología</a>
+      <a href="#" class="active">Testimonios</a>
+      <a class="nav-cta" href="hablemos.html">Hablemos</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="section-kicker">Testimonios</div>
+  <h1 class="page-h1">Lo que dicen quienes han<br>trabajado <em>conmigo.</em></h1>
+  <p class="page-sub">Feedback real de equipos y líderes con los que he colaborado. Proyectos con impacto medible, documentación transferible y cero dependencia.</p>
+  <div class="nda-note">Algunos datos modificados por NDA — las métricas son verificables en los casos de éxito</div>
+</div>
+
+<div class="page-wrap">
+  <div class="testimonios-grid">
+
+    <!-- FEATURED -->
+    <div class="test-card featured">
+      <div>
+        <div class="test-card-top">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div class="test-avatar">DT</div>
+            <div>
+              <div style="font-size:13px;font-weight:500">Director de TI</div>
+              <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase">Director de Tecnología · MediRec</div>
+            </div>
+          </div>
+          <div class="test-platform">
+            <div class="platform-dot" style="background:var(--blue)"></div>
+            LinkedIn
+          </div>
+        </div>
+        <div class="test-quote">
+          Moisés lideró la reducción de nuestra factura AWS en un 58%. No solo optimizó costos — documentó cada decisión de arquitectura para que el equipo pudiera mantenerlos sin depender de él.
+        </div>
+        <div class="test-meta">
+          <div class="test-person">
+            <div class="test-name">Director de TI</div>
+            <div class="test-role">Plataforma Healthcare · MediRec · 2023</div>
+          </div>
+          <div class="test-badges">
+            <span class="metric-small">-58% AWS · $180K</span>
+            <span class="cat-badge cat-green"><span class="dot"></span>FinOps</span>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;justify-content:center;gap:16px;padding:0 0 0 40px;border-left:1px solid var(--border)">
+        <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px">Resultado verificable</div>
+        <div>
+          <div style="font-family:var(--ff-display);font-size:44px;font-weight:500;letter-spacing:-.04em;line-height:1;color:var(--green)">-58%</div>
+          <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;margin-top:6px">Factura AWS · MediRec</div>
+        </div>
+        <div>
+          <div style="font-family:var(--ff-display);font-size:32px;font-weight:500;letter-spacing:-.03em;line-height:1;color:var(--text)">48h</div>
+          <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;margin-top:6px">Onboarding dev nuevo</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 -->
+    <div class="test-card">
+      <div class="test-card-top">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="test-avatar">LT</div>
+          <div>
+            <div style="font-size:13px;font-weight:500">Líder Técnico</div>
+            <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase">Tech Lead · MediRec Mobile</div>
+          </div>
+        </div>
+        <div class="test-platform">
+          <div class="platform-dot" style="background:var(--blue)"></div>
+          LinkedIn
+        </div>
+      </div>
+      <div class="test-quote">
+        La app móvil quedó lista en 2 meses. Lo impresionante fue que el código estaba tan bien estructurado que cuando hubo que agregar features, no tuvimos que reescribir nada.
+      </div>
+      <div class="test-meta">
+        <div class="test-person">
+          <div class="test-name">Líder Técnico</div>
+          <div class="test-role">MediRec Mobile · 2024</div>
+        </div>
+        <div class="test-badges">
+          <span class="metric-small">2 meses delivery</span>
+          <span class="cat-badge cat-amber"><span class="dot"></span>Mobile</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 -->
+    <div class="test-card">
+      <div class="test-card-top">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="test-avatar">PO</div>
+          <div>
+            <div style="font-size:13px;font-weight:500">Product Owner</div>
+            <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase">Product Lead · T-Cuida</div>
+          </div>
+        </div>
+        <div class="test-platform">
+          <div class="platform-dot" style="background:oklch(67% 0.17 148)"></div>
+          Directo
+        </div>
+      </div>
+      <div class="test-quote">
+        Lo que más me impresionó fue su documentación. Cuando entró un nuevo dev, estuvo productivo en 48 horas gracias al registro de decisiones que Moisés mantuvo durante todo el proyecto.
+      </div>
+      <div class="test-meta">
+        <div class="test-person">
+          <div class="test-name">Product Owner</div>
+          <div class="test-role">T-Cuida · SaaS IoT · 2023</div>
+        </div>
+        <div class="test-badges">
+          <span class="metric-small">48h onboarding</span>
+          <span class="cat-badge cat-blue"><span class="dot"></span>SaaS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 -->
+    <div class="test-card">
+      <div class="test-card-top">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="test-avatar">GO</div>
+          <div>
+            <div style="font-size:13px;font-weight:500">Gerente de Operaciones</div>
+            <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase">Ops Lead · Lab Middleware</div>
+          </div>
+        </div>
+        <div class="test-platform">
+          <div class="platform-dot" style="background:var(--violet)"></div>
+          Directo
+        </div>
+      </div>
+      <div class="test-quote">
+        La integración del middleware redujo el 70% del tiempo de comunicación de resultados. El sistema se comunica con equipos legacy que nadie más quería tocar. Funciona perfecto.
+      </div>
+      <div class="test-meta">
+        <div class="test-person">
+          <div class="test-name">Gerente de Operaciones</div>
+          <div class="test-role">Lab Middleware · Healthcare · 2022</div>
+        </div>
+        <div class="test-badges">
+          <span class="metric-small">-70% tiempo</span>
+          <span class="cat-badge cat-violet"><span class="dot"></span>Healthcare</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 05 -->
+    <div class="test-card">
+      <div class="test-card-top">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="test-avatar">CI</div>
+          <div>
+            <div style="font-size:13px;font-weight:500">Coordinador IoT</div>
+            <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase">IoT Lead · T-Cuida</div>
+          </div>
+        </div>
+        <div class="test-platform">
+          <div class="platform-dot" style="background:var(--amber)"></div>
+          Directo
+        </div>
+      </div>
+      <div class="test-quote">
+        El Bridge TCP/IP–WebSocket mejoró el throughput en un 400%. Pensamos que necesitaríamos hardware nuevo, pero Moisés encontró la solución en el software.
+      </div>
+      <div class="test-meta">
+        <div class="test-person">
+          <div class="test-name">Coordinador IoT</div>
+          <div class="test-role">T-Cuida · Bridge TCP/IP · 2023</div>
+        </div>
+        <div class="test-badges">
+          <span class="metric-small">+400% throughput</span>
+          <span class="cat-badge cat-amber"><span class="dot"></span>IoT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 06 -->
+    <div class="test-card">
+      <div class="test-card-top">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="test-avatar">CT</div>
+          <div>
+            <div style="font-size:13px;font-weight:500">CTO</div>
+            <div style="font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase">Chief Technology Officer · Healthcare Startup</div>
+          </div>
+        </div>
+        <div class="test-platform">
+          <div class="platform-dot" style="background:var(--text-3)"></div>
+          Email
+        </div>
+      </div>
+      <div class="test-quote">
+        Necesitábamos cumplir con PREIS (regulación Gov-Tech) en tiempo récord. Moisés no solo lo logró — automatizó los reportes que antes tomaban 4 horas semanales. Ahora son real-time.
+      </div>
+      <div class="test-meta">
+        <div class="test-person">
+          <div class="test-name">CTO</div>
+          <div class="test-role">Healthcare Startup · Gov-Tech · 2023</div>
+        </div>
+        <div class="test-badges">
+          <span class="metric-small neutral" style="background:var(--bg-3);color:var(--text-2);border-color:var(--border-2);font-family:var(--ff-mono);font-size:10px;padding:2px 7px;border-radius:3px;border:1px solid;letter-spacing:.04em">100% PREIS</span>
+          <span class="cat-badge cat-violet"><span class="dot"></span>Healthcare</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MÉTRICAS -->
+<div class="metrics-strip">
+  <div class="sec-kicker">En números</div>
+  <div class="metrics-grid">
+    <div class="metric-cell">
+      <div class="metric-val green">-58%</div>
+      <div class="metric-lbl">AWS reducido</div>
+      <div class="metric-ctx">MediRec · verificable</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-val">48h</div>
+      <div class="metric-lbl">Onboarding</div>
+      <div class="metric-ctx">T-Cuida · verificable</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-val">+400%</div>
+      <div class="metric-lbl">Throughput IoT</div>
+      <div class="metric-ctx">TCP/IP Bridge · verificable</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-val">-70%</div>
+      <div class="metric-lbl">Tiempo clínico</div>
+      <div class="metric-ctx">Lab Middleware · verificable</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="cta-inner">
+    <div>
+      <h3 class="cta-h">¿Listo para ser el próximo<br>caso de <em>éxito</em>?</h3>
+      <p class="cta-sub">Proyectos que entregan resultados medibles, con documentación que permite continuidad sin dependencias.</p>
+    </div>
+    <div class="cta-btns">
+      <a class="btn btn-primary" href="hablemos.html">Hablemos de tu proyecto →</a>
+      <a class="btn btn-secondary" href="casos-de-exito.html">Ver casos de éxito</a>
+    </div>
+  </div>
+</div>
+
+<div style="border-top:1px solid var(--border)">
+  <footer>
+    <div class="footer-brand"><span class="mo">mo</span>davidc</div>
+    <div class="footer-copy">© 2026 Moisés Cedeño · Todos los derechos reservados.</div>
+    <div class="footer-links">
+      <a href="home.html">Inicio</a>
+      <a href="casos-de-exito.html">Casos de Éxito</a>
+      <a href="metodologia.html">Metodología</a>
+      <a href="/cdn-cgi/l/email-protection#640c0b080524090b0005120d00074a070b09"><span class="__cf_email__" data-cfemail="85edeae9e4c5e8eae1e4f3ece1e6abe6eae8">[email&#160;protected]</span></a>
+    </div>
+  </footer>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

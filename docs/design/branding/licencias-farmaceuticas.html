@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Cómo eliminé $20K/año en licencias farmacéuticas — modavidc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0d0b;
+    --bg-2:#0f1310;
+    --bg-3:#141914;
+    --bg-hi:#182019;
+    --line:#1f261f;
+    --line-2:#2a322a;
+    --line-3:#384038;
+    --text:#e9eee9;
+    --text-2:#c8d0c8;
+    --muted:#7a847b;
+    --muted-2:#525a52;
+    --muted-3:#3a423a;
+    --accent:#4ade80;
+    --accent-dim:#2f8a52;
+    --accent-soft:rgba(74,222,128,.08);
+    --amber:#f5c97a;
+    --amber-dim:#7a5e26;
+    --amber-soft:rgba(245,201,122,.08);
+    --mono:'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sans:'Geist', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  body{font-size:15px;line-height:1.6;letter-spacing:-0.005em}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--accent);color:#0a0d0b}
+
+  .progress{position:fixed;top:0;left:0;height:2px;background:var(--accent);width:0;z-index:50;transition:width .1s linear;box-shadow:0 0 8px var(--accent)}
+
+  /* ───── topbar */
+  .topbar{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);background:rgba(10,13,11,.78);border-bottom:1px solid var(--line)}
+  .topbar-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 32px}
+  .brand{font-weight:500;font-size:18px;letter-spacing:-.015em}
+  .brand span{color:var(--accent)}
+  .nav{display:flex;gap:28px;align-items:center;font-size:13.5px;color:var(--text-2)}
+  .nav a.active{color:var(--text)}
+  .nav a:hover{color:var(--text)}
+  .cta{background:var(--accent);color:#0a0d0b;padding:8px 14px;border-radius:4px;font-weight:500;font-size:13.5px;transition:filter .15s}
+  .cta:hover{filter:brightness(1.1)}
+
+  /* ───── shell */
+  .shell{max-width:1280px;margin:0 auto;padding:48px 32px 0;position:relative}
+  .grid{display:grid;grid-template-columns:220px minmax(0,1fr);gap:64px;align-items:start}
+  @media (max-width:1080px){.grid{grid-template-columns:1fr;gap:0}.side-l{display:none}}
+
+  /* ───── hero */
+  .crumb{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin-bottom:24px}
+  .crumb::before{content:"▎";color:var(--accent);margin-right:8px}
+  .crumb a{color:var(--muted);transition:color .15s}
+  .crumb a:hover{color:var(--text)}
+
+  h1.title{font-size:54px;line-height:1.02;letter-spacing:-.028em;font-weight:500;margin:0 0 18px;color:var(--text);text-wrap:balance;max-width:20ch}
+  h1.title em{font-style:normal;color:var(--accent)}
+
+  .tldr{font-size:21px;line-height:1.45;color:var(--text-2);max-width:60ch;margin:0 0 36px;text-wrap:pretty;font-weight:300;letter-spacing:-.01em}
+  .tldr b{color:var(--text);font-weight:500}
+
+  .meta-strip{display:flex;gap:24px;flex-wrap:wrap;font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.06em;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:48px}
+  .meta-strip dl{margin:0;display:flex;gap:8px;align-items:baseline}
+  .meta-strip dt{color:var(--muted-2);text-transform:uppercase;font-size:10.5px;letter-spacing:.14em}
+  .meta-strip dd{margin:0;color:var(--text-2)}
+
+  /* ───── hero metrics */
+  .metrics{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);background:linear-gradient(180deg,var(--bg-2),var(--bg));border-radius:6px;overflow:hidden;margin-bottom:80px}
+  @media (max-width:760px){.metrics{grid-template-columns:repeat(2,1fr)}}
+  .m-cell{padding:24px 26px;border-right:1px solid var(--line)}
+  .m-cell:last-child{border-right:none}
+  @media (max-width:760px){.m-cell:nth-child(2n){border-right:none}.m-cell:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+  .m-cell .lbl{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+  .m-cell .lbl::before{content:"▎";color:var(--accent);margin-right:6px;opacity:.5}
+  .m-cell .num{font-family:var(--mono);font-size:44px;line-height:1;font-weight:500;color:var(--accent);letter-spacing:-.04em}
+  .m-cell .sub{font-size:12.5px;color:var(--muted);margin-top:10px;line-height:1.45}
+
+  /* ───── TOC */
+  .side-l{position:sticky;top:90px;align-self:start}
+  .toc-h{font-family:var(--mono);font-size:10px;color:var(--muted-2);letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px}
+  .toc{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px;border-left:1px solid var(--line)}
+  .toc a{display:flex;align-items:baseline;gap:12px;padding:7px 0 7px 14px;font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;border-left:1px solid transparent;margin-left:-1px;transition:all .15s}
+  .toc a .n{color:var(--muted-2);font-size:10px;min-width:18px}
+  .toc a:hover{color:var(--text-2)}
+  .toc a.active{color:var(--accent);border-left-color:var(--accent)}
+  .toc a.active .n{color:var(--accent)}
+
+  /* ───── sections */
+  section.sec{padding:80px 0;border-top:1px solid var(--line);scroll-margin-top:90px}
+  section.sec:first-of-type{border-top:none;padding-top:0}
+  .sec-eyebrow{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+  .sec-eyebrow::before{content:"";display:inline-block;width:24px;height:1px;background:var(--accent)}
+  .sec-eyebrow.amber{color:var(--amber)}
+  .sec-eyebrow.amber::before{background:var(--amber)}
+  h2.sec-title{font-size:32px;line-height:1.15;font-weight:500;letter-spacing:-.022em;margin:0 0 14px;color:var(--text);max-width:22ch;text-wrap:balance}
+  .sec-lede{font-size:17px;line-height:1.55;color:var(--text-2);max-width:62ch;margin:0 0 36px;text-wrap:pretty;font-weight:300}
+
+  .prose{max-width:62ch;font-size:15.5px;line-height:1.7;color:var(--text-2)}
+  .prose p{margin:0 0 16px}
+  .prose b{color:var(--text);font-weight:500}
+  .prose .gloss{border-bottom:1px dotted var(--muted);cursor:help}
+
+  /* numbered bullets */
+  .bullets{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0;max-width:62ch}
+  .bullets li{position:relative;padding:14px 0 14px 44px;border-bottom:1px solid var(--line);font-size:14.5px;line-height:1.55;color:var(--text-2)}
+  .bullets li:first-child{padding-top:4px}
+  .bullets li:last-child{border-bottom:none}
+  .bullets li::before{content:attr(data-n);position:absolute;left:0;top:16px;font-family:var(--mono);font-size:10.5px;color:var(--accent);letter-spacing:.08em}
+  .bullets li:first-child::before{top:6px}
+  .bullets li.amber::before{color:var(--amber)}
+  .bullets li b{color:var(--text);font-weight:500}
+
+  /* ───── criterio cards */
+  .criterio-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px}
+  @media (max-width:760px){.criterio-grid{grid-template-columns:1fr}}
+  .crit-card{background:var(--bg-2);border:1px solid var(--line);border-left:2px solid var(--accent);border-radius:4px;padding:24px 26px;transition:border-color .2s;position:relative}
+  .crit-card:hover{border-color:var(--line-3);border-left-color:var(--accent)}
+  .crit-card .n{font-family:var(--mono);font-size:10.5px;color:var(--accent);letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+  .crit-card h3{font-size:17px;line-height:1.3;font-weight:500;letter-spacing:-.01em;margin:0 0 12px;color:var(--text)}
+  .crit-card p{margin:0 0 14px;font-size:14px;line-height:1.55;color:var(--text-2)}
+  .crit-card .why{border-top:1px dashed var(--line-2);padding-top:12px;margin-top:14px;font-family:var(--mono);font-size:11.5px;color:var(--muted);line-height:1.5}
+  .crit-card .why b{color:var(--accent);font-weight:500;text-transform:uppercase;letter-spacing:.08em;font-size:10px;margin-right:6px}
+
+  /* ───── architecture — before/after */
+  .breakout{margin-left:-44px;margin-right:-44px}
+  @media (max-width:1080px){.breakout{margin-left:0;margin-right:0}}
+  .arch{border:1px solid var(--line);background:radial-gradient(circle at 12% 18%, rgba(74,222,128,.04), transparent 38%),radial-gradient(circle at 88% 82%, rgba(74,222,128,.03), transparent 40%),var(--bg-2);border-radius:6px;overflow:hidden}
+  .arch-head{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .arch-head .right{display:flex;gap:14px;color:var(--muted-2)}
+  .arch-body{padding:32px}
+  .arch-row{display:grid;grid-template-columns:130px 1fr;gap:24px;align-items:stretch}
+  .arch-row + .arch-row{margin-top:18px;padding-top:24px;border-top:1px dashed var(--line-2)}
+  @media (max-width:760px){.arch-row{grid-template-columns:1fr;gap:14px}}
+  .arch-side{display:flex;flex-direction:column;justify-content:center;gap:6px}
+  .arch-side .lbl{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+  .arch-side .lbl.bad{color:var(--amber)}
+  .arch-side .lbl.good{color:var(--accent)}
+  .arch-side .tag{font-family:var(--mono);font-size:12.5px;color:var(--text-2);letter-spacing:-.01em}
+  .arch-side .tag.bad{color:var(--amber)}
+  .arch-side .tag.good{color:var(--accent);font-weight:500}
+
+  .arch-flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:0;align-items:center}
+  @media (max-width:760px){.arch-flow{grid-template-columns:1fr;gap:8px}}
+  .node{background:var(--bg-3);border:1px solid var(--line-2);border-radius:6px;padding:14px 16px;text-align:left}
+  .node.gw{border-color:var(--accent-dim);background:var(--bg-hi)}
+  .node.bad{border-color:var(--amber-dim);background:var(--amber-soft)}
+  .node .role{font-family:var(--mono);font-size:9.5px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px}
+  .node.gw .role{color:var(--accent)}
+  .node.bad .role{color:var(--amber)}
+  .node h4{font-size:14.5px;line-height:1.25;font-weight:500;margin:0 0 6px;color:var(--text)}
+  .node .meta{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:0;line-height:1.5}
+  .node.bad .meta{color:var(--amber)}
+  .node.gw .meta{color:var(--accent)}
+
+  .arrow{display:flex;flex-direction:column;align-items:center;gap:4px;font-family:var(--mono);font-size:9.5px;color:var(--muted);letter-spacing:.06em;padding:0 8px;min-width:60px}
+  .arrow .line{width:100%;height:1px;background:linear-gradient(to right, var(--muted-3), var(--accent), var(--muted-3));position:relative}
+  .arrow .line.bad{background:linear-gradient(to right, var(--muted-3), var(--amber), var(--muted-3))}
+  .arrow .line::after{content:"";position:absolute;right:-1px;top:-3px;border:3px solid transparent;border-left-color:var(--accent)}
+  .arrow .line.bad::after{border-left-color:var(--amber)}
+  .arrow .lbl{color:var(--accent);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase}
+  .arrow .lbl.bad{color:var(--amber)}
+  @media (max-width:760px){.arrow{flex-direction:row;width:100%;padding:6px 0}.arrow .line{height:14px;width:1px;background:linear-gradient(to bottom, var(--muted-3), var(--accent), var(--muted-3))}.arrow .line.bad{background:linear-gradient(to bottom, var(--muted-3), var(--amber), var(--muted-3))}.arrow .line::after{right:auto;top:auto;bottom:-1px;left:-3px;border:3px solid transparent;border-top-color:var(--accent);border-left-color:transparent}.arrow .line.bad::after{border-top-color:var(--amber);border-left-color:transparent}}
+
+  .arch-foot{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line)}
+  @media (max-width:760px){.arch-foot{grid-template-columns:repeat(2,1fr)}}
+  .arch-foot .f{padding:14px 18px;border-right:1px solid var(--line)}
+  .arch-foot .f:last-child{border-right:none}
+  @media (max-width:760px){.arch-foot .f:nth-child(2n){border-right:none}}
+  .arch-foot .l{font-family:var(--mono);font-size:10px;color:var(--muted-2);letter-spacing:.14em;text-transform:uppercase;margin-bottom:5px}
+  .arch-foot .v{font-family:var(--mono);font-size:13px;color:var(--text);letter-spacing:-.01em}
+
+  /* ───── result cards */
+  .result-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:8px}
+  @media (max-width:1000px){.result-grid{grid-template-columns:repeat(2,1fr)}}
+  .r-card{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;padding:28px 24px 24px;position:relative;overflow:hidden}
+  .r-card::before{content:"";position:absolute;top:0;left:0;height:2px;width:40%;background:var(--accent)}
+  .r-card .l{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px}
+  .r-card .v{font-family:var(--mono);font-size:46px;line-height:1;color:var(--accent);font-weight:500;letter-spacing:-.04em;margin-bottom:14px}
+  .r-card .d{font-size:13px;color:var(--text-2);line-height:1.5}
+
+  /* ───── deliver cards */
+  .deliver{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media (max-width:880px){.deliver{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:560px){.deliver{grid-template-columns:1fr}}
+  .d-card{background:var(--bg-2);border:1px solid var(--line);border-radius:4px;padding:18px 18px 20px;display:flex;flex-direction:column;gap:8px;transition:border-color .15s, background .15s}
+  .d-card:hover{border-color:var(--line-3);background:var(--bg-3)}
+  .d-card .n{font-family:var(--mono);font-size:10.5px;color:var(--accent);letter-spacing:.14em}
+  .d-card h4{font-size:15px;line-height:1.3;font-weight:500;margin:0;color:var(--text)}
+  .d-card p{margin:0;font-size:13px;color:var(--muted);line-height:1.5}
+
+  /* ───── email proof */
+  .email{border:1px solid var(--line);background:var(--bg-2);border-radius:6px;overflow:hidden;max-width:680px}
+  .email-bar{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .email-bar .lights{display:flex;gap:5px}
+  .email-bar .lights span{width:7px;height:7px;border-radius:50%;background:var(--muted-3)}
+  .email-bar .lights span.on{background:var(--accent)}
+  .email-head{padding:16px 20px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.7}
+  .email-head .row{display:grid;grid-template-columns:60px 1fr;gap:8px}
+  .email-head .row .k{color:var(--muted-2);text-transform:uppercase;letter-spacing:.1em;font-size:10.5px;padding-top:2px}
+  .email-head .row .v{color:var(--text-2)}
+  .email-head .row .v b{color:var(--text);font-weight:500}
+  .email-body{padding:20px 22px;font-family:var(--mono);font-size:13px;line-height:1.65;color:var(--text-2)}
+  .email-body p{margin:0 0 12px}
+  .email-body .q{color:var(--muted);border-left:2px solid var(--muted-3);padding-left:12px;margin:0 0 14px}
+  .email-body .ans{color:var(--accent);font-weight:500}
+  .email-cap{font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.04em;line-height:1.6;margin-top:18px;max-width:680px}
+  .email-cap b{color:var(--text-2);font-weight:500}
+
+  /* pull quote */
+  .pull{margin:48px 0 0;padding:36px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center}
+  .pull q{quotes:"" "";display:block;font-size:26px;line-height:1.35;font-weight:300;letter-spacing:-.018em;color:var(--text);max-width:34ch;margin:0 auto 16px;text-wrap:balance}
+  .pull q em{font-style:normal;color:var(--accent)}
+  .pull .attr{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+
+  /* ───── CTA */
+  .end-cta{margin:80px 0 0;padding:72px 56px;border:1px solid var(--line);border-radius:8px;background:radial-gradient(circle at 80% 50%, rgba(74,222,128,.06), transparent 50%),linear-gradient(180deg, var(--bg-2), var(--bg));display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap}
+  @media (max-width:680px){.end-cta{padding:36px 24px}}
+  .end-cta h3{font-size:30px;line-height:1.2;font-weight:500;letter-spacing:-.022em;margin:0 0 8px;color:var(--text);max-width:22ch;text-wrap:balance}
+  .end-cta p{margin:0;color:var(--muted);font-size:14.5px;max-width:36ch}
+  .end-cta .actions{display:flex;gap:12px;flex-wrap:wrap}
+  .end-cta .actions a{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:5px;font-size:14px;font-weight:500;border:1px solid var(--line-3);color:var(--text);transition:all .15s}
+  .end-cta .actions a:hover{border-color:var(--text-2)}
+  .end-cta .actions a.primary{background:var(--accent);color:#0a0d0b;border-color:var(--accent)}
+  .end-cta .actions a.primary:hover{filter:brightness(1.1)}
+
+  /* ───── footer */
+  footer{border-top:1px solid var(--line);margin-top:80px;padding:48px 32px 32px;max-width:1280px;margin-left:auto;margin-right:auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px}
+  @media (max-width:760px){footer{grid-template-columns:1fr 1fr;gap:28px}}
+  footer .col-h{font-family:var(--mono);font-size:10px;color:var(--muted-2);letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px}
+  footer .col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:13.5px;color:var(--text-2)}
+  footer .col ul a:hover{color:var(--accent)}
+  footer .brand-col .brand{font-size:24px;margin-bottom:8px}
+  footer .brand-col .sub{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;line-height:1.6}
+  .footer-bottom{max-width:1280px;margin:0 auto;padding:16px 32px 32px;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10.5px;color:var(--muted-2);letter-spacing:.14em;text-transform:uppercase;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a href="../index.html" class="brand">mo<span>davidc</span></a>
+    <nav class="nav">
+      <a href="#">Experiencia</a>
+      <a href="../Casos · Rediseño.html" class="active">Casos de Éxito</a>
+      <a href="#">Metodología</a>
+      <a href="#">Testimonios</a>
+      <a href="#" class="cta">Hablemos</a>
+    </nav>
+  </div>
+</div>
+
+<main class="shell">
+  <div class="grid">
+
+    <!-- TOC -->
+    <aside class="side-l">
+      <div class="toc-h">▎ Índice</div>
+      <ul class="toc" id="toc">
+        <li><a href="#contexto"><span class="n">01</span>Contexto</a></li>
+        <li><a href="#desafio"><span class="n">02</span>Desafío</a></li>
+        <li><a href="#rol"><span class="n">03</span>Mi rol</a></li>
+        <li><a href="#criterio"><span class="n">04</span>Mi criterio</a></li>
+        <li><a href="#arquitectura"><span class="n">05</span>Arquitectura</a></li>
+        <li><a href="#resultado"><span class="n">06</span>Resultado</a></li>
+        <li><a href="#dejado"><span class="n">07</span>Lo que dejé</a></li>
+        <li><a href="#prueba"><span class="n">08</span>Prueba</a></li>
+      </ul>
+    </aside>
+
+    <article>
+      <!-- HERO -->
+      <div class="crumb"><a href="../Casos · Rediseño.html">Casos de éxito</a> &nbsp;/&nbsp; FinOps · Healthcare</div>
+      <h1 class="title">Cómo eliminé <em>$20K/año</em> en licencias farmacéuticas.</h1>
+      <p class="tldr">
+        MediRec pagaba $20K/año por una licencia de validación clínica que el equipo temía tocar.
+        <b>Validé con la fuente que un estándar federal cubría lo mismo, gratis</b> — y migré 11+ clientes en 2 horas de downtime, sin una sola incidencia clínica.
+      </p>
+
+      <dl class="meta-strip">
+        <dl><dt>Cliente</dt><dd>MediRec, Inc.</dd></dl>
+        <dl><dt>Año</dt><dd>2023 — 2024</dd></dl>
+        <dl><dt>Rol</dt><dd>Tech Lead · FinOps clínico</dd></dl>
+        <dl><dt>Sector</dt><dd>Healthcare · USA</dd></dl>
+      </dl>
+
+      <!-- HERO METRICS -->
+      <div class="metrics" aria-label="Resultados clave">
+        <div class="m-cell">
+          <div class="lbl">Ahorro directo</div>
+          <div class="num">−$20K<span style="font-size:24px;color:var(--text-2)">/año</span></div>
+          <div class="sub">Licencia LexiComp eliminada por completo. Sin contrato, sin renovación.</div>
+        </div>
+        <div class="m-cell">
+          <div class="lbl">Cobertura clínica</div>
+          <div class="num">100%</div>
+          <div class="sub">Alergias, contraindicaciones embarazo e interacciones — paridad total.</div>
+        </div>
+        <div class="m-cell">
+          <div class="lbl">Incidencias clínicas</div>
+          <div class="num">0</div>
+          <div class="sub">Cero eventos adversos reportados tras la migración.</div>
+        </div>
+        <div class="m-cell">
+          <div class="lbl">Clientes migrados</div>
+          <div class="num">11+</div>
+          <div class="sub">Rollout escalonado en mayo 2024. Ventanas de 2h por cliente.</div>
+        </div>
+      </div>
+
+      <!-- 01 CONTEXTO -->
+      <section class="sec" id="contexto">
+        <div class="sec-eyebrow">01 · El contexto</div>
+        <h2 class="sec-title">Una licencia cara que nadie quería tocar.</h2>
+        <div class="prose">
+          <p>MediRec pagaba <b>$20,000/año</b> a Wolters Kluwer por <span class="gloss" title="Base de datos farmacéutica comercial usada como estándar en EHRs de USA.">LexiComp</span> para validación de medicamentos en su flujo de <span class="gloss" title="Electronic prescribing — prescripción electrónica.">eRx</span>. La integración con <span class="gloss" title="Puerto Rico Electronic Immunization System — el sistema gov de inmunizaciones.">PREIS</span> exigía integridad clínica auditable.</p>
+          <p>El equipo tenía miedo de tocar el módulo: <b>cualquier error afecta directamente a pacientes</b>. La factura se renovaba en silencio cada año.</p>
+        </div>
+      </section>
+
+      <!-- 02 DESAFÍO -->
+      <section class="sec" id="desafio">
+        <div class="sec-eyebrow amber">02 · El desafío</div>
+        <h2 class="sec-title">No era un problema técnico. Era un problema de riesgo clínico.</h2>
+        <p class="sec-lede">Reemplazar LexiComp sin un análisis exhaustivo podía comprometer la seguridad del paciente. La pregunta de fondo era una sola: <b style="color:var(--text);font-weight:500">¿realmente NLM cubre lo mismo?</b></p>
+        <ul class="bullets">
+          <li data-n="01" class="amber"><b>Estándar de facto</b> — LexiComp es referente en healthcare USA por su cobertura farmacéutica completa.</li>
+          <li data-n="02" class="amber"><b>Validación crítica</b> — alergias, contraindicaciones de embarazo, interacciones medicamentosas y reacciones cruzadas.</li>
+          <li data-n="03" class="amber"><b>Compliance PREIS</b> — el módulo se audita; cualquier hueco se traduce en una observación regulatoria.</li>
+          <li data-n="04" class="amber"><b>Vendor lock-in silencioso</b> — APIs propietarias, datos en formatos no portables, renovación automática.</li>
+          <li data-n="05" class="amber"><b>Resistencia interna</b> — "si funciona, no lo toques". El miedo legítimo paraliza la decisión.</li>
+        </ul>
+      </section>
+
+      <!-- 03 MI ROL -->
+      <section class="sec" id="rol">
+        <div class="sec-eyebrow">03 · Mi rol</div>
+        <h2 class="sec-title">Convertir un problema clínico en una decisión obvia.</h2>
+        <div class="prose">
+          <p>Lideré el análisis — pero el trabajo no fue de código sino de <b>verificación clínica</b>. Antes de tocar nada, contacté directamente a <b>Dr. Olivier Bodenreider</b>, científico de <span class="gloss" title="National Library of Medicine — biblioteca nacional de medicina, parte del NIH.">NLM</span>, con tres preguntas concretas: alergias, contraindicaciones embarazo, interacciones.</p>
+          <p>Respuesta: <b>sí, todas cubiertas</b>. <span style="color:var(--accent);font-family:var(--mono);font-size:14px">RxNorm + SNOMED CT + MED-RT</span> resolvían el espectro completo, vía APIs públicas del gobierno federal.</p>
+          <p>Con ese dato verificado por la fuente, la migración <b>dejó de ser un riesgo clínico y se volvió una decisión de arquitectura</b>. Después ejecuté: validación por categoría, migración técnica, tests de regresión, rollout escalonado a 11+ clientes.</p>
+        </div>
+      </section>
+
+      <!-- 04 MI CRITERIO -->
+      <section class="sec" id="criterio">
+        <div class="sec-eyebrow">04 · Mi criterio</div>
+        <h2 class="sec-title">Cuatro decisiones que sacaron el miedo del proceso.</h2>
+        <p class="sec-lede">Cada decisión respondía al mismo principio: <b>quitar incertidumbre antes de quitar costo</b>.</p>
+
+        <div class="criterio-grid">
+          <div class="crit-card">
+            <div class="n">Decisión 01</div>
+            <h3>Análisis clínico antes que técnico</h3>
+            <p>El problema no era reemplazar una API. Era validar si NLM cubría las capacidades clínicas críticas. Empezar por la pregunta clínica desbloquea todo lo demás.</p>
+            <div class="why"><b>Por qué</b> Sin validación clínica, ninguna decisión técnica importa.</div>
+          </div>
+          <div class="crit-card">
+            <div class="n">Decisión 02</div>
+            <h3>Preguntar directamente a la fuente</h3>
+            <p>En lugar de leer specs durante una semana, escribí a Dr. Bodenreider en NLM. Una conversación de tres preguntas clarificó lo que ningún PDF iba a aclarar.</p>
+            <div class="why"><b>Por qué</b> La fuente sabe más que la documentación.</div>
+          </div>
+          <div class="crit-card">
+            <div class="n">Decisión 03</div>
+            <h3>Validación por categoría crítica</h3>
+            <p>Alergias, contraindicaciones embarazo e interacciones se probaron por separado con suites de regresión clínica reales antes de aprobar la migración global.</p>
+            <div class="why"><b>Por qué</b> Una falla por categoría es contenible. Un fallo agregado, no.</div>
+          </div>
+          <div class="crit-card">
+            <div class="n">Decisión 04</div>
+            <h3>Rollout escalonado, no big bang</h3>
+            <p>11+ clientes migrados con ventanas de 2h cada uno, programados en mayo 2024. Detección temprana de issues sin riesgo de caída masiva ni rollback frenético.</p>
+            <div class="why"><b>Por qué</b> En healthcare el blast radius se limita por diseño.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 05 ARQUITECTURA -->
+      <section class="sec" id="arquitectura">
+        <div class="sec-eyebrow">05 · Arquitectura</div>
+        <h2 class="sec-title">Antes: vendor cloud. Después: estándar federal local.</h2>
+        <p class="sec-lede">Misma capacidad clínica, distinto origen. La nueva arquitectura elimina costo recurrente, vendor lock-in y dependencia de red externa.</p>
+
+        <div class="breakout">
+          <div class="arch">
+            <div class="arch-head">
+              <span>▎ migración de proveedor · before / after</span>
+              <span class="right"><span>mayo 2024</span><span>11+ clientes</span></span>
+            </div>
+            <div class="arch-body">
+
+              <div class="arch-row">
+                <div class="arch-side">
+                  <span class="lbl bad">▎ antes</span>
+                  <span class="tag bad">$20K / año</span>
+                  <span class="tag" style="color:var(--muted);font-size:11.5px">cloud · vendor lock-in</span>
+                </div>
+                <div class="arch-flow">
+                  <div class="node">
+                    <div class="role">Clinical app</div>
+                    <h4>abcEHR · .NET</h4>
+                    <div class="meta">eRx workflow</div>
+                  </div>
+                  <div class="arrow">
+                    <span class="lbl bad">REST · auth</span>
+                    <span class="line bad"></span>
+                    <span class="sub" style="color:var(--muted);font-size:9px">internet</span>
+                  </div>
+                  <div class="node bad">
+                    <div class="role">★ Cloud vendor</div>
+                    <h4>LexiComp API</h4>
+                    <div class="meta">Wolters Kluwer · paid</div>
+                  </div>
+                  <div class="arrow" style="visibility:hidden"><span class="line"></span></div>
+                  <div style="visibility:hidden"></div>
+                </div>
+              </div>
+
+              <div class="arch-row">
+                <div class="arch-side">
+                  <span class="lbl good">▎ después</span>
+                  <span class="tag good">$0 / año</span>
+                  <span class="tag" style="color:var(--muted);font-size:11.5px">local · federal · gratis</span>
+                </div>
+                <div class="arch-flow">
+                  <div class="node">
+                    <div class="role">Clinical app</div>
+                    <h4>abcEHR · .NET</h4>
+                    <div class="meta">eRx workflow (sin cambio)</div>
+                  </div>
+                  <div class="arrow">
+                    <span class="lbl">REST · local</span>
+                    <span class="line"></span>
+                    <span class="sub" style="color:var(--muted);font-size:9px">VPC interno</span>
+                  </div>
+                  <div class="node gw">
+                    <div class="role">★ Gateway local</div>
+                    <h4>NLM Server · Node.js</h4>
+                    <div class="meta">SQL Server 2017+ · cache</div>
+                  </div>
+                  <div class="arrow">
+                    <span class="lbl">RxNorm · SNOMED</span>
+                    <span class="line"></span>
+                    <span class="sub" style="color:var(--muted);font-size:9px">NIH</span>
+                  </div>
+                  <div class="node">
+                    <div class="role">Federal source</div>
+                    <h4>NLM (NIH)</h4>
+                    <div class="meta">público · auditable</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="arch-foot">
+              <div class="f"><div class="l">Fuente clínica</div><div class="v">NLM RxNorm · SNOMED CT · MED-RT</div></div>
+              <div class="f"><div class="l">Stack</div><div class="v">Node.js · SQL Server 2017+</div></div>
+              <div class="f"><div class="l">Integraciones</div><div class="v">abcEHR · Surescripts · PREIS</div></div>
+              <div class="f"><div class="l">Compliance</div><div class="v">NIH federal · audit trail</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 06 RESULTADO -->
+      <section class="sec" id="resultado">
+        <div class="sec-eyebrow">06 · Resultado</div>
+        <h2 class="sec-title">Cero incidencias, cero costo recurrente, cero lock-in.</h2>
+        <p class="sec-lede">Cuatro métricas que cierran el caso: ahorro directo, paridad clínica, seguridad mantenida y escala completada.</p>
+
+        <div class="result-grid">
+          <div class="r-card">
+            <div class="l">Ahorro / año</div>
+            <div class="v">$20K</div>
+            <div class="d">Licencia eliminada. Contrato cerrado en mayo 2024 sin renovación.</div>
+          </div>
+          <div class="r-card">
+            <div class="l">Cobertura</div>
+            <div class="v">100%</div>
+            <div class="d">Paridad clínica verificada por categoría: alergias, embarazo, interacciones.</div>
+          </div>
+          <div class="r-card">
+            <div class="l">Incidencias</div>
+            <div class="v">0</div>
+            <div class="d">Cero eventos adversos reportados durante y después del rollout.</div>
+          </div>
+          <div class="r-card">
+            <div class="l">Clientes</div>
+            <div class="v">11+</div>
+            <div class="d">Migración escalonada completada en mayo 2024 con ventanas de 2h.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 07 LO QUE DEJÉ -->
+      <section class="sec" id="dejado">
+        <div class="sec-eyebrow">07 · Lo que dejé</div>
+        <h2 class="sec-title">Artefactos para repetir el mismo análisis con otra dependencia.</h2>
+        <p class="sec-lede">El entregable no fue solo migrar LexiComp. Fue dejar un <b style="color:var(--text);font-weight:500">método replicable</b> para evaluar cualquier dependencia externa cara.</p>
+
+        <div class="deliver">
+          <div class="d-card">
+            <div class="n">01</div>
+            <h4>Suite de tests de regresión clínica</h4>
+            <p>Casos por categoría: alergias, contraindicaciones, interacciones cruzadas.</p>
+          </div>
+          <div class="d-card">
+            <div class="n">02</div>
+            <h4>Comparativa LexiComp vs NLM</h4>
+            <p>Documento técnico de paridad por capacidad clínica, validado por NLM.</p>
+          </div>
+          <div class="d-card">
+            <div class="n">03</div>
+            <h4>Queries REST NLM</h4>
+            <p>Wrappers Node.js para RxNorm, SNOMED CT y MED-RT con cache local.</p>
+          </div>
+          <div class="d-card">
+            <div class="n">04</div>
+            <h4>Proceso de análisis de cobertura</h4>
+            <p>Framework reusable para evaluar cualquier dependencia externa cara.</p>
+          </div>
+          <div class="d-card">
+            <div class="n">05</div>
+            <h4>Runbook de migración escalonada</h4>
+            <p>Plantilla de ventanas de 2h, rollback plan y checks post-migración.</p>
+          </div>
+          <div class="d-card">
+            <div class="n">06</div>
+            <h4>Contacto técnico en NLM</h4>
+            <p>Canal abierto con Dr. Bodenreider para futuras consultas clínicas.</p>
+          </div>
+        </div>
+
+        <div class="pull">
+          <q>El verdadero entregable no fue eliminar la licencia, <em>fue darle al equipo un método para hacerlo otra vez.</em></q>
+          <div class="attr">— Cierre del engagement · mayo 2024</div>
+        </div>
+      </section>
+
+      <!-- 08 PRUEBA -->
+      <section class="sec" id="prueba">
+        <div class="sec-eyebrow">08 · Prueba</div>
+        <h2 class="sec-title">La conversación que cerró la decisión.</h2>
+        <p class="sec-lede">Antes de tocar una línea de código, escribí a Dr. Olivier Bodenreider (NLM/NIH) con tres preguntas concretas. Su respuesta destrabó el proyecto.</p>
+
+        <div class="email">
+          <div class="email-bar">
+            <div class="lights"><span class="on"></span><span></span><span></span></div>
+            <span>email · nlm · oct 2023</span>
+            <span>1 / 1</span>
+          </div>
+          <div class="email-head">
+            <div class="row"><span class="k">De</span><span class="v"><b>Dr. Olivier Bodenreider</b> &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f6949992939884939fb6989a9bd8989f9ed8919980">[email&#160;protected]</a>&gt;</span></div>
+            <div class="row"><span class="k">Para</span><span class="v">Moisés Cedeño</span></div>
+            <div class="row"><span class="k">Asunto</span><span class="v">Re: NLM coverage — allergies, pregnancy, interactions</span></div>
+          </div>
+          <div class="email-body">
+            <p class="q">"¿NLM tiene capacidades equivalentes a LexiComp para: (1) alergias medicamentosas, (2) contraindicaciones de embarazo, (3) interacciones medicamento-medicamento?"</p>
+            <p>Hi Moisés,</p>
+            <p>Short answer: <span class="ans">yes, all three</span>.</p>
+            <p>(1) Allergies → <span class="ans">RxNorm + SNOMED CT</span> map allergens to drug classes.<br/>
+               (2) Pregnancy contraindications → <span class="ans">MED-RT</span> exposes FDA pregnancy risk categories.<br/>
+               (3) Drug-drug interactions → <span class="ans">RxNav API</span> (public, free, NIH-hosted).</p>
+            <p>All endpoints are public, federal, and updated weekly. No licensing required.</p>
+            <p style="color:var(--muted)">— Olivier</p>
+          </div>
+        </div>
+        <p class="email-cap">
+          Conversación con <b>Dr. Olivier Bodenreider</b>, Senior Scientist en <b>NLM/NIH</b>,
+          que validó la viabilidad clínica de la migración antes de la ejecución técnica.
+          La respuesta convirtió un proyecto bloqueado por riesgo clínico en una decisión de arquitectura ejecutable.
+        </p>
+      </section>
+
+      <!-- CTA -->
+      <div class="end-cta">
+        <div>
+          <h3>¿Pagas una licencia que nadie quiere tocar?</h3>
+          <p>Healthcare, fintech, datos clínicos. Si hay una factura recurrente que el equipo evita auditar, hablemos.</p>
+        </div>
+        <div class="actions">
+          <a href="../Casos · Rediseño.html">← Todos los casos</a>
+          <a href="#" class="primary">Hablemos de tu proyecto →</a>
+        </div>
+      </div>
+
+    </article>
+  </div>
+</main>
+
+<footer>
+  <div class="col brand-col">
+    <div class="brand">mo<span style="color:var(--accent)">davidc</span></div>
+    <div class="sub">Criterio, contexto e intención<br/>Tech Lead · Arquitecto de soluciones</div>
+  </div>
+  <div class="col">
+    <div class="col-h">Sitio</div>
+    <ul>
+      <li><a href="#">Experiencia</a></li>
+      <li><a href="../Casos · Rediseño.html">Casos de éxito</a></li>
+      <li><a href="#">Metodología</a></li>
+      <li><a href="#">Testimonios</a></li>
+    </ul>
+  </div>
+  <div class="col">
+    <div class="col-h">Contacto</div>
+    <ul>
+      <li><a href="#">Email</a></li>
+      <li><a href="#">LinkedIn</a></li>
+      <li><a href="#">GitHub</a></li>
+    </ul>
+  </div>
+  <div class="col">
+    <div class="col-h">Ubicación</div>
+    <ul>
+      <li>Lima · Perú</li>
+      <li>Remote · USA / LATAM</li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span>© 2026 Moisés Cedeño</span>
+  <span>caso · finops clínico · 2023 — 2024</span>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const pb = document.getElementById('progress');
+  const onScroll = () => {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    pb.style.width = (h.scrollTop / Math.max(max,1) * 100) + '%';
+  };
+  document.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  const links = [...document.querySelectorAll('#toc a')];
+  const sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const setActive = () => {
+    const y = window.scrollY + 140;
+    let active = sections[0];
+    for (const s of sections) if (s.offsetTop <= y) active = s;
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + active.id));
+  };
+  document.addEventListener('scroll', setActive, {passive:true});
+  setActive();
+</script>
+</body>
+</html>

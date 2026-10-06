@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Metodología — modavidc · Solutions Architect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0b0c0e; --bg-2:#111316; --bg-3:#181a1d;
+  --border:#202227; --border-2:#2a2d33;
+  --text:#eaedf2; --text-2:#9aa0ae; --text-3:#555c6a;
+  --green:oklch(67% 0.17 148); --green-dim:oklch(35% 0.10 148); --green-bg:oklch(16% 0.06 148);
+  --blue:oklch(67% 0.17 240); --blue-bg:oklch(16% 0.06 240);
+  --violet:oklch(67% 0.17 290);
+  --amber:oklch(72% 0.14 68);
+  --ff-display:'Space Grotesk',sans-serif; --ff-body:'DM Sans',sans-serif; --ff-mono:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);color:var(--text);font-family:var(--ff-body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+
+.nav{position:sticky;top:0;z-index:100;background:rgba(11,12,14,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-brand{display:flex;align-items:baseline;gap:12px;text-decoration:none}
+.nav-wm{font-family:var(--ff-display);font-size:20px;font-weight:400;letter-spacing:-.025em;color:var(--text)}
+.nav-wm .mo{color:var(--green)}
+.nav-tagline{font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-size:13px;color:var(--text-2);text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:var(--text)}
+.nav-links a.active{color:var(--green)}
+.nav-cta{background:var(--green);color:#0b0c0e;font-size:13px;font-weight:500;padding:8px 18px;border-radius:3px;font-family:var(--ff-body);text-decoration:none;transition:opacity .15s}
+.nav-cta:hover{opacity:.85}
+
+.page-wrap{max-width:1200px;margin:0 auto;padding:0 48px}
+
+/* HERO */
+.hero{padding:72px 0 64px;border-bottom:1px solid var(--border)}
+.section-kicker{font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.16em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.section-kicker::before{content:'';display:block;width:24px;height:1px;background:var(--border-2)}
+.hero-h1{font-family:var(--ff-display);font-size:clamp(36px,5vw,64px);font-weight:300;letter-spacing:-.04em;line-height:1.05;margin-bottom:20px}
+.hero-h1 em{color:var(--green);font-style:normal}
+.hero-sub{font-size:16px;color:var(--text-2);max-width:640px;line-height:1.65;font-weight:300;margin-bottom:32px}
+.hero-pull{border-left:2px solid var(--green-dim);padding:6px 0 6px 20px;font-size:15px;color:var(--text-2);line-height:1.65;max-width:700px;font-style:italic}
+.hero-pull strong{color:var(--text);font-style:normal}
+
+/* PILARES */
+.section{padding:72px 0;border-bottom:1px solid var(--border)}
+.section-h2{font-family:var(--ff-display);font-size:clamp(24px,3vw,36px);font-weight:300;letter-spacing:-.03em;margin-bottom:10px}
+.section-h2 em{color:var(--green);font-style:normal}
+.section-sub{font-size:15px;color:var(--text-2);max-width:600px;line-height:1.65;margin-bottom:48px;font-weight:300}
+
+.pilares-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.pilar-card{background:var(--bg-2);padding:36px 28px}
+.pilar-icon{font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.pilar-icon-mark{width:28px;height:28px;border:1px solid var(--border-2);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--green)}
+.pilar-title{font-family:var(--ff-display);font-size:20px;font-weight:500;letter-spacing:-.01em;margin-bottom:12px}
+.pilar-body{font-size:14px;color:var(--text-2);line-height:1.7;margin-bottom:20px}
+.pilar-items{display:flex;flex-direction:column;gap:6px}
+.pilar-item{font-size:13px;color:var(--text-2);padding-left:16px;position:relative;line-height:1.55}
+.pilar-item::before{content:'—';position:absolute;left:0;font-family:var(--ff-mono);font-size:10px;color:var(--text-3);top:4px}
+.pilar-item strong{color:var(--text)}
+
+/* CASO REAL */
+.caso-real{background:var(--bg-2);border:1px solid var(--border);border-left:2px solid var(--green-dim);padding:36px 40px;margin-top:1px}
+.caso-real-label{font-family:var(--ff-mono);font-size:10px;color:var(--green);letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px}
+.caso-real-h{font-family:var(--ff-display);font-size:28px;font-weight:300;letter-spacing:-.03em;margin-bottom:12px}
+.caso-real-body{font-size:14px;color:var(--text-2);line-height:1.7;margin-bottom:24px;max-width:680px}
+.caso-kpis{display:flex;gap:1px}
+.caso-kpi{background:var(--bg-3);border:1px solid var(--border);padding:18px 24px;flex:1}
+.caso-kpi-val{font-family:var(--ff-display);font-size:32px;font-weight:500;letter-spacing:-.04em;line-height:1;color:var(--green);margin-bottom:4px}
+.caso-kpi-label{font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase}
+
+/* PROCESS FLOW */
+.process-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.process-step{background:var(--bg-2);padding:28px 24px;position:relative}
+.process-step:not(:last-child)::after{content:'→';position:absolute;right:-8px;top:28px;font-family:var(--ff-mono);font-size:11px;color:var(--text-3);z-index:1;background:var(--bg-2);padding:2px 4px}
+.step-num{font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
+.step-title{font-family:var(--ff-display);font-size:16px;font-weight:500;letter-spacing:-.01em;margin-bottom:8px}
+.step-body{font-size:13px;color:var(--text-2);line-height:1.6}
+
+/* RIESGOS / GARANTÍAS */
+.riesgos-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border)}
+.riesgos-col{background:var(--bg-2);padding:32px 28px}
+.riesgos-head{font-family:var(--ff-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.riesgos-head.bad{color:var(--amber)}
+.riesgos-head.good{color:var(--green)}
+.riesgo-item{font-size:14px;color:var(--text-2);margin-bottom:14px;padding-left:20px;position:relative;line-height:1.55}
+.riesgo-item::before{position:absolute;left:0;font-family:var(--ff-mono);font-size:11px;top:2px}
+.riesgos-col.bad .riesgo-item::before{content:'✕';color:var(--amber)}
+.riesgos-col.good .riesgo-item::before{content:'✓';color:var(--green)}
+.riesgo-item strong{color:var(--text);font-weight:500}
+
+/* REGLAS */
+.reglas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.regla-card{background:var(--bg-2);padding:32px 28px}
+.regla-num{font-family:var(--ff-mono);font-size:32px;font-weight:500;color:var(--text-3);letter-spacing:-.04em;line-height:1;margin-bottom:14px}
+.regla-title{font-family:var(--ff-display);font-size:17px;font-weight:500;letter-spacing:-.01em;margin-bottom:10px}
+.regla-body{font-size:13px;color:var(--text-2);line-height:1.65}
+
+/* VIDEO PLACEHOLDER — sin emoji */
+.video-block{background:var(--bg-2);border:1px solid var(--border);padding:0;overflow:hidden;margin-top:1px}
+.video-header{padding:24px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.video-title{font-family:var(--ff-display);font-size:18px;font-weight:500;letter-spacing:-.01em}
+.video-placeholder{height:320px;background:var(--bg-3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;border-top:1px solid var(--border)}
+.video-play{width:56px;height:56px;border-radius:50%;border:1px solid var(--border-2);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .15s}
+.video-play:hover{border-color:var(--green)}
+.video-play svg{width:18px;height:18px;fill:var(--text-2)}
+.video-caption{font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;text-align:center}
+
+/* CTA */
+.cta-band{background:var(--bg-2);border:1px solid var(--border);border-left:2px solid var(--green);padding:48px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;margin-top:1px}
+.cta-h{font-family:var(--ff-display);font-size:clamp(22px,3vw,32px);font-weight:300;letter-spacing:-.03em;line-height:1.2;margin-bottom:10px}
+.cta-h em{color:var(--green);font-style:normal}
+.cta-sub{font-size:14px;color:var(--text-2);line-height:1.65;max-width:520px}
+.cta-btns{display:flex;gap:12px;flex-shrink:0}
+.btn{font-family:var(--ff-body);font-size:14px;font-weight:500;padding:11px 22px;border-radius:3px;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;letter-spacing:-.01em;text-decoration:none;transition:opacity .15s;white-space:nowrap}
+.btn:hover{opacity:.85}
+.btn-primary{background:var(--green);color:#0b0c0e}
+.btn-secondary{background:transparent;color:var(--text);border:1px solid var(--border-2)}
+
+footer{border-top:1px solid var(--border);padding:28px 48px;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-brand{font-family:var(--ff-display);font-size:15px;font-weight:400;letter-spacing:-.02em}
+.footer-brand .mo{color:var(--green)}
+.footer-copy{font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.06em}
+.footer-links{display:flex;gap:24px;font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.06em}
+.footer-links a{color:var(--text-3);text-decoration:none;transition:color .15s}
+.footer-links a:hover{color:var(--green)}
+
+@media(max-width:900px){
+  .nav-inner,.page-wrap,footer{padding-left:20px;padding-right:20px}
+  .nav-tagline{display:none}
+  .nav-links{gap:16px}
+  .pilares-grid,.riesgos-grid,.reglas-grid,.process-flow{grid-template-columns:1fr}
+  .cta-band{grid-template-columns:1fr;gap:24px}
+  .caso-kpis{flex-direction:column}
+  .process-step::after{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="home.html">
+      <div class="nav-wm"><span class="mo">mo</span>davidc</div>
+      <div class="nav-tagline">Honest work. Efficient architectures.</div>
+    </a>
+    <div class="nav-links">
+      <a href="experiencia.html">Experiencia</a>
+      <a href="casos-de-exito.html">Casos de Éxito</a>
+      <a href="#" class="active">Metodología</a>
+      <a href="testimonios.html">Testimonios</a>
+      <a class="nav-cta" href="hablemos.html">Hablemos</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="section-kicker">Metodología</div>
+    <h1 class="hero-h1">Así es cómo trabajo — y por qué<br>importa más que el <em>stack</em> que elijo.</h1>
+    <p class="hero-sub">IA para velocidad. Documentación para continuidad. Criterio para que el proyecto no dependa de mí. Cada proyecto queda en mejor estado del que lo encontré.</p>
+    <div class="hero-pull">
+      Cuando termino un proyecto, el equipo <strong>no me necesita para seguir</strong> — eso no es accidental, es el objetivo desde el día uno.
+    </div>
+  </div>
+
+  <!-- PILARES -->
+  <section class="section">
+    <div class="section-kicker">Los tres pilares</div>
+    <h2 class="section-h2">IA + Contexto + <em>Criterio</em></h2>
+    <p class="section-sub">No es un proceso lineal — es un sistema donde cada pilar refuerza a los otros.</p>
+
+    <div class="pilares-grid">
+      <div class="pilar-card">
+        <div class="pilar-icon">
+          <div class="pilar-icon-mark">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 2L10 6H14L11 9L12 13L8 11L4 13L5 9L2 6H6L8 2Z" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>
+          </div>
+          IA para velocidad
+        </div>
+        <div class="pilar-title">Velocidad con criterio</div>
+        <div class="pilar-body">Uso IA como acelerador del trabajo técnico, no como sustituto del juicio. La diferencia es que puedo entregar en 3 semanas lo que antes tardaba 3 meses — sin sacrificar la calidad de la arquitectura.</div>
+        <div class="pilar-items">
+          <div class="pilar-item"><strong>Generación de código</strong> — acelero scaffolding, tests y boilerplate repetitivo</div>
+          <div class="pilar-item"><strong>Análisis</strong> — reviso dependencias, surface patterns y deuda técnica con mayor velocidad</div>
+          <div class="pilar-item"><strong>Documentación</strong> — genero primeros borradores de ADRs y runbooks que luego refino</div>
+        </div>
+      </div>
+      <div class="pilar-card">
+        <div class="pilar-icon">
+          <div class="pilar-icon-mark">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="1" stroke="currentColor" stroke-width="1.2"/><line x1="5" y1="6" x2="11" y2="6" stroke="currentColor" stroke-width="1.2"/><line x1="5" y1="9" x2="9" y2="9" stroke="currentColor" stroke-width="1.2"/></svg>
+          </div>
+          Contexto documentado
+        </div>
+        <div class="pilar-title">Documentación que vive</div>
+        <div class="pilar-body">No escribo documentación para que exista — la escribo para que cualquier dev pueda tomar el control del sistema sin necesitarme. ADRs, runbooks y guías de contribución como ciudadanos de primera clase del proyecto.</div>
+        <div class="pilar-items">
+          <div class="pilar-item"><strong>ADRs</strong> — cada decisión de arquitectura documentada con contexto y alternativas evaluadas</div>
+          <div class="pilar-item"><strong>Runbooks</strong> — guías operacionales para incidentes, deploys y rollbacks</div>
+          <div class="pilar-item"><strong>Onboarding</strong> — cualquier dev nuevo productivo en menos de 48 horas</div>
+        </div>
+      </div>
+      <div class="pilar-card">
+        <div class="pilar-icon">
+          <div class="pilar-icon-mark">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg>
+          </div>
+          Criterio técnico
+        </div>
+        <div class="pilar-title">Criterio, no herramientas</div>
+        <div class="pilar-body">La IA me da velocidad pero no me da criterio. Saber cuándo no usar un framework, cuándo construir internamente en vez de comprar una licencia, cuándo la solución simple gana — eso viene de 8 años de proyectos reales.</div>
+        <div class="pilar-items">
+          <div class="pilar-item"><strong>Build vs. buy</strong> — análisis de TCO real antes de adoptar una dependencia</div>
+          <div class="pilar-item"><strong>Simplicidad intencional</strong> — la arquitectura más simple que resuelve el problema</div>
+          <div class="pilar-item"><strong>ROI técnico</strong> — cada decisión tiene un argumento de negocio</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASO REAL -->
+  <section class="section">
+    <div class="section-kicker">Caso real</div>
+    <h2 class="section-h2">De 3 semanas a <em>48 horas</em></h2>
+    <p class="section-sub">Cómo el sistema funcionó en un proyecto real — con números.</p>
+
+    <div class="caso-real">
+      <div class="caso-real-label">Caso real · T-Cuida · SaaS IoT</div>
+      <div class="caso-real-h">De la idea al App Store en 3 semanas</div>
+      <div class="caso-real-body">
+        Se necesitaba construir una plataforma SaaS completa — wearables, GPS, dashboard real-time, comunicación familiar — en tiempo récord. Con el sistema de IA + documentación desde el día uno, pude generar el registro de arquitectura completo en las primeras 48 horas. Eso permitió que cualquier colaborador externo pudiera integrarse al proyecto sin fricción.<br><br>
+        El resultado: de cero a App Store + Play Store en 3 semanas. Con documentación que permitió que el equipo tomara ownership inmediato al entregarlo.
+      </div>
+      <div class="caso-kpis">
+        <div class="caso-kpi">
+          <div class="caso-kpi-val">3</div>
+          <div class="caso-kpi-label">Semanas · entrega total</div>
+        </div>
+        <div class="caso-kpi">
+          <div class="caso-kpi-val">48h</div>
+          <div class="caso-kpi-label">Onboarding de dev nuevo</div>
+        </div>
+        <div class="caso-kpi">
+          <div class="caso-kpi-val">0</div>
+          <div class="caso-kpi-label">Dependencia de persona</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESO -->
+  <section class="section">
+    <div class="section-kicker">El proceso</div>
+    <h2 class="section-h2">Del problema a la solución <em>documentada</em></h2>
+    <p class="section-sub">Cuatro fases en cada proyecto — sin importar el tamaño.</p>
+
+    <div class="process-flow">
+      <div class="process-step">
+        <div class="step-num">01 · Diagnóstico</div>
+        <div class="step-title">Entender el sistema existente</div>
+        <div class="step-body">Mapeo de deuda técnica, dependencias críticas y riesgos antes de escribir una línea. El problema real no siempre es el problema reportado.</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">02 · Arquitectura</div>
+        <div class="step-title">Diseñar antes de construir</div>
+        <div class="step-body">ADRs escritos antes del código. Cada decisión de arquitectura con alternativas evaluadas, contexto y criterio de negocio documentados.</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">03 · Entrega</div>
+        <div class="step-title">Iterar con contexto</div>
+        <div class="step-body">Sprints cortos con CI/CD desde el primer día. Cada deploy es auditado y documentado. La velocidad no sacrifica la calidad de la arquitectura.</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">04 · Transferencia</div>
+        <div class="step-title">El equipo toma ownership</div>
+        <div class="step-body">Entrego cuando el equipo puede continuar sin mí. Runbook completo, guía de contribución, onboarding documentado. Cualquier dev productivo en 48h.</div>
+      </div>
+    </div>
+
+    <!-- Video placeholder (sin emoji, con diseño coherente) -->
+    <div class="video-block">
+      <div class="video-header">
+        <div class="video-title">Del problema a la solución documentada</div>
+        <div style="font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase">Próximamente</div>
+      </div>
+      <div class="video-placeholder">
+        <div class="video-play">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="video-caption">Velocidad + Documentación + Criterio<br>Cómo construyo software que cualquier dev puede mantener</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RIESGOS / GARANTÍAS -->
+  <section class="section">
+    <div class="section-kicker">Lo que elimino · Lo que garantizo</div>
+    <h2 class="section-h2">Riesgos que <em>elimino</em></h2>
+    <p class="section-sub">Cada uno de estos es un patrón que he visto en proyectos reales — y que el proceso está diseñado para prevenir.</p>
+
+    <div class="riesgos-grid">
+      <div class="riesgos-col bad">
+        <div class="riesgos-head bad">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor"/><line x1="4" y1="4" x2="8" y2="8" stroke="currentColor" stroke-width="1.2"/><line x1="8" y1="4" x2="4" y2="8" stroke="currentColor" stroke-width="1.2"/></svg>
+          Riesgos que elimino
+        </div>
+        <div class="riesgo-item"><strong>Fuga de conocimiento</strong> — cuando el dev que llevaba el proyecto ya no está disponible</div>
+        <div class="riesgo-item"><strong>Onboarding lento</strong> — semanas para que un dev nuevo entienda por qué las cosas son como son</div>
+        <div class="riesgo-item"><strong>Dependencia de persona</strong> — no podrás escalar sin esa persona clave</div>
+        <div class="riesgo-item"><strong>Decisiones sin contexto</strong> — código sin documentar por qué se tomó esa decisión</div>
+      </div>
+      <div class="riesgos-col good">
+        <div class="riesgos-head good">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor"/><path d="M3.5 6L5.5 8L8.5 4" stroke="currentColor" stroke-width="1.2"/></svg>
+          Lo que garantizo
+        </div>
+        <div class="riesgo-item"><strong>ADRs completos</strong> — cada decisión de arquitectura con contexto, alternativas y criterio de negocio</div>
+        <div class="riesgo-item"><strong>Onboarding rápido</strong> — cualquier dev nuevo productivo en menos de 48 horas con la documentación entregada</div>
+        <div class="riesgo-item"><strong>Sistema que escala</strong> — arquitectura que el equipo puede mantener y extender sin mí</div>
+        <div class="riesgo-item"><strong>Listo para escalar</strong> — entrego infraestructura y prácticas que soportan el crecimiento futuro</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGLAS INNEGOCIABLES -->
+  <section class="section" style="border-bottom:none;padding-bottom:0">
+    <div class="section-kicker">Principios</div>
+    <h2 class="section-h2">Tres reglas <em>innegociables</em></h2>
+    <p class="section-sub">Son los valores que no negocio en ningún proyecto, sin importar el deadline.</p>
+
+    <div class="reglas-grid">
+      <div class="regla-card">
+        <div class="regla-num">01</div>
+        <div class="regla-title">Si no está escrito, no pasó</div>
+        <div class="regla-body">Cada decisión importante que no está documentada es deuda técnica disfrazada de velocidad. La documentación no es un extra — es parte del entregable desde el sprint uno.</div>
+      </div>
+      <div class="regla-card">
+        <div class="regla-num">02</div>
+        <div class="regla-title">Mínimo 2 opciones evaluadas</div>
+        <div class="regla-body">No existe una única solución a un problema de arquitectura. Siempre evalúo al menos dos alternativas y documento por qué elegí la que elegí — con criterio técnico y de negocio.</div>
+      </div>
+      <div class="regla-card">
+        <div class="regla-num">03</div>
+        <div class="regla-title">IA como herramienta, no muleta</div>
+        <div class="regla-body">La IA me da velocidad. El criterio técnico y el juicio de arquitectura son míos. Reviso, valido y refino cada output antes de que entre al proyecto. El estándar no baja.</div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-band">
+      <div>
+        <h3 class="cta-h">¿Tu próximo proyecto o<br>rescatando uno <em>existente</em>?</h3>
+        <p class="cta-sub">Si tu problema es nuevo o ya tienes un sistema que necesita mejorar — el resultado es el mismo: un sistema que escala sin depender de nadie.</p>
+      </div>
+      <div class="cta-btns">
+        <a class="btn btn-primary" href="hablemos.html">Hablemos →</a>
+        <a class="btn btn-secondary" href="casos-de-exito.html">Ver todos los casos</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div style="border-top:1px solid var(--border)">
+  <footer>
+    <div class="footer-brand"><span class="mo">mo</span>davidc</div>
+    <div class="footer-copy">© 2026 Moisés Cedeño · Todos los derechos reservados.</div>
+    <div class="footer-links">
+      <a href="home.html">Inicio</a>
+      <a href="casos-de-exito.html">Casos de Éxito</a>
+      <a href="testimonios.html">Testimonios</a>
+      <a href="/cdn-cgi/l/email-protection#fa9295969bba97959e9b8c939e99d4999597"><span class="__cf_email__" data-cfemail="b9d1d6d5d8f9d4d6ddd8cfd0ddda97dad6d4">[email&#160;protected]</span></a>
+    </div>
+  </footer>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Auditoría UX/UI — Portfolio Moisés Cedeño</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,500;9..144,0,700;9..144,1,400;9..144,1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f4ef;
+    --paper:#fbfaf6;
+    --ink:#1a1a1a;
+    --ink-2:#4a4a4a;
+    --muted:#8a8a85;
+    --line:#e3dfd4;
+    --line-2:#d4cfc1;
+    --accent:#1f4d3a;
+    --accent-soft:#e7ede8;
+    --sev-hi:#b23b2a;
+    --sev-hi-bg:#fbece8;
+    --sev-md:#b8832b;
+    --sev-md-bg:#faf1dc;
+    --sev-lo:#3b6b48;
+    --sev-lo-bg:#e7efe8;
+    --sev-nit:#5c5c5c;
+    --sev-nit-bg:#ececea;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  a{color:inherit}
+  code{font-family:'JetBrains Mono',monospace;font-size:.85em;background:var(--line);padding:1px 5px;border-radius:2px}
+  .wrap{max-width:1180px;margin:0 auto;padding:56px 48px 120px}
+
+  /* Header */
+  .masthead{border-bottom:1px solid var(--line);padding-bottom:36px;margin-bottom:48px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end}
+  .kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+  h1.title{font-family:'Fraunces',serif;font-weight:400;font-size:64px;line-height:1.02;letter-spacing:-.02em;margin:0 0 18px;color:var(--ink)}
+  h1.title em{font-style:italic;color:var(--accent)}
+  .dek{font-size:17px;color:var(--ink-2);max-width:640px;margin:0}
+  .meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-align:right;line-height:1.8}
+  .meta b{color:var(--ink);font-weight:500}
+
+  /* Scorecard */
+  .scorecard{display:grid;grid-template-columns:260px 1fr;gap:48px;background:var(--paper);border:1px solid var(--line);padding:36px 40px;margin-bottom:40px}
+  .score-big{font-family:'Fraunces',serif;font-size:112px;line-height:.9;letter-spacing:-.04em;color:var(--accent);font-weight:400}
+  .score-big sup{font-size:28px;color:var(--muted);vertical-align:top;margin-left:4px;font-family:'JetBrains Mono',monospace}
+  .score-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:10px}
+  .pillars{display:grid;grid-template-columns:repeat(2,1fr);gap:2px 40px;align-content:center}
+  .pillar-row{display:grid;grid-template-columns:1fr 80px 40px;align-items:center;padding:10px 0;border-bottom:1px dashed var(--line);gap:12px}
+  .pillar-row:last-child{border-bottom:none}
+  .pillar-name{font-size:14px;color:var(--ink-2)}
+  .pillar-bar{height:4px;background:var(--line);position:relative}
+  .pillar-bar span{position:absolute;inset:0 auto 0 0;background:var(--accent)}
+  .pillar-num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink);text-align:right}
+
+  /* Counts */
+  .counts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:0 0 0}
+  .ct{padding:20px 24px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:4px}
+  .ct:last-child{border-right:none}
+  .ct-n{font-family:'Fraunces',serif;font-size:40px;line-height:1;letter-spacing:-.02em}
+  .ct-l{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .ct.hi .ct-n{color:var(--sev-hi)}
+  .ct.md .ct-n{color:var(--sev-md)}
+  .ct.lo .ct-n{color:var(--sev-lo)}
+  .ct.nit .ct-n{color:var(--sev-nit)}
+
+  /* TOC */
+  .toc{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);margin-bottom:64px;background:var(--paper)}
+  .toc a{padding:18px 20px;border-right:1px solid var(--line);text-decoration:none;display:block;transition:background .15s}
+  .toc a:last-child{border-right:none}
+  .toc a:hover{background:var(--accent-soft)}
+  .toc .n{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--muted);margin-bottom:6px;display:block}
+  .toc .t{font-size:14px;color:var(--ink);font-weight:500}
+
+  /* Section */
+  section{margin-bottom:80px}
+  .sec-head{display:grid;grid-template-columns:110px 1fr;gap:32px;padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:28px}
+  .sec-num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:.1em;padding-top:12px}
+  .sec-title{font-family:'Fraunces',serif;font-weight:400;font-size:34px;letter-spacing:-.015em;margin:0;line-height:1.15}
+  .sec-sub{font-size:15px;color:var(--ink-2);margin:6px 0 0;max-width:760px}
+
+  /* Intro */
+  .intro{background:var(--paper);border:1px solid var(--line);padding:24px 28px;margin-bottom:20px;font-size:14.5px;color:var(--ink-2);line-height:1.6}
+  .intro strong{color:var(--ink)}
+
+  /* Pull quote */
+  .pull{border-left:2px solid var(--accent);padding:6px 0 6px 20px;margin:24px 0;font-family:'Fraunces',serif;font-size:20px;line-height:1.4;color:var(--ink);font-style:italic;max-width:720px}
+
+  /* Findings */
+  .findings{display:grid;gap:14px}
+  .finding{display:grid;grid-template-columns:110px 1fr auto;gap:28px;background:var(--paper);border:1px solid var(--line);padding:22px 26px;align-items:start}
+  .finding:hover{border-color:var(--line-2)}
+  .sev{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:5px 9px;border-radius:2px;white-space:nowrap}
+  .sev::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+  .sev.hi{color:var(--sev-hi);background:var(--sev-hi-bg)}
+  .sev.md{color:var(--sev-md);background:var(--sev-md-bg)}
+  .sev.lo{color:var(--sev-lo);background:var(--sev-lo-bg)}
+  .sev.nit{color:var(--sev-nit);background:var(--sev-nit-bg)}
+  .f-body h4{margin:0 0 6px;font-size:17px;font-weight:600;letter-spacing:-.005em}
+  .f-body p{margin:0 0 10px;font-size:14.5px;color:var(--ink-2);line-height:1.55}
+  .f-body .fix{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);display:grid;grid-template-columns:72px 1fr;gap:12px;align-items:baseline}
+  .fix-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+  .fix-text{font-size:14px;color:var(--ink);line-height:1.55}
+  .tag{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;padding-top:2px}
+
+  /* Quick wins */
+  .quick{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:12px}
+  .quick .q{background:var(--paper);border:1px solid var(--line);padding:20px}
+  .quick h5{margin:0 0 10px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .quick ul{margin:0;padding-left:18px;font-size:13.5px;color:var(--ink-2);line-height:1.6}
+  .quick li{margin-bottom:4px}
+
+  /* Matrix */
+  .matrix{background:var(--paper);border:1px solid var(--line);padding:36px;margin-top:12px;position:relative}
+  .matrix-grid{position:relative;height:420px;border-left:1px solid var(--line-2);border-bottom:1px solid var(--line-2);margin:0 20px 40px 80px}
+  .axis-y,.axis-x{position:absolute;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .axis-y.top{top:0;transform:none;left:-70px}
+  .axis-y.bot{top:auto;bottom:-6px;transform:none;left:-70px}
+  .axis-x.left{bottom:-24px;left:0}
+  .axis-x.right{bottom:-24px;right:0}
+  .quad{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+  .quad>div{border-right:1px dashed var(--line);border-bottom:1px dashed var(--line);padding:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+  .quad>div:nth-child(2n){border-right:none}
+  .quad>div:nth-child(n+3){border-bottom:none}
+  .dot{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--accent);transform:translate(-50%,-50%);cursor:default}
+  .dot.hi{background:var(--sev-hi)}
+  .dot.md{background:var(--sev-md)}
+  .dot.lo{background:var(--sev-lo)}
+  .dot-label{position:absolute;transform:translate(-50%,-160%);font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink);white-space:nowrap;background:var(--paper);padding:2px 6px;border:1px solid var(--line)}
+
+  /* Footer */
+  footer{margin-top:80px;padding-top:32px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:24px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.08em}
+
+  @media(max-width:900px){
+    .wrap{padding:32px 20px 80px}
+    h1.title{font-size:44px}
+    .masthead,.scorecard{grid-template-columns:1fr}
+    .sec-head{grid-template-columns:1fr}
+    .finding{grid-template-columns:1fr}
+    .quick{grid-template-columns:1fr}
+    .toc{grid-template-columns:1fr 1fr}
+    .counts{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- MASTHEAD -->
+  <header class="masthead">
+    <div>
+      <div class="kicker">Auditoría UX/UI · Portfolio Personal · Senior</div>
+      <h1 class="title">Moisés Cedeño <em>bajo la lupa</em></h1>
+      <p class="dek">Revisión completa de <b>localhost:3001 (modavidc.com)</b> — propuesta de valor, jerarquía, prueba social, conversión, coherencia de idioma y detalles de acabado. 21 hallazgos accionables, priorizados por impacto real en conversión de clientes/empleadores.</p>
+    </div>
+    <div class="meta">
+      <div><b>Sitio</b> modavidc.com</div>
+      <div><b>Tipo</b> Portfolio personal · Senior</div>
+      <div><b>Mercado</b> LATAM / Global</div>
+      <div><b>Fecha</b> 21 Abr 2026</div>
+      <div><b>Dispositivos</b> Desktop · Mobile (visual)</div>
+      <div><b>Stack</b> Next.js · Tailwind · Framer Motion</div>
+    </div>
+  </header>
+
+  <!-- SCORECARD -->
+  <div class="scorecard">
+    <div>
+      <div class="score-big">7.1<sup>/10</sup></div>
+      <div class="score-label">Puntuación global</div>
+    </div>
+    <div class="pillars">
+      <div class="pillar-row"><span class="pillar-name">Claridad de propuesta</span><div class="pillar-bar"><span style="width:72%"></span></div><span class="pillar-num">7.2</span></div>
+      <div class="pillar-row"><span class="pillar-name">Jerarquía visual</span><div class="pillar-bar"><span style="width:75%"></span></div><span class="pillar-num">7.5</span></div>
+      <div class="pillar-row"><span class="pillar-name">Prueba social / confianza</span><div class="pillar-bar"><span style="width:52%"></span></div><span class="pillar-num">5.2</span></div>
+      <div class="pillar-row"><span class="pillar-name">Conversión / CTA</span><div class="pillar-bar"><span style="width:65%"></span></div><span class="pillar-num">6.5</span></div>
+      <div class="pillar-row"><span class="pillar-name">Contenido / copy</span><div class="pillar-bar"><span style="width:87%"></span></div><span class="pillar-num">8.7</span></div>
+      <div class="pillar-row"><span class="pillar-name">Coherencia de idioma/marca</span><div class="pillar-bar"><span style="width:45%"></span></div><span class="pillar-num">4.5</span></div>
+      <div class="pillar-row"><span class="pillar-name">Accesibilidad</span><div class="pillar-bar"><span style="width:68%"></span></div><span class="pillar-num">6.8</span></div>
+      <div class="pillar-row"><span class="pillar-name">Detalles de acabado</span><div class="pillar-bar"><span style="width:62%"></span></div><span class="pillar-num">6.2</span></div>
+    </div>
+  </div>
+
+  <!-- CONTADORES -->
+  <div class="counts">
+    <div class="ct hi"><span class="ct-n">6</span><span class="ct-l">Críticos</span></div>
+    <div class="ct md"><span class="ct-n">8</span><span class="ct-l">Importantes</span></div>
+    <div class="ct lo"><span class="ct-n">5</span><span class="ct-l">Mejoras</span></div>
+    <div class="ct nit"><span class="ct-n">2</span><span class="ct-l">Detalles</span></div>
+  </div>
+
+  <!-- TOC -->
+  <nav class="toc" style="margin-top:48px">
+    <a href="#tldr"><span class="n">TL;DR</span><span class="t">Resumen ejecutivo</span></a>
+    <a href="#hero"><span class="n">01</span><span class="t">Hero &amp; propuesta</span></a>
+    <a href="#idioma"><span class="n">02</span><span class="t">Idioma &amp; marca</span></a>
+    <a href="#confianza"><span class="n">03</span><span class="t">Prueba social</span></a>
+    <a href="#cta"><span class="n">04</span><span class="t">Conversión / CTA</span></a>
+    <a href="#paginas"><span class="n">05</span><span class="t">Páginas internas</span></a>
+    <a href="#copy"><span class="n">06</span><span class="t">Contenido &amp; tono</span></a>
+    <a href="#priority"><span class="n">07</span><span class="t">Roadmap</span></a>
+  </nav>
+
+  <!-- TL;DR -->
+  <section id="tldr">
+    <div class="sec-head">
+      <div class="sec-num">TL;DR</div>
+      <div>
+        <h2 class="sec-title">Un portfolio sólido que se traiciona a sí mismo en los detalles</h2>
+        <p class="sec-sub">El copy es el punto más fuerte — concreto, sin vaguedades, con métricas reales. La arquitectura de información es coherente. El mayor boquete está en la <b>mezcla de idiomas</b> (seis páginas de un portfolio en español tienen títulos y copy en inglés) y en la <b>prueba social neutralizada</b> por el disclaimer de anonimato.</p>
+      </div>
+    </div>
+
+    <div class="pull">"Construyo software que escala sin depender de quién lo creó" es una propuesta de valor excelente. El problema es que hay cuatro páginas del mismo portfolio que dicen "Contact Me", "Current Status" y "Send Message" — en inglés, sin razón aparente.</div>
+
+    <div class="quick">
+      <div class="q">
+        <h5>✓ Qué funciona</h5>
+        <ul>
+          <li>Copy de hero específico y con impacto: <code>-58% AWS</code>, <code>48h onboarding</code></li>
+          <li>"Construyo software que escala..." — propuesta de valor diferenciada</li>
+          <li>"Lo que construyo cuando nadie me paga" — voz propia, auténtica</li>
+          <li>Casos de éxito con métricas reales y ROI cuantificable</li>
+          <li>Sección "Problemas que Resuelvo" con links directos a casos</li>
+          <li>Diseño oscuro consistente y animaciones bien calibradas</li>
+          <li>Sticky nav ya implementado ✓</li>
+        </ul>
+      </div>
+      <div class="q">
+        <h5>✗ Qué rompe</h5>
+        <ul>
+          <li>Contact, Now, Status: tres páginas en inglés en un sitio en español</li>
+          <li>Testimonios con disclaimer "anonimizados" — mata credibilidad</li>
+          <li>Logo "DM" no coincide con iniciales "MC" — confunde la marca</li>
+          <li>"Freelance Availability: Limited" disuade prospectos</li>
+          <li>Now page con datos placeholder (Alex Johnson, Maria Garcia)</li>
+          <li>Gmail expuesto vs. hola@modavidc.com del contact: incoherencia</li>
+        </ul>
+      </div>
+      <div class="q">
+        <h5>⚡ Mayor palanca</h5>
+        <ul>
+          <li>Unificar idioma: todo en español o elegir conscientemente inglés — no mezclar</li>
+          <li>Quitar o reescribir el disclaimer de anonimato de testimonios</li>
+          <li>Cambiar "Freelance Availability: Limited" por "Open to selected projects"</li>
+          <li>Mover al menos un testimonio a la home page</li>
+          <li>Resolver "DM" vs. "MC" en el logo</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 HERO -->
+  <section id="hero">
+    <div class="sec-head">
+      <div class="sec-num">01 / HERO</div>
+      <div>
+        <h2 class="sec-title">El hero casi lo tiene todo — le falta el contexto de industria</h2>
+        <p class="sec-sub">La propuesta de valor está, las métricas están, el CTA está. El problema: el kicker dice "Tech Lead · Arquitecto de Soluciones" pero no menciona <i>FinOps, Healthcare ni Cloud</i> — las tres áreas que diferencian a Moisés de cualquier arquitecto genérico. Eso aparece hasta la sección de KPIs.</p>
+      </div>
+    </div>
+
+    <div class="intro">
+      <strong>Diagnóstico:</strong> Un reclutador o CTO que llega al hero ve "Tech Lead · Arquitecto de Soluciones" + nombre. Recién en la segunda lectura, los proof points (-58% AWS, 48h onboarding) dan contexto. La frase "Construyo software que escala sin depender de quién lo creó" es poderosa pero habla de metodología, no de industria. El visitante no sabe en 3 segundos si Moisés es el perfil correcto para una empresa healthcare vs. una fintech.
+    </div>
+
+    <div class="findings">
+
+      <div class="finding">
+        <span class="sev md">Importante</span>
+        <div class="f-body">
+          <h4>El kicker del hero no menciona las industrias que diferencian a Moisés</h4>
+          <p>"Tech Lead · Arquitecto de Soluciones" es la descripción de miles de perfiles en LinkedIn. FinOps, Healthcare e IoT son las áreas donde Moisés tiene resultados concretos y diferenciados. Un reclutador de healthcare que llega al hero no sabe que es el perfil correcto hasta que scrollea.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Cambiar el kicker de <code>"Tech Lead · Arquitecto de Soluciones"</code> a <code>"Tech Lead · FinOps &amp; Cloud · Healthcare / SaaS / IoT"</code>. Tres segundos, cero ambigüedad sobre el nicho.</span></div>
+        </div>
+        <span class="tag">Hero §1</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev md">Importante</span>
+        <div class="f-body">
+          <h4>"100% ownership" como proof point es vago — el visitante no sabe qué significa</h4>
+          <p>Los otros dos proof points son concretos: <code>-58%</code> (resultado medible) y <code>48h</code> (tiempo medible). "100% ownership" podría significar "trabajo solo", "entrego sin bugs", o "me hago responsable del proyecto" — pero ninguna de esas interpretaciones comunica valor diferenciado. Es la métrica más débil del trio.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Reemplazar <code>"100% ownership"</code> por algo medible que ya existe en el sitio. Opciones: <code>"-$20k/año en licencias"</code>, <code>"+20k usuarios en sistemas multi-tenant"</code>, o <code>"-70% tiempo de resultados clínicos"</code>.</span></div>
+        </div>
+        <span class="tag">Hero §2</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev lo">Mejora</span>
+        <div class="f-body">
+          <h4>El subtítulo del hero habla de metodología pero no de industria/cliente ideal</h4>
+          <p>"Construyo software que escala sin depender de quién lo creó" define el <i>cómo</i>. Falta el <i>para quién</i>: startups healthcare, empresas SaaS, equipos con deuda técnica. Sin eso, la propuesta de valor es amplia al punto de ser genérica para el cliente que llega por un término de búsqueda específico.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Ampliar el párrafo de apoyo del hero: <i>"+8 años en Healthcare, SaaS e IoT con empresas que no podían permitirse depender de una sola persona."</i> — Le da audiencia concreta a la propuesta.</span></div>
+        </div>
+        <span class="tag">Hero §3</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 IDIOMA Y MARCA -->
+  <section id="idioma">
+    <div class="sec-head">
+      <div class="sec-num">02 / IDIOMA &amp; MARCA</div>
+      <div>
+        <h2 class="sec-title">Seis páginas en español con nombres, títulos y copy en inglés — sin razón</h2>
+        <p class="sec-sub">Es el hallazgo más sistémico del portfolio. No es un error de copy aislado — es una falla de decisión de producto. Un visitante hispanohablante percibe falta de atención al detalle; uno angloparlante queda igualmente confundido.</p>
+      </div>
+    </div>
+
+    <div class="intro">
+      <strong>Inventario del problema:</strong> Nav items: "Testimonials", "Now", "Contact" (inglés) junto a "Home", "Experiencia", "Casos de Éxito", "Metodología" (mezcla). Páginas: <code>/contact</code> → "Contact Me", "Send a Message", todos los labels del form en inglés. <code>/status</code> → "Current Status", "What I'm currently reading, listening to, learning and building." — 100% inglés. Incluso el footer dice "All rights reserved." mientras el resto de la página está en español.
+    </div>
+
+    <div class="findings">
+
+      <div class="finding">
+        <span class="sev hi">Crítico</span>
+        <div class="f-body">
+          <h4>La página de contacto está completamente en inglés — es la página más importante del portfolio</h4>
+          <p>Después de convencer a un prospecto con el hero y los casos de éxito en español, la página de contacto lo recibe con "Contact Me", "Send a Message", "Your name", "Your email address", "Subject of your message". El cambio de idioma es un golpe de fricción justo en el momento de conversión. En UX, se llama "cognitive load at decision point" — lo peor que puede pasar.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Traducir completamente. H1: <code>"Hablemos"</code>. Subtítulo: <code>"Cuéntame tu proyecto o tu propuesta."</code> Labels: Nombre · Email · Asunto · Mensaje · Enviar mensaje. O bien, decidir que el sitio es bilingüe y ser consistente.</span></div>
+        </div>
+        <span class="tag">Contact page</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev hi">Crítico</span>
+        <div class="f-body">
+          <h4>El logo "DM" no corresponde a las iniciales "MC" (Moisés Cedeño)</h4>
+          <p>El logotipo del navbar dice "DM". El nombre del portafolio es Moisés Cedeño, cuyas iniciales serían "MC". "DM" podría ser "David Moisés" (nombre completo: Moisés David Aaron), pero el nombre público es "Moisés Cedeño". Para cualquier visitante que no conoce a Moisés de antes, el logo es ruido o confusión — resta coherencia a la marca personal.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Opciones: (a) Cambiar a <code>"MC"</code> si el posicionamiento es como Moisés Cedeño. (b) Usar <code>"modavidc"</code> si se usa ese handle. (c) Un icono/wordmark que no sean iniciales. La decisión que sea, hacerla consciente y consistente con el dominio.</span></div>
+        </div>
+        <span class="tag">Navbar · marca</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev hi">Crítico</span>
+        <div class="f-body">
+          <h4>La página "Now" / "Current Status" es 100% en inglés y tiene datos placeholder</h4>
+          <p>La ruta <code>/status</code> (enlazada como "Now" en el nav) muestra: "Current Status", "What I'm currently reading, listening to, learning and building", libro "Atomic Habits" by James Clear, y recomendaciones de "Alex Johnson" y "Maria Garcia" con fechas del 2023. Son datos de template no personalizados. El formulario "Recommend a Book" también está en inglés. Esta página, tal como está, daña la credibilidad.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">O (a) personalizar completamente la página con datos reales actualizados, traducir a español/elegir inglés conscientemente y eliminar los placeholders — o (b) quitarla del nav hasta que esté lista. Una página en construcción visible en el nav principal es un hallazgo de credibilidad, no un hallazgo técnico.</span></div>
+        </div>
+        <span class="tag">Now page</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev md">Importante</span>
+        <div class="f-body">
+          <h4>Mezcla de idiomas en el nav: "Testimonials", "Now", "Contact" vs. "Experiencia", "Casos de Éxito"</h4>
+          <p>El navbar tiene 7 items en dos idiomas sin patrón claro. No es bilingüismo intencional (donde todo está en ambos idiomas) sino inconsistencia. Un visitante en LATAM buscando contratar un Tech Lead ve el nav y percibe un portfolio sin terminar.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Decidir el idioma del nav y ser consistente. Si es español: <code>Inicio · Experiencia · Casos de Éxito · Metodología · Testimonios · Ahora · Contacto</code>. Nota adicional: 7 items es demasiado — ver hallazgo de Nav en §04.</span></div>
+        </div>
+        <span class="tag">Navbar</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev md">Importante</span>
+        <div class="f-body">
+          <h4>Gmail expuesto públicamente vs. hola@modavidc.com del formulario de contacto</h4>
+          <p>El código fuente usa <code>moisesdavidaaron@gmail.com</code> en todos los <code>mailto:</code> links (hero social icons, botones CTA de metodología, footer). Pero la página de contacto muestra <code>hola@modavidc.com</code>. Esta inconsistencia da la impresión de que el dominio propio es solo decorativo. Para un Tech Lead que vende arquitectura y documentación, usar Gmail como email principal en todos los CTAs es un detalle que llama la atención.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Unificar todos los <code>mailto:</code> en el código a <code>hola@modavidc.com</code>. En 5 archivos: <code>app/page.tsx:125</code>, <code>app/metodologia/page.tsx:269</code>, <code>app/testimonials/page.tsx:397</code> y donde aplique. El email profesional ya existe — úsalo.</span></div>
+        </div>
+        <span class="tag">Global · links</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 PRUEBA SOCIAL -->
+  <section id="confianza">
+    <div class="sec-head">
+      <div class="sec-num">03 / PRUEBA SOCIAL</div>
+      <div>
+        <h2 class="sec-title">Los testimonios existen y son buenos — pero los neutras tú mismo</h2>
+        <p class="sec-sub">Hay 6 testimonios con métricas reales, en plataformas específicas, de proyectos documentados. Es trabajo sólido. El problema es el disclaimer que los acompaña: "Los nombres han sido anonimizados por confidencialidad." En el visitante, eso se traduce como: "No tengo prueba de que esto sea real."</p>
+      </div>
+    </div>
+
+    <div class="intro">
+      <strong>El paradox de los testimonios anónimos:</strong> Tienes un testimonio que dice <i>"Moisés lideró la reducción de nuestra factura AWS en un 58%"</i> de "Director de TI de MediRec". Pero el nombre es genérico ("Director de TI"), la empresa es un nombre de proyecto ficticio ("MediRec"), y hay un disclaimer que dice que fueron anonimizados. El resultado neto para el lector: no sabe si son reales o inventados. Exactamente el efecto contrario de los testimonios.
+    </div>
+
+    <div class="findings">
+
+      <div class="finding">
+        <span class="sev hi">Crítico</span>
+        <div class="f-body">
+          <h4>El disclaimer de anonimato en la página de testimonios neutraliza toda la prueba social</h4>
+          <p>"Los nombres han sido anonimizados por confidencialidad. Los testimonios reflejan feedback real de proyectos documentados." — Esto suena exactamente como lo que diría alguien que inventó testimonios y quiere cubrirse. La intención es honesta, pero el efecto es devastador para la credibilidad. Desaparece la diferencia entre un testimonio real y uno fabricado.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Dos opciones: (a) Pedir permiso a al menos 2–3 personas reales para usar su nombre y cargo reales, aunque sea "Director de TI, empresa de salud en Lima, 2023" — la especificidad importa más que el nombre completo. (b) Si no es posible, quitar el disclaimer y agregar un contexto diferente: <i>"Proyectos reales. Métricas verificables. Algunos detalles modificados por NDA."</i> Habla de restricción legal, no de posible fabricación.</span></div>
+        </div>
+        <span class="tag">Testimonials page</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev hi">Crítico</span>
+        <div class="f-body">
+          <h4>La home page no tiene ni un fragmento de testimonio — son 8 secciones antes de llegar al social proof</h4>
+          <p>Los testimonios están exclusivamente en <code>/testimonials</code>. La home page tiene: Hero → KPIs → Mi Enfoque → Problemas que Resuelvo → Explora Mi Trabajo → Labs → CTA Final. Cero prueba social en la página más visitada del portfolio. Un prospecto que no hace click en "Testimonials" en el nav nunca la ve.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Insertar un bloque de 2–3 testimonios entre "Problemas que Resuelvo" y "Explora Mi Trabajo". Formato compacto, una cita por testimonio + nombre/rol/empresa. No hace falta reproducir la página completa — solo la cita más impactante de cada uno. Ejemplo: <i>"El nuevo dev estuvo productivo en 48h gracias al registro de decisiones." — Product Owner, T-Cuida</i></span></div>
+        </div>
+        <span class="tag">Home page</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev lo">Mejora</span>
+        <div class="f-body">
+          <h4>No hay logos de empresas/clientes en ninguna página</h4>
+          <p>Los nombres MediRec, T-Cuida, Gov-Tech, Healthcare Startup están en los casos de éxito y testimonios, pero no hay ninguna barra de logos de clientes en la home. Para un Tech Lead con 8 años de experiencia en industrias específicas, incluso logos genéricos con leyenda "Healthcare · SaaS · IoT · Gov-Tech" añaden credibilidad visual inmediata.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Sección minimalista debajo del hero: "Empresas y proyectos donde he entregado resultados" + logos o badges con los nombres de industrias/clientes. Si hay NDA sobre nombres de empresas, usar categorías: "Plataforma de salud digital (Lima)", "SaaS IoT (Miami)", "Gov-Tech (Puerto Rico)".</span></div>
+        </div>
+        <span class="tag">Home page</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 CONVERSIÓN / CTA -->
+  <section id="cta">
+    <div class="sec-head">
+      <div class="sec-num">04 / CONVERSIÓN / CTA</div>
+      <div>
+        <h2 class="sec-title">Demasiados CTAs, señales contradictorias, y disponibilidad marcada como "Limited"</h2>
+        <p class="sec-sub">El portfolio tiene 4 CTAs distintos en la home ("Hablemos", "Ver casos de éxito", "Contactar", "Descargar CV"), nav sobrecargado con 7 items, y una señal de disponibilidad que activamente disuade el contacto.</p>
+      </div>
+    </div>
+
+    <div class="findings">
+
+      <div class="finding">
+        <span class="sev hi">Crítico</span>
+        <div class="f-body">
+          <h4>"Freelance Availability: Limited" en la página de contacto activamente disuade el contacto</h4>
+          <p>La página de contacto muestra un bloque de "Availability" con: <code>Project Inquiries: Open</code> y <code>Freelance Availability: Limited</code>. "Limited" en inglés en un portfolio en español ya es un problema (ver §02), pero además el badge naranja "Limited" es visualmente llamativo y negativo. Un prospecto que llega con interés genuino ve "Limited" y puede decidir no escribir para "no molestar". Se pierden leads calificados.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Cambiar a español y reformular positivamente: <code>Proyectos: Disponible para conversaciones</code> y si la disponibilidad es real: <code>Freelance: Proyectos seleccionados (preguntar)</code>. O simplemente quitar el bloque de disponibilidad — el formulario de contacto ya hace esa función.</span></div>
+        </div>
+        <span class="tag">Contact page</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev md">Importante</span>
+        <div class="f-body">
+          <h4>El nav tiene 7 items — demasiado para una página de conversión</h4>
+          <p>Los 7 items del nav: Home · Experiencia · Casos de Éxito · Metodología · Testimonials · Now · Contact + botón "Hablemos". Para un portfolio cuyo objetivo es convertir prospectos en contactos, la abundancia de opciones diluye el foco. "Now" en particular no agrega valor para un reclutador o CTO — es más una feature personal que una herramienta de conversión.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Nav reducido a 5 items + CTA: <code>Inicio · Experiencia · Casos de Éxito · Metodología · Testimonios | [Hablemos]</code>. "Now" puede ser un link discreto en el footer para quienes quieran explorar más. "Contact" desaparece del nav — el botón "Hablemos" hace esa función.</span></div>
+        </div>
+        <span class="tag">Navbar</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev md">Importante</span>
+        <div class="f-body">
+          <h4>El formulario de contacto tiene un campo "Subject" innecesario que añade fricción</h4>
+          <p>El formulario tiene 4 campos: Nombre · Email · Subject · Mensaje. El campo "Subject" (además de estar en inglés) es redundante — el prospecto ya escribirá el contexto en el mensaje. Cada campo adicional reduce la tasa de envío. En formularios de contacto B2B/freelance, 3 campos es el óptimo: Nombre · Email · Mensaje.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Eliminar el campo Subject y renombrar los labels: <code>Nombre · Email · Cuéntame tu proyecto</code>. El placeholder del mensaje puede guiar: <i>"Ej: Necesito un Tech Lead para escalar nuestra plataforma SaaS. Equipo de 5 devs, stack Node + AWS..."</i></span></div>
+        </div>
+        <span class="tag">Contact form</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev md">Importante</span>
+        <div class="f-body">
+          <h4>El CTA "Descargar CV" apunta a <code>/assets/cv/cv.pdf</code> — verificar que el archivo existe</h4>
+          <p>El botón "Descargar CV" en el CTA final de la home apunta a <code>/assets/cv/cv.pdf</code> con atributo <code>download</code>. Si ese archivo no existe en el directorio <code>public/assets/cv/</code>, el CTA da un error 404 — el momento más frustrante posible para un reclutador con interés. Los botones de CV muertos son una de las causas más comunes de pérdida de oportunidades en portfolios.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Verificar que el archivo existe en <code>public/assets/cv/cv.pdf</code>. Si no existe, quitar el botón temporalmente o reemplazarlo por un link al perfil de LinkedIn. Si existe, añadir el peso del archivo (<code>"Descargar CV · PDF · 180kb"</code>) para aumentar la confianza en que el link funciona.</span></div>
+        </div>
+        <span class="tag">Home CTA</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 05 PÁGINAS INTERNAS -->
+  <section id="paginas">
+    <div class="sec-head">
+      <div class="sec-num">05 / PÁGINAS INTERNAS</div>
+      <div>
+        <h2 class="sec-title">Metodología y Casos de Éxito son fuertes — Experiencia necesita trabajo</h2>
+        <p class="sec-sub">Las páginas de Metodología y Casos de Éxito tienen estructura sólida y copy específico. La página de Experiencia (screenshot) tiene una oportunidad grande en la sección "Dominios de un Tech Lead" que se queda en categorías sin conectar con resultados.</p>
+      </div>
+    </div>
+
+    <div class="findings">
+
+      <div class="finding">
+        <span class="sev md">Importante</span>
+        <div class="f-body">
+          <h4>La sección "Dominios de un Tech Lead" en Experiencia lista categorías sin métricas ni resultados</h4>
+          <p>La página de Experiencia tiene una sección que agrupa dominios (Cloud FinOps, Backend APIs, Mobile &amp; Frontend, Healthcare &amp; Gov-Tech, Negocio, Personas, Delivery, Comunicación, Arquitectura). Visualmente es interesante pero cada dominio es solo una lista de tecnologías/conceptos. No hay un resultado adjunto — "Cloud FinOps: -58% en factura AWS" conectaría el skill con el impacto inmediatamente.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Para cada dominio, añadir una línea de resultado: <code>Cloud FinOps → -58% factura AWS (MediRec)</code>, <code>Backend APIs → -70% tiempo de resultados clínicos (Lab Middleware)</code>, <code>Healthcare → Cumplimiento PREIS regulatorio en tiempo récord</code>. Los skills se venden con evidencia, no con categorías.</span></div>
+        </div>
+        <span class="tag">Experiencia page</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev lo">Mejora</span>
+        <div class="f-body">
+          <h4>La página de Metodología repite la propuesta de valor del hero sin añadir información nueva al inicio</h4>
+          <p>El H1 de Metodología es "Software que escala sin depender de nadie" — casi idéntico al subtítulo del hero de la home ("Construyo software que escala sin depender de quién lo creó"). El visitante que llega de la home siente que está leyendo lo mismo. La página de Metodología debería arrancar donde la home terminó.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">El H1 de Metodología puede ser más específico: <i>"Así es cómo trabajo — y por qué importa más que el stack que elijo"</i>. El subtítulo puede ir directo al proceso: "IA para velocidad, documentación para continuidad, criterio para que el proyecto no dependa de mí." — Amplía en lugar de repetir.</span></div>
+        </div>
+        <span class="tag">Metodología page</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev lo">Mejora</span>
+        <div class="f-body">
+          <h4>La sección "Explora Mi Trabajo" en la home es redundante con el nav</h4>
+          <p>La home tiene una sección con 3 tarjetas: Experiencia → Casos de Éxito → Metodología. Esas tres son exactamente los mismos links que ya están en el nav. La sección ocupa ~400px de scroll para comunicar lo mismo que el nav en 3 clicks. No tiene copy diferenciado que justifique el espacio.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Reemplazar "Explora Mi Trabajo" por un bloque de 2–3 testimonios (el hallazgo de prueba social de §03) o por un mini-caso de éxito destacado con métricas. El nav ya cubre la navegación — este espacio vale más como evidencia adicional.</span></div>
+        </div>
+        <span class="tag">Home page</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 06 COPY Y TONO -->
+  <section id="copy">
+    <div class="sec-head">
+      <div class="sec-num">06 / CONTENIDO &amp; TONO</div>
+      <div>
+        <h2 class="sec-title">El copy es el activo más fuerte — y tiene una zona muerta</h2>
+        <p class="sec-sub">La voz es específica, honesta y con datos concretos. "Lo que construyo cuando nadie me paga" es una de las mejores líneas del portafolio. La zona muerta está en los textos de apoyo de algunas secciones que caen en vaguedades.</p>
+      </div>
+    </div>
+
+    <div class="findings">
+
+      <div class="finding">
+        <span class="sev lo">Mejora</span>
+        <div class="f-body">
+          <h4>"No solo entrego código. Entrego sistemas que funcionan cuando yo no estoy." — es bueno pero defensivo</h4>
+          <p>La línea de apoyo de "Mi Enfoque" arranca negando algo ("No solo"). Arranca desde una posición defensiva, como si respondiera a una acusación que nadie hizo. La segunda parte es excelente. Juntas, la primera debilita a la segunda.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Eliminar la primera oración. Dejar solo: <i>"Entrego sistemas que funcionan cuando yo no estoy — y documentación que permite que cualquier dev los entienda."</i> Afirmar directamente es más fuerte que negar primero.</span></div>
+        </div>
+        <span class="tag">Home · Mi Enfoque</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev lo">Mejora</span>
+        <div class="f-body">
+          <h4>"Cada sección cuenta una historia diferente de cómo aporto valor" es genérico</h4>
+          <p>El subtítulo de "Explora Mi Trabajo" dice exactamente esto. Es el tipo de copy que se escribe cuando no se sabe qué escribir. No dice nada que el visitante no sepa — claro que cada sección aporta información diferente.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Reemplazar con algo que dé razón de visitar cada sección: <i>"8 años de decisiones técnicas, documentadas. Decide por dónde empezar."</i> — Comunica profundidad y da autonomía al visitante.</span></div>
+        </div>
+        <span class="tag">Home · copy</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev nit">Detalle</span>
+        <div class="f-body">
+          <h4>El footer dice "All rights reserved." mientras el portfolio es en español</h4>
+          <p>Pequeño pero consistente con el patrón de mezcla de idiomas. El footer tiene el mismo copyright en inglés que cualquier template de Next.js sin personalizar. Es el último elemento que el visitante ve.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Cambiar a: <code>© 2026 Moisés Cedeño. Todos los derechos reservados.</code> O, mejor, aprovechar el footer para agregar una mini-propuesta de valor: <i>"Moisés Cedeño · Tech Lead · FinOps &amp; Cloud · hola@modavidc.com"</i></span></div>
+        </div>
+        <span class="tag">Footer</span>
+      </div>
+
+      <div class="finding">
+        <span class="sev nit">Detalle</span>
+        <div class="f-body">
+          <h4>La respuesta "Within 24 hours" en la página de contacto está en inglés</h4>
+          <p>En el bloque de Availability: "Response Time: Within 24 hours". Junto a todos los otros items en inglés de esa página, contribuye al patrón de template no completamente personalizado.</p>
+          <div class="fix"><span class="fix-label">Fix</span><span class="fix-text">Si se decide traducir la página: <code>Tiempo de respuesta: Menos de 24h</code>. Si el tiempo de respuesta no es real (es decir, a veces tarda más), mejor quitar ese dato — una promesa de 24h no cumplida daña más que no tenerla.</span></div>
+        </div>
+        <span class="tag">Contact page</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 07 ROADMAP -->
+  <section id="priority">
+    <div class="sec-head">
+      <div class="sec-num">07 / ROADMAP</div>
+      <div>
+        <h2 class="sec-title">Matriz impacto / esfuerzo — por dónde empezar</h2>
+        <p class="sec-sub">Los 6 hallazgos críticos tienen esfuerzo bajo. La mayoría son cambios de copy y configuración, no rediseños. Ordenados por velocidad de impacto en conversión.</p>
+      </div>
+    </div>
+
+    <div class="matrix">
+      <div class="matrix-grid">
+        <div class="quad">
+          <div style="text-align:left">Hacer YA</div>
+          <div style="text-align:right">Planificar</div>
+          <div style="text-align:left">Llenadores</div>
+          <div style="text-align:right">Evaluar</div>
+        </div>
+
+        <!-- Cuadrante Hacer YA (alto impacto, bajo esfuerzo): x 5-45%, y 5-45% -->
+        <div class="dot hi" style="left:10%;top:12%"><span class="dot-label">Traducir /contact</span></div>
+        <div class="dot hi" style="left:20%;top:22%"><span class="dot-label">Unificar emails a hola@modavidc.com</span></div>
+        <div class="dot hi" style="left:15%;top:35%"><span class="dot-label">Fix "Availability: Limited"</span></div>
+        <div class="dot hi" style="left:30%;top:15%"><span class="dot-label">Nav: quitar "Now"</span></div>
+        <div class="dot hi" style="left:35%;top:30%"><span class="dot-label">Logo DM → MC</span></div>
+
+        <!-- Cuadrante Planificar (alto impacto, alto esfuerzo): x 55-95%, y 5-45% -->
+        <div class="dot md" style="left:62%;top:18%"><span class="dot-label">Testimonios en home page</span></div>
+        <div class="dot md" style="left:70%;top:30%"><span class="dot-label">Reescribir disclaimer testimonios</span></div>
+        <div class="dot hi" style="left:80%;top:15%"><span class="dot-label">Now page: datos reales</span></div>
+
+        <!-- Cuadrante Llenadores (bajo impacto, bajo esfuerzo): x 5-45%, y 55-95% -->
+        <div class="dot lo" style="left:20%;top:65%"><span class="dot-label">Footer español</span></div>
+        <div class="dot lo" style="left:30%;top:75%"><span class="dot-label">Quitar campo Subject del form</span></div>
+        <div class="dot lo" style="left:12%;top:80%"><span class="dot-label">Kicker hero: agregar industrias</span></div>
+
+        <!-- Cuadrante Evaluar (bajo impacto, alto esfuerzo): x 55-95%, y 55-95% -->
+        <div class="dot lo" style="left:65%;top:65%"><span class="dot-label">Logos de clientes en home</span></div>
+        <div class="dot lo" style="left:78%;top:78%"><span class="dot-label">Resultados en Dominios Tech Lead</span></div>
+        <div class="dot lo" style="left:88%;top:68%"><span class="dot-label">Reemplazar sección Explora Mi Trabajo</span></div>
+
+        <span class="axis-y top">Impacto alto ↑</span>
+        <span class="axis-y bot">Impacto bajo ↓</span>
+        <span class="axis-x left">← Bajo esfuerzo</span>
+        <span class="axis-x right">Alto esfuerzo →</span>
+      </div>
+    </div>
+
+    <div class="quick" style="margin-top:32px">
+      <div class="q">
+        <h5>Semana 1 · Hacer YA (1–2h)</h5>
+        <ul>
+          <li>Traducir completamente la página <code>/contact</code></li>
+          <li>Unificar todos los <code>mailto:</code> a <code>hola@modavidc.com</code></li>
+          <li>Cambiar "Freelance Availability: Limited" a texto positivo</li>
+          <li>Quitar "Now" del nav o redirigir a página con datos reales</li>
+          <li>Resolver "DM" vs. "MC" en el logo</li>
+          <li>Verificar que <code>/assets/cv/cv.pdf</code> existe y se descarga</li>
+        </ul>
+      </div>
+      <div class="q">
+        <h5>Semana 2–3 · Planificar</h5>
+        <ul>
+          <li>Insertar bloque de 2–3 testimonios en la home page</li>
+          <li>Reescribir disclaimer de testimonios: "NDA" no "anonimizados"</li>
+          <li>Personalizar o eliminar la Now page</li>
+          <li>Unificar idioma del nav completo (español o inglés)</li>
+          <li>Quitar campo "Subject" del formulario de contacto</li>
+        </ul>
+      </div>
+      <div class="q">
+        <h5>Mes 2 · Evolución</h5>
+        <ul>
+          <li>Añadir resultados a cada dominio en Experiencia</li>
+          <li>Logos o badges de industrias/proyectos en la home</li>
+          <li>Reemplazar "Explora Mi Trabajo" por testimonios o mini-caso</li>
+          <li>Kicker del hero: añadir FinOps · Healthcare · Cloud</li>
+          <li>Reemplazar "100% ownership" por métrica concreta</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>Auditoría · Portfolio modavidc.com · 21 Abr 2026 · Moisés Cedeño</div>
+    <div>21 hallazgos · 6 críticos · 8 importantes · 5 mejoras · 2 detalles</div>
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,946 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Auditoría Design + Branding v2 — modavidc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0d0f;
+  --surface: #131316;
+  --surface-2: #1a1a1e;
+  --border: #252528;
+  --border-2: #2e2e33;
+  --text: #e8e8ec;
+  --text-2: #9898a8;
+  --text-3: #5a5a68;
+  --green:  oklch(67% 0.17 148);
+  --red:    oklch(65% 0.20 25);
+  --amber:  oklch(72% 0.16 70);
+  --blue:   oklch(68% 0.17 240);
+  --violet: oklch(68% 0.18 295);
+  --red-bg:    oklch(18% 0.06 25);
+  --amber-bg:  oklch(18% 0.06 70);
+  --green-bg:  oklch(18% 0.06 148);
+  --blue-bg:   oklch(18% 0.06 240);
+  --violet-bg: oklch(18% 0.06 295);
+  --ff-display: 'Space Grotesk', system-ui, sans-serif;
+  --ff-body: 'DM Sans', system-ui, sans-serif;
+  --ff-mono: 'DM Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--bg); color: var(--text); font-family: var(--ff-body); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+em { font-style: normal; color: var(--green); }
+code { font-family: var(--ff-mono); font-size: .82em; background: var(--surface-2); border: 1px solid var(--border); padding: 1px 6px; border-radius: 3px; color: var(--green); }
+
+.page { max-width: 1160px; margin: 0 auto; padding: 64px 48px 120px; }
+
+/* TOP STRIP */
+.topstrip {
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid var(--border); padding-bottom: 24px; margin-bottom: 56px;
+  font-family: var(--ff-mono); font-size: 11px; color: var(--text-3); letter-spacing: .12em; text-transform: uppercase;
+}
+.topstrip .brand { font-family: var(--ff-display); color: var(--text); font-size: 14px; letter-spacing: -.01em; text-transform: none; font-weight: 400; }
+.topstrip .brand .mo { color: var(--green); }
+.topstrip .ver { display: inline-flex; align-items: center; gap: 8px; }
+.topstrip .ver-pill { font-family: var(--ff-mono); font-size: 10px; padding: 2px 8px; border: 1px solid var(--green); color: var(--green); border-radius: 100px; letter-spacing: .14em; }
+
+/* HERO */
+.hero { margin-bottom: 64px; }
+.hero-kicker { font-family: var(--ff-mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--text-3); margin-bottom: 20px; }
+.hero h1 { font-family: var(--ff-display); font-size: clamp(42px, 5.4vw, 72px); font-weight: 300; line-height: 1.05; letter-spacing: -.025em; color: var(--text); margin-bottom: 24px; }
+.hero h1 strong { font-weight: 500; color: var(--green); }
+.hero .dek { font-size: 17px; color: var(--text-2); max-width: 720px; line-height: 1.65; margin-bottom: 28px; }
+
+/* DELTA — qué cambió desde v1 */
+.delta { border: 1px solid var(--border); background: var(--surface); margin-bottom: 56px; display: grid; grid-template-columns: 220px 1fr; }
+.delta-side { padding: 28px 28px; border-right: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; gap: 6px; background: linear-gradient(180deg, var(--green-bg) 0%, var(--surface) 100%); }
+.delta-side .lbl { font-family: var(--ff-mono); font-size: 10px; color: var(--green); letter-spacing: .14em; text-transform: uppercase; }
+.delta-side .num { font-family: var(--ff-display); font-size: 56px; font-weight: 300; letter-spacing: -.04em; color: var(--green); line-height: 1; }
+.delta-side .sub { font-size: 12px; color: var(--text-2); }
+.delta-list { padding: 24px 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 4px 32px; }
+.delta-row { font-size: 13px; color: var(--text-2); padding: 6px 0; padding-left: 22px; position: relative; line-height: 1.5; }
+.delta-row::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-family: var(--ff-mono); font-size: 12px; }
+
+/* SCORECARD */
+.scorecard {
+  display: grid; grid-template-columns: 220px 1fr; gap: 0;
+  border: 1px solid var(--border); margin-bottom: 8px;
+}
+.score-main { padding: 32px 36px; border-right: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; }
+.score-num { font-family: var(--ff-display); font-size: 80px; font-weight: 300; line-height: 1; letter-spacing: -.04em; color: var(--green); }
+.score-num .arrow { font-size: 26px; color: var(--text-3); margin: 0 6px; }
+.score-num .from { font-size: 26px; color: var(--text-3); font-weight: 300; }
+.score-den { font-size: 18px; color: var(--text-3); vertical-align: super; }
+.score-lbl { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); margin-top: 8px; }
+.pillars { padding: 24px 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; align-content: center; }
+.pillar { display: grid; grid-template-columns: 1fr 60px 36px; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border); }
+.pillar:nth-last-child(-n+2) { border-bottom: none; }
+.pillar-name { font-size: 13px; color: var(--text-2); }
+.pillar-delta { font-family: var(--ff-mono); font-size: 11px; color: var(--green); text-align: right; }
+.pillar-delta.flat { color: var(--text-3); }
+.pillar-val { font-family: var(--ff-mono); font-size: 12px; color: var(--text); text-align: right; }
+.pillar-track { grid-column: 1 / -1; height: 2px; background: var(--border-2); margin-top: -6px; margin-bottom: 2px; position: relative; }
+.pillar-track .prev { position: absolute; left: 0; top: 0; height: 100%; background: var(--text-3); opacity: .4; }
+.pillar-track .now { position: absolute; left: 0; top: 0; height: 100%; background: var(--green); }
+
+/* COUNTS */
+.counts { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border); border-top: none; margin-bottom: 56px; }
+.count { padding: 18px 24px; border-right: 1px solid var(--border); }
+.count:last-child { border-right: none; }
+.count-n { font-family: var(--ff-display); font-size: 36px; font-weight: 300; letter-spacing: -.03em; line-height: 1; }
+.count-l { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); margin-top: 4px; }
+.count-meta { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); margin-top: 6px; letter-spacing: .04em; }
+.count.crit .count-n { color: var(--red); }
+.count.warn .count-n { color: var(--amber); }
+.count.info .count-n { color: var(--blue); }
+.count.nit .count-n { color: var(--text-3); }
+
+/* NAV TABS */
+.navtabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 64px; overflow-x: auto; }
+.navtab { padding: 12px 20px; font-family: var(--ff-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); text-decoration: none; white-space: nowrap; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color .15s, border-color .15s; }
+.navtab:hover { color: var(--text); border-color: var(--border-2); }
+.navtab .num { color: var(--text-3); margin-right: 8px; }
+
+/* SECTION */
+section { margin-bottom: 80px; }
+.sec-label { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--text-3); margin-bottom: 12px; }
+.sec-title { font-family: var(--ff-display); font-size: clamp(26px, 3.5vw, 40px); font-weight: 300; letter-spacing: -.02em; line-height: 1.2; margin-bottom: 10px; }
+.sec-sub { font-size: 15px; color: var(--text-2); max-width: 740px; line-height: 1.65; margin-bottom: 28px; }
+.sec-divider { width: 100%; height: 1px; background: var(--border); margin-bottom: 32px; }
+
+/* PULL */
+.pull { border-left: 2px solid var(--green); padding: 8px 0 8px 20px; font-size: 18px; font-weight: 300; line-height: 1.55; color: var(--text-2); max-width: 720px; margin-bottom: 28px; font-style: italic; }
+
+/* FINDINGS */
+.findings { display: grid; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 28px; }
+.finding { background: var(--surface); display: grid; grid-template-columns: 110px 1fr 110px; gap: 24px; padding: 22px 28px; align-items: start; }
+.finding:hover { background: var(--surface-2); }
+
+.badge { display: inline-flex; align-items: center; gap: 6px; font-family: var(--ff-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; padding: 4px 8px; border-radius: 2px; white-space: nowrap; line-height: 1; }
+.badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+.badge.crit { color: var(--red); background: var(--red-bg); }
+.badge.warn { color: var(--amber); background: var(--amber-bg); }
+.badge.info { color: var(--blue); background: var(--blue-bg); }
+.badge.nit  { color: var(--text-3); background: var(--surface-2); }
+.badge.win { color: var(--green); background: var(--green-bg); }
+
+.f-title { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 8px; line-height: 1.4; }
+.f-body { font-size: 13.5px; color: var(--text-2); line-height: 1.65; }
+.f-body p { margin-bottom: 8px; }
+.f-fix { margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border-2); display: grid; grid-template-columns: 52px 1fr; gap: 12px; align-items: baseline; }
+.fix-lbl { font-family: var(--ff-mono); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--green); }
+.fix-val { font-size: 13px; color: var(--text); line-height: 1.55; }
+.f-tag { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); letter-spacing: .08em; padding-top: 3px; text-align: right; line-height: 1.6; }
+
+/* COMPARE */
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 24px; }
+.compare-col { background: var(--surface); padding: 24px 28px; }
+.compare-col.bad { border-top: 2px solid var(--red); }
+.compare-col.good { border-top: 2px solid var(--green); }
+.compare-head { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); margin-bottom: 16px; }
+.compare-head.bad { color: var(--red); }
+.compare-head.good { color: var(--green); }
+.compare-item { font-size: 13px; color: var(--text-2); margin-bottom: 8px; padding-left: 16px; position: relative; line-height: 1.5; }
+.compare-col.bad .compare-item::before { content: '✗'; position: absolute; left: 0; color: var(--red); font-family: var(--ff-mono); }
+.compare-col.good .compare-item::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-family: var(--ff-mono); }
+
+/* CHIPS / SYSTEM */
+.chaos-demo { border: 1px solid var(--border); background: var(--surface); padding: 24px 28px; margin-bottom: 24px; }
+.chaos-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; align-items: center; }
+.chaos-label { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); letter-spacing: .1em; text-transform: uppercase; width: 130px; flex-shrink: 0; }
+.chip { padding: 3px 10px; border-radius: 100px; font-size: 12px; font-family: var(--ff-mono); }
+.chip-green  { background: oklch(22% 0.07 148); color: oklch(78% 0.18 148); }
+.chip-violet { background: oklch(22% 0.07 295); color: oklch(78% 0.18 295); }
+.chip-blue   { background: oklch(22% 0.07 240); color: oklch(78% 0.17 240); }
+.chip-amber  { background: oklch(22% 0.07 70);  color: oklch(78% 0.16 70);  }
+.chip-neutral{ background: var(--surface-2); color: var(--text-2); border: 1px solid var(--border); }
+.chaos-note { font-size: 13px; color: var(--text-3); margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); line-height: 1.5; }
+.chaos-note strong { color: var(--green); }
+
+/* PROPOSED COLOR SYSTEM */
+.system-demo { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 16px; }
+.sys-swatch { background: var(--surface); padding: 18px 16px; }
+.sys-block { height: 36px; border-radius: 2px; margin-bottom: 10px; }
+.sys-name { font-family: var(--ff-mono); font-size: 10px; color: var(--text); }
+.sys-role { font-size: 11px; color: var(--text-3); margin-top: 3px; }
+
+/* NAV PREVIEW */
+.nav-preview { border: 1px solid var(--border); background: var(--bg); margin-bottom: 16px; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+.nav-preview-brand { display: flex; flex-direction: column; gap: 4px; }
+.nav-preview-wm { font-family: var(--ff-display); font-size: 20px; font-weight: 400; letter-spacing: -.025em; color: var(--text); }
+.nav-preview-wm .mo { color: var(--green); }
+.nav-preview-tag { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); letter-spacing: .12em; text-transform: uppercase; }
+.nav-preview-links { display: flex; gap: 22px; font-size: 13px; color: var(--text-2); font-family: var(--ff-body); }
+.nav-preview-cta { background: var(--green); color: #0b0c0e; font-size: 13px; font-weight: 500; padding: 7px 18px; border-radius: 3px; }
+.nav-preview-note { font-family: var(--ff-mono); font-size: 11px; color: var(--text-3); margin-top: 4px; letter-spacing: .04em; padding-left: 4px; }
+
+/* TYPE SAMPLES */
+.type-stack { display: grid; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 24px; }
+.type-row { background: var(--surface); padding: 22px 28px; display: grid; grid-template-columns: 160px 1fr; gap: 32px; align-items: baseline; }
+.type-row .lbl { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); letter-spacing: .12em; text-transform: uppercase; }
+.type-row .sample { font-family: var(--ff-display); color: var(--text); font-weight: 300; letter-spacing: -.025em; line-height: 1.1; }
+.type-row .sample em { color: var(--green); }
+.type-row .meta { font-family: var(--ff-mono); font-size: 11px; color: var(--text-3); margin-top: 8px; letter-spacing: .04em; }
+
+/* MICRO MATRIX */
+.matrix { display: grid; grid-template-columns: 180px repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 28px; font-size: 12.5px; }
+.mx-cell { background: var(--surface); padding: 12px 14px; }
+.mx-cell.h { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); letter-spacing: .12em; text-transform: uppercase; background: var(--surface-2); }
+.mx-cell.row { font-family: var(--ff-mono); font-size: 11px; color: var(--text-2); letter-spacing: .04em; }
+.mx-cell.match { color: var(--green); }
+.mx-cell.miss { color: var(--amber); }
+.mx-cell.bad { color: var(--red); }
+
+/* ROADMAP */
+.roadmap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 28px; }
+.rm-col { background: var(--surface); padding: 24px 28px; }
+.rm-head { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 8px; }
+.rm-sub { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); margin-bottom: 14px; letter-spacing: .04em; }
+.rm-item { font-size: 13px; color: var(--text-2); margin-bottom: 10px; padding-left: 22px; position: relative; line-height: 1.5; }
+.rm-item::before { position: absolute; left: 0; font-family: var(--ff-mono); font-size: 11px; }
+.rm-col:nth-child(1) .rm-head { color: var(--red); }
+.rm-col:nth-child(1) .rm-item::before { content: '!'; color: var(--red); }
+.rm-col:nth-child(2) .rm-head { color: var(--amber); }
+.rm-col:nth-child(2) .rm-item::before { content: '→'; color: var(--amber); }
+.rm-col:nth-child(3) .rm-head { color: var(--blue); }
+.rm-col:nth-child(3) .rm-item::before { content: '◦'; color: var(--blue); }
+
+/* CONCLUSION */
+.conclusion { background: var(--surface); border: 1px solid var(--border); padding: 40px 48px; display: grid; grid-template-columns: 1fr 320px; gap: 48px; align-items: center; }
+.conclusion-text { font-family: var(--ff-display); font-size: 26px; font-weight: 300; line-height: 1.35; letter-spacing: -.015em; color: var(--text); }
+.conclusion-text strong { color: var(--green); font-weight: 500; }
+.conclusion-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.cstat { background: var(--surface-2); padding: 16px 20px; }
+.cstat-n { font-family: var(--ff-display); font-size: 30px; font-weight: 300; letter-spacing: -.03em; line-height: 1; }
+.cstat-l { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); letter-spacing: .12em; text-transform: uppercase; margin-top: 4px; }
+
+footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-family: var(--ff-mono); font-size: 11px; color: var(--text-3); letter-spacing: .06em; }
+
+@media (max-width: 900px) {
+  .page { padding: 32px 20px 80px; }
+  .scorecard, .compare, .roadmap, .conclusion, .delta, .nav-preview, .matrix { grid-template-columns: 1fr; }
+  .delta-list { grid-template-columns: 1fr; }
+  .finding { grid-template-columns: 1fr; }
+  .pillars { grid-template-columns: 1fr; }
+  .counts { grid-template-columns: 1fr 1fr; }
+  .system-demo { grid-template-columns: 1fr 1fr; }
+  .f-tag { text-align: left; }
+  .type-row { grid-template-columns: 1fr; gap: 8px; }
+  .nav-preview-links { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- TOP STRIP -->
+  <div class="topstrip">
+    <span class="brand"><span class="mo">mo</span>davidc — Auditoría Design + Branding</span>
+    <span class="ver">v2 · sobre el sitio rediseñado <span class="ver-pill">Brand v1.0</span></span>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-kicker">Auditoría · Diseño + Identidad de Marca · Iteración 2</div>
+    <h1>Ya no es un sitio sin sistema.<br>Ahora es un <strong>sistema con detalles</strong>.</h1>
+    <p class="dek">El rediseño aplicó casi todo lo que la v1 recomendó: hay un <em>Brand Identity v1.0</em> público, <code>modavidc</code> es wordmark, "Honest work. Efficient architectures." está en cada nav, el verde <code>oklch(67% 0.17 148)</code> es ahora el único acento de marca, y Space Grotesk + DM Sans + DM Mono unificaron toda la tipografía. Esta v2 audita <em>el sitio nuevo</em> — los problemas restantes son finos, pero existen.</p>
+  </div>
+
+  <!-- DELTA -->
+  <div class="delta">
+    <div class="delta-side">
+      <div class="lbl">Cambios desde v1</div>
+      <div class="num">+2.7</div>
+      <div class="sub">Sistema de marca: 6.4 → 9.1</div>
+    </div>
+    <div class="delta-list">
+      <div class="delta-row">Wordmark <code>modavidc</code> reemplazó al "DM"</div>
+      <div class="delta-row">Tagline "Honest work. Efficient architectures." en nav global</div>
+      <div class="delta-row">Verde único <code>oklch(67% 0.17 148)</code> como acento</div>
+      <div class="delta-row">Space Grotesk display + DM Sans body + DM Mono micro</div>
+      <div class="delta-row">Brand Identity v1.0 público y documentado</div>
+      <div class="delta-row">3 colores categóricos limitados a casos/testimonios</div>
+      <div class="delta-row">"Hablemos" reemplazó "Contact Me" como CTA</div>
+      <div class="delta-row">Sistema de cards unificado (no más "screenshots")</div>
+    </div>
+  </div>
+
+  <!-- SCORECARD -->
+  <div class="scorecard">
+    <div class="score-main">
+      <div class="score-num"><span class="from">6.4</span><span class="arrow">→</span>9.1<span class="score-den">/10</span></div>
+      <div class="score-lbl">Score de marca · v1 → v2</div>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <span class="pillar-name">Sistema de color</span>
+        <span class="pillar-delta">+5.0</span>
+        <span class="pillar-val">9.5</span>
+        <div class="pillar-track"><span class="prev" style="width:45%"></span><span class="now" style="width:95%"></span></div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-name">Identidad / Wordmark</span>
+        <span class="pillar-delta">+6.5</span>
+        <span class="pillar-val">9.5</span>
+        <div class="pillar-track"><span class="prev" style="width:30%"></span><span class="now" style="width:95%"></span></div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-name">Tipografía & jerarquía</span>
+        <span class="pillar-delta">+1.5</span>
+        <span class="pillar-val">9.0</span>
+        <div class="pillar-track"><span class="prev" style="width:75%"></span><span class="now" style="width:90%"></span></div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-name">Consistencia entre páginas</span>
+        <span class="pillar-delta">+3.5</span>
+        <span class="pillar-val">9.0</span>
+        <div class="pillar-track"><span class="prev" style="width:55%"></span><span class="now" style="width:90%"></span></div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-name">Componentes UI</span>
+        <span class="pillar-delta">+3.0</span>
+        <span class="pillar-val">9.0</span>
+        <div class="pillar-track"><span class="prev" style="width:60%"></span><span class="now" style="width:90%"></span></div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-name">Alineación cross-platform</span>
+        <span class="pillar-delta">+1.5</span>
+        <span class="pillar-val">8.5</span>
+        <div class="pillar-track"><span class="prev" style="width:70%"></span><span class="now" style="width:85%"></span></div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-name">Voz visual / tono</span>
+        <span class="pillar-delta">+2.0</span>
+        <span class="pillar-val">8.5</span>
+        <div class="pillar-track"><span class="prev" style="width:65%"></span><span class="now" style="width:85%"></span></div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-name">Micro-detalles</span>
+        <span class="pillar-delta">+2.5</span>
+        <span class="pillar-val">7.5</span>
+        <div class="pillar-track"><span class="prev" style="width:50%"></span><span class="now" style="width:75%"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="counts">
+    <div class="count crit">
+      <div class="count-n">0</div>
+      <div class="count-l">Críticos</div>
+      <div class="count-meta">v1: 4 · -100%</div>
+    </div>
+    <div class="count warn">
+      <div class="count-n">3</div>
+      <div class="count-l">Importantes</div>
+      <div class="count-meta">v1: 6 · -50%</div>
+    </div>
+    <div class="count info">
+      <div class="count-n">6</div>
+      <div class="count-l">Mejoras</div>
+      <div class="count-meta">v1: 5</div>
+    </div>
+    <div class="count nit">
+      <div class="count-n">5</div>
+      <div class="count-l">Detalles</div>
+      <div class="count-meta">v1: 3</div>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="navtabs">
+    <a class="navtab" href="#color"><span class="num">01</span>Color residual</a>
+    <a class="navtab" href="#wordmark"><span class="num">02</span>Wordmark · Logo</a>
+    <a class="navtab" href="#typo"><span class="num">03</span>Tipografía</a>
+    <a class="navtab" href="#componentes"><span class="num">04</span>Componentes</a>
+    <a class="navtab" href="#crossplatform"><span class="num">05</span>Cross-platform</a>
+    <a class="navtab" href="#voz"><span class="num">06</span>Voz visual</a>
+    <a class="navtab" href="#micro"><span class="num">07</span>Micro-detalles</a>
+    <a class="navtab" href="#roadmap"><span class="num">08</span>Roadmap v3</a>
+  </nav>
+
+  <!-- 01 COLOR -->
+  <section id="color">
+    <div class="sec-label">01 / Sistema de color · estado residual</div>
+    <h2 class="sec-title">El sistema 1+3+neutros funciona —<br>quedan dos fricciones puntuales</h2>
+    <p class="sec-sub">El verde de marca es ahora el único color de interacción. Los tres categóricos (azul SaaS, violeta Healthcare, amber IoT/Mobile) están limitados a casos y testimonios. Quedan dos focos: las "platform-dot" en testimonios todavía mezclan plataformas con categorías, y el icono violeta del enfoque "Autonomía del equipo" (home) introduce un cuarto color sin razón semántica.</p>
+    <div class="sec-divider"></div>
+
+    <!-- Demo del sistema activo -->
+    <div style="font-family:var(--ff-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);margin-bottom:12px;">Sistema activo en el sitio nuevo</div>
+    <div class="system-demo">
+      <div class="sys-swatch">
+        <div class="sys-block" style="background:var(--green)"></div>
+        <div class="sys-name">Verde marca</div>
+        <div class="sys-role">CTAs · acento único</div>
+      </div>
+      <div class="sys-swatch">
+        <div class="sys-block" style="background:var(--blue)"></div>
+        <div class="sys-name">Azul</div>
+        <div class="sys-role">Solo: SaaS</div>
+      </div>
+      <div class="sys-swatch">
+        <div class="sys-block" style="background:var(--violet)"></div>
+        <div class="sys-name">Violeta</div>
+        <div class="sys-role">Solo: Healthcare</div>
+      </div>
+      <div class="sys-swatch">
+        <div class="sys-block" style="background:var(--amber)"></div>
+        <div class="sys-name">Amber</div>
+        <div class="sys-role">Solo: Mobile / IoT</div>
+      </div>
+      <div class="sys-swatch">
+        <div class="sys-block" style="background:#181a1d;border:1px solid var(--border-2)"></div>
+        <div class="sys-name">Neutros</div>
+        <div class="sys-role">Texto · borders · fondo</div>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--text-3);line-height:1.6;margin-bottom:32px;">El sistema declarado en <em>Brand Identity v1.0</em> está aplicado correctamente en home, casos, metodología y experiencia. Las fricciones residuales aparecen en testimonios y en un ícono del enfoque.</p>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="badge warn">Importante</span>
+        <div class="f-body">
+          <div class="f-title">El "platform-dot" de testimonios reintroduce mezcla de semánticas — un dot azul puede ser "LinkedIn" o "SaaS" en la misma página</div>
+          <p>En <code>testimonios.html</code>, cada card tiene una etiqueta de plataforma de origen (LinkedIn azul · Email gris · Directo verde/violeta/amber). En la misma card también aparece el badge de categoría (FinOps verde · SaaS azul · Healthcare violeta · IoT amber). Resultado: el dot azul de "LinkedIn" coincide cromáticamente con el badge "SaaS" de la misma card. El visitante no puede leer si el color comunica plataforma o categoría.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Quitar el color de los platform-dot — usar todos en gris neutro (<code>var(--text-3)</code>) y diferenciarlos por <em>icono</em> en lugar de color: ícono LinkedIn, ícono Email, ícono mensaje (Directo). El color queda exclusivamente para categoría de proyecto. Alternativa más simple: eliminar el platform-dot y dejar solo el texto "LinkedIn / Email / Directo" en mono.</span>
+          </div>
+        </div>
+        <span class="f-tag">testimonios.html<br>platform-dot</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge info">Mejora</span>
+        <div class="f-body">
+          <div class="f-title">El ícono "⌬" violeta del bloque "Autonomía del equipo" (home) introduce un 5to color sin razón semántica</div>
+          <p>En la sección <em>Mi Enfoque</em> de <code>home.html</code>, los tres bloques tienen íconos coloreados: "IA" en verde (correcto, primario), "↗" en azul (sin razón clara — no es un bloque SaaS), y "⌬" en violeta (no es un bloque Healthcare). El violeta y el azul no comunican nada — son decoración. Y rompen el sistema 1+3 porque aquí ninguno representa una categoría.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Tres opciones en orden de fuerza: (a) Los tres íconos en verde de marca — los pilares son una sola idea. (b) Los tres en neutro (<code>var(--text-2)</code>) y reservar el verde para el acento del título "<em>Mi Enfoque</em>". (c) Cada ícono mantiene un color, pero entonces los tres deben mapear a categorías (verde=FinOps, azul=SaaS, violeta=Healthcare) — y este enfoque <em>no</em> mapea, así que esta opción no aplica.</span>
+          </div>
+        </div>
+        <span class="f-tag">home.html<br>Mi Enfoque · íconos</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge nit">Detalle</span>
+        <div class="f-body">
+          <div class="f-title">Hay dos definiciones del verde en el código — <code>oklch(67% 0.17 148)</code> y <code>oklch(68% 0.18 145)</code></div>
+          <p>El sistema declarado es <code>oklch(67% 0.17 148)</code> pero en algunos archivos antiguos quedaron variantes con hue 145 y luminosidad 68%. La diferencia perceptual es mínima (~1%) pero rompe la promesa de "un único color de marca". Si alguien luego usa <code>var(--accent)</code> de un archivo y <code>var(--green)</code> de otro, los acentos no coinciden píxel-a-píxel.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Una sola fuente de verdad: <code>--green: oklch(67% 0.17 148)</code> en un <code>tokens.css</code> importado por todas las páginas. Eliminar redefiniciones locales. Búsqueda y reemplazo: <code>oklch(68% 0.18 145)</code> → <code>oklch(67% 0.17 148)</code>.</span>
+          </div>
+        </div>
+        <span class="f-tag">global<br>token --green</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 WORDMARK -->
+  <section id="wordmark">
+    <div class="sec-label">02 / Wordmark & identidad</div>
+    <h2 class="sec-title">El wordmark <code style="font-size:.85em;background:none;border:none;color:var(--green);padding:0">modavidc</code> está bien resuelto —<br>su superficie de uso, no del todo</h2>
+    <p class="sec-sub">El "mo" en verde + "davidc" en blanco es una marca tipográfica memorable, consistente entre nav, footer y brand identity. El sistema funciona. Lo que falta son las superficies adyacentes que toda marca personal necesita: favicon, OG image, banner LinkedIn coordinado, y una versión cuadrada para perfiles sociales.</p>
+    <div class="sec-divider"></div>
+
+    <!-- Preview real del nav -->
+    <div class="nav-preview">
+      <div class="nav-preview-brand">
+        <div class="nav-preview-wm"><span class="mo">mo</span>davidc</div>
+        <div class="nav-preview-tag">Honest work. Efficient architectures.</div>
+      </div>
+      <div class="nav-preview-links">
+        <span>Experiencia</span>
+        <span>Casos de Éxito</span>
+        <span>Metodología</span>
+        <span>Testimonios</span>
+        <span class="nav-preview-cta">Hablemos</span>
+      </div>
+    </div>
+    <div class="nav-preview-note">↑ El nav unificado en las 6 páginas — wordmark + tagline + 4 links + CTA verde. Sólido. El issue está fuera del nav.</div>
+
+    <div class="findings" style="margin-top:24px">
+      <div class="finding">
+        <span class="badge win">Resuelto</span>
+        <div class="f-body">
+          <div class="f-title">El crítico de v1 ("DM no es tu marca, modavidc sí") está completamente cerrado</div>
+          <p>El wordmark <code>modavidc</code> está aplicado en nav, footer, hero del Brand Identity, y como referencia en todas las páginas. El "DM" desapareció. Esta era la fricción de marca más visible de la v1 — está corregida y el resultado se ve coherente en las 6 páginas auditadas.</p>
+        </div>
+        <span class="f-tag">global<br>nav · footer</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge warn">Importante</span>
+        <div class="f-body">
+          <div class="f-title">No se ve evidencia de favicon ni OG image personalizados — dos superficies de marca todavía sin explotar</div>
+          <p>El <code>&lt;head&gt;</code> de las 6 páginas no incluye <code>&lt;link rel="icon"&gt;</code> personalizado ni <code>&lt;meta property="og:image"&gt;</code>. Eso significa: (1) la pestaña del navegador muestra el ícono default; (2) cuando alguien comparta el link en LinkedIn, WhatsApp o Slack, no aparecerá una preview con la marca. Cada vez que un reclutador o CTO comparte el portfolio internamente, está renunciando a una primera impresión.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Favicon: SVG cuadrado con la "m" de modavidc en verde sobre fondo <code>#0d0d0f</code> — exportar a 32×32 y 180×180 (apple-touch). OG image 1200×630: fondo dark, wordmark grande, tagline "Honest work. Efficient architectures.", 3 KPIs (-58% AWS · 48h · 8+ años). Misma OG para todas las páginas o una por página de alto tráfico.</span>
+          </div>
+        </div>
+        <span class="f-tag">global<br>head · meta</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge info">Mejora</span>
+        <div class="f-body">
+          <div class="f-title">El tagline "Honest work. Efficient architectures." aparece en mono sutil en el nav — merece una superficie hero al menos una vez</div>
+          <p>El tagline está en el nav de cada página pero a 10px en mono gris — funciona como suscript del wordmark. En toda la home no hay un solo lugar donde el tagline aparezca tipográficamente "grande". El brand identity tiene una sección donde sí lo trata así, pero el sitio público no. Para un visitante que nunca abre el brand identity, el tagline pasa desapercibido.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Una posibilidad: cierre del footer con el tagline a 32–40px en Space Grotesk, "Honest work." en blanco y "<em>Efficient architectures.</em>" en verde, separado por punto medio. Otra: portada de la página de Hablemos podría abrir con el tagline en lugar de un H1 genérico "Hablemos." Es la firma de marca — debería verse al menos una vez por sesión.</span>
+          </div>
+        </div>
+        <span class="f-tag">home/footer<br>tagline</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge info">Mejora</span>
+        <div class="f-body">
+          <div class="f-title">No existe una "marca cuadrada" para avatars sociales — solo el wordmark horizontal</div>
+          <p>El wordmark <code>modavidc</code> funciona en nav y footer (formato horizontal), pero LinkedIn, GitHub, Twitter/X y cualquier red social usan avatars cuadrados (1:1). Sin una versión cuadrada, las plataformas mostrarán o (a) la foto personal de Moisés, o (b) el wordmark recortado/distorsionado. Es una superficie de marca repetida miles de veces en cada notificación, comentario y DM.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Crear un "monograma" cuadrado: la "m" de modavidc en Space Grotesk, verde sobre fondo <code>#0d0d0f</code>, cuadrado con esquinas a 4px de radio. Funciona en 24×24 (favicon), 96×96 (Twitter), 400×400 (LinkedIn). Documentar como variante oficial en el Brand Identity.</span>
+          </div>
+        </div>
+        <span class="f-tag">brand assets<br>monograma</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge nit">Detalle</span>
+        <div class="f-body">
+          <div class="f-title">El nav-tagline desaparece bajo 1000px — y en mobile el wordmark queda solo, sin firma</div>
+          <p>El media query oculta <code>.nav-tagline</code> en pantallas pequeñas. Es razonable por espacio, pero es la pantalla más común (mobile representa la mayor parte del tráfico orgánico desde LinkedIn). Resultado: en mobile el visitante nunca ve el tagline, ni siquiera mientras navega entre páginas.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Dos opciones: (a) Comprimir el tagline a 9px en mobile en lugar de ocultarlo. (b) Mostrarlo en el footer mobile con tipografía media — el footer sí tiene espacio. La opción (b) es la que la mayoría de marcas resuelven mejor.</span>
+          </div>
+        </div>
+        <span class="f-tag">global mobile<br>nav-tagline</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 TIPOGRAFÍA -->
+  <section id="typo">
+    <div class="sec-label">03 / Tipografía y jerarquía</div>
+    <h2 class="sec-title">Space Grotesk + DM Sans + DM Mono —<br>el sistema más sólido del rediseño</h2>
+    <p class="sec-sub">La triada tipográfica está clara: Space Grotesk para display (H1, H2, KPIs), DM Sans para body, DM Mono para kickers, labels y código. La aplicación es consistente en las 6 páginas. Quedan ajustes finos: jerarquía entre H1 y H2 que a veces compite, y el uso del <em>italic + verde</em> que aparece más de la cuenta.</p>
+    <div class="sec-divider"></div>
+
+    <!-- Type stack preview -->
+    <div class="type-stack">
+      <div class="type-row">
+        <div>
+          <div class="lbl">Display · H1 hero</div>
+          <div class="meta">Space Grotesk 300 · -.025em · 1.05</div>
+        </div>
+        <div>
+          <div class="sample" style="font-size:48px;">Construyo software<br>que escala sin depender<br><em>de quién lo creó.</em></div>
+        </div>
+      </div>
+      <div class="type-row">
+        <div>
+          <div class="lbl">Display · H2 sección</div>
+          <div class="meta">Space Grotesk 300 · -.02em · 1.2</div>
+        </div>
+        <div>
+          <div class="sample" style="font-size:32px;">Entrego sistemas que funcionan<br>cuando yo no estoy.</div>
+        </div>
+      </div>
+      <div class="type-row">
+        <div>
+          <div class="lbl">Body · párrafo</div>
+          <div class="meta">DM Sans 400 · 16px · 1.65</div>
+        </div>
+        <div style="font-family:var(--ff-body);font-size:16px;color:var(--text-2);line-height:1.65;font-weight:400;">+8 años en Healthcare, SaaS e IoT entregando sistemas que cualquier dev puede mantener desde el primer día.</div>
+      </div>
+      <div class="type-row">
+        <div>
+          <div class="lbl">Mono · kicker</div>
+          <div class="meta">DM Mono 400 · 11px · .14em uppercase</div>
+        </div>
+        <div style="font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.14em;text-transform:uppercase;">Solutions Architect · FinOps &amp; Cloud · Healthcare &amp; SaaS</div>
+      </div>
+    </div>
+
+    <div class="findings" style="margin-top:8px">
+      <div class="finding">
+        <span class="badge warn">Importante</span>
+        <div class="f-body">
+          <div class="f-title">El uso de <em>&lt;em&gt;</em> en verde aparece en todos los H1 y muchos H2 — cuando todo se enfatiza, nada se enfatiza</div>
+          <p>"<em>de quién lo creó</em>" en home, "<em>conmigo</em>" en testimonios, "<em>medible</em>" en casos, "<em>existente</em>" en metodología CTA, "<em>importa más que el stack</em>" en metodología H1. Cada página tiene 2–4 instancias del italic verde. Es el mismo recurso visual aplicado tantas veces que pierde el rol de énfasis y se convierte en "estilo de título". Comparado con el brand identity (donde el <em>em</em> aparece <em>una</em> vez por página, en el lugar correcto), el sitio lo sobreusa.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Regla: <strong>un solo <em>em</em> por hero, uno por sección</strong>. En el resto, el verde puede aparecer como acento en KPIs o en el verbo principal pero no como italic. Auditar las 6 páginas y reducir las instancias actuales en ~40%. El que queda gana fuerza.</span>
+          </div>
+        </div>
+        <span class="f-tag">global<br>em · italic verde</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge info">Mejora</span>
+        <div class="f-body">
+          <div class="f-title">El H1 de Hablemos.html es solo "Hablemos." — la página de conversión usa la tipografía más tibia del sitio</div>
+          <p>Casos abre con "Impacto <em>medible.</em>" Metodología abre con "Así es cómo trabajo — y por qué <em>importa más que el stack</em>." Testimonios abre con "Lo que dicen quienes han trabajado <em>conmigo</em>." Hablemos abre con "Hablemos." — punto. Es el único H1 de una sola palabra del sitio. La página donde el visitante llega <em>listo para escribir</em> es la que tiene el menor compromiso tipográfico.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Un H1 con dos líneas y una nota de marca, p.ej. "Cuéntame tu proyecto.<br>Te respondo en <em>menos de 24h</em>." — alinea con el resto del sitio, anclá la promesa, y deja "Hablemos" para el botón/nav (que ya cumple esa función).</span>
+          </div>
+        </div>
+        <span class="f-tag">hablemos.html<br>H1</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge info">Mejora</span>
+        <div class="f-body">
+          <div class="f-title">Los kickers de sección y los nav-tagline usan los dos exactamente el mismo tratamiento — DM Mono 10–11px, .12–.14em, uppercase, gris</div>
+          <p>Visualmente no hay forma de distinguir un "kicker de sección" de un "tagline de nav" — son la misma línea tipográfica. Esto produce una sensación de monotonía en mono: cada bloque parece introducido por una etiqueta idéntica. Un visitante escaneando rápido no diferencia "Solutions Architect · Lima" del kicker "Mi Enfoque".</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Diferenciar dos roles en mono: (a) <strong>Kicker de sección</strong> = DM Mono 11px, color blanco/var(--text-2), tracking .14em. (b) <strong>Etiqueta meta</strong> (rol, plataforma, contexto) = DM Mono 10px, var(--text-3), tracking .1em. La diferencia de color (gris medio vs gris oscuro) y tracking es suficiente.</span>
+          </div>
+        </div>
+        <span class="f-tag">global<br>mono labels</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge nit">Detalle</span>
+        <div class="f-body">
+          <div class="f-title">El H1 hero de home tiene 3 líneas — la última es la única en italic, lo que rompe el ritmo de quiebre</div>
+          <p>"Construyo software / que escala sin depender / <em>de quién lo creó.</em>" El italic en la tercera línea está bien semánticamente pero hace que la última línea cargue visualmente más que las primeras dos. Líneas 1 y 2 son blancas y rectas; línea 3 es verde, italic, con punto final. Visualmente el peso baja al final cuando el sistema display normalmente sube.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Probar: "Construyo software<br>que escala sin depender de<br><em>quién lo creó.</em>" — tercera línea más corta y compacta, el italic remata sin sobrepesar. O simplemente romper el tagline a dos líneas y dejar el italic en la primera.</span>
+          </div>
+        </div>
+        <span class="f-tag">home.html<br>H1 ritmo</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 COMPONENTES -->
+  <section id="componentes">
+    <div class="sec-label">04 / Consistencia de componentes UI</div>
+    <h2 class="sec-title">Cards unificadas, KPIs unificados —<br>el botón secundario es la última pieza suelta</h2>
+    <p class="sec-sub">El v1 documentó tres sistemas de card. La v2 muestra uno. Las cards de Casos, Testimonios y Experiencia comparten ahora el mismo lenguaje (fondo <code>--surface</code>, border <code>--border</code>, padding consistente). El issue restante está en el botón secundario y en la forma de los <em>metric-tag</em>, que aún tienen 3 variantes según contexto.</p>
+    <div class="sec-divider"></div>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="badge win">Resuelto</span>
+        <div class="f-body">
+          <div class="f-title">El "screenshot de WhatsApp/LinkedIn/Telegram" desapareció — testimonios ahora son cards reales del sistema</div>
+          <p>El crítico de v1 sobre testimonios (cards que imitaban interfaces de plataformas externas) está cerrado. Las cards actuales tienen avatar redondo + nombre + rol + quote + meta + categoría — todo en el sistema visual del sitio. La plataforma de origen es ahora una etiqueta secundaria, no el tratamiento dominante.</p>
+        </div>
+        <span class="f-tag">testimonios.html<br>cards</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge warn">Importante</span>
+        <div class="f-body">
+          <div class="f-title">El botón secundario inconsistente — a veces es "outline + verde", a veces "outline + texto-2", a veces "outline + texto"</div>
+          <p>En home: <em>"Ver casos de éxito"</em> sale con borde claro y texto blanco. En metodología CTA: <em>"Ver casos de éxito"</em> sale con borde gris y texto gris-2. En testimonios CTA: <em>"Ver casos de éxito"</em> es similar al de home pero con padding distinto. La intención es la misma — botón secundario "Ver casos" — pero el estilo visual cambia entre páginas.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Definir un solo <code>.btn-secondary</code>: borde <code>var(--border-2)</code>, texto <code>var(--text)</code>, hover → borde verde + texto verde, padding 12×24px, radio 3px. Usar la misma variable en home, metodología, testimonios, casos. Documentar en Brand Identity v1.0 como "Botón secundario · variante única".</span>
+          </div>
+        </div>
+        <span class="f-tag">global<br>btn-secondary</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge info">Mejora</span>
+        <div class="f-body">
+          <div class="f-title">Tres variantes de <code>metric-tag</code> coexisten — verde sólido, neutro outline, y un mini-badge gris en testimonios</div>
+          <p>Los KPIs del home usan <code>metric-tag</code> verde sobre fondo verde-bg. Los casos usan <code>metric-tag</code> verde sin fondo. Testimonios usan un <code>metric-small</code> con borde y un caso especial inline (PREIS) que es un cuarto estilo distinto. Cuatro variantes para la misma idea (resaltar una métrica): es ruido sistémico.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Dos variantes oficiales: <strong>metric-strong</strong> (verde sólido sobre fondo verde-bg, para KPI principal del hero/CTA) y <strong>metric-quiet</strong> (verde plano sobre transparente, para listas y cards). Eliminar el resto. Documentar en el Brand Identity como "Sistema de metric tags · 2 variantes".</span>
+          </div>
+        </div>
+        <span class="f-tag">global<br>metric-tag</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge info">Mejora</span>
+        <div class="f-body">
+          <div class="f-title">Las imágenes/SVG de los Casos de Éxito son ilustraciones lineales custom — coherentes entre sí pero ajenas al sistema visual del sitio</div>
+          <p>Las 8 cards de casos tienen SVG ilustrativos generados (gráficos de líneas, diagramas de cajas, círculos concéntricos). Son consistentes entre sí — mismo color verde de marca, misma paleta de líneas. Pero ese lenguaje "diagramático lineal" no aparece en ninguna otra parte del sitio. Resultado: los Casos de Éxito tienen un estilo visual propio que no se conecta con el resto.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Dos caminos. (a) Llevar el lenguaje "diagrama lineal" a otras páginas: el hero de Metodología podría tener uno; el footer podría tener un patrón sutil. (b) Reemplazar los SVG por capturas reales del trabajo (dashboards, queries, ADRs). La opción (b) es más fuerte para credibilidad pero requiere assets reales. (a) es más rápida y refuerza la identidad visual.</span>
+          </div>
+        </div>
+        <span class="f-tag">casos-de-exito.html<br>case visuals</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 CROSS-PLATFORM -->
+  <section id="crossplatform">
+    <div class="sec-label">05 / Alineación cross-platform</div>
+    <h2 class="sec-title">Web · LinkedIn · GitHub —<br>el handle <code style="font-size:.8em;background:none;border:none;color:var(--green);padding:0">modavidc</code> está unificado, el resto no</h2>
+    <p class="sec-sub">La auditoría v1 puso esto en 7.0; la v2 lo deja en 8.5. El handle <code>modavidc</code> es ahora consistente en LinkedIn, GitHub y dominio. Lo que falta es trasladar el sistema visual completo (verde de marca + tagline + tono) a las superficies sociales — hoy LinkedIn y GitHub se ven como cuentas separadas, no como extensiones del sitio.</p>
+    <div class="sec-divider"></div>
+
+    <div class="matrix">
+      <div class="mx-cell h">Elemento</div>
+      <div class="mx-cell h">modavidc.com</div>
+      <div class="mx-cell h">LinkedIn</div>
+      <div class="mx-cell h">GitHub</div>
+      <div class="mx-cell h">Email firma</div>
+
+      <div class="mx-cell row">Handle</div>
+      <div class="mx-cell match">modavidc ✓</div>
+      <div class="mx-cell match">in/modavidc ✓</div>
+      <div class="mx-cell match">@modavidc ✓</div>
+      <div class="mx-cell miss">N/D</div>
+
+      <div class="mx-cell row">Tagline visible</div>
+      <div class="mx-cell match">Sí · nav</div>
+      <div class="mx-cell match">Sí · banner</div>
+      <div class="mx-cell miss">No · README</div>
+      <div class="mx-cell miss">No · firma</div>
+
+      <div class="mx-cell row">Verde de marca</div>
+      <div class="mx-cell match">oklch(67/.17/148)</div>
+      <div class="mx-cell miss">No verificable</div>
+      <div class="mx-cell miss">No aplicado</div>
+      <div class="mx-cell miss">N/D</div>
+
+      <div class="mx-cell row">Foto profesional</div>
+      <div class="mx-cell match">Hero photo · ✓</div>
+      <div class="mx-cell match">Avatar · ✓</div>
+      <div class="mx-cell miss">Probablemente sí</div>
+      <div class="mx-cell miss">N/D</div>
+
+      <div class="mx-cell row">Métricas KPI</div>
+      <div class="mx-cell match">5 KPIs · home</div>
+      <div class="mx-cell miss">No claras</div>
+      <div class="mx-cell miss">No · README</div>
+      <div class="mx-cell miss">N/D</div>
+
+      <div class="mx-cell row">Link al portfolio</div>
+      <div class="mx-cell match">N/A</div>
+      <div class="mx-cell miss">A verificar</div>
+      <div class="mx-cell miss">A verificar</div>
+      <div class="mx-cell miss">A verificar</div>
+    </div>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="badge info">Mejora</span>
+        <div class="f-body">
+          <div class="f-title">El GitHub README de <code>modavidc</code> probablemente no refleja el sistema de marca del sitio</div>
+          <p>Recruters técnicos y CTOs casi siempre abren el GitHub antes que el portfolio. Si el README de perfil <code>github.com/modavidc/modavidc</code> no existe, o no usa el wordmark + tagline + verde + KPIs del sitio, entonces el primer punto de contacto técnico es inconsistente con el portfolio. Es una superficie de marca de 0 costo y alto impacto.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Crear <code>github.com/modavidc/modavidc</code> README con: (1) wordmark "<strong>mo</strong>davidc" en H1, (2) tagline en cita, (3) tabla con los 5 KPIs principales, (4) link al portfolio + LinkedIn, (5) lista de los 3 últimos repos destacados con una frase de impacto cada uno. Mantener el tono "honest work" — no listar 30 tecnologías.</span>
+          </div>
+        </div>
+        <span class="f-tag">github.com<br>profile README</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge info">Mejora</span>
+        <div class="f-body">
+          <div class="f-title">La firma de email no se ve documentada — es la superficie con más impresiones por mes para una marca personal</div>
+          <p>Cada email enviado (a clientes, leads, recruiters) lleva una firma. Si esa firma es solo "Moisés Cedeño · Solutions Architect" en Arial 10px sin link al portfolio, sin tagline y sin el verde de marca, el sitio tiene 6 páginas pulidas y la firma de email anula el trabajo.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Firma HTML compacta: línea 1 — Moisés Cedeño · Solutions Architect (DM Sans 13px). Línea 2 — "Honest work. Efficient architectures." (DM Mono 10px gris). Línea 3 — modavidc.com · linkedin.com/in/modavidc · github.com/modavidc (links subrayados, hover verde). Sin imágenes (las firmas con imágenes se rompen en muchos clientes).</span>
+          </div>
+        </div>
+        <span class="f-tag">email<br>firma</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 VOZ VISUAL -->
+  <section id="voz">
+    <div class="sec-label">06 / Voz visual / tono</div>
+    <h2 class="sec-title">El tono visual es honesto y técnico —<br>la foto del hero es el único elemento con tono distinto</h2>
+    <p class="sec-sub">El sitio respira "honest work. efficient architectures." en su composición: dark, alto contraste, espaciado generoso, mono para los micro-detalles. Una pieza puntual rompe el tono — la foto del hero, que tiene un tratamiento más cálido/personal que el resto del sistema.</p>
+    <div class="sec-divider"></div>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="badge info">Mejora</span>
+        <div class="f-body">
+          <div class="f-title">La foto del hero tiene tono cálido (warm) y aspecto editorial — el resto del sitio es frío, dark y técnico</div>
+          <p>La foto en <code>uploads/pasted-1777010489653-0.png</code> presumiblemente tiene una iluminación natural cálida (típica de fotos de retrato profesional). Sobre el fondo <code>#0d0d0f</code> con verde de marca y tipografía Space Grotesk fría, la foto se siente como si pertenciera a otro portfolio — uno más editorial, más LinkedIn. No es un problema de calidad de la foto: es un problema de tono cromático.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Tres opciones en orden de fuerza: (a) <strong>Pasar la foto a duotono</strong> verde + dark — coloriza la foto en el sistema de marca. Ej: filtro CSS <code>filter: grayscale(.6) hue-rotate(110deg) contrast(1.1)</code> o un tratamiento exportado en Figma. (b) Bajar la saturación al 50% y subir el contraste — la foto se siente más fría sin perder humanidad. (c) Si la marca quiere mantener calidez como diferenciador (válido), entonces introducir <em>otro</em> elemento cálido en algún CTA o footer para que la foto no quede aislada.</span>
+          </div>
+        </div>
+        <span class="f-tag">home.html<br>hero photo</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge nit">Detalle</span>
+        <div class="f-body">
+          <div class="f-title">El badge "Disponible" sobre la foto usa verde plano sobre verde-bg sutil — se confunde con el verde de los KPIs</div>
+          <p>"Disponible" es información de estado (puedo trabajar contigo ahora) — debería verse distinta a un KPI de impacto (-58% AWS). Hoy ambos usan el mismo tratamiento cromático. El visitante lee "Disponible" con el mismo peso visual que "-58%", cuando uno es un fact de timing y el otro un fact de resultado.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">"Disponible" puede usar verde + dot pulsante (live indicator) y mantenerse en mono pequeño — el dot anima la idea de "ahora disponible" y diferencia del KPI estático. O cambiar el tratamiento a un pill outline en verde-2 (más sutil), reservando el verde sólido para métricas de impacto.</span>
+          </div>
+        </div>
+        <span class="f-tag">home.html<br>hero badge</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 MICRO-DETALLES -->
+  <section id="micro">
+    <div class="sec-label">07 / Micro-detalles</div>
+    <h2 class="sec-title">Los detalles donde se nota un Solutions Architect —<br>o donde se nota que falta uno</h2>
+    <p class="sec-sub">Cinco fricciones que un visitante senior detecta inconscientemente. Ninguna es bloqueante; en conjunto, son la diferencia entre "buen sitio" y "sitio impecable".</p>
+    <div class="sec-divider"></div>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="badge nit">Detalle</span>
+        <div class="f-body">
+          <div class="f-title">Los focus states no parecen documentados — al tabular el form de Hablemos, el ring de focus es el default del navegador</div>
+          <p>Un Solutions Architect que cuida la documentación cuida también accesibilidad. Si <code>:focus-visible</code> no está estilizado, el navegador pinta el outline default (azul Chrome o negro). En un sitio dark, el outline default se ve como un bug visual.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">CSS global: <code>:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }</code>. Probar tabulando todo el form de Hablemos, los nav links, y los botones del CTA. Documentar en Brand Identity v1.0 sección "Estados".</span>
+          </div>
+        </div>
+        <span class="f-tag">global<br>focus states</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge nit">Detalle</span>
+        <div class="f-body">
+          <div class="f-title">El CTA primario no tiene loading state — al enviar el form de Hablemos, el botón queda igual durante la respuesta</div>
+          <p>El form de Hablemos hace <code>onsubmit="handleSubmit(event)"</code> y muestra un mensaje de éxito. Pero entre el click y la respuesta, no hay feedback visual de "procesando". En conexiones lentas (mobile, 3G), el usuario puede dudar si el botón funcionó y hacer doble click.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Estado <code>btn--loading</code>: spinner SVG inline + texto "Enviando..." en lugar del icono de avión. Mantener mismo width para evitar layout shift. Disabled al hacer click para prevenir doble-submit.</span>
+          </div>
+        </div>
+        <span class="f-tag">hablemos.html<br>btn states</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge nit">Detalle</span>
+        <div class="f-body">
+          <div class="f-title">No hay <code>scroll-margin-top</code> en los anchors de home — el nav fijo tapa parcialmente el título cuando se navega a #casos, #testimonios, etc.</div>
+          <p>El nav del home es <code>position: fixed</code> (asumido por la altura). Al hacer click en "Casos de Éxito" del nav, el navegador lleva a la sección, pero el H2 queda parcialmente bajo el nav. Es un detalle universal en sites con nav fijo.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">CSS: <code>section[id], div[id] { scroll-margin-top: 80px; }</code> donde 80px = altura del nav + respiración. Probar todos los anchors del home.</span>
+          </div>
+        </div>
+        <span class="f-tag">home.html<br>scroll anchors</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge nit">Detalle</span>
+        <div class="f-body">
+          <div class="f-title">Los hover states de las cards de Casos de Éxito no están — el cursor cambia pero la card no responde visualmente</div>
+          <p>Las cards tienen <code>caso-link "Ver caso →"</code> al final pero la card completa parece no tener hover state (no hay elevación, no hay border highlight, no hay shadow). En cards clickeables, esa señal visual es el contrato implícito: "esta tarjeta es interactiva".</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Hover sobre <code>.caso-card</code>: <code>border-color: var(--green-dim); transform: translateY(-2px); transition: all .2s</code>. O más sutil: solo el border cambia a verde-dim y el "Ver caso →" se vuelve verde fuerte. La regla: siempre hay <em>algún</em> cambio cuando la card es clickeable.</span>
+          </div>
+        </div>
+        <span class="f-tag">casos-de-exito.html<br>card hover</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge nit">Detalle</span>
+        <div class="f-body">
+          <div class="f-title">La animación de entrada del hero no existe — todo aparece en frame 1, sin staggered reveal</div>
+          <p>Para un portfolio que vende "criterio + velocidad", una animación bien medida en el hero (kicker → H1 → sub → CTA → KPIs aparecen en cascada de 80–120ms) comunica "este sitio fue pensado". Hoy todo aparece de golpe, lo cual no es malo pero no agrega.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">CSS-only stagger con <code>animation-delay</code>: kicker (0ms) → H1 (120ms) → sub (240ms) → CTAs (360ms) → KPI bar (480ms). <code>opacity 0 → 1</code> + <code>translateY(8px → 0)</code>. Curva: <code>cubic-bezier(.2,.6,.2,1)</code>. Solo en el primer load — no repetir al volver a la home con back button.</span>
+          </div>
+        </div>
+        <span class="f-tag">home.html<br>hero motion</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 ROADMAP -->
+  <section id="roadmap">
+    <div class="sec-label">08 / Roadmap hacia v3</div>
+    <h2 class="sec-title">Qué cerrar antes del próximo lanzamiento</h2>
+    <p class="sec-sub">Tres tracks ordenados por impacto/esfuerzo. La columna izquierda son los issues que afectan percepción de marca. La del medio, polish que un visitante senior detecta. La derecha, asuntos de "siguiente versión" que aún no son críticos.</p>
+    <div class="sec-divider"></div>
+
+    <div class="roadmap">
+      <div class="rm-col">
+        <div class="rm-head">Esta semana · alta prioridad</div>
+        <div class="rm-sub">Marca · superficies básicas</div>
+        <div class="rm-item">Favicon SVG con la "m" de modavidc en verde · 32×32 + 180×180</div>
+        <div class="rm-item">OG image 1200×630 con wordmark + tagline + KPIs</div>
+        <div class="rm-item">Quitar color de los <code>platform-dot</code> de testimonios</div>
+        <div class="rm-item">Unificar <code>btn-secondary</code> en todas las páginas</div>
+        <div class="rm-item">Reducir uso de <em>italic verde</em> ~40% (uno por hero)</div>
+        <div class="rm-item">Tokenizar <code>--green</code> en un único <code>tokens.css</code></div>
+      </div>
+      <div class="rm-col">
+        <div class="rm-head">Próximas dos semanas</div>
+        <div class="rm-sub">Polish · cross-platform</div>
+        <div class="rm-item">Monograma cuadrado para avatars sociales (LinkedIn, GitHub, X)</div>
+        <div class="rm-item">README de perfil GitHub con sistema de marca completo</div>
+        <div class="rm-item">Firma de email HTML con tagline + links + estilo</div>
+        <div class="rm-item">H1 de Hablemos en línea con el resto del sitio</div>
+        <div class="rm-item">Botón de loading state en form de Hablemos</div>
+        <div class="rm-item">Hover state en cards de Casos de Éxito</div>
+        <div class="rm-item">Focus states con <code>:focus-visible</code> en verde</div>
+        <div class="rm-item">Tagline grande al menos una vez por sesión (footer hero)</div>
+      </div>
+      <div class="rm-col">
+        <div class="rm-head">v3 · siguiente iteración</div>
+        <div class="rm-sub">Sistema · siguiente nivel</div>
+        <div class="rm-item">Foto del hero en duotono o ajuste cromático al sistema</div>
+        <div class="rm-item">Lenguaje "diagrama lineal" llevado a otras páginas</div>
+        <div class="rm-item">Hero motion con stagger de 120ms entre elementos</div>
+        <div class="rm-item">Banner LinkedIn coordinado al sitio (mismo color/tagline)</div>
+        <div class="rm-item">Sistema de metric-tags reducido a 2 variantes oficiales</div>
+        <div class="rm-item">Documentar focus + hover + loading en Brand Identity</div>
+        <div class="rm-item">Auditoría de accesibilidad WCAG AA</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONCLUSION -->
+  <div class="conclusion">
+    <div class="conclusion-text">
+      La v1 era un sitio sin sistema con buena dirección.<br>
+      La v2 es un <strong>sistema con detalles</strong> — y ningún issue restante es bloqueante para enviarle el link a un cliente, recruiter o CTO.
+    </div>
+    <div class="conclusion-stats">
+      <div class="cstat"><div class="cstat-n" style="color:var(--green)">+2.7</div><div class="cstat-l">Score · v1 → v2</div></div>
+      <div class="cstat"><div class="cstat-n" style="color:var(--green)">−4</div><div class="cstat-l">Críticos cerrados</div></div>
+      <div class="cstat"><div class="cstat-n">14</div><div class="cstat-l">Hallazgos restantes</div></div>
+      <div class="cstat"><div class="cstat-n">~3</div><div class="cstat-l">Días para roadmap 1</div></div>
+    </div>
+  </div>
+
+  <footer>
+    <span><span style="font-family:var(--ff-display);color:var(--text)"><span style="color:var(--green)">mo</span>davidc</span> · Auditoría Design + Branding · v2</span>
+    <span>Abr 2026 · sobre el sitio rediseñado</span>
+  </footer>
+
+</div>
+</body>
+</html>

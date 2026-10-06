@@ -1,0 +1,855 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Auditoría Design + Branding — modavidc.com</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0d0f;
+  --surface: #131316;
+  --surface-2: #1a1a1e;
+  --border: #252528;
+  --border-2: #2e2e33;
+  --text: #e8e8ec;
+  --text-2: #9898a8;
+  --text-3: #5a5a68;
+  --accent: oklch(72% 0.18 145);      /* green — brand anchor */
+  --red:    oklch(65% 0.20 25);
+  --amber:  oklch(72% 0.16 70);
+  --blue:   oklch(68% 0.17 240);
+  --purple: oklch(68% 0.18 295);
+  --red-bg:    oklch(18% 0.06 25);
+  --amber-bg:  oklch(18% 0.06 70);
+  --green-bg:  oklch(18% 0.06 145);
+  --blue-bg:   oklch(18% 0.06 240);
+  --purple-bg: oklch(18% 0.06 295);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--bg); color: var(--text); font-family: 'DM Sans', system-ui, sans-serif; font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+code { font-family: 'DM Mono', monospace; font-size: .82em; background: var(--surface-2); border: 1px solid var(--border); padding: 1px 6px; border-radius: 3px; color: var(--accent); }
+
+/* LAYOUT */
+.page { max-width: 1160px; margin: 0 auto; padding: 64px 48px 120px; }
+
+/* TOP STRIP */
+.topstrip {
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid var(--border); padding-bottom: 24px; margin-bottom: 56px;
+  font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-3); letter-spacing: .12em; text-transform: uppercase;
+}
+.topstrip .brand { color: var(--accent); font-size: 13px; letter-spacing: .02em; text-transform: none; font-weight: 500; }
+
+/* HERO */
+.hero { margin-bottom: 72px; }
+.hero-kicker { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--text-3); margin-bottom: 20px; }
+.hero h1 { font-size: clamp(42px, 5vw, 68px); font-weight: 300; line-height: 1.05; letter-spacing: -.025em; color: var(--text); margin-bottom: 20px; }
+.hero h1 strong { font-weight: 600; color: var(--accent); }
+.hero .dek { font-size: 17px; color: var(--text-2); max-width: 680px; line-height: 1.65; margin-bottom: 36px; }
+
+/* SCORECARD */
+.scorecard {
+  display: grid; grid-template-columns: 200px 1fr; gap: 0;
+  border: 1px solid var(--border); margin-bottom: 8px;
+}
+.score-main { padding: 32px 36px; border-right: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; }
+.score-num { font-size: 80px; font-weight: 300; line-height: 1; letter-spacing: -.04em; color: var(--accent); }
+.score-den { font-size: 20px; color: var(--text-3); vertical-align: super; }
+.score-lbl { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); margin-top: 8px; }
+.pillars { padding: 24px 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; align-content: center; }
+.pillar { display: grid; grid-template-columns: 1fr 36px; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border); }
+.pillar:nth-last-child(-n+2) { border-bottom: none; }
+.pillar-name { font-size: 13px; color: var(--text-2); }
+.pillar-val { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text); text-align: right; }
+.pillar-track { grid-column: 1 / -1; height: 2px; background: var(--border-2); margin-top: -6px; margin-bottom: 2px; }
+.pillar-track span { display: block; height: 100%; background: var(--accent); }
+
+/* ISSUE COUNTS */
+.counts { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border); border-top: none; margin-bottom: 56px; }
+.count { padding: 18px 24px; border-right: 1px solid var(--border); }
+.count:last-child { border-right: none; }
+.count-n { font-size: 36px; font-weight: 300; letter-spacing: -.03em; line-height: 1; }
+.count-l { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); margin-top: 4px; }
+.count.crit .count-n { color: var(--red); }
+.count.warn .count-n { color: var(--amber); }
+.count.info .count-n { color: var(--blue); }
+.count.nit .count-n { color: var(--text-3); }
+
+/* NAV TABS */
+.navtabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 72px; overflow-x: auto; }
+.navtab { padding: 12px 20px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); text-decoration: none; white-space: nowrap; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color .15s, border-color .15s; }
+.navtab:hover { color: var(--text); border-color: var(--border-2); }
+.navtab .num { color: var(--text-3); margin-right: 8px; }
+
+/* SECTION */
+section { margin-bottom: 88px; }
+.sec-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--text-3); margin-bottom: 12px; }
+.sec-title { font-size: clamp(26px, 3.5vw, 38px); font-weight: 300; letter-spacing: -.02em; line-height: 1.2; margin-bottom: 10px; }
+.sec-sub { font-size: 15px; color: var(--text-2); max-width: 740px; line-height: 1.65; margin-bottom: 36px; }
+.sec-divider { width: 100%; height: 1px; background: var(--border); margin-bottom: 36px; }
+
+/* PULL */
+.pull { border-left: 2px solid var(--accent); padding: 8px 0 8px 20px; font-size: 18px; font-weight: 300; line-height: 1.55; color: var(--text-2); max-width: 720px; margin-bottom: 32px; font-style: italic; }
+
+/* FINDINGS */
+.findings { display: grid; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 36px; }
+.finding { background: var(--surface); display: grid; grid-template-columns: 120px 1fr 80px; gap: 24px; padding: 24px 28px; align-items: start; }
+.finding:hover { background: var(--surface-2); }
+
+.badge { display: inline-flex; align-items: center; gap: 6px; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; padding: 4px 8px; border-radius: 2px; white-space: nowrap; line-height: 1; }
+.badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+.badge.crit { color: var(--red); background: var(--red-bg); }
+.badge.warn { color: var(--amber); background: var(--amber-bg); }
+.badge.info { color: var(--blue); background: var(--blue-bg); }
+.badge.nit  { color: var(--text-3); background: var(--surface-2); }
+
+.f-title { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 8px; line-height: 1.4; }
+.f-body { font-size: 13.5px; color: var(--text-2); line-height: 1.65; }
+.f-body p { margin-bottom: 8px; }
+.f-fix { margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border-2); display: grid; grid-template-columns: 52px 1fr; gap: 12px; align-items: baseline; }
+.fix-lbl { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+.fix-val { font-size: 13px; color: var(--text); line-height: 1.55; }
+.f-tag { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-3); letter-spacing: .08em; padding-top: 3px; text-align: right; line-height: 1.6; }
+
+/* COLOR DEMO */
+.color-demo { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 24px; }
+.color-swatch { background: var(--surface); padding: 20px; }
+.swatch-block { height: 40px; border-radius: 2px; margin-bottom: 12px; }
+.swatch-name { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text); }
+.swatch-desc { font-size: 12px; color: var(--text-3); margin-top: 4px; line-height: 1.4; }
+
+/* COMPARE */
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 24px; }
+.compare-col { background: var(--surface); padding: 24px 28px; }
+.compare-col.bad { border-top: 2px solid var(--red); }
+.compare-col.good { border-top: 2px solid var(--accent); }
+.compare-head { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); margin-bottom: 16px; }
+.compare-head.bad { color: var(--red); }
+.compare-head.good { color: var(--accent); }
+.compare-item { font-size: 13px; color: var(--text-2); margin-bottom: 8px; padding-left: 16px; position: relative; line-height: 1.5; }
+.compare-item::before { content: '·'; position: absolute; left: 0; color: var(--text-3); }
+.compare-col.bad .compare-item::before { content: '✗'; color: var(--red); }
+.compare-col.good .compare-item::before { content: '✓'; color: var(--accent); }
+
+/* TYPE SPECIMEN */
+.type-specimen { border: 1px solid var(--border); background: var(--surface); padding: 28px 32px; margin-bottom: 1px; }
+.type-specimen + .type-specimen { border-top: none; }
+.type-meta { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-3); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 12px; }
+.type-sample { line-height: 1.2; letter-spacing: -.02em; }
+.type-note { font-size: 13px; color: var(--text-3); margin-top: 10px; line-height: 1.5; }
+
+/* PLATFORM GRID */
+.platforms { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 36px; }
+.platform { background: var(--surface); padding: 24px 28px; }
+.platform-name { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.platform-name-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.platform-row { margin-bottom: 8px; }
+.platform-label { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--text-3); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 2px; }
+.platform-value { font-size: 13px; color: var(--text); line-height: 1.4; }
+.platform-value.mismatch { color: var(--amber); }
+.platform-value.match { color: var(--accent); }
+.platform-issue { font-size: 12px; color: var(--red); margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-2); font-family: 'DM Mono', monospace; letter-spacing: .05em; }
+
+/* ROADMAP */
+.roadmap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 36px; }
+.rm-col { background: var(--surface); padding: 24px 28px; }
+.rm-head { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 16px; }
+.rm-item { font-size: 13px; color: var(--text-2); margin-bottom: 10px; padding-left: 20px; position: relative; line-height: 1.5; }
+.rm-item::before { position: absolute; left: 0; font-family: 'DM Mono', monospace; font-size: 11px; }
+.rm-col:nth-child(1) .rm-head { color: var(--red); }
+.rm-col:nth-child(1) .rm-item::before { content: '!'; color: var(--red); }
+.rm-col:nth-child(2) .rm-head { color: var(--amber); }
+.rm-col:nth-child(2) .rm-item::before { content: '→'; color: var(--amber); }
+.rm-col:nth-child(3) .rm-head { color: var(--blue); }
+.rm-col:nth-child(3) .rm-item::before { content: '◦'; color: var(--blue); }
+.rm-sub { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-3); margin-bottom: 14px; }
+
+/* CONCLUSION */
+.conclusion { background: var(--surface); border: 1px solid var(--border); padding: 40px 48px; display: grid; grid-template-columns: 1fr 320px; gap: 48px; align-items: center; }
+.conclusion-text { font-size: 22px; font-weight: 300; line-height: 1.45; letter-spacing: -.01em; color: var(--text); }
+.conclusion-text strong { color: var(--accent); font-weight: 500; }
+.conclusion-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.cstat { background: var(--surface-2); padding: 16px 20px; }
+.cstat-n { font-size: 28px; font-weight: 300; letter-spacing: -.03em; line-height: 1; }
+.cstat-l { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-3); letter-spacing: .12em; text-transform: uppercase; margin-top: 4px; }
+
+footer { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-3); letter-spacing: .06em; }
+
+@media (max-width: 900px) {
+  .page { padding: 32px 20px 80px; }
+  .scorecard, .compare, .platforms, .roadmap, .conclusion { grid-template-columns: 1fr; }
+  .finding { grid-template-columns: 1fr; }
+  .pillars { grid-template-columns: 1fr; }
+  .counts { grid-template-columns: 1fr 1fr; }
+  .f-tag { text-align: left; }
+}
+
+/* ACCENT COLOR CHAOS DEMO */
+.chaos-demo { border: 1px solid var(--border); background: var(--surface); padding: 24px 28px; margin-bottom: 24px; }
+.chaos-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; align-items: center; }
+.chaos-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-3); letter-spacing: .1em; text-transform: uppercase; width: 130px; flex-shrink: 0; }
+.chip { padding: 3px 10px; border-radius: 100px; font-size: 12px; font-family: 'DM Mono', monospace; }
+.chip-green  { background: oklch(22% 0.07 145); color: oklch(78% 0.18 145); }
+.chip-purple { background: oklch(22% 0.07 295); color: oklch(78% 0.18 295); }
+.chip-blue   { background: oklch(22% 0.07 240); color: oklch(78% 0.17 240); }
+.chip-orange { background: oklch(22% 0.07 55);  color: oklch(78% 0.17 55);  }
+.chip-amber  { background: oklch(22% 0.07 70);  color: oklch(78% 0.16 70);  }
+.chip-white  { background: oklch(22% 0.00 0);   color: oklch(85% 0.00 0);   }
+.chip-teal   { background: oklch(22% 0.07 185); color: oklch(78% 0.17 185); }
+.chaos-note { font-size: 13px; color: var(--text-3); margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); line-height: 1.5; }
+.chaos-note strong { color: var(--amber); }
+
+/* PROPOSED SYSTEM */
+.system-demo { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 12px; }
+.sys-swatch { background: var(--surface); padding: 18px 16px; }
+.sys-block { height: 36px; border-radius: 2px; margin-bottom: 10px; }
+.sys-name { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text); }
+.sys-role { font-size: 11px; color: var(--text-3); margin-top: 3px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- TOP STRIP -->
+  <div class="topstrip">
+    <span class="brand">modavidc.com — Auditoría Design + Branding</span>
+    <span>Abr 2026 · Complementaria al análisis UX/Claude Code</span>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-kicker">Auditoría · Diseño · Identidad de Marca · Consistencia Visual</div>
+    <h1>El diseño es <strong>casi premium.</strong><br>El branding, sin terminar.</h1>
+    <p class="dek">El sitio tiene buena dirección visual: oscuro, limpio, bien espaciado. Pero no tiene un <em>sistema de marca</em> — no hay un color acento definido, el logo no corresponde a la identidad pública, y la plataforma web, LinkedIn y GitHub hablan con voces ligeramente distintas. Esta auditoría se enfoca exclusivamente en esos tres ejes: <strong>color, tipografía e identidad cross-platform.</strong></p>
+  </div>
+
+  <!-- SCORECARD -->
+  <div class="scorecard">
+    <div class="score-main">
+      <div class="score-num">6.4<span class="score-den">/10</span></div>
+      <div class="score-lbl">Score de marca</div>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <span class="pillar-name">Sistema de color</span>
+        <span class="pillar-val">4.5</span>
+        <div class="pillar-track"><span style="width:45%"></span></div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-name">Identidad / Logo</span>
+        <span class="pillar-val">3.0</span>
+        <div class="pillar-track"><span style="width:30%"></span></div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-name">Tipografía & jerarquía</span>
+        <span class="pillar-val">7.5</span>
+        <div class="pillar-track"><span style="width:75%"></span></div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-name">Consistencia entre páginas</span>
+        <span class="pillar-val">5.5</span>
+        <div class="pillar-track"><span style="width:55%"></span></div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-name">Componentes UI</span>
+        <span class="pillar-val">6.0</span>
+        <div class="pillar-track"><span style="width:60%"></span></div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-name">Alineación cross-platform</span>
+        <span class="pillar-val">7.0</span>
+        <div class="pillar-track"><span style="width:70%"></span></div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-name">Voz visual / tono</span>
+        <span class="pillar-val">6.5</span>
+        <div class="pillar-track"><span style="width:65%"></span></div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-name">Micro-detalles</span>
+        <span class="pillar-val">5.0</span>
+        <div class="pillar-track"><span style="width:50%"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="counts">
+    <div class="count crit"><div class="count-n">4</div><div class="count-l">Críticos</div></div>
+    <div class="count warn"><div class="count-n">6</div><div class="count-l">Importantes</div></div>
+    <div class="count info"><div class="count-n">5</div><div class="count-l">Mejoras</div></div>
+    <div class="count nit"><div class="count-n">3</div><div class="count-l">Detalles</div></div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="navtabs">
+    <a class="navtab" href="#color"><span class="num">01</span>Sistema de color</a>
+    <a class="navtab" href="#logo"><span class="num">02</span>Logo & marca</a>
+    <a class="navtab" href="#typo"><span class="num">03</span>Tipografía</a>
+    <a class="navtab" href="#componentes"><span class="num">04</span>Componentes</a>
+    <a class="navtab" href="#crossplatform"><span class="num">05</span>Cross-platform</a>
+    <a class="navtab" href="#voz"><span class="num">06</span>Voz visual</a>
+    <a class="navtab" href="#micro"><span class="num">07</span>Micro-detalles</a>
+    <a class="navtab" href="#roadmap"><span class="num">08</span>Roadmap</a>
+  </nav>
+
+  <!-- 01 COLOR -->
+  <section id="color">
+    <div class="sec-label">01 / Sistema de color</div>
+    <h2 class="sec-title">El sitio no tiene un color acento definido —<br>tiene seis colores sin sistema</h2>
+    <p class="sec-sub">El fondo oscuro es correcto y coherente. El problema está en los acentos: cada sección usa colores distintos, no como parte de un sistema semántico, sino de forma ad-hoc. El resultado visual es "tech bootstrap" en lugar de "senior arquitecto con criterio propio".</p>
+    <div class="sec-divider"></div>
+
+    <div class="pull">"Un sistema de color con un solo acento bien elegido comunica más criterio de diseño que seis colores usados sin razón."</div>
+
+    <!-- Diagnóstico actual -->
+    <div class="chaos-demo">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);margin-bottom:16px;">Inventario de colores acento — estado actual</div>
+
+      <div class="chaos-row">
+        <span class="chaos-label">KPIs / Home</span>
+        <span class="chip chip-green">+8 años</span>
+        <span class="chip chip-orange">-58%</span>
+        <span class="chip chip-teal">+9</span>
+        <span class="chip chip-white">48h</span>
+        <span class="chip chip-amber">-$20K</span>
+      </div>
+      <div class="chaos-row">
+        <span class="chaos-label">Filtros / Casos</span>
+        <span class="chip chip-green">● FinOps</span>
+        <span class="chip chip-purple">● Healthcare</span>
+        <span class="chip chip-blue">● SaaS</span>
+        <span class="chip chip-orange">● Mobile</span>
+      </div>
+      <div class="chaos-row">
+        <span class="chaos-label">Timeline / Exp.</span>
+        <span class="chip chip-green">● Tech Lead</span>
+        <span class="chip chip-purple">● Solutions Arch.</span>
+        <span class="chip chip-orange">● Integration Eng.</span>
+        <span class="chip chip-teal">● Full-Stack</span>
+      </div>
+      <div class="chaos-row">
+        <span class="chaos-label">Testimonios</span>
+        <span class="chip chip-green">WhatsApp</span>
+        <span class="chip chip-blue">LinkedIn</span>
+        <span class="chip chip-teal">Telegram</span>
+        <span class="chip chip-orange">Email</span>
+      </div>
+      <div class="chaos-note">
+        <strong>El problema:</strong> hay 7+ colores acento distintos en el sitio. Ninguno es consistentemente "el color de Moisés Cedeño". Los colores de testimonios son de plataformas externas (verde WhatsApp, azul LinkedIn) — se mezclan con los colores del sistema sin diferenciación. El visitante no puede construir una asociación visual con la marca.
+      </div>
+    </div>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="badge crit">Crítico</span>
+        <div class="f-body">
+          <div class="f-title">No existe un color acento de marca — hay colores de contexto sin sistema</div>
+          <p>Cada sección eligió un color distinto de forma independiente. El verde se usa para FinOps, para "Tech Lead", para WhatsApp y para años de experiencia. El naranja se usa para -58%, para "Mobile" y para Integration Engineer. No hay semántica de color — el mismo color significa cosas distintas en distintas secciones.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Definir un único color primario de marca. Recomendación: verde (<code>oklch(68% 0.18 145)</code>) — ya es el más usado implícitamente, funciona en dark theme, connota tecnología + eficiencia. Usar ese color para todos los acentos de interacción (CTAs, métricas destacadas, links hover, borders activos). Reducir los colores categóricos a máximo 3, solo para etiquetas de categoría en Casos de Éxito.</span>
+          </div>
+        </div>
+        <span class="f-tag">Global<br>Color system</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge crit">Crítico</span>
+        <div class="f-body">
+          <div class="f-title">Los colores de plataformas externas (WhatsApp verde, LinkedIn azul) se mezclan con los colores del sistema</div>
+          <p>En la sección de Testimonios, las tarjetas usan el verde de WhatsApp y el azul de LinkedIn como colores de borde. Al mismo tiempo, el sistema usa esos mismos colores para categorías. El resultado: el visitante no puede diferenciar visualmente un color de "plataforma externa" de un color del sistema de diseño. El verde de WhatsApp compite con el verde de marca.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Para los íconos de plataforma (WhatsApp, LinkedIn, Telegram, Email) usar los colores de marca de cada plataforma pero solo en el ícono, no en el borde de la tarjeta. Los borders de tarjeta deben estar en el color neutro del sistema (<code>var(--border)</code>) excepto cuando hay un estado activo o highlight de marca propia.</span>
+          </div>
+        </div>
+        <span class="f-tag">Testimonios<br>Color semantics</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge warn">Importante</span>
+        <div class="f-body">
+          <div class="f-title">Los KPIs de la home usan 5 colores distintos para 5 números — ninguno es el "número más importante"</div>
+          <p>La sección "Los números hablan solos" tiene: verde (+8 años), naranja (-58%), teal (+9), blanco (48h), amber (-$20K). Al ser todos distintos, ninguno se jerarquiza visualmente. El "-58% AWS" es el número más impactante del portfolio — pero visualmente pesa lo mismo que "+9 países de servicio".</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Usar el color primario de marca (verde) solo para el KPI más importante (<code>-58% AWS</code>). Los demás KPIs en color neutro/blanco. Así hay jerarquía visual que guía la atención. El color deja de ser decorativo y pasa a ser funcional.</span>
+          </div>
+        </div>
+        <span class="f-tag">Home<br>KPIs section</span>
+      </div>
+    </div>
+
+    <!-- Sistema propuesto -->
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);margin-bottom:12px;">Sistema propuesto — 1 primario + 3 categóricos</div>
+    <div class="system-demo">
+      <div class="sys-swatch">
+        <div class="sys-block" style="background:oklch(68% 0.18 145)"></div>
+        <div class="sys-name">Verde marca</div>
+        <div class="sys-role">Primario / CTAs / acento único</div>
+      </div>
+      <div class="sys-swatch">
+        <div class="sys-block" style="background:oklch(22% 0.00 0);border:1px solid var(--border-2)"></div>
+        <div class="sys-name">Neutro</div>
+        <div class="sys-role">Texto, bordes, fondos</div>
+      </div>
+      <div class="sys-swatch">
+        <div class="sys-block" style="background:oklch(68% 0.17 240)"></div>
+        <div class="sys-name">Azul</div>
+        <div class="sys-role">Solo: etiqueta SaaS/Cloud</div>
+      </div>
+      <div class="sys-swatch">
+        <div class="sys-block" style="background:oklch(68% 0.18 295)"></div>
+        <div class="sys-name">Violeta</div>
+        <div class="sys-role">Solo: etiqueta Healthcare</div>
+      </div>
+      <div class="sys-swatch">
+        <div class="sys-block" style="background:oklch(68% 0.16 55)"></div>
+        <div class="sys-name">Amber</div>
+        <div class="sys-role">Solo: etiqueta Mobile/IoT</div>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--text-3);line-height:1.6;">Los 3 colores categóricos se usan <em>solo</em> para los filtros de Casos de Éxito, nunca en otros contextos. Todo lo demás — CTAs, hover states, links activos, métricas destacadas — usa el verde de marca.</p>
+  </section>
+
+  <!-- 02 LOGO -->
+  <section id="logo">
+    <div class="sec-label">02 / Logo & identidad de marca</div>
+    <h2 class="sec-title">"DM" no es tu marca — "modavidc" sí lo es</h2>
+    <p class="sec-sub">El logo actual "DM" no conecta con ningún elemento de la identidad pública. El handle <code>modavidc</code> es único, consistente en todas las plataformas, y ya está en el dominio. Es el activo de marca más fuerte y está siendo ignorado visualmente.</p>
+    <div class="sec-divider"></div>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="badge crit">Crítico</span>
+        <div class="f-body">
+          <div class="f-title">El logo "DM" no corresponde a ningún elemento de identidad pública reconocible</div>
+          <p>"DM" podrían ser las iniciales de "David Moisés" (nombre completo), pero el nombre público es "Moisés Cedeño". Para un visitante nuevo, "DM" parece un logo de template no reemplazado — exactamente el mismo efecto que "Lorem ipsum" en una sección de texto. Las iniciales correctas serían "MC" (Moisés Cedeño) o podría usarse el wordmark completo.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Tres opciones en orden de impacto de marca: (1) <strong>Wordmark</strong> <code>modavidc</code> — el handle es único, está en el dominio, tiene personalidad propia. Perfectamente legible como navbar brand. (2) <strong>Iniciales "MC"</strong> en el mismo estilo — simple, correcto, coherente con el nombre público. (3) Cualquier opción que no sea "DM" sin razón de ser.</span>
+          </div>
+        </div>
+        <span class="f-tag">Navbar<br>Identidad</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge warn">Importante</span>
+        <div class="f-body">
+          <div class="f-title">El tagline "Honest work. Efficient architectures." existe en LinkedIn pero no en el sitio web</div>
+          <p>En el banner de LinkedIn (el elemento visual más visto del perfil) aparece claramente "Honest work. Efficient architectures." — es una línea de marca fuerte, directa, memorable. En el sitio web no aparece en ninguna parte. El sitio usa "Construyo software que escala sin depender de quién lo creó" — que es un claim de metodología, no un tagline de marca. Ambos son buenos pero son distintos y no se refuerzan entre sí.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Elegir uno como tagline primario de marca y usarlo consistentemente en todos los canales. "Honest work. Efficient architectures." es más marcable (corto, rítmico, en contraste semántico). "Construyo software que escala..." es más descriptivo y funciona mejor como subtítulo del hero. Solución: usar ambos, con roles distintos — tagline en el logo/navbar, copy descriptivo en el hero body.</span>
+          </div>
+        </div>
+        <span class="f-tag">Navbar · LinkedIn<br>Tagline</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge warn">Importante</span>
+        <div class="f-body">
+          <div class="f-title">No hay favicon personalizado ni imagen OG — dos superficies de marca inexplotadas</div>
+          <p>El favicon (el ícono de pestaña) es presumiblemente el default de Next.js o un genérico. El meta tag <code>og:image</code> (la imagen que se muestra al compartir el link en LinkedIn, WhatsApp, Slack) probablemente no está configurado o usa un fallback. Son dos de las superficies de mayor exposición de una marca personal: cada vez que alguien comparte el link, o tiene el tab abierto, el favicon es la única representación visual.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Favicon: <code>modavidc</code> inicial "M" o "m" en fondo oscuro, con el verde de marca — legible en 16×16. OG image: <code>1200×630px</code> con fondo dark, nombre completo, tagline "Honest work. Efficient architectures.", métricas clave (-58% AWS, 8+ años). Es la primera impresión al compartir el link.</span>
+          </div>
+        </div>
+        <span class="f-tag">Meta tags<br>Brand surface</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 TIPOGRAFÍA -->
+  <section id="typo">
+    <div class="sec-label">03 / Tipografía y jerarquía</div>
+    <h2 class="sec-title">La tipografía display es el punto más fuerte del sitio — con excepciones</h2>
+    <p class="sec-sub">La fuente de display (grande, tight, condensada) funciona muy bien en Casos de Éxito y Metodología. El problema son las páginas donde se sale del sistema: Contact, Now y el H1 del hero tienen tratamientos tipográficos inconsistentes con el resto.</p>
+    <div class="sec-divider"></div>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="badge warn">Importante</span>
+        <div class="f-body">
+          <div class="f-title">El H1 de Contact Me rompe la escala — usa un tamaño significativamente menor que todos los demás H1</div>
+          <p>Todas las páginas del sitio abren con un H1 display de gran escala (Casos de Éxito: "Impacto medible" ~72px+ tight; Metodología: "Software que escala sin depender de nadie" ~64px). La página de Contact abre con "Contact Me" notablemente más pequeño (~40–44px) y en otro peso. La persona que llega a la página más importante del portfolio se encuentra con el diseño más tibio.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Igualar el H1 de Contact al sistema display del resto del sitio. Si el título cambia a "Hablemos" (fix del audit de UX), usar la misma escala tipográfica: grande, tight, high-contrast. La página de conversión merece el mayor impacto visual, no el menor.</span>
+          </div>
+        </div>
+        <span class="f-tag">Contact page<br>Tipografía H1</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge warn">Importante</span>
+        <div class="f-body">
+          <div class="f-title">La sección "Current Status" (Now page) usa "Current Status" en una tipografía completamente diferente al resto del sitio</div>
+          <p>"Current Status" se ve en serif o en una variante con serifa que no aparece en ninguna otra página. El spacing entre letras, el peso y el cuerpo son distintos. La Now page parece construida con un componente de template diferente al resto del sitio. Aunque la página tenga problemas de contenido (ya documentados en el audit anterior), el tratamiento tipográfico también la desconecta visualmente del sistema.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Aplicar el mismo H1 display system al título de la Now page. Cambiar "Current Status" / "What I'm currently reading..." por un header en el sistema tipográfico del sitio. El diseño de la página debe ser consistente con las otras páginas aunque el contenido sea diferente.</span>
+          </div>
+        </div>
+        <span class="f-tag">Now page<br>Tipografía</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge info">Mejora</span>
+        <div class="f-body">
+          <div class="f-title">Las secciones de la home usan mayúsculas para algunos títulos y capitalización mixta para otros — sin patrón</div>
+          <p>En la home: "Mi Enfoque", "Problemas que Resuelvo", "Explora Mi Trabajo", "Lo que construyo cuando nadie me paga". Algunos capitalizan cada palabra (Title Case), otros solo la primera (Sentence case). No hay un patrón de capitalización definido para H2/H3 a nivel de sección. Pequeño pero en un portfolio que vende atención al detalle, cuenta.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Elegir un estándar y aplicarlo: <strong>Sentence case</strong> para todos los H2 de sección ("Mi enfoque", "Problemas que resuelvo") — es más moderno, más legible y más fácil de mantener. Reservar Title Case o ALL CAPS para los kickers/labels pequeños en monospace (esos sí funcionan con mayúsculas).</span>
+          </div>
+        </div>
+        <span class="f-tag">Home<br>Capitalización</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 COMPONENTES -->
+  <section id="componentes">
+    <div class="sec-label">04 / Consistencia de componentes UI</div>
+    <h2 class="sec-title">Tres sistemas de tarjetas, dos sistemas de badges, sin unificación</h2>
+    <p class="sec-sub">Cada sección del sitio parece construida con componentes independientes. Hay valor visual en cada uno por separado, pero el conjunto comunica "páginas distintas" en lugar de "un producto cohesivo".</p>
+    <div class="sec-divider"></div>
+
+    <div class="compare">
+      <div class="compare-col bad">
+        <div class="compare-head bad">Estado actual — 3 sistemas de card</div>
+        <div class="compare-item">Card de Experiencia: fondo oscuro, border lateral coloreado, checkmarks con color</div>
+        <div class="compare-item">Card de Casos de Éxito: image + texto en overlay, badge de métrica en parte inferior</div>
+        <div class="compare-item">Card de Testimonios: fondo semitransparente verde/azul/teal, estilo "screenshot de app"</div>
+        <div class="compare-item">Card de Now page: fondo gris medio, estilo diferente a todo lo anterior</div>
+        <div class="compare-item">Resultado: el visitante que navega entre páginas siente que no está en el mismo sitio</div>
+      </div>
+      <div class="compare-col good">
+        <div class="compare-head good">Hacia dónde ir — 1 sistema de card con variantes</div>
+        <div class="compare-item">Definir: fondo base, borde, espaciado, radio de borde — iguales en todas las cards</div>
+        <div class="compare-item">Variantes permitidas: con imagen (Casos de Éxito), sin imagen (Experiencia, Testimonios)</div>
+        <div class="compare-item">Los bordes coloreados de Experiencia pueden quedarse como variante de color de categoría, no de estilo</div>
+        <div class="compare-item">Los testimonios deben estar en el mismo sistema de card que el resto, no en "pantallas de app"</div>
+        <div class="compare-item">Un sistema de card bien definido hace que el sitio se sienta como un producto, no como secciones pegadas</div>
+      </div>
+    </div>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="badge warn">Importante</span>
+        <div class="f-body">
+          <div class="f-title">Los testimonios "screenshot de app" (WhatsApp, LinkedIn, Email) no pertenecen al sistema de diseño del sitio</div>
+          <p>Los testimonios están diseñados para imitar la interfaz visual de WhatsApp (verde), LinkedIn (azul), Telegram (azul claro) y un cliente de email. Es una idea creativa que busca autenticidad, pero rompe completamente el sistema visual del sitio. El contraste entre las cards oscuras y minimalistas de Casos de Éxito y los "screenshots de conversación" es demasiado grande — parece que se pegó contenido de otro sitio.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Dos opciones: (a) Integrar los screenshots reales como imágenes dentro de cards del sistema — fondo oscuro, borde neutro, con el screenshot como elemento visual dentro de la card (no como la card misma). (b) Rediseñar los testimonios como quote cards en el sistema de diseño del sitio, con un ícono pequeño de la plataforma de origen como referencia, no como tratamiento visual dominante.</span>
+          </div>
+        </div>
+        <span class="f-tag">Testimonios<br>Sistema de cards</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge info">Mejora</span>
+        <div class="f-body">
+          <div class="f-title">Hay dos sistemas de badge distintos: los "pill" de categoría y los "metric badge" rectangulares — sin relación visual</div>
+          <p>En Casos de Éxito coexisten: (1) pills de filtro redondeados con punto de color ("● FinOps", "● Healthcare"), (2) metric badges rectangulares con resultado ("+58% AWS bill", "-$20k/año"), y (3) badges de estado tipo "Work 2023" en esquina superior. Son tres treatments distintos para el concepto de "etiqueta". No hay una relación visual entre ellos.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Definir una jerarquía de badge: (1) Label/categoría: pill redondeado, solo para filtros de categoría. (2) Métrica: badge rectangular, fondo con color de marca al 15%, texto en color de marca — para resultados cuantificables. (3) Meta: tipo/año en monospace, color neutro — para contexto. Los tres usan la misma base tipográfica (DM Mono o equivalente) y el mismo border-radius.</span>
+          </div>
+        </div>
+        <span class="f-tag">Casos de éxito<br>Badges</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge info">Mejora</span>
+        <div class="f-body">
+          <div class="f-title">El botón principal "Hablemos" y el CTA de formulario "Send Message" usan el mismo estilo pero en contextos con jerarquía diferente</div>
+          <p>"Hablemos" en el navbar (CTA primario del sitio) y "Send Message" en el formulario de contacto (CTA de acción puntual) usan el mismo tratamiento visual: fondo blanco, texto oscuro. No hay distinción visual entre el CTA de marca más importante del sitio y un botón de formulario funcional.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Definir jerarquía de botones: <strong>Primario</strong> (verde de marca, texto oscuro) para "Hablemos" en navbar y el CTA final de home. <strong>Secundario</strong> (outline, borde blanco/neutro, texto blanco) para "Ver casos de éxito", "Ver caso →". <strong>Funcional</strong> (fondo blanco opaco) solo para enviar formularios. El navbar CTA es el botón más importante del sitio — debe verse como tal.</span>
+          </div>
+        </div>
+        <span class="f-tag">Botones<br>Jerarquía</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 CROSS-PLATFORM -->
+  <section id="crossplatform">
+    <div class="sec-label">05 / Alineación cross-platform</div>
+    <h2 class="sec-title">LinkedIn, GitHub y la web son <em>casi</em> coherentes — los detalles no cierran</h2>
+    <p class="sec-sub">La foto de perfil, el handle <code>modavidc</code> y el mensaje core (sistemas escalables, sin dependencia) son consistentes. Pero el título, el tagline y la propuesta de valor están formulados de forma distinta en cada plataforma — tres versiones ligeramente diferentes de la misma marca.</p>
+    <div class="sec-divider"></div>
+
+    <div class="platforms">
+      <div class="platform">
+        <div class="platform-name">
+          <div class="platform-name-dot" style="background:var(--blue)"></div>
+          LinkedIn
+        </div>
+        <div class="platform-row">
+          <div class="platform-label">Título</div>
+          <div class="platform-value mismatch">Senior Solutions Architect</div>
+        </div>
+        <div class="platform-row">
+          <div class="platform-label">Tagline visual</div>
+          <div class="platform-value match">Honest work. Efficient architectures.</div>
+        </div>
+        <div class="platform-row">
+          <div class="platform-label">Subtítulo</div>
+          <div class="platform-value mismatch">Arquitecto de Soluciones Senior | FinOps: -58% AWS | SaaS & Healthcare</div>
+        </div>
+        <div class="platform-issue">✗ "Senior" en LinkedIn, sin "Senior" en web</div>
+      </div>
+      <div class="platform">
+        <div class="platform-name">
+          <div class="platform-name-dot" style="background:var(--text-3)"></div>
+          GitHub
+        </div>
+        <div class="platform-row">
+          <div class="platform-label">Título</div>
+          <div class="platform-value mismatch">Solutions Architect | Backend & Cloud | FinOps</div>
+        </div>
+        <div class="platform-row">
+          <div class="platform-label">Tagline visual</div>
+          <div class="platform-value mismatch">— (no definido)</div>
+        </div>
+        <div class="platform-row">
+          <div class="platform-label">Headline README</div>
+          <div class="platform-value match">I build scalable systems that reduce costs and don't depend on who built them.</div>
+        </div>
+        <div class="platform-issue">✗ Tagline "Honest work." ausente en GitHub</div>
+      </div>
+      <div class="platform">
+        <div class="platform-name">
+          <div class="platform-name-dot" style="background:var(--accent)"></div>
+          modavidc.com
+        </div>
+        <div class="platform-row">
+          <div class="platform-label">Título kicker</div>
+          <div class="platform-value mismatch">Tech Lead · Arquitecto de Soluciones</div>
+        </div>
+        <div class="platform-row">
+          <div class="platform-label">Tagline visual</div>
+          <div class="platform-value mismatch">— (ausente)</div>
+        </div>
+        <div class="platform-row">
+          <div class="platform-label">Headline hero</div>
+          <div class="platform-value match">Construyo software que escala sin depender de quién lo creó</div>
+        </div>
+        <div class="platform-issue">✗ Tagline ausente · Título diferente en cada plataforma</div>
+      </div>
+    </div>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="badge warn">Importante</span>
+        <div class="f-body">
+          <div class="f-title">El título profesional tiene 3 variaciones distintas entre plataformas</div>
+          <p>LinkedIn: "Senior Solutions Architect". GitHub: "Solutions Architect | Backend & Cloud | FinOps". Web: "Tech Lead · Arquitecto de Soluciones". Son tres formulaciones del mismo rol. Un reclutador que revisa las tres plataformas (lo hacen siempre) puede notar la inconsistencia y percibir falta de claridad sobre la posición que se busca. La marca personal más fuerte es la que responde consistentemente a "¿qué haces?" sin importar dónde te encuentren.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Definir un título canónico único: recomendación <strong>"Solutions Architect · FinOps & Cloud"</strong> — cubre el rol, la especialización más diferenciada, y no tiene "Senior" que puede ser controversial según el mercado. Usarlo igual en las tres plataformas. La web puede expandirlo en el body del hero con el contexto de industrias (Healthcare, SaaS, IoT).</span>
+          </div>
+        </div>
+        <span class="f-tag">Cross-platform<br>Título profesional</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge info">Mejora</span>
+        <div class="f-body">
+          <div class="f-title">"Honest work. Efficient architectures." es el mejor activo de marca y solo existe en LinkedIn</div>
+          <p>Es corto, rítmico, en contraste semántico (dos valores que no siempre van juntos). Es más memorable que cualquier otro claim del portfolio. Está en el banner de LinkedIn — una superficie que miles de personas ven. No está en el sitio web (la superficie que Moisés controla completamente), no está en el README de GitHub, no está en ningún otro lugar.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Usar "Honest work. Efficient architectures." como tagline de marca en el navbar (junto al wordmark <code>modavidc</code>), en el footer, en el README de GitHub bajo el nombre, y en la OG image. Es la línea que conecta todas las plataformas. Actualmente se está desperdiciando en el único lugar donde menos control tienes (LinkedIn).</span>
+          </div>
+        </div>
+        <span class="f-tag">Cross-platform<br>Tagline</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge info">Mejora</span>
+        <div class="f-body">
+          <div class="f-title">El README de GitHub tiene las métricas correctas pero ninguna imagen de marca ni banner visual</div>
+          <p>El README de GitHub tiene: nombre, título, claim, stack, KPIs y contacto — todo el contenido correcto. Pero no tiene ningún elemento visual. El banner de LinkedIn tiene diseño (dark bg + text overlay). El README tiene solo texto en el tema de GitHub. Para un Solutions Architect con criterio visual propio, el README de GitHub es una oportunidad de primera impresión que se está dejando como texto plano.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Añadir un header image al README: <code>1280×640px</code> con fondo dark, nombre, tagline, métricas — el mismo lenguaje visual del LinkedIn banner pero con más espacio. GitHub soporta imágenes en README con <code>![banner](assets/banner.png)</code>. Es la única superficie de GitHub donde puedes añadir identidad visual sin código.</span>
+          </div>
+        </div>
+        <span class="f-tag">GitHub README<br>Visual identity</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 VOZ VISUAL -->
+  <section id="voz">
+    <div class="sec-label">06 / Voz visual — tono del diseño</div>
+    <h2 class="sec-title">El 90% del sitio comunica "precision engineering" — el 10% rompe el tono</h2>
+    <p class="sec-sub">El diseño oscuro, tipografía tight, ausencia de ilustraciones, métricas como elementos visuales — todo construye un tono de "arquitecto serio con criterio técnico". Hay tres elementos específicos que quiebran ese tono.</p>
+    <div class="sec-divider"></div>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="badge crit">Crítico</span>
+        <div class="f-body">
+          <div class="f-title">El emoji 🚀 en el placeholder de video de Metodología rompe completamente el tono del sitio</div>
+          <p>La sección "Del problema a la solución documentada" en Metodología tiene un placeholder de video con un emoji 🚀 como elemento visual central. En un sitio que evita conscientemente los clichés visuales de tech (no hay cohetes, no hay "disruption", no hay iconografía startup genérica en ningún otro lugar) — este emoji es un golpe de incongruencia en la página donde se explica exactamente el proceso de trabajo más diferenciado del portfolio.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Reemplazar el placeholder con un thumbnail de video real, o si no hay video aún: un placeholder oscuro con texto en monospace que diga el título del proceso ("Del problema a la solución documentada"), con el mismo tratamiento visual que los otros bloques de contenido de la página. Cero emojis en superficies que vendan metodología de arquitectura.</span>
+          </div>
+        </div>
+        <span class="f-tag">Metodología<br>Voz visual</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge warn">Importante</span>
+        <div class="f-body">
+          <div class="f-title">Los íconos de Metodología (⚡IA, 📄 Contexto, ✓ Criterio) mezclan emoji con iconografía — inconsistente</div>
+          <p>En la sección de Metodología, los tres pilares del proceso usan: "⚡ IA", "📄 Contexto", "✓ Criterio". El relámpago y el documento son emojis; el check es Unicode. En el resto del sitio los íconos son consistentemente de una librería (aparentemente Lucide o similar). Esta mezcla es visible especialmente en diferentes sistemas operativos donde los emoji se renderizan diferente (Apple vs Windows vs Android).</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Usar la misma librería de íconos que el resto del sitio para los tres pilares. Si el sitio usa Lucide: <code>Zap</code> para IA, <code>FileText</code> para Contexto, <code>Target</code> o <code>CheckCircle</code> para Criterio. Consistente entre páginas, consistente entre sistemas operativos.</span>
+          </div>
+        </div>
+        <span class="f-tag">Metodología<br>Iconografía</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge info">Mejora</span>
+        <div class="f-body">
+          <div class="f-title">El floating chat bubble (foto de perfil) en la esquina inferior derecha no tiene una razón de ser clara en el sistema de diseño</div>
+          <p>Hay un elemento flotante en la esquina inferior derecha con la foto de perfil de Moisés — visible en todas las páginas del sitio. La intención es probablemente generar una sensación de "hay alguien detrás de este portfolio". Pero visualmente es un elemento que flota sin contexto, sin tooltip, sin interacción clara. En páginas como Casos de Éxito o Metodología donde el diseño es muy limpio, el elemento flotante añade ruido visual sin propósito definido.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Dos opciones: (a) Darle un propósito claro — al hacer click o hover muestra un mini-panel de "¿Hablamos?" con el botón de contacto. Si hace algo, justifica su presencia. (b) Quitarlo — el botón "Hablemos" en el navbar ya cumple esa función. La foto de perfil ya está en el hero. El floating bubble sin interacción clara es decoración sin función.</span>
+          </div>
+        </div>
+        <span class="f-tag">Global<br>Floating element</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 MICRO-DETALLES -->
+  <section id="micro">
+    <div class="sec-label">07 / Micro-detalles de acabado</div>
+    <h2 class="sec-title">Pequeños detalles que el cliente ideal nota aunque no los nombre</h2>
+    <p class="sec-sub">Un CTO o reclutador senior que revisa el portfolio no va a decir "el spacing del footer es inconsistente". Pero va a sentir la diferencia entre un portfolio que se siente terminado y uno que se siente cerca de terminado. Estos micro-detalles son esa diferencia.</p>
+    <div class="sec-divider"></div>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="badge info">Mejora</span>
+        <div class="f-body">
+          <div class="f-title">El terminal flotante (esquina inferior izquierda) necesita propósito o desaparece</div>
+          <p>Hay un ícono de terminal (<code>&gt;_</code>) en la esquina inferior izquierda del sitio. Es un detalle interesante que refuerza la identidad de backend/arquitecto. Pero si es solo decorativo (no hace nada al hacer click), pasa de "detalle de personalidad" a "elemento de template no removido". En un portfolio que se vende por la calidad de sus decisiones técnicas, un elemento sin propósito claro es contraproducente.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Opciones: (a) Que abra una mini-terminal con un comando que muestre los skills o las métricas — easter egg de developer, refuerza la identidad técnica. (b) Que sea el link al perfil de GitHub — ícono terminal = código. (c) Quitarlo si no tiene función. La opción (a) es la más memorable y on-brand.</span>
+          </div>
+        </div>
+        <span class="f-tag">Global<br>Terminal icon</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge nit">Detalle</span>
+        <div class="f-body">
+          <div class="f-title">Los section pills ("Casos de Éxito", "Testimonios", "Metodología") no están en todas las páginas — inconsistencia de patrón</div>
+          <p>Es uno de los mejores detalles de diseño del sitio: un pill label pequeño que contextualiza la página antes del H1. Aparece en Casos de Éxito, Metodología, Testimonios. No aparece en Home, Experiencia, Contact, Now. Si es un patrón, debe aplicarse en todas partes. Si no es un patrón, quita los que existen para evitar la inconsistencia.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Estandarizar el pill en todas las páginas que tienen H1 de sección. En Experiencia: "Experiencia". En Contact: "Contacto". En Now: "Ahora". Es un detalle de 5 minutos que completa un patrón ya establecido.</span>
+          </div>
+        </div>
+        <span class="f-tag">Global<br>Section pills</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge nit">Detalle</span>
+        <div class="f-body">
+          <div class="f-title">El color del dark mode toggle (sol/luna) no tiene un estado visual definido — igual en claro y oscuro</div>
+          <p>El ícono de moon/sun en el navbar para cambiar entre dark/light mode se ve igual en ambos estados (parece ser siempre el mismo ícono con el mismo color). No hay feedback visual claro de cuál modo está activo. En un portfolio donde el dark mode es la experiencia principal, el toggle debe reforzar ese sistema de color.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">El ícono activo debe usar el color acento de marca (verde) como indicador de estado. En modo oscuro: ícono de luna en verde. En modo claro: ícono de sol en verde. Simple, consistente con el sistema de color definido.</span>
+          </div>
+        </div>
+        <span class="f-tag">Navbar<br>Dark mode toggle</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 ROADMAP -->
+  <section id="roadmap">
+    <div class="sec-label">08 / Roadmap de diseño</div>
+    <h2 class="sec-title">18 hallazgos — priorizados por impacto de marca</h2>
+    <p class="sec-sub">Los cambios de mayor impacto son decisiones de sistema (color, logo, tagline) que, una vez definidas, se propagan al resto automáticamente. No son rediseños — son decisiones.</p>
+    <div class="sec-divider"></div>
+
+    <div class="roadmap">
+      <div class="rm-col">
+        <div class="rm-head">Decisiones primero · &lt;1 día</div>
+        <div class="rm-sub">Define el sistema, todo lo demás se implementa solo</div>
+        <div class="rm-item">Elegir el color primario de marca (verde recomendado) y aplicarlo a CTAs, KPI destacado, links activos</div>
+        <div class="rm-item">Cambiar logo "DM" → "modavidc" o "MC" — una línea de código en el navbar</div>
+        <div class="rm-item">Añadir "Honest work. Efficient architectures." al navbar (junto al wordmark) y al footer</div>
+        <div class="rm-item">Definir el título canónico: "Solutions Architect · FinOps & Cloud" — actualizar LinkedIn, GitHub y web</div>
+        <div class="rm-item">Quitar el emoji 🚀 del placeholder de video en Metodología</div>
+      </div>
+      <div class="rm-col">
+        <div class="rm-head">Sistema · 1–3 días</div>
+        <div class="rm-sub">Implementar el sistema en componentes existentes</div>
+        <div class="rm-item">Reducir colores acento KPIs: solo verde para el KPI más importante, neutros para el resto</div>
+        <div class="rm-item">Estandarizar jerarquía de botones: primario verde, secundario outline, funcional blanco</div>
+        <div class="rm-item">Añadir section pill en Contact, Experiencia y Now (si se decide mantener)</div>
+        <div class="rm-item">Estandarizar capitalización de H2: sentence case en toda la home</div>
+        <div class="rm-item">Igualar el H1 de Contact al sistema display del resto del sitio</div>
+        <div class="rm-item">Unificar íconos de Metodología (⚡📄✓) a la misma librería del resto del sitio</div>
+      </div>
+      <div class="rm-col">
+        <div class="rm-head">Detalles · 1 semana+</div>
+        <div class="rm-sub">Refinamiento y superficies de marca adicionales</div>
+        <div class="rm-item">Crear favicon "m" en fondo oscuro con verde de marca</div>
+        <div class="rm-item">Crear OG image: 1200×630 con dark bg, nombre, tagline, KPIs clave</div>
+        <div class="rm-item">Crear banner para GitHub README (mismo lenguaje visual que LinkedIn banner)</div>
+        <div class="rm-item">Definir interacción del floating terminal (easter egg de developer) o quitarlo</div>
+        <div class="rm-item">Rediseñar cards de testimonios en el sistema de diseño del sitio (fuera del look "screenshot de app")</div>
+        <div class="rm-item">Separar visualmente los colores de plataforma (WhatsApp verde) de los colores del sistema</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONCLUSIÓN -->
+  <div class="conclusion">
+    <div>
+      <div class="sec-label" style="margin-bottom:16px">Síntesis</div>
+      <div class="conclusion-text">
+        El sitio está al <strong>85% del camino</strong>. Las decisiones de diseño son buenas. Falta un paso que pocos portfolios hacen: <strong>declarar el sistema</strong> — un color, un wordmark, un tagline — y aplicarlo con consistencia quirúrgica. Ese 15% es lo que separa un portfolio que "se ve bien" de una marca que se recuerda.
+      </div>
+    </div>
+    <div class="conclusion-stats">
+      <div class="cstat"><div class="cstat-n" style="color:var(--red)">4</div><div class="cstat-l">Críticos</div></div>
+      <div class="cstat"><div class="cstat-n" style="color:var(--amber)">6</div><div class="cstat-l">Importantes</div></div>
+      <div class="cstat"><div class="cstat-n" style="color:var(--blue)">5</div><div class="cstat-l">Mejoras</div></div>
+      <div class="cstat"><div class="cstat-n" style="color:var(--text-3)">3</div><div class="cstat-l">Detalles</div></div>
+    </div>
+  </div>
+
+  <footer>
+    <span>Auditoría Design + Branding · modavidc.com · Abr 2026</span>
+    <span>18 hallazgos · Complementaria al audit UX/Claude Code</span>
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>modavidc — Tarjetas de presentación · 4 modelos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0b0c0e; --bg-2: #111316; --bg-3: #181a1d;
+  --border: #202227; --border-2: #2a2d33;
+  --text: #eaedf2; --text-2: #9aa0ae; --text-3: #555c6a;
+  --green: oklch(67% 0.17 148);
+  --green-dim: oklch(35% 0.10 148);
+  --green-print: #2da866;
+  --ff-display: 'Space Grotesk', sans-serif;
+  --ff-body: 'DM Sans', sans-serif;
+  --ff-mono: 'DM Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #1a1c20; color: var(--text); font-family: var(--ff-body); font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+
+.page-wrap { max-width: 1100px; margin: 0 auto; padding: 48px 32px 120px; }
+
+.doc-header { border-bottom: 1px solid var(--border-2); padding-bottom: 24px; margin-bottom: 48px; }
+.doc-kicker { font-family: var(--ff-mono); font-size: 11px; color: var(--text-3); letter-spacing: .16em; text-transform: uppercase; margin-bottom: 12px; }
+.doc-title { font-family: var(--ff-display); font-size: 36px; font-weight: 300; letter-spacing: -.025em; color: var(--text); margin-bottom: 12px; }
+.doc-sub { font-size: 14px; color: var(--text-2); max-width: 680px; }
+
+.specs { display: flex; gap: 32px; margin-top: 24px; padding: 16px 20px; background: var(--bg-2); border: 1px solid var(--border); }
+.spec { font-family: var(--ff-mono); font-size: 11px; color: var(--text-3); letter-spacing: .08em; }
+.spec strong { color: var(--text-2); font-weight: 500; }
+
+/* ─── MODEL BLOCK ─── */
+.model { margin-bottom: 64px; }
+.model-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.model-num { font-family: var(--ff-mono); font-size: 11px; color: var(--text-3); letter-spacing: .14em; }
+.model-name { font-family: var(--ff-display); font-size: 20px; font-weight: 500; color: var(--text); letter-spacing: -.01em; }
+.model-desc { font-size: 13px; color: var(--text-2); margin-left: auto; }
+
+.card-pair { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 16px; }
+.card-frame { display: flex; flex-direction: column; gap: 6px; }
+.card-label { font-family: var(--ff-mono); font-size: 9px; color: var(--text-3); letter-spacing: .16em; text-transform: uppercase; }
+
+/* ─── BUSINESS CARD CANVAS · 85×55mm standard ─── */
+.card {
+  width: 85mm; height: 55mm;
+  position: relative; overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,.35), 0 1px 2px rgba(0,0,0,.5);
+  border-radius: 1.5mm;
+}
+
+/* ───────── MODEL 1: DARK EDITORIAL ───────── */
+.m1-front { background: var(--bg); color: var(--text); padding: 7mm; display: flex; flex-direction: column; justify-content: space-between; }
+.m1-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.m1-corner { font-family: var(--ff-mono); font-size: 7pt; color: var(--text-3); letter-spacing: .14em; text-transform: uppercase; }
+.m1-wm { font-family: var(--ff-display); font-size: 32pt; font-weight: 300; letter-spacing: -.04em; line-height: 1; }
+.m1-wm .mo { color: var(--green-print); }
+.m1-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+.m1-name { font-family: var(--ff-display); font-size: 9pt; font-weight: 500; color: var(--text); letter-spacing: -.005em; line-height: 1.35; }
+.m1-role { font-family: var(--ff-mono); font-size: 6.5pt; color: var(--text-3); letter-spacing: .1em; text-transform: uppercase; margin-top: 3px; }
+.m1-tag { font-family: var(--ff-mono); font-size: 6.5pt; color: var(--text-3); letter-spacing: .14em; text-transform: uppercase; text-align: right; line-height: 1.6; }
+.m1-tag em { color: var(--text-2); font-style: normal; }
+
+.m1-back { background: var(--bg); color: var(--text); padding: 7mm; display: flex; flex-direction: column; justify-content: space-between; }
+.m1-back-top { font-family: var(--ff-display); font-size: 13pt; font-weight: 300; letter-spacing: -.02em; line-height: 1.25; color: var(--text); }
+.m1-back-top em { color: var(--green-print); font-style: italic; font-weight: 400; }
+.m1-back-rule { width: 14mm; height: 1px; background: var(--green-print); margin: 4mm 0; }
+.m1-contact { display: flex; flex-direction: column; gap: 2mm; }
+.m1-line { display: flex; align-items: baseline; gap: 4mm; font-family: var(--ff-mono); font-size: 7.5pt; color: var(--text); letter-spacing: .02em; }
+.m1-line .k { color: var(--text-3); font-size: 6pt; letter-spacing: .14em; text-transform: uppercase; width: 12mm; }
+
+/* ───────── MODEL 2: LIGHT MINIMAL ───────── */
+.m2-front { background: #f4f5f7; color: #0b0c0e; padding: 8mm 7mm; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 3mm; }
+.m2-wm { font-family: var(--ff-display); font-size: 36pt; font-weight: 300; letter-spacing: -.04em; line-height: 1; color: #0b0c0e; }
+.m2-wm .mo { color: #1d8b53; }
+.m2-tag { font-family: var(--ff-mono); font-size: 7pt; color: #6b7280; letter-spacing: .22em; text-transform: uppercase; }
+
+.m2-back { background: #f4f5f7; color: #0b0c0e; padding: 7mm; display: flex; flex-direction: column; justify-content: space-between; }
+.m2-back-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.m2-name { font-family: var(--ff-display); font-size: 12pt; font-weight: 500; color: #0b0c0e; letter-spacing: -.015em; line-height: 1.2; }
+.m2-role { font-family: var(--ff-mono); font-size: 7pt; color: #6b7280; letter-spacing: .12em; text-transform: uppercase; margin-top: 4px; }
+.m2-dot { width: 6pt; height: 6pt; border-radius: 50%; background: #1d8b53; margin-top: 3pt; }
+.m2-contact { font-family: var(--ff-mono); font-size: 7.5pt; color: #0b0c0e; line-height: 1.7; letter-spacing: .02em; }
+.m2-contact .k { color: #9aa0ae; display: inline-block; width: 12mm; font-size: 6pt; letter-spacing: .14em; text-transform: uppercase; }
+
+/* ───────── MODEL 3: GREEN STATEMENT ───────── */
+.m3-front { background: var(--green-print); color: #0b0c0e; padding: 7mm; display: flex; flex-direction: column; justify-content: space-between; }
+.m3-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.m3-corner { font-family: var(--ff-mono); font-size: 7pt; color: rgba(0,0,0,.55); letter-spacing: .14em; text-transform: uppercase; }
+.m3-wm { font-family: var(--ff-display); font-size: 30pt; font-weight: 300; letter-spacing: -.04em; line-height: 1; color: #0b0c0e; }
+.m3-wm .mo { color: rgba(0,0,0,.55); }
+.m3-bottom { font-family: var(--ff-mono); font-size: 7pt; color: rgba(0,0,0,.7); letter-spacing: .16em; text-transform: uppercase; line-height: 1.6; }
+
+.m3-back { background: var(--bg); color: var(--text); padding: 7mm; display: flex; flex-direction: column; justify-content: space-between; }
+.m3-back-name { font-family: var(--ff-display); font-size: 14pt; font-weight: 400; color: var(--text); letter-spacing: -.02em; line-height: 1.15; }
+.m3-back-role { font-family: var(--ff-mono); font-size: 7pt; color: var(--green-print); letter-spacing: .12em; text-transform: uppercase; margin-top: 3mm; }
+.m3-back-contact { font-family: var(--ff-mono); font-size: 7.5pt; color: var(--text); line-height: 1.7; letter-spacing: .02em; }
+.m3-back-contact div { display: flex; align-items: baseline; gap: 3mm; }
+.m3-back-contact .k { color: var(--text-3); font-size: 6pt; letter-spacing: .14em; text-transform: uppercase; width: 11mm; }
+
+/* ───────── MODEL 4: TECHNICAL / MONO GRID ───────── */
+.m4-front { background: var(--bg); color: var(--text); padding: 6mm; display: grid; grid-template-rows: auto 1fr auto; gap: 4mm; }
+.m4-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 2mm; border-bottom: 1px solid var(--border-2); }
+.m4-header-l { font-family: var(--ff-mono); font-size: 6.5pt; color: var(--text-3); letter-spacing: .14em; text-transform: uppercase; }
+.m4-header-r { font-family: var(--ff-mono); font-size: 6.5pt; color: var(--green-print); letter-spacing: .14em; text-transform: uppercase; }
+.m4-body { display: flex; flex-direction: column; justify-content: center; gap: 2.5mm; }
+.m4-wm { font-family: var(--ff-display); font-size: 26pt; font-weight: 300; letter-spacing: -.04em; line-height: 1; }
+.m4-wm .mo { color: var(--green-print); }
+.m4-name-line { font-family: var(--ff-mono); font-size: 8pt; color: var(--text-2); letter-spacing: .04em; }
+.m4-name-line strong { color: var(--text); font-weight: 500; }
+.m4-footer { display: flex; justify-content: space-between; padding-top: 2mm; border-top: 1px solid var(--border-2); font-family: var(--ff-mono); font-size: 6pt; color: var(--text-3); letter-spacing: .12em; text-transform: uppercase; }
+
+.m4-back { background: var(--bg); color: var(--text); padding: 6mm; display: grid; grid-template-rows: auto 1fr; gap: 4mm; }
+.m4-back-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 2mm; border-bottom: 1px solid var(--border-2); }
+.m4-back-header span { font-family: var(--ff-mono); font-size: 6.5pt; color: var(--text-3); letter-spacing: .14em; text-transform: uppercase; }
+.m4-back-grid { display: grid; grid-template-columns: auto 1fr; column-gap: 4mm; row-gap: 1.6mm; align-content: center; }
+.m4-back-grid .k { font-family: var(--ff-mono); font-size: 6pt; color: var(--text-3); letter-spacing: .14em; text-transform: uppercase; align-self: center; }
+.m4-back-grid .v { font-family: var(--ff-mono); font-size: 8pt; color: var(--text); letter-spacing: .02em; align-self: center; }
+.m4-back-grid .v.accent { color: var(--green-print); }
+
+/* ─── INSTRUCTIONS ─── */
+.notes { margin-top: 80px; padding: 28px 32px; background: var(--bg-2); border: 1px solid var(--border); }
+.notes h3 { font-family: var(--ff-display); font-size: 16px; font-weight: 500; color: var(--text); margin-bottom: 14px; letter-spacing: -.01em; }
+.notes ul { list-style: none; padding: 0; }
+.notes li { font-size: 13px; color: var(--text-2); margin-bottom: 8px; padding-left: 14px; position: relative; line-height: 1.6; }
+.notes li::before { content: '—'; position: absolute; left: 0; color: var(--text-3); }
+.notes li strong { color: var(--text); font-weight: 500; }
+.notes code { font-family: var(--ff-mono); font-size: 12px; color: var(--green-print); background: var(--bg-3); padding: 1px 6px; border-radius: 2px; }
+
+/* ─── PRINT ─── */
+@media print {
+  body, html { background: white; }
+  .doc-header, .specs, .notes, .model-head, .card-label, .card-pair-wrap { display: none; }
+  .model { margin: 0; page-break-after: always; }
+  .card-pair { gap: 0; }
+  .card { box-shadow: none; border-radius: 0; }
+  @page { size: A4; margin: 10mm; }
+}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <header class="doc-header">
+    <div class="doc-kicker">modavidc · Brand Assets · Tarjetas de presentación</div>
+    <h1 class="doc-title">4 modelos de tarjetas, listas para imprimir</h1>
+    <p class="doc-sub">Cuatro propuestas usando el sistema de marca: dos en variante oscura (editorial y técnica), una en blanco y una en verde. Todas a tamaño estándar internacional 85 × 55 mm con sangrado conceptual de 3 mm. Elige una, o combínalas (frente de una con dorso de otra).</p>
+    <div class="specs">
+      <div class="spec"><strong>FORMATO</strong> · 85 × 55 mm (estándar EU)</div>
+      <div class="spec"><strong>SANGRADO</strong> · +3 mm por lado</div>
+      <div class="spec"><strong>COLOR</strong> · CMYK / Pantone equivalente al verde marca</div>
+      <div class="spec"><strong>PAPEL SUGERIDO</strong> · 350 g mate o uncoated</div>
+    </div>
+  </header>
+
+  <!-- ═════════════════ MODEL 1 · DARK EDITORIAL ═════════════════ -->
+  <section class="model">
+    <div class="model-head">
+      <span class="model-num">01</span>
+      <h2 class="model-name">Editorial · Dark</h2>
+      <span class="model-desc">El más fiel al portfolio web. Frente con wordmark, dorso con manifiesto y contacto.</span>
+    </div>
+    <div class="card-pair">
+      <div class="card-frame">
+        <span class="card-label">Frente</span>
+        <div class="card m1-front">
+          <div class="m1-top">
+            <span class="m1-corner">Tech Lead</span>
+            <span class="m1-corner">2026</span>
+          </div>
+          <div class="m1-wm"><span class="mo">mo</span>davidc</div>
+          <div class="m1-bottom">
+            <div>
+              <div class="m1-name">Moisés Cedeño</div>
+              <div class="m1-role">AWS · FinOps · Arquitectura</div>
+            </div>
+            <div class="m1-tag">Criterio<br/>Contexto<br/><em>Intención</em></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-frame">
+        <span class="card-label">Dorso</span>
+        <div class="card m1-back">
+          <div class="m1-back-top">No es solo escribir buen código.<br/>Es tomar las <em>decisiones correctas</em>.</div>
+          <div>
+            <div class="m1-back-rule"></div>
+            <div class="m1-contact">
+              <div class="m1-line"><span class="k">Email</span> moisesdavidaaron@gmail.com</div>
+              <div class="m1-line"><span class="k">Web</span> modavidc.com</div>
+              <div class="m1-line"><span class="k">Base</span> Lima, Perú</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════════ MODEL 2 · LIGHT MINIMAL ═════════════════ -->
+  <section class="model">
+    <div class="model-head">
+      <span class="model-num">02</span>
+      <h2 class="model-name">Minimal · Light</h2>
+      <span class="model-desc">Inversa, gris claro. Para contextos formales o de imprenta económica. Mucha respiración.</span>
+    </div>
+    <div class="card-pair">
+      <div class="card-frame">
+        <span class="card-label">Frente</span>
+        <div class="card m2-front">
+          <div class="m2-wm"><span class="mo">mo</span>davidc</div>
+          <div class="m2-tag">Criterio · Contexto · Intención</div>
+        </div>
+      </div>
+      <div class="card-frame">
+        <span class="card-label">Dorso</span>
+        <div class="card m2-back">
+          <div class="m2-back-top">
+            <div>
+              <div class="m2-name">Moisés Cedeño</div>
+              <div class="m2-role">Tech Lead · AWS &amp; FinOps</div>
+            </div>
+            <div class="m2-dot"></div>
+          </div>
+          <div class="m2-contact">
+            <div><span class="k">Email</span> moisesdavidaaron@gmail.com</div>
+            <div><span class="k">Web</span> modavidc.com</div>
+            <div><span class="k">Base</span> Lima, Perú</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════════ MODEL 3 · GREEN STATEMENT ═════════════════ -->
+  <section class="model">
+    <div class="model-head">
+      <span class="model-num">03</span>
+      <h2 class="model-name">Statement · Green</h2>
+      <span class="model-desc">Más memorable. Verde marca al frente, dorso oscuro con datos. Para que la guarden.</span>
+    </div>
+    <div class="card-pair">
+      <div class="card-frame">
+        <span class="card-label">Frente</span>
+        <div class="card m3-front">
+          <div class="m3-top">
+            <span class="m3-corner">modavidc · 2026</span>
+            <span class="m3-corner">Lima · PE</span>
+          </div>
+          <div class="m3-wm"><span class="mo">mo</span>davidc</div>
+          <div class="m3-bottom">Criterio · Contexto · Intención</div>
+        </div>
+      </div>
+      <div class="card-frame">
+        <span class="card-label">Dorso</span>
+        <div class="card m3-back">
+          <div>
+            <div class="m3-back-name">Moisés Cedeño</div>
+            <div class="m3-back-role">Tech Lead · AWS · FinOps</div>
+          </div>
+          <div class="m3-back-contact">
+            <div><span class="k">Email</span><span>moisesdavidaaron@gmail.com</span></div>
+            <div><span class="k">Web</span><span>modavidc.com</span></div>
+            <div><span class="k">LinkedIn</span><span>/in/modavidc</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════════ MODEL 4 · TECHNICAL ═════════════════ -->
+  <section class="model">
+    <div class="model-head">
+      <span class="model-num">04</span>
+      <h2 class="model-name">Technical · Spec sheet</h2>
+      <span class="model-desc">Más "ingeniero". Como una ficha técnica. Filas, etiquetas mono, sin adornos. Memorable por inusual.</span>
+    </div>
+    <div class="card-pair">
+      <div class="card-frame">
+        <span class="card-label">Frente</span>
+        <div class="card m4-front">
+          <div class="m4-header">
+            <span class="m4-header-l">Brand · modavidc</span>
+            <span class="m4-header-r">v2.0 · 2026</span>
+          </div>
+          <div class="m4-body">
+            <div class="m4-wm"><span class="mo">mo</span>davidc</div>
+            <div class="m4-name-line"><strong>Moisés Cedeño</strong> · Tech Lead</div>
+          </div>
+          <div class="m4-footer">
+            <span>Criterio</span>
+            <span>Contexto</span>
+            <span>Intención</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-frame">
+        <span class="card-label">Dorso</span>
+        <div class="card m4-back">
+          <div class="m4-back-header">
+            <span>Contact · Spec</span>
+            <span>moisesdavidaaron</span>
+          </div>
+          <div class="m4-back-grid">
+            <span class="k">Role</span>     <span class="v">Tech Lead · Solutions Architect</span>
+            <span class="k">Stack</span>    <span class="v">AWS · FinOps · Healthcare SaaS</span>
+            <span class="k">Email</span>    <span class="v accent">moisesdavidaaron@gmail.com</span>
+            <span class="k">Web</span>      <span class="v">modavidc.com</span>
+            <span class="k">Base</span>     <span class="v">Lima, Perú</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PRINT NOTES ─── -->
+  <section class="notes">
+    <h3>Notas para mandar a imprenta</h3>
+    <ul>
+      <li><strong>Tamaño final:</strong> 85 × 55 mm. Pide al imprentero archivo con sangrado de 3 mm (88 × 58 mm total) y área segura de texto a 4 mm del borde.</li>
+      <li><strong>Verde marca:</strong> color base <code>oklch(67% 0.17 148)</code>. En CMYK aproximado: <code>C70 M0 Y65 K0</code>. Si la imprenta usa Pantone, el más cercano es <strong>Pantone 354 C</strong> o <strong>355 C</strong>. Pide muestra antes de tirada completa.</li>
+      <li><strong>Tipografías:</strong> Space Grotesk (display) y DM Mono (monospace). Si la imprenta no las tiene, convierte los textos a curvas/outlines antes de exportar el PDF.</li>
+      <li><strong>Papel recomendado:</strong> 350 g uncoated (papel sin recubrimiento, sensación premium). Si quieres efecto técnico/editorial, soft touch laminado mate. Evita brillo.</li>
+      <li><strong>Acabados opcionales:</strong> stamping en verde sobre dorso negro queda espectacular para el modelo 03. Borde teñido (edge painting) en verde para el modelo 01 sube la percepción notablemente.</li>
+      <li><strong>Cantidad mínima realista:</strong> 100 unidades para validar formato antes de pedir tirada larga (500+).</li>
+      <li><strong>Imprentas en Lima:</strong> Cyclos, Gráfica Biblos, Multi-Color (digital). Para tirada premium: cualquiera que ofrezca offset + Pantone.</li>
+    </ul>
+  </section>
+
+</div>
+</body>
+</html>

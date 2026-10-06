@@ -65,7 +65,7 @@ export default function ContactPage() {
 
             {/* Email */}
             <a
-              href="mailto:moisesdavidaaron@gmail.com"
+              href="mailto:moisesdavidaaron@gmail.com?subject=Quiero%20hablar%20contigo&body=Hola%20Mois%C3%A9s%2C%0A%0A"
               style={{
                 display: 'flex', alignItems: 'center', gap: '20px',
                 padding: '24px 28px', textDecoration: 'none',

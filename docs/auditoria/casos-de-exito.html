@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Casos de Éxito — modavidc · Solutions Architect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0b0c0e; --bg-2:#111316; --bg-3:#181a1d;
+  --border:#202227; --border-2:#2a2d33;
+  --text:#eaedf2; --text-2:#9aa0ae; --text-3:#555c6a;
+  --green:oklch(67% 0.17 148); --green-dim:oklch(35% 0.10 148); --green-bg:oklch(16% 0.06 148);
+  --blue:oklch(67% 0.17 240); --blue-bg:oklch(16% 0.06 240);
+  --violet:oklch(67% 0.17 290); --violet-bg:oklch(16% 0.06 290);
+  --amber:oklch(72% 0.14 68); --amber-bg:oklch(16% 0.06 68);
+  --ff-display:'Space Grotesk',sans-serif; --ff-body:'DM Sans',sans-serif; --ff-mono:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);color:var(--text);font-family:var(--ff-body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:rgba(11,12,14,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-brand{display:flex;align-items:baseline;gap:12px;text-decoration:none}
+.nav-wm{font-family:var(--ff-display);font-size:20px;font-weight:400;letter-spacing:-.025em;color:var(--text)}
+.nav-wm .mo{color:var(--green)}
+.nav-tagline{font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-size:13px;color:var(--text-2);text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:var(--text)}
+.nav-links a.active{color:var(--green)}
+.nav-cta{background:var(--green);color:#0b0c0e;font-size:13px;font-weight:500;padding:8px 18px;border-radius:3px;font-family:var(--ff-body);text-decoration:none;transition:opacity .15s}
+.nav-cta:hover{opacity:.85}
+
+/* PAGE HEADER */
+.page-header{max-width:1200px;margin:0 auto;padding:72px 48px 64px;border-bottom:1px solid var(--border);text-align:center}
+.section-kicker{font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.16em;text-transform:uppercase;margin-bottom:20px;display:inline-flex;align-items:center;gap:10px}
+.section-kicker::before,.section-kicker::after{content:'';display:block;width:24px;height:1px;background:var(--border-2)}
+.page-h1{font-family:var(--ff-display);font-size:clamp(44px,5.5vw,72px);font-weight:300;letter-spacing:-.04em;line-height:1.05;margin-bottom:16px}
+.page-h1 em{color:var(--green);font-style:normal}
+.page-sub{font-size:16px;color:var(--text-2);line-height:1.65;font-weight:300;max-width:480px;margin:0 auto}
+
+/* FILTERS */
+.filters-wrap{max-width:1200px;margin:0 auto;padding:32px 48px}
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+.filter-btn{font-family:var(--ff-mono);font-size:11px;letter-spacing:.08em;padding:6px 14px;border-radius:100px;border:1px solid var(--border-2);background:transparent;color:var(--text-2);cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:6px}
+.filter-btn:hover{border-color:var(--text-3);color:var(--text)}
+.filter-btn.active{background:var(--green);border-color:var(--green);color:#0b0c0e}
+.filter-dot{width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
+
+/* GRID */
+.casos-wrap{max-width:1200px;margin:0 auto;padding:0 48px 96px}
+.casos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.caso-card{background:var(--bg-2);display:flex;flex-direction:column;transition:background .15s}
+.caso-card:hover{background:var(--bg-3)}
+.caso-img{height:180px;overflow:hidden;position:relative;background:var(--bg-3)}
+.caso-img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.caso-img-inner{padding:20px 22px 0}
+.caso-meta{font-family:var(--ff-mono);font-size:10px;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between;margin-bottom:10px}
+.caso-title{font-family:var(--ff-display);font-size:17px;font-weight:500;letter-spacing:-.01em;line-height:1.25;margin-bottom:8px}
+.caso-body{font-size:13px;color:var(--text-2);line-height:1.65;margin-bottom:16px;flex:1}
+.caso-foot{padding:0 22px 20px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.metric-tag{font-family:var(--ff-mono);font-size:11px;letter-spacing:.04em;padding:3px 9px;border-radius:3px;background:var(--green-bg);color:var(--green);border:1px solid var(--green-dim)}
+.metric-tag.neutral{background:var(--bg-3);color:var(--text-2);border-color:var(--border-2)}
+.caso-link{font-family:var(--ff-mono);font-size:11px;color:var(--green);letter-spacing:.06em;text-decoration:none;display:flex;align-items:center;gap:4px;transition:opacity .15s;white-space:nowrap}
+.caso-link:hover{opacity:.7}
+.badge{font-family:var(--ff-mono);font-size:10px;letter-spacing:.08em;padding:3px 9px;border-radius:100px;display:inline-flex;align-items:center;gap:5px}
+.badge-dot{width:4px;height:4px;border-radius:50%;background:currentColor;flex-shrink:0}
+.badge-green{background:var(--green-bg);color:var(--green)}
+.badge-blue{background:var(--blue-bg);color:var(--blue)}
+.badge-violet{background:var(--violet-bg);color:var(--violet)}
+.badge-amber{background:var(--amber-bg);color:var(--amber)}
+.badge-neutral{background:var(--bg-3);color:var(--text-3);border:1px solid var(--border-2)}
+
+/* SVG placeholders */
+.img-grid{display:grid;width:100%;height:100%}
+.img-lines{width:100%;height:100%}
+
+/* CTA */
+.cta-band{max-width:1200px;margin:0 auto;padding:0 48px 96px}
+.cta-inner{background:var(--bg-2);border:1px solid var(--border);padding:48px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+.cta-h{font-family:var(--ff-display);font-size:clamp(22px,3vw,32px);font-weight:300;letter-spacing:-.03em;line-height:1.2;margin-bottom:10px}
+.cta-h em{color:var(--green);font-style:normal}
+.cta-sub{font-size:14px;color:var(--text-2);line-height:1.65;max-width:520px}
+.cta-btns{display:flex;gap:12px;flex-shrink:0}
+.btn{font-family:var(--ff-body);font-size:14px;font-weight:500;padding:11px 22px;border-radius:3px;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;letter-spacing:-.01em;text-decoration:none;transition:opacity .15s;white-space:nowrap}
+.btn:hover{opacity:.85}
+.btn-primary{background:var(--green);color:#0b0c0e}
+.btn-secondary{background:transparent;color:var(--text);border:1px solid var(--border-2)}
+
+footer{border-top:1px solid var(--border);padding:28px 48px;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-brand{font-family:var(--ff-display);font-size:15px;font-weight:400;letter-spacing:-.02em}
+.footer-brand .mo{color:var(--green)}
+.footer-copy{font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.06em}
+.footer-links{display:flex;gap:24px;font-family:var(--ff-mono);font-size:11px;color:var(--text-3);letter-spacing:.06em}
+.footer-links a{color:var(--text-3);text-decoration:none;transition:color .15s}
+.footer-links a:hover{color:var(--green)}
+
+@media(max-width:900px){
+  .nav-inner,.page-header,.filters-wrap,.casos-wrap,.cta-band,footer{padding-left:20px;padding-right:20px}
+  .nav-tagline{display:none}
+  .nav-links{gap:16px}
+  .casos-grid{grid-template-columns:1fr}
+  .cta-inner{grid-template-columns:1fr;gap:24px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="home.html">
+      <div class="nav-wm"><span class="mo">mo</span>davidc</div>
+      <div class="nav-tagline">Honest work. Efficient architectures.</div>
+    </a>
+    <div class="nav-links">
+      <a href="experiencia.html">Experiencia</a>
+      <a href="#" class="active">Casos de Éxito</a>
+      <a href="metodologia.html">Metodología</a>
+      <a href="testimonios.html">Testimonios</a>
+      <a class="nav-cta" href="hablemos.html">Hablemos</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="section-kicker">Casos de Éxito</div>
+  <h1 class="page-h1">Impacto <em>medible.</em></h1>
+  <p class="page-sub">Decisiones técnicas con ROI comprobable. Proyectos reales, métricas verificables.</p>
+</div>
+
+<div class="filters-wrap">
+  <div class="filters">
+    <button class="filter-btn active" onclick="filterCasos('todos', this)">Todos</button>
+    <button class="filter-btn" onclick="filterCasos('finops', this)"><span class="filter-dot" style="color:var(--green)"></span>FinOps</button>
+    <button class="filter-btn" onclick="filterCasos('healthcare', this)"><span class="filter-dot" style="color:var(--violet)"></span>Healthcare</button>
+    <button class="filter-btn" onclick="filterCasos('saas', this)"><span class="filter-dot" style="color:var(--blue)"></span>SaaS</button>
+    <button class="filter-btn" onclick="filterCasos('iot', this)"><span class="filter-dot" style="color:var(--amber)"></span>Mobile / IoT</button>
+    <button class="filter-btn" onclick="filterCasos('personal', this)">Personal</button>
+  </div>
+</div>
+
+<div class="casos-wrap">
+  <div class="casos-grid" id="casosGrid">
+
+    <!-- 01 -->
+    <div class="caso-card" data-cat="finops healthcare">
+      <div class="caso-img">
+        <svg class="img-lines" viewBox="0 0 400 180" preserveAspectRatio="xMidYMid slice">
+          <rect width="400" height="180" fill="#111316"/>
+          <line x1="0" y1="180" x2="400" y2="30" stroke="#202227" stroke-width="1"/>
+          <line x1="0" y1="140" x2="400" y2="60" stroke="#202227" stroke-width="1"/>
+          <polyline points="0,160 60,140 130,120 200,80 280,55 360,40 400,38" stroke="oklch(67% 0.17 148)" stroke-width="1.5" fill="none"/>
+          <polyline points="0,170 60,165 130,155 200,145 280,130 360,110 400,105" stroke="#2a2d33" stroke-width="1" fill="none"/>
+          <text x="20" y="170" font-family="monospace" font-size="9" fill="#555c6a" letter-spacing="1">-58% AWS</text>
+        </svg>
+      </div>
+      <div class="caso-img-inner">
+        <div class="caso-meta"><span>Work · FinOps</span><span>2023</span></div>
+        <div class="caso-title">Cómo reduje 58% la factura AWS de MediRec</div>
+        <div class="caso-body">Re-arquitectura y gobernanza de costos en plataforma Healthcare con 20K+ usuarios. Rightsizing, auto-scaling y eliminación de recursos huérfanos — sin tocar uptime.</div>
+      </div>
+      <div class="caso-foot">
+        <span class="metric-tag">-58% AWS · $180K</span>
+        <a class="caso-link" href="#">Ver caso →</a>
+      </div>
+    </div>
+
+    <!-- 02 -->
+    <div class="caso-card" data-cat="finops healthcare">
+      <div class="caso-img">
+        <svg class="img-lines" viewBox="0 0 400 180" preserveAspectRatio="xMidYMid slice">
+          <rect width="400" height="180" fill="#111316"/>
+          <rect x="40" y="40" width="320" height="100" rx="4" fill="#181a1d" stroke="#202227" stroke-width="1"/>
+          <text x="60" y="68" font-family="monospace" font-size="10" fill="#555c6a">LexComp → NLMI</text>
+          <line x1="60" y1="80" x2="340" y2="80" stroke="#202227" stroke-width="1"/>
+          <text x="60" y="98" font-family="monospace" font-size="9" fill="#9aa0ae">licencias: $0 / año</text>
+          <text x="60" y="114" font-family="monospace" font-size="9" fill="oklch(67% 0.17 148)">cobertura: 100%</text>
+          <text x="60" y="130" font-family="monospace" font-size="9" fill="#555c6a">integridad clínica: ✓</text>
+        </svg>
+      </div>
+      <div class="caso-img-inner">
+        <div class="caso-meta"><span>Work · FinOps</span><span>2024</span></div>
+        <div class="caso-title">Cómo eliminé $20k/año en licencias farmacéuticas</div>
+        <div class="caso-body">Migración de LexComp a NLMI sin perder integridad clínica. Sistema de medicamentos que cumple PREIS con cero costo de licencias.</div>
+      </div>
+      <div class="caso-foot">
+        <span class="metric-tag">-$20k/año · 0 downtime</span>
+        <a class="caso-link" href="#">Ver caso →</a>
+      </div>
+    </div>
+
+    <!-- 03 -->
+    <div class="caso-card" data-cat="saas healthcare">
+      <div class="caso-img">
+        <svg class="img-lines" viewBox="0 0 400 180" preserveAspectRatio="xMidYMid slice">
+          <rect width="400" height="180" fill="#111316"/>
+          <rect x="30" y="50" width="160" height="80" rx="3" fill="#181a1d" stroke="#202227"/>
+          <text x="45" y="75" font-family="monospace" font-size="9" fill="#555c6a">Lab System</text>
+          <text x="45" y="92" font-family="monospace" font-size="8" fill="#2a2d33">HL7 v2.x</text>
+          <path d="M190 90 L210 90" stroke="oklch(67% 0.17 148)" stroke-width="1.5" marker-end="url(#arr)"/>
+          <rect x="210" y="50" width="160" height="80" rx="3" fill="#181a1d" stroke="#202227"/>
+          <text x="225" y="75" font-family="monospace" font-size="9" fill="#9aa0ae">Middleware</text>
+          <text x="225" y="92" font-family="monospace" font-size="8" fill="oklch(67% 0.17 148)">-70% latency</text>
+          <text x="30" y="158" font-family="monospace" font-size="8" fill="#555c6a">6h → 90min · resultados clínicos</text>
+        </svg>
+      </div>
+      <div class="caso-img-inner">
+        <div class="caso-meta"><span>Work · Healthcare</span><span>2022</span></div>
+        <div class="caso-title">De fax a real-time: resultados de lab en minutos</div>
+        <div class="caso-body">Middleware HL7 que redujo el tiempo de entrega de resultados clínicos de 6 horas a menos de 90 minutos. Cero cambios en el sistema de laboratorio legacy.</div>
+      </div>
+      <div class="caso-foot">
+        <span class="metric-tag">-70% tiempo clínico</span>
+        <a class="caso-link" href="#">Ver caso →</a>
+      </div>
+    </div>
+
+    <!-- 04 -->
+    <div class="caso-card" data-cat="saas healthcare">
+      <div class="caso-img">
+        <svg class="img-lines" viewBox="0 0 400 180" preserveAspectRatio="xMidYMid slice">
+          <rect width="400" height="180" fill="#111316"/>
+          <text x="20" y="40" font-family="monospace" font-size="9" fill="#555c6a" letter-spacing="2">GOV-TECH · PUERTO RICO</text>
+          <rect x="20" y="50" width="60" height="40" rx="2" fill="#181a1d" stroke="#202227"/>
+          <rect x="90" y="50" width="60" height="40" rx="2" fill="#181a1d" stroke="#202227"/>
+          <rect x="160" y="50" width="60" height="40" rx="2" fill="#181a1d" stroke="#202227"/>
+          <rect x="230" y="50" width="60" height="40" rx="2" fill="#181a1d" stroke="#202227"/>
+          <rect x="300" y="50" width="60" height="40" rx="2" fill="#181a1d" stroke="oklch(67% 0.17 148)"/>
+          <line x1="20" y1="110" x2="380" y2="110" stroke="#202227"/>
+          <text x="20" y="130" font-family="monospace" font-size="9" fill="#9aa0ae">API automatizada · 100% compliance</text>
+          <text x="20" y="148" font-family="monospace" font-size="8" fill="#555c6a">Antes: Excel manual · Ahora: real-time</text>
+        </svg>
+      </div>
+      <div class="caso-img-inner">
+        <div class="caso-meta"><span>Work · Gov-Tech</span><span>2023</span></div>
+        <div class="caso-title">Integración Gov-Tech: de Excel manual a API automatizada</div>
+        <div class="caso-body">API crítica para reportes de inmunizaciones al Gobierno de Puerto Rico. De proceso manual en Excel a sistema automatizado con auditoría completa.</div>
+      </div>
+      <div class="caso-foot">
+        <span class="metric-tag neutral">100% compliance</span>
+        <a class="caso-link" href="#">Ver caso →</a>
+      </div>
+    </div>
+
+    <!-- 05 -->
+    <div class="caso-card" data-cat="iot saas">
+      <div class="caso-img">
+        <svg class="img-lines" viewBox="0 0 400 180" preserveAspectRatio="xMidYMid slice">
+          <rect width="400" height="180" fill="#111316"/>
+          <circle cx="200" cy="90" r="55" fill="none" stroke="#202227" stroke-width="1"/>
+          <circle cx="200" cy="90" r="35" fill="none" stroke="#2a2d33" stroke-width="1"/>
+          <circle cx="200" cy="90" r="6" fill="oklch(67% 0.17 148)"/>
+          <circle cx="145" cy="60" r="5" fill="#181a1d" stroke="#202227"/>
+          <circle cx="255" cy="60" r="5" fill="#181a1d" stroke="#202227"/>
+          <circle cx="145" cy="120" r="5" fill="#181a1d" stroke="#202227"/>
+          <circle cx="255" cy="120" r="5" fill="#181a1d" stroke="#202227"/>
+          <line x1="200" y1="90" x2="145" y2="60" stroke="#555c6a" stroke-width="1"/>
+          <line x1="200" y1="90" x2="255" y2="60" stroke="#555c6a" stroke-width="1"/>
+          <line x1="200" y1="90" x2="145" y2="120" stroke="#555c6a" stroke-width="1"/>
+          <line x1="200" y1="90" x2="255" y2="120" stroke="#555c6a" stroke-width="1"/>
+          <text x="20" y="168" font-family="monospace" font-size="8" fill="#555c6a">T-Cuida · SaaS IoT · wearables + GPS + dashboard</text>
+        </svg>
+      </div>
+      <div class="caso-img-inner">
+        <div class="caso-meta"><span>Work · SaaS / IoT</span><span>2023</span></div>
+        <div class="caso-title">T-Cuida — sistema IoT que construí desde cero</div>
+        <div class="caso-body">Ecosistema SaaS completo: wearables, GPS, dashboard real-time y comunicación familiar. De cero a App Store + Play Store con Flutter en 3 semanas.</div>
+      </div>
+      <div class="caso-foot">
+        <span class="metric-tag neutral">3 sem · 100% ownership</span>
+        <a class="caso-link" href="#">Ver caso →</a>
+      </div>
+    </div>
+
+    <!-- 06 -->
+    <div class="caso-card" data-cat="saas">
+      <div class="caso-img">
+        <svg class="img-lines" viewBox="0 0 400 180" preserveAspectRatio="xMidYMid slice">
+          <rect width="400" height="180" fill="#111316"/>
+          <rect x="30" y="30" width="340" height="120" rx="4" fill="#181a1d" stroke="#202227"/>
+          <rect x="50" y="50" width="120" height="80" rx="3" fill="#0b0c0e" stroke="#202227"/>
+          <rect x="190" y="50" width="160" height="36" rx="3" fill="#0b0c0e" stroke="#202227"/>
+          <rect x="190" y="94" width="160" height="36" rx="3" fill="#0b0c0e" stroke="oklch(67% 0.17 148)"/>
+          <text x="60" y="97" font-family="monospace" font-size="22" font-weight="500" fill="oklch(67% 0.17 148)">3→1</text>
+          <text x="60" y="118" font-family="monospace" font-size="8" fill="#555c6a">min respuesta</text>
+          <text x="200" y="73" font-family="monospace" font-size="8" fill="#555c6a">alertas · 24/7</text>
+          <text x="200" y="117" font-family="monospace" font-size="9" fill="oklch(67% 0.17 148)">3min → 1min</text>
+        </svg>
+      </div>
+      <div class="caso-img-inner">
+        <div class="caso-meta"><span>Work · SaaS</span><span>2023</span></div>
+        <div class="caso-title">De 3 minutos a 1 — dashboard de emergencias</div>
+        <div class="caso-body">Panel de atención en tiempo real que triplicó la velocidad de respuesta ante emergencias de campo. Stack: React + WebSockets + AWS.</div>
+      </div>
+      <div class="caso-foot">
+        <span class="metric-tag">3min → 1min</span>
+        <a class="caso-link" href="#">Ver caso →</a>
+      </div>
+    </div>
+
+    <!-- 07 -->
+    <div class="caso-card" data-cat="iot">
+      <div class="caso-img">
+        <svg class="img-lines" viewBox="0 0 400 180" preserveAspectRatio="xMidYMid slice">
+          <rect width="400" height="180" fill="#111316"/>
+          <polyline points="20,150 60,148 100,145 140,130 180,80 220,50 260,45 300,42 340,40 380,38" stroke="oklch(67% 0.17 148)" stroke-width="2" fill="none"/>
+          <polyline points="20,165 60,162 100,155 140,140 180,100 220,75 260,68 300,65 340,63 380,61" stroke="#2a2d33" stroke-width="1" fill="none"/>
+          <text x="20" y="30" font-family="monospace" font-size="9" fill="#555c6a" letter-spacing="1">TCP/IP BRIDGE · WEBSOCKET</text>
+          <text x="20" y="48" font-family="monospace" font-size="22" font-weight="500" fill="oklch(67% 0.17 148)">+400%</text>
+          <text x="20" y="65" font-family="monospace" font-size="8" fill="#555c6a">programming speed</text>
+        </svg>
+      </div>
+      <div class="caso-img-inner">
+        <div class="caso-meta"><span>Work · IoT</span><span>2023</span></div>
+        <div class="caso-title">Bridge TCP/IP–WebSocket: 400% más rápido sin cambiar hardware</div>
+        <div class="caso-body">Puente que conecta dispositivos IoT legacy con aplicaciones web modernas vía WebSocket. Sin reemplazar hardware existente.</div>
+      </div>
+      <div class="caso-foot">
+        <span class="metric-tag">+400% velocidad</span>
+        <a class="caso-link" href="#">Ver caso →</a>
+      </div>
+    </div>
+
+    <!-- 08 -->
+    <div class="caso-card" data-cat="iot saas">
+      <div class="caso-img">
+        <svg class="img-lines" viewBox="0 0 400 180" preserveAspectRatio="xMidYMid slice">
+          <rect width="400" height="180" fill="#111316"/>
+          <rect x="80" y="30" width="100" height="120" rx="12" fill="#181a1d" stroke="#202227"/>
+          <rect x="90" y="50" width="80" height="85" rx="4" fill="#0b0c0e"/>
+          <circle cx="130" cy="142" r="6" fill="none" stroke="#2a2d33" stroke-width="1.5"/>
+          <rect x="100" y="58" width="60" height="8" rx="2" fill="#202227"/>
+          <rect x="100" y="70" width="45" height="6" rx="2" fill="#202227"/>
+          <rect x="100" y="80" width="55" height="6" rx="2" fill="#202227"/>
+          <rect x="100" y="95" width="60" height="20" rx="3" fill="oklch(67% 0.17 148)" opacity=".15"/>
+          <text x="220" y="70" font-family="monospace" font-size="9" fill="#555c6a">2 meses</text>
+          <text x="220" y="88" font-family="monospace" font-size="9" fill="#9aa0ae">App Store</text>
+          <text x="220" y="106" font-family="monospace" font-size="9" fill="#9aa0ae">Play Store</text>
+          <text x="220" y="126" font-family="monospace" font-size="8" fill="oklch(67% 0.17 148)">Flutter · Firebase</text>
+        </svg>
+      </div>
+      <div class="caso-img-inner">
+        <div class="caso-meta"><span>Work · Mobile</span><span>2024</span></div>
+        <div class="caso-title">Primera app móvil de MediRec en 2 meses</div>
+        <div class="caso-body">De cero a App Store + Play Store con Flutter y Firebase. Resultado de laboratorio en el bolsillo del paciente. Entrega en 8 semanas.</div>
+      </div>
+      <div class="caso-foot">
+        <span class="metric-tag neutral">2 meses · delivery</span>
+        <a class="caso-link" href="#">Ver caso →</a>
+      </div>
+    </div>
+
+    <!-- 09 -->
+    <div class="caso-card" data-cat="personal">
+      <div class="caso-img">
+        <svg class="img-lines" viewBox="0 0 400 180" preserveAspectRatio="xMidYMid slice">
+          <rect width="400" height="180" fill="#111316"/>
+          <rect x="30" y="40" width="340" height="100" rx="4" fill="#181a1d" stroke="#202227"/>
+          <text x="50" y="70" font-family="monospace" font-size="10" fill="oklch(67% 0.17 148)">FCP 0.8s</text>
+          <text x="50" y="88" font-family="monospace" font-size="9" fill="#9aa0ae">Core Web Vitals</text>
+          <line x1="50" y1="100" x2="350" y2="100" stroke="#202227"/>
+          <rect x="50" y="108" width="180" height="6" rx="3" fill="#202227"/>
+          <rect x="50" y="108" width="162" height="6" rx="3" fill="oklch(67% 0.17 148)" opacity=".6"/>
+          <text x="242" y="116" font-family="monospace" font-size="8" fill="#555c6a">90%</text>
+          <text x="50" y="136" font-family="monospace" font-size="8" fill="#555c6a">El Estoico · landing page · performance</text>
+        </svg>
+      </div>
+      <div class="caso-img-inner">
+        <div class="caso-meta"><span>Personal</span><span>2025</span></div>
+        <div class="caso-title">El Estoico — performance perfecta en 0.8s</div>
+        <div class="caso-body">Landing page con Core Web Vitals verdes y arquitectura moderna. FCP de 0.8s, 100% Lighthouse, sin frameworks pesados.</div>
+      </div>
+      <div class="caso-foot">
+        <span class="metric-tag">FCP 0.8s</span>
+        <a class="caso-link" href="#">Ver caso →</a>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="caso-card" data-cat="personal">
+      <div class="caso-img">
+        <svg class="img-lines" viewBox="0 0 400 180" preserveAspectRatio="xMidYMid slice">
+          <rect width="400" height="180" fill="#111316"/>
+          <circle cx="80" cy="90" r="30" fill="#181a1d" stroke="#202227"/>
+          <circle cx="80" cy="90" r="18" fill="#0b0c0e" stroke="#202227"/>
+          <circle cx="200" cy="90" r="30" fill="#181a1d" stroke="#202227"/>
+          <circle cx="320" cy="90" r="30" fill="#181a1d" stroke="#202227"/>
+          <line x1="110" y1="90" x2="170" y2="90" stroke="#202227"/>
+          <line x1="230" y1="90" x2="290" y2="90" stroke="#202227"/>
+          <text x="20" y="155" font-family="monospace" font-size="8" fill="#555c6a">Grupero · análisis de grupos WhatsApp · 100% privado</text>
+        </svg>
+      </div>
+      <div class="caso-img-inner">
+        <div class="caso-meta"><span>Personal</span><span>2025</span></div>
+        <div class="caso-title">Grupero — la radiografía de tus grupos de WhatsApp</div>
+        <div class="caso-body">App Android que analiza participación, detecta inactivos y eventos en grupos de WhatsApp. Procesamiento 100% local, sin servidor.</div>
+      </div>
+      <div class="caso-foot">
+        <span class="badge badge-neutral">100% privado</span>
+        <a class="caso-link" href="#">Ver caso →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="cta-band">
+  <div class="cta-inner">
+    <div>
+      <h3 class="cta-h">¿Tu proyecto en este <em>listado</em>?</h3>
+      <p class="cta-sub">Si tienes un problema que se parece a alguno de estos casos — ya sé cómo resolverlo. Cuéntame el contexto.</p>
+    </div>
+    <div class="cta-btns">
+      <a class="btn btn-primary" href="hablemos.html">Hablemos →</a>
+      <a class="btn btn-secondary" href="experiencia.html">Ver experiencia</a>
+    </div>
+  </div>
+</div>
+
+<div style="border-top:1px solid var(--border)">
+  <footer>
+    <div class="footer-brand"><span class="mo">mo</span>davidc</div>
+    <div class="footer-copy">© 2026 Moisés Cedeño · Todos los derechos reservados.</div>
+    <div class="footer-links">
+      <a href="home.html">Inicio</a>
+      <a href="experiencia.html">Experiencia</a>
+      <a href="metodologia.html">Metodología</a>
+      <a href="/cdn-cgi/l/email-protection#472f282b26072a282326312e23246924282a"><span class="__cf_email__" data-cfemail="d7bfb8bbb697bab8b3b6a1beb3b4f9b4b8ba">[email&#160;protected]</span></a>
+    </div>
+  </footer>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function filterCasos(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.caso-card').forEach(card => {
+    if (cat === 'todos') { card.style.display = ''; return; }
+    const cats = card.dataset.cat || '';
+    card.style.display = cats.includes(cat) ? '' : 'none';
+  });
+  // reflow grid
+  const grid = document.getElementById('casosGrid');
+  const visible = [...grid.querySelectorAll('.caso-card')].filter(c => c.style.display !== 'none');
+  grid.style.gridTemplateColumns = visible.length === 1 ? '400px' : '';
+}
+</script>
+</body>
+</html>

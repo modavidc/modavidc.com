@@ -1,0 +1,757 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Experiencia — modavidc · Solutions Architect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ─────────────────────────────────────────────── */
+:root {
+  --bg:         #0b0c0e;
+  --bg-2:       #111316;
+  --bg-3:       #181a1d;
+  --border:     #202227;
+  --border-2:   #2a2d33;
+  --text:       #eaedf2;
+  --text-2:     #9aa0ae;
+  --text-3:     #555c6a;
+  --green:      oklch(67% 0.17 148);
+  --green-dim:  oklch(35% 0.10 148);
+  --green-bg:   oklch(16% 0.06 148);
+  --blue:       oklch(67% 0.17 240);
+  --blue-bg:    oklch(16% 0.06 240);
+  --violet:     oklch(67% 0.17 290);
+  --violet-bg:  oklch(16% 0.06 290);
+  --amber:      oklch(72% 0.14 68);
+  --amber-bg:   oklch(16% 0.06 68);
+  --ff-display: 'Space Grotesk', sans-serif;
+  --ff-body:    'DM Sans', sans-serif;
+  --ff-mono:    'DM Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--bg); color: var(--text); font-family: var(--ff-body); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+
+/* ── NAV ────────────────────────────────────────────────── */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(11,12,14,.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 60px;
+}
+.nav-brand { display: flex; align-items: baseline; gap: 12px; text-decoration: none; }
+.nav-wm { font-family: var(--ff-display); font-size: 20px; font-weight: 400; letter-spacing: -.025em; color: var(--text); }
+.nav-wm .mo { color: var(--green); }
+.nav-tagline { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); letter-spacing: .12em; text-transform: uppercase; }
+.nav-links { display: flex; align-items: center; gap: 32px; }
+.nav-links a { font-size: 13px; color: var(--text-2); text-decoration: none; transition: color .15s; }
+.nav-links a:hover, .nav-links a.active { color: var(--text); }
+.nav-links a.active { color: var(--green); }
+.nav-cta {
+  background: var(--green); color: #0b0c0e; font-size: 13px; font-weight: 500;
+  padding: 8px 18px; border-radius: 3px; font-family: var(--ff-body);
+  text-decoration: none; transition: opacity .15s;
+}
+.nav-cta:hover { opacity: .85; }
+
+/* ── PAGE HEADER ────────────────────────────────────────── */
+.page-header {
+  max-width: 1200px; margin: 0 auto;
+  padding: 72px 48px 0;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 64px;
+}
+.section-kicker {
+  font-family: var(--ff-mono); font-size: 11px; color: var(--text-3);
+  letter-spacing: .16em; text-transform: uppercase; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-kicker::before { content: ''; display: block; width: 24px; height: 1px; background: var(--border-2); }
+.page-h1 {
+  font-family: var(--ff-display); font-size: clamp(40px, 5vw, 64px);
+  font-weight: 300; letter-spacing: -.04em; line-height: 1.05;
+  margin-bottom: 20px;
+}
+.page-h1 em { color: var(--green); font-style: normal; }
+.page-sub {
+  font-size: 16px; color: var(--text-2); max-width: 640px;
+  line-height: 1.65; font-weight: 300;
+}
+
+/* ── LAYOUT WRAPPER ─────────────────────────────────────── */
+.page-wrap { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+
+/* ── SECTION ────────────────────────────────────────────── */
+.section {
+  padding: 72px 0;
+  border-bottom: 1px solid var(--border);
+}
+.section-h2 {
+  font-family: var(--ff-display); font-size: clamp(24px, 3vw, 36px);
+  font-weight: 300; letter-spacing: -.03em; line-height: 1.1;
+  margin-bottom: 10px;
+}
+.section-sub {
+  font-size: 15px; color: var(--text-2); max-width: 600px;
+  line-height: 1.65; margin-bottom: 48px; font-weight: 300;
+}
+
+/* ── TIMELINE ───────────────────────────────────────────── */
+.timeline {
+  position: relative;
+  padding-left: 0;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 159px;
+  top: 8px; bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+
+.tl-entry {
+  display: grid;
+  grid-template-columns: 148px 1fr;
+  gap: 32px;
+  margin-bottom: 2px;
+  position: relative;
+}
+.tl-entry:last-child { margin-bottom: 0; }
+
+/* Left: date column */
+.tl-date {
+  text-align: right;
+  padding-top: 28px;
+  position: relative;
+}
+.tl-years {
+  font-family: var(--ff-mono); font-size: 11px; color: var(--text-3);
+  letter-spacing: .08em; display: block; margin-bottom: 4px;
+}
+.tl-period {
+  font-family: var(--ff-mono); font-size: 12px; color: var(--text-2);
+  letter-spacing: .04em; line-height: 1.4;
+}
+.tl-period.current { color: var(--green); }
+
+/* Timeline dot */
+.tl-dot {
+  position: absolute; right: -22px; top: 30px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--border-2); border: 2px solid var(--border-2);
+  z-index: 1;
+}
+.tl-entry.is-current .tl-dot {
+  background: var(--green); border-color: var(--green);
+  box-shadow: 0 0 0 4px var(--green-bg);
+}
+
+/* Right: content card */
+.tl-card {
+  background: var(--bg-2); border: 1px solid var(--border);
+  padding: 28px 28px 24px;
+  transition: border-color .2s;
+}
+.tl-card:hover { border-color: var(--border-2); }
+.tl-entry.is-current .tl-card { border-color: var(--green-dim); }
+
+.tl-card-head {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: 6px; gap: 16px;
+}
+.tl-role {
+  font-family: var(--ff-display); font-size: 18px; font-weight: 500;
+  letter-spacing: -.01em; line-height: 1.2;
+}
+.tl-company {
+  font-family: var(--ff-mono); font-size: 11px; color: var(--text-3);
+  letter-spacing: .1em; text-transform: uppercase; margin-bottom: 14px;
+}
+.tl-body { font-size: 14px; color: var(--text-2); line-height: 1.7; margin-bottom: 18px; }
+
+/* Achievements list */
+.tl-achievements { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+.tl-achievements li {
+  font-size: 13.5px; color: var(--text-2); line-height: 1.55;
+  padding-left: 18px; position: relative;
+}
+.tl-achievements li::before {
+  content: '—'; position: absolute; left: 0;
+  font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); top: 4px;
+}
+.tl-achievements li strong { color: var(--text); font-weight: 500; }
+
+/* Tags row */
+.tl-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  font-family: var(--ff-mono); font-size: 10px; color: var(--text-3);
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: 3px 8px; background: var(--bg-3); border: 1px solid var(--border);
+  border-radius: 2px;
+}
+
+/* Status badge */
+.status-badge {
+  font-family: var(--ff-mono); font-size: 11px; letter-spacing: .08em;
+  padding: 3px 10px; border-radius: 100px;
+  display: inline-flex; align-items: center; gap: 5px;
+  flex-shrink: 0;
+}
+.status-badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; display: block; }
+.status-current { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-dim); }
+.status-past { background: var(--bg-3); color: var(--text-3); border: 1px solid var(--border); }
+
+/* Category badge */
+.cat-badge {
+  font-family: var(--ff-mono); font-size: 10px; letter-spacing: .08em;
+  padding: 2px 8px; border-radius: 100px;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.cat-badge .dot { width: 4px; height: 4px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+.cat-green  { background: var(--green-bg);  color: var(--green);  }
+.cat-blue   { background: var(--blue-bg);   color: var(--blue);   }
+.cat-violet { background: var(--violet-bg); color: var(--violet); }
+.cat-amber  { background: var(--amber-bg);  color: var(--amber);  }
+
+/* Metric inline */
+.metric-inline {
+  font-family: var(--ff-mono); font-size: 11px; letter-spacing: .04em;
+  padding: 3px 8px; border-radius: 3px;
+  background: var(--green-bg); color: var(--green);
+  border: 1px solid var(--green-dim); display: inline-block;
+}
+.metric-inline.neutral {
+  background: var(--bg-3); color: var(--text-2); border-color: var(--border-2);
+}
+
+/* ── DOMINIOS ───────────────────────────────────────────── */
+.dominios-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border);
+}
+.dominio-card { background: var(--bg-2); padding: 28px; }
+.dominio-head {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  margin-bottom: 14px; gap: 12px;
+}
+.dominio-title {
+  font-family: var(--ff-display); font-size: 15px; font-weight: 500;
+  letter-spacing: -.01em; line-height: 1.3;
+}
+.dominio-result {
+  font-family: var(--ff-mono); font-size: 11px; letter-spacing: .04em;
+  padding: 3px 8px; border-radius: 3px; white-space: nowrap; flex-shrink: 0;
+}
+.dominio-skills { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 14px; }
+.dominio-body { font-size: 13px; color: var(--text-3); line-height: 1.6; }
+
+/* ── HABILIDADES (skills radar alt) ────────────────────── */
+.skills-table {
+  border: 1px solid var(--border);
+  display: grid; grid-template-columns: 200px 1fr 120px;
+}
+.skills-table .row {
+  display: contents;
+}
+.skills-table .row > * {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center;
+}
+.skills-table .row:last-child > * { border-bottom: none; }
+.skills-table .row .skill-name {
+  font-size: 14px; font-weight: 500; letter-spacing: -.005em;
+  border-right: 1px solid var(--border); background: var(--bg-2);
+}
+.skills-table .row .skill-bar-wrap {
+  background: var(--bg-2); border-right: 1px solid var(--border);
+}
+.skill-bar { width: 100%; height: 3px; background: var(--border-2); border-radius: 1px; }
+.skill-bar span { display: block; height: 100%; background: var(--green); border-radius: 1px; }
+.skills-table .row .skill-level {
+  font-family: var(--ff-mono); font-size: 11px; color: var(--text-3);
+  letter-spacing: .1em; text-transform: uppercase;
+  background: var(--bg-3); justify-content: flex-end;
+}
+
+/* ── KPI STRIP ──────────────────────────────────────────── */
+.kpi-strip {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1px; background: var(--border); border: 1px solid var(--border);
+}
+.kpi-cell { background: var(--bg-2); padding: 28px 24px; }
+.kpi-val { font-family: var(--ff-display); font-size: 40px; font-weight: 500; letter-spacing: -.04em; line-height: 1; margin-bottom: 6px; }
+.kpi-val.green { color: var(--green); }
+.kpi-label { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); letter-spacing: .1em; text-transform: uppercase; }
+.kpi-sub { font-size: 12px; color: var(--text-3); margin-top: 3px; }
+
+/* ── CTA ────────────────────────────────────────────────── */
+.cta-band {
+  background: var(--bg-2); border: 1px solid var(--border);
+  padding: 48px; margin-top: 2px;
+  display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center;
+}
+.cta-band-h {
+  font-family: var(--ff-display); font-size: clamp(22px, 3vw, 32px);
+  font-weight: 300; letter-spacing: -.03em; line-height: 1.2; margin-bottom: 10px;
+}
+.cta-band-h em { color: var(--green); font-style: normal; }
+.cta-band-sub { font-size: 14px; color: var(--text-2); line-height: 1.65; max-width: 520px; }
+.cta-band-btns { display: flex; gap: 12px; flex-shrink: 0; }
+
+.btn {
+  font-family: var(--ff-body); font-size: 14px; font-weight: 500;
+  padding: 11px 22px; border-radius: 3px; border: none; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 8px; letter-spacing: -.01em;
+  text-decoration: none; transition: opacity .15s; white-space: nowrap;
+}
+.btn:hover { opacity: .85; }
+.btn-primary { background: var(--green); color: #0b0c0e; }
+.btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border-2); }
+
+/* ── FOOTER ─────────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border); padding: 28px 48px;
+  max-width: 1200px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px;
+}
+.footer-brand { font-family: var(--ff-display); font-size: 15px; font-weight: 400; letter-spacing: -.02em; }
+.footer-brand .mo { color: var(--green); }
+.footer-copy { font-family: var(--ff-mono); font-size: 11px; color: var(--text-3); letter-spacing: .06em; }
+.footer-links { display: flex; gap: 24px; font-family: var(--ff-mono); font-size: 11px; color: var(--text-3); letter-spacing: .06em; }
+.footer-links a { color: var(--text-3); text-decoration: none; transition: color .15s; }
+.footer-links a:hover { color: var(--green); }
+
+/* ── RESPONSIVE ─────────────────────────────────────────── */
+@media(max-width: 1000px) {
+  .nav-inner, .page-header, .page-wrap, footer { padding-left: 20px; padding-right: 20px; }
+  .nav-tagline { display: none; }
+  .nav-links { gap: 16px; }
+  .timeline::before { left: 0; display: none; }
+  .tl-entry { grid-template-columns: 1fr; }
+  .tl-date { text-align: left; padding-top: 0; padding-bottom: 8px; display: flex; align-items: center; gap: 12px; }
+  .tl-dot { display: none; }
+  .dominios-grid { grid-template-columns: 1fr; }
+  .skills-table { grid-template-columns: 1fr; }
+  .skills-table .row .skill-name { border-right: none; border-bottom: 1px solid var(--border); }
+  .skills-table .row .skill-bar-wrap { border-right: none; }
+  .kpi-strip { grid-template-columns: 1fr 1fr; }
+  .cta-band { grid-template-columns: 1fr; gap: 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ════════════════════════════════════════════════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="home.html">
+      <div class="nav-wm"><span class="mo">mo</span>davidc</div>
+      <div class="nav-tagline">Honest work. Efficient architectures.</div>
+    </a>
+    <div class="nav-links">
+      <a href="#" class="active">Experiencia</a>
+      <a href="#">Casos de Éxito</a>
+      <a href="#">Metodología</a>
+      <a href="#">Testimonios</a>
+      <a class="nav-cta" href="#">Hablemos</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ═══ PAGE HEADER ═════════════════════════════════════════ -->
+<div class="page-header">
+  <div class="section-kicker">Experiencia</div>
+  <h1 class="page-h1">
+    De full-stack a<br>
+    <em>Tech Lead.</em>
+  </h1>
+  <p class="page-sub">
+    8+ años construyendo sistemas que escalan — en Healthcare, SaaS e IoT. Cada rol añadió una capa: velocidad técnica, luego arquitectura, luego criterio de negocio.
+  </p>
+</div>
+
+
+<!-- ═══ TIMELINE ════════════════════════════════════════════ -->
+<div class="page-wrap">
+  <section class="section">
+    <div class="section-kicker">Trayectoria</div>
+    <h2 class="section-h2">Roles que construyeron el criterio</h2>
+    <p class="section-sub">De la implementación al diseño de sistemas — con métricas reales en cada etapa.</p>
+
+    <div class="timeline">
+
+      <!-- CURRENT: Tech Lead -->
+      <div class="tl-entry is-current">
+        <div class="tl-date">
+          <span class="tl-years">2023 → presente</span>
+          <span class="tl-period current">2+ años</span>
+          <div class="tl-dot"></div>
+        </div>
+        <div class="tl-card">
+          <div class="tl-card-head">
+            <div>
+              <div class="tl-role">Tech Lead</div>
+              <div class="tl-company">Plataforma Healthcare · SaaS · Lima, Perú</div>
+            </div>
+            <span class="status-badge status-current">Actual</span>
+          </div>
+          <p class="tl-body">
+            Liderazgo técnico de equipo de 6 devs en plataforma de salud con 20K+ usuarios activos. Responsable de arquitectura cloud, FinOps y cultura de documentación. Primer rol donde el impacto medible supera el código escrito directamente.
+          </p>
+          <ul class="tl-achievements">
+            <li>Redujo la factura AWS en <strong>-58%</strong> ($180K anuales) en 90 días mediante re-arquitectura de instancias y eliminación de recursos huérfanos — sin afectar uptime.</li>
+            <li>Implementó un sistema de ADRs (Architecture Decision Records) que llevó el onboarding de nuevos devs de 3 semanas a <strong>48 horas</strong>.</li>
+            <li>Migró de LexComp a NLMI eliminando <strong>$20K/año en licencias</strong> farmacéuticas sin pérdida de integridad clínica.</li>
+            <li>Implementó CI/CD completo + observabilidad: de 0 a <strong>100% de cobertura de deploys</strong> auditables.</li>
+            <li>Logró cumplimiento regulatorio PREIS en tiempo récord para sistema de resultados de laboratorio.</li>
+          </ul>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;">
+            <span class="metric-inline">-58% AWS · $180K</span>
+            <span class="metric-inline">48h onboarding</span>
+            <span class="metric-inline">-$20K/año licencias</span>
+          </div>
+          <div class="tl-tags">
+            <span class="cat-badge cat-green"><span class="dot"></span>FinOps</span>
+            <span class="cat-badge cat-violet"><span class="dot"></span>Healthcare</span>
+            <span class="cat-badge cat-blue"><span class="dot"></span>SaaS</span>
+            <span class="tag">AWS</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">Docker</span>
+            <span class="tag">Terraform</span>
+            <span class="tag">HL7 / FHIR</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Solutions Architect -->
+      <div class="tl-entry">
+        <div class="tl-date">
+          <span class="tl-years">2021 → 2023</span>
+          <span class="tl-period">2 años</span>
+          <div class="tl-dot"></div>
+        </div>
+        <div class="tl-card">
+          <div class="tl-card-head">
+            <div>
+              <div class="tl-role">Solutions Architect</div>
+              <div class="tl-company">Empresa Gov-Tech · Puerto Rico</div>
+            </div>
+            <span class="status-badge status-past">2021–2023</span>
+          </div>
+          <p class="tl-body">
+            Diseño de arquitectura para sistemas de gobierno digital. Primer rol con responsabilidad completa de decisiones técnicas de principio a fin — stack, infraestructura, patrones de integración y seguridad. Trabajo directo con stakeholders no técnicos.
+          </p>
+          <ul class="tl-achievements">
+            <li>Arquitectó un sistema multi-tenant que hoy sirve a <strong>+20K usuarios</strong> de servicios públicos de salud.</li>
+            <li>Redujo el tiempo de entrega de resultados clínicos de laboratorio en <strong>-70%</strong> mediante middleware de integración HL7.</li>
+            <li>Lideró la migración de infraestructura on-premise a cloud en <strong>2 meses</strong> con cero downtime visible al usuario final.</li>
+            <li>Implementó autenticación federada y auditoría completa de acceso para cumplir con regulaciones de datos gubernamentales.</li>
+          </ul>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;">
+            <span class="metric-inline">20K+ usuarios</span>
+            <span class="metric-inline">-70% tiempo clínico</span>
+            <span class="metric-inline neutral">2 meses · 0 downtime</span>
+          </div>
+          <div class="tl-tags">
+            <span class="cat-badge cat-violet"><span class="dot"></span>Healthcare</span>
+            <span class="tag">AWS</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">React</span>
+            <span class="tag">Redis</span>
+            <span class="tag">HL7</span>
+            <span class="tag">OAuth 2.0</span>
+            <span class="tag">Gov-Tech</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Integration Engineer -->
+      <div class="tl-entry">
+        <div class="tl-date">
+          <span class="tl-years">2019 → 2021</span>
+          <span class="tl-period">2 años</span>
+          <div class="tl-dot"></div>
+        </div>
+        <div class="tl-card">
+          <div class="tl-card-head">
+            <div>
+              <div class="tl-role">Integration Engineer</div>
+              <div class="tl-company">Startup SaaS · Panamá / Miami</div>
+            </div>
+            <span class="status-badge status-past">2019–2021</span>
+          </div>
+          <p class="tl-body">
+            Diseño y desarrollo de integraciones entre sistemas heterogéneos — ERP, dispositivos IoT, APIs de terceros y plataformas de mensajería clínica. Rol que definió el enfoque en arquitecturas orientadas a eventos y sistemas distribuidos.
+          </p>
+          <ul class="tl-achievements">
+            <li>Construyó el backbone de integración de una plataforma SaaS IoT que conecta <strong>+1,500 dispositivos</strong> en tiempo real.</li>
+            <li>Implementó un sistema de eventos con MQTT + AWS IoT Core que redujo la latencia de telemetría en <strong>-65%</strong>.</li>
+            <li>Diseñó el primer ADK (API Developer Kit) de la empresa — adoptado por <strong>3 clientes enterprise</strong> en el primer trimestre.</li>
+          </ul>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;">
+            <span class="metric-inline neutral">1,500+ dispositivos</span>
+            <span class="metric-inline">-65% latencia IoT</span>
+          </div>
+          <div class="tl-tags">
+            <span class="cat-badge cat-amber"><span class="dot"></span>IoT</span>
+            <span class="cat-badge cat-blue"><span class="dot"></span>SaaS</span>
+            <span class="tag">MQTT</span>
+            <span class="tag">AWS IoT</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">Python</span>
+            <span class="tag">Kafka</span>
+            <span class="tag">REST / GraphQL</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Full-Stack Developer -->
+      <div class="tl-entry">
+        <div class="tl-date">
+          <span class="tl-years">2016 → 2019</span>
+          <span class="tl-period">3 años</span>
+          <div class="tl-dot"></div>
+        </div>
+        <div class="tl-card">
+          <div class="tl-card-head">
+            <div>
+              <div class="tl-role">Full-Stack Developer</div>
+              <div class="tl-company">Agencia de producto digital · Lima, Perú</div>
+            </div>
+            <span class="status-badge status-past">2016–2019</span>
+          </div>
+          <p class="tl-body">
+            Desarrollo full-stack para productos digitales de clientes en retail, fintech y salud. Primera exposición a sistemas con carga real de usuarios y primeros patrones de arquitectura escalable. Base técnica que define el resto de la trayectoria.
+          </p>
+          <ul class="tl-achievements">
+            <li>Desarrolló y mantuvo 6 productos digitales en producción simultáneamente — aprendió a priorizar técnicamente bajo presión real.</li>
+            <li>Primera experiencia con sistemas de salud: plataforma de gestión de citas médicas con <strong>+3K usuarios</strong> activos.</li>
+            <li>Adoptó las primeras prácticas de documentación técnica — patrón que luego escalaría en todos los roles posteriores.</li>
+          </ul>
+          <div class="tl-tags">
+            <span class="tag">JavaScript</span>
+            <span class="tag">React</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">PHP</span>
+            <span class="tag">AWS EC2</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══ DOMINIOS ═══════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-kicker">Dominios de un Tech Lead</div>
+    <h2 class="section-h2">Qué resuelvo — y con qué resultado probado</h2>
+    <p class="section-sub">No son categorías de skills. Son áreas donde hay decisiones tomadas, sistemas entregados y métricas reales.</p>
+
+    <div class="dominios-grid">
+
+      <div class="dominio-card">
+        <div class="dominio-head">
+          <div class="dominio-title">Cloud FinOps</div>
+          <span class="metric-inline">-58% AWS · MediRec</span>
+        </div>
+        <div class="dominio-skills">
+          <span class="tag">AWS Cost Explorer</span>
+          <span class="tag">Reserved Instances</span>
+          <span class="tag">Terraform</span>
+          <span class="tag">Auto Scaling</span>
+        </div>
+        <div class="dominio-body">Gobernanza de costos cloud con tagging, rightsizing y automatización de apagado de recursos ociosos. Resultado documentado: $180K ahorrados en un año.</div>
+      </div>
+
+      <div class="dominio-card">
+        <div class="dominio-head">
+          <div class="dominio-title">Backend APIs &amp; Microservicios</div>
+          <span class="metric-inline">-70% tiempo clínico</span>
+        </div>
+        <div class="dominio-skills">
+          <span class="tag">Node.js</span>
+          <span class="tag">REST / GraphQL</span>
+          <span class="tag">Kafka</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Redis</span>
+        </div>
+        <div class="dominio-body">APIs de alta disponibilidad para plataformas con miles de usuarios. Middleware de integración HL7 que redujo latencia de resultados clínicos en un 70%.</div>
+      </div>
+
+      <div class="dominio-card">
+        <div class="dominio-head">
+          <div class="dominio-title">Healthcare &amp; Regulatorio</div>
+          <span class="metric-inline neutral">PREIS · HIPAA</span>
+        </div>
+        <div class="dominio-skills">
+          <span class="tag">HL7 / FHIR</span>
+          <span class="tag">NLMI</span>
+          <span class="tag">LexComp</span>
+          <span class="tag">Auditoría clínica</span>
+        </div>
+        <div class="dominio-body">Sistemas que cumplen regulaciones de datos clínicos en LATAM y Puerto Rico. Migración de sistemas farmacéuticos propietarios a alternativas open sin perder cobertura de datos.</div>
+      </div>
+
+      <div class="dominio-card">
+        <div class="dominio-head">
+          <div class="dominio-title">IoT &amp; Sistemas distribuidos</div>
+          <span class="metric-inline">-65% latencia · 1,500 devs</span>
+        </div>
+        <div class="dominio-skills">
+          <span class="tag">MQTT</span>
+          <span class="tag">AWS IoT Core</span>
+          <span class="tag">Edge computing</span>
+          <span class="tag">Raspberry Pi</span>
+        </div>
+        <div class="dominio-body">Arquitecturas event-driven para telemetría en tiempo real. Backbone de integración para plataformas con 1,500+ dispositivos conectados.</div>
+      </div>
+
+      <div class="dominio-card">
+        <div class="dominio-head">
+          <div class="dominio-title">Documentación &amp; Onboarding</div>
+          <span class="metric-inline">48h onboarding</span>
+        </div>
+        <div class="dominio-skills">
+          <span class="tag">ADRs</span>
+          <span class="tag">Runbooks</span>
+          <span class="tag">C4 Model</span>
+          <span class="tag">Notion / Confluence</span>
+        </div>
+        <div class="dominio-body">Sistemas de documentación viva: Architecture Decision Records, guías de contribución y runbooks que reducen la curva de onboarding de semanas a horas.</div>
+      </div>
+
+      <div class="dominio-card">
+        <div class="dominio-head">
+          <div class="dominio-title">Liderazgo técnico</div>
+          <span class="metric-inline neutral">Equipos de 4–8 devs</span>
+        </div>
+        <div class="dominio-skills">
+          <span class="tag">Code reviews</span>
+          <span class="tag">RFC / RFC-light</span>
+          <span class="tag">Roadmap técnico</span>
+          <span class="tag">1:1s</span>
+        </div>
+        <div class="dominio-body">Liderazgo de equipos con ownership real: decisiones de arquitectura, roadmap técnico, cultura de calidad y procesos de revisión sin burocracia.</div>
+      </div>
+
+      <div class="dominio-card">
+        <div class="dominio-head">
+          <div class="dominio-title">Entrega &amp; Delivery</div>
+          <span class="metric-inline neutral">2 meses · 0 downtime</span>
+        </div>
+        <div class="dominio-skills">
+          <span class="tag">CI/CD</span>
+          <span class="tag">GitHub Actions</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Observabilidad</span>
+        </div>
+        <div class="dominio-body">Migración de infraestructura on-premise a cloud en tiempo récord sin downtime. CI/CD completo con observabilidad desde el primer sprint.</div>
+      </div>
+
+      <div class="dominio-card">
+        <div class="dominio-head">
+          <div class="dominio-title">Negocio &amp; stakeholders</div>
+          <span class="metric-inline neutral">ROI documentado</span>
+        </div>
+        <div class="dominio-skills">
+          <span class="tag">Decisiones de build vs. buy</span>
+          <span class="tag">Estimaciones técnicas</span>
+          <span class="tag">Comunicación ejecutiva</span>
+        </div>
+        <div class="dominio-body">Decisiones técnicas con criterio de negocio: cuándo migrar una librería de terceros, cuándo construir internamente, cómo comunicar impacto en términos de ROI a audiencias no técnicas.</div>
+      </div>
+
+      <div class="dominio-card">
+        <div class="dominio-head">
+          <div class="dominio-title">IA aplicada al desarrollo</div>
+          <span class="metric-inline">+400% velocidad</span>
+        </div>
+        <div class="dominio-skills">
+          <span class="tag">Cursor / Claude</span>
+          <span class="tag">Prompt engineering</span>
+          <span class="tag">Revisión de output</span>
+          <span class="tag">Flujos augmentados</span>
+        </div>
+        <div class="dominio-body">IA como acelerador de desarrollo con criterio: entrega en semanas lo que antes tardaba meses, sin delegar el juicio técnico a la herramienta.</div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══ KPI STRIP ══════════════════════════════════════════ -->
+  <section class="section" style="padding-bottom: 0; border-bottom: none;">
+    <div class="section-kicker">En números</div>
+    <h2 class="section-h2">8 años de decisiones, documentadas</h2>
+    <p class="section-sub">Métricas de impacto directo — verificables en los casos de éxito.</p>
+
+    <div class="kpi-strip">
+      <div class="kpi-cell">
+        <div class="kpi-val green">-58%</div>
+        <div class="kpi-label">Reducción factura AWS</div>
+        <div class="kpi-sub">MediRec · 2023</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-val">48h</div>
+        <div class="kpi-label">Onboarding documentado</div>
+        <div class="kpi-sub">Sin dependencia de persona</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-val">20K+</div>
+        <div class="kpi-label">Usuarios en producción</div>
+        <div class="kpi-sub">Sistemas multi-tenant</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-val">-$20K</div>
+        <div class="kpi-label">En licencias / año</div>
+        <div class="kpi-sub">Migración NLMI · 2024</div>
+      </div>
+    </div>
+
+
+    <!-- CTA -->
+    <div class="cta-band">
+      <div>
+        <h3 class="cta-band-h">¿Buscas este perfil<br>para tu <em>equipo</em>?</h3>
+        <p class="cta-band-sub">Si necesitas un Tech Lead que deje el sistema en mejor estado del que lo encontró — cuéntame el proyecto.</p>
+      </div>
+      <div class="cta-band-btns">
+        <a class="btn btn-primary" href="/cdn-cgi/l/email-protection#94fcfbf8f5d4f9fbf0f5e2fdf0f7baf7fbf9">Hablemos →</a>
+        <a class="btn btn-secondary" href="/assets/cv/cv.pdf" download>Descargar CV</a>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /page-wrap -->
+
+
+<!-- ═══ FOOTER ═══════════════════════════════════════════════ -->
+<div style="border-top: 1px solid var(--border);">
+  <footer>
+    <div class="footer-brand"><span class="mo">mo</span>davidc</div>
+    <div class="footer-copy">© 2026 Moisés Cedeño · Todos los derechos reservados.</div>
+    <div class="footer-links">
+      <a href="home.html">Inicio</a>
+      <a href="#">Casos de Éxito</a>
+      <a href="#">Metodología</a>
+      <a href="/cdn-cgi/l/email-protection#630b0c0f02230e0c0702150a07004d000c0e"><span class="__cf_email__" data-cfemail="d8b0b7b4b998b5b7bcb9aeb1bcbbf6bbb7b5">[email&#160;protected]</span></a>
+    </div>
+  </footer>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

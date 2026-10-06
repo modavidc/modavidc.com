@@ -1,0 +1,713 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>modavidc — Moisés Cedeño · Solutions Architect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS (from Brand Identity v1.0) ─────────────────── */
+:root {
+  --bg:           #0b0c0e;
+  --bg-2:         #111316;
+  --bg-3:         #181a1d;
+  --border:       #202227;
+  --border-2:     #2a2d33;
+  --text:         #eaedf2;
+  --text-2:       #9aa0ae;
+  --text-3:       #555c6a;
+  --green:        oklch(67% 0.17 148);
+  --green-dim:    oklch(35% 0.10 148);
+  --green-bg:     oklch(16% 0.06 148);
+  --blue:         oklch(67% 0.17 240);
+  --blue-bg:      oklch(16% 0.06 240);
+  --violet:       oklch(67% 0.17 290);
+  --violet-bg:    oklch(16% 0.06 290);
+  --amber:        oklch(72% 0.14 68);
+  --amber-bg:     oklch(16% 0.06 68);
+  --red:          oklch(63% 0.18 22);
+  --red-bg:       oklch(16% 0.07 22);
+  --ff-display:   'Space Grotesk', sans-serif;
+  --ff-body:      'DM Sans', sans-serif;
+  --ff-mono:      'DM Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--bg); color: var(--text); font-family: var(--ff-body); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+
+/* ── NAV ────────────────────────────────────────────────── */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(11,12,14,.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 60px;
+}
+.nav-brand { display: flex; align-items: baseline; gap: 12px; text-decoration: none; }
+.nav-wm {
+  font-family: var(--ff-display); font-size: 20px; font-weight: 400;
+  letter-spacing: -.025em; color: var(--text);
+}
+.nav-wm .mo { color: var(--green); }
+.nav-tagline {
+  font-family: var(--ff-mono); font-size: 10px; color: var(--text-3);
+  letter-spacing: .12em; text-transform: uppercase;
+}
+.nav-links { display: flex; align-items: center; gap: 32px; }
+.nav-links a {
+  font-size: 13px; color: var(--text-2); text-decoration: none;
+  transition: color .15s; letter-spacing: -.005em;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  background: var(--green); color: #0b0c0e; font-size: 13px; font-weight: 500;
+  padding: 8px 18px; border-radius: 3px; font-family: var(--ff-body);
+  text-decoration: none; transition: opacity .15s;
+}
+.nav-cta:hover { opacity: .85; }
+
+/* ── HERO ───────────────────────────────────────────────── */
+.hero {
+  max-width: 1200px; margin: 0 auto; padding: 96px 48px 0;
+  display: grid; grid-template-columns: 1fr 420px; gap: 80px; align-items: center;
+  min-height: calc(100vh - 60px);
+}
+.hero-left { padding-bottom: 80px; }
+.hero-kicker {
+  font-family: var(--ff-mono); font-size: 11px; color: var(--text-3);
+  letter-spacing: .16em; text-transform: uppercase; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.hero-kicker::before {
+  content: ''; display: block; width: 24px; height: 1px; background: var(--green);
+}
+.hero-h1 {
+  font-family: var(--ff-display); font-size: clamp(48px, 5.5vw, 72px);
+  font-weight: 300; letter-spacing: -.04em; line-height: 1.05;
+  margin-bottom: 24px; color: var(--text);
+}
+.hero-h1 em { color: var(--green); font-style: normal; }
+.hero-sub {
+  font-size: 17px; color: var(--text-2); max-width: 520px;
+  line-height: 1.65; margin-bottom: 36px; font-weight: 300;
+}
+.hero-ctas { display: flex; gap: 12px; align-items: center; }
+.btn {
+  font-family: var(--ff-body); font-size: 14px; font-weight: 500;
+  padding: 11px 22px; border-radius: 3px; border: none; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 8px; letter-spacing: -.01em;
+  text-decoration: none; transition: opacity .15s;
+}
+.btn:hover { opacity: .85; }
+.btn-primary { background: var(--green); color: #0b0c0e; }
+.btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border-2); }
+
+/* Photo */
+.hero-right {
+  display: flex; align-items: flex-end; justify-content: center;
+  align-self: end;
+}
+.hero-photo-wrap {
+  position: relative; width: 360px;
+}
+.hero-photo-wrap img {
+  width: 100%; display: block;
+  border-radius: 4px 4px 0 0;
+  filter: grayscale(8%);
+  border: 1px solid var(--border);
+  border-bottom: none;
+}
+.hero-photo-caption {
+  background: var(--bg-2); border: 1px solid var(--border); border-top: none;
+  padding: 14px 18px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.hero-photo-name {
+  font-family: var(--ff-display); font-size: 15px; font-weight: 500;
+  letter-spacing: -.01em;
+}
+.hero-photo-role {
+  font-family: var(--ff-mono); font-size: 10px; color: var(--text-3);
+  letter-spacing: .1em; text-transform: uppercase; margin-top: 2px;
+}
+.hero-photo-badge {
+  font-family: var(--ff-mono); font-size: 11px; letter-spacing: .06em;
+  padding: 3px 10px; border-radius: 100px;
+  background: var(--green-bg); color: var(--green);
+  border: 1px solid var(--green-dim);
+  display: flex; align-items: center; gap: 5px;
+}
+.hero-photo-badge::before {
+  content: ''; width: 5px; height: 5px; border-radius: 50%;
+  background: var(--green); display: block;
+}
+
+/* ── KPI BAR ────────────────────────────────────────────── */
+.kpi-bar {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 1px; background: var(--border);
+  border-top: 1px solid var(--border);
+  margin-top: 0;
+}
+.kpi-cell {
+  background: var(--bg-2); padding: 28px 32px;
+}
+.kpi-val {
+  font-family: var(--ff-display); font-size: 36px; font-weight: 500;
+  letter-spacing: -.03em; line-height: 1; margin-bottom: 6px;
+  color: var(--text);
+}
+.kpi-val.green { color: var(--green); }
+.kpi-label { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); letter-spacing: .1em; text-transform: uppercase; }
+.kpi-sub { font-size: 12px; color: var(--text-3); margin-top: 3px; }
+
+/* ── SECTION LAYOUT ─────────────────────────────────────── */
+.section {
+  max-width: 1200px; margin: 0 auto; padding: 96px 48px;
+  border-bottom: 1px solid var(--border);
+}
+.section-kicker {
+  font-family: var(--ff-mono); font-size: 11px; color: var(--text-3);
+  letter-spacing: .16em; text-transform: uppercase; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-kicker::before {
+  content: ''; display: block; width: 24px; height: 1px; background: var(--border-2);
+}
+.section-h2 {
+  font-family: var(--ff-display); font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 300; letter-spacing: -.03em; line-height: 1.1;
+  margin-bottom: 12px;
+}
+.section-sub {
+  font-size: 16px; color: var(--text-2); max-width: 600px;
+  line-height: 1.65; margin-bottom: 48px; font-weight: 300;
+}
+
+/* ── MI ENFOQUE ─────────────────────────────────────────── */
+.enfoque-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border);
+}
+.enfoque-cell {
+  background: var(--bg-2); padding: 32px 28px;
+}
+.enfoque-icon {
+  font-family: var(--ff-mono); font-size: 28px; font-weight: 500;
+  color: var(--green); letter-spacing: -.04em; margin-bottom: 16px;
+  line-height: 1;
+}
+.enfoque-title {
+  font-family: var(--ff-display); font-size: 18px; font-weight: 500;
+  letter-spacing: -.01em; margin-bottom: 10px;
+}
+.enfoque-body {
+  font-size: 14px; color: var(--text-2); line-height: 1.65; margin-bottom: 18px;
+}
+.metric-tag {
+  font-family: var(--ff-mono); font-size: 11px; letter-spacing: .04em;
+  padding: 4px 10px; border-radius: 3px;
+  background: var(--green-bg); color: var(--green);
+  border: 1px solid var(--green-dim); display: inline-block;
+}
+.metric-tag.neutral {
+  background: var(--bg-3); color: var(--text-2); border-color: var(--border-2);
+}
+
+/* ── PROBLEMAS ──────────────────────────────────────────── */
+.problemas-list { display: flex; flex-direction: column; gap: 1px; }
+.problema-item {
+  background: var(--bg-2); border: 1px solid var(--border);
+  padding: 28px 32px; display: grid;
+  grid-template-columns: 280px 1fr; gap: 40px; align-items: start;
+  transition: border-color .2s;
+}
+.problema-item:not(:first-child) { border-top: none; }
+.problema-item:hover { border-color: var(--border-2); }
+.problema-q {
+  font-size: 15px; color: var(--text-2); line-height: 1.55;
+  padding-left: 20px; position: relative;
+}
+.problema-q::before {
+  content: '?'; position: absolute; left: 0;
+  font-family: var(--ff-mono); font-size: 11px; color: var(--text-3);
+  top: 2px;
+}
+.problema-a { font-size: 14px; color: var(--text-2); line-height: 1.65; }
+.problema-a strong { color: var(--text); font-weight: 500; }
+.problema-link {
+  font-family: var(--ff-mono); font-size: 11px; color: var(--green);
+  letter-spacing: .06em; text-decoration: none; display: inline-flex;
+  align-items: center; gap: 4px; margin-top: 10px;
+}
+
+/* ── TESTIMONIOS ────────────────────────────────────────── */
+.test-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border);
+}
+.test-cell {
+  background: var(--bg-2); padding: 28px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.test-quote {
+  font-family: var(--ff-display); font-size: 15px; font-weight: 300;
+  letter-spacing: -.01em; line-height: 1.6; color: var(--text);
+  flex: 1;
+}
+.test-quote::before { content: '"'; color: var(--green); margin-right: 2px; }
+.test-quote::after  { content: '"'; color: var(--green); margin-left: 2px;  }
+.test-meta { border-top: 1px solid var(--border); padding-top: 14px; }
+.test-name { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
+.test-role { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); letter-spacing: .1em; text-transform: uppercase; }
+.test-badge {
+  display: inline-flex; align-items: center; gap: 5px; margin-top: 8px;
+  font-family: var(--ff-mono); font-size: 10px; letter-spacing: .08em;
+  padding: 3px 8px; border-radius: 100px; border: 1px solid var(--border-2);
+  color: var(--text-3); background: var(--bg-3);
+}
+
+/* ── CASOS DE ÉXITO ─────────────────────────────────────── */
+.casos-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+  background: var(--border); border: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+.caso-card {
+  background: var(--bg-2); padding: 28px 28px 24px;
+  display: flex; flex-direction: column; gap: 0;
+}
+.caso-meta {
+  font-family: var(--ff-mono); font-size: 10px; color: var(--text-3);
+  letter-spacing: .1em; text-transform: uppercase;
+  display: flex; justify-content: space-between; margin-bottom: 14px;
+}
+.caso-title {
+  font-family: var(--ff-display); font-size: 18px; font-weight: 500;
+  letter-spacing: -.01em; margin-bottom: 10px; line-height: 1.25;
+}
+.caso-body { font-size: 13px; color: var(--text-2); line-height: 1.65; margin-bottom: 20px; flex: 1; }
+.caso-foot { display: flex; align-items: center; justify-content: space-between; }
+.badge {
+  font-family: var(--ff-mono); font-size: 11px; letter-spacing: .08em;
+  padding: 3px 10px; border-radius: 100px;
+  display: inline-flex; align-items: center; gap: 5px;
+}
+.badge-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+.badge-green  { background: var(--green-bg);  color: var(--green);  }
+.badge-blue   { background: var(--blue-bg);   color: var(--blue);   }
+.badge-violet { background: var(--violet-bg); color: var(--violet); }
+.badge-amber  { background: var(--amber-bg);  color: var(--amber);  }
+.caso-link {
+  font-family: var(--ff-mono); font-size: 11px; color: var(--green);
+  letter-spacing: .06em; text-decoration: none; display: flex; align-items: center; gap: 4px;
+  transition: opacity .15s;
+}
+.caso-link:hover { opacity: .7; }
+
+/* ── CTA FINAL ──────────────────────────────────────────── */
+.cta-final {
+  max-width: 1200px; margin: 0 auto; padding: 96px 48px;
+  display: grid; grid-template-columns: 1fr 300px; gap: 80px;
+  align-items: center;
+}
+.cta-final-h2 {
+  font-family: var(--ff-display); font-size: clamp(32px, 4vw, 52px);
+  font-weight: 300; letter-spacing: -.03em; line-height: 1.1;
+  margin-bottom: 16px;
+}
+.cta-final-h2 em { color: var(--green); font-style: normal; }
+.cta-final-sub {
+  font-size: 15px; color: var(--text-2); line-height: 1.65;
+  max-width: 520px; margin-bottom: 32px;
+}
+.cta-final-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.cta-final-aside {
+  background: var(--bg-2); border: 1px solid var(--border); padding: 24px;
+}
+.cta-aside-item {
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 10px 0; border-bottom: 1px solid var(--border);
+}
+.cta-aside-item:last-child { border-bottom: none; padding-bottom: 0; }
+.cta-aside-label {
+  font-family: var(--ff-mono); font-size: 10px; color: var(--text-3);
+  letter-spacing: .12em; text-transform: uppercase;
+}
+.cta-aside-val { font-size: 13px; color: var(--text-2); }
+.cta-aside-val a { color: var(--green); text-decoration: none; }
+
+/* ── FOOTER ─────────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 48px;
+  max-width: 1200px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px;
+}
+.footer-brand {
+  font-family: var(--ff-display); font-size: 15px; font-weight: 400;
+  letter-spacing: -.02em;
+}
+.footer-brand .mo { color: var(--green); }
+.footer-copy {
+  font-family: var(--ff-mono); font-size: 11px; color: var(--text-3);
+  letter-spacing: .06em;
+}
+.footer-links {
+  display: flex; gap: 24px;
+  font-family: var(--ff-mono); font-size: 11px; color: var(--text-3);
+  letter-spacing: .06em;
+}
+.footer-links a { color: var(--text-3); text-decoration: none; transition: color .15s; }
+.footer-links a:hover { color: var(--green); }
+
+/* ── SECTION DIVIDER ────────────────────────────────────── */
+.full-border { border-top: 1px solid var(--border); }
+
+/* ── RESPONSIVE ─────────────────────────────────────────── */
+@media(max-width: 1000px) {
+  .hero { grid-template-columns: 1fr; gap: 48px; padding-top: 60px; min-height: auto; }
+  .hero-right { justify-content: flex-start; }
+  .hero-photo-wrap { width: 280px; }
+  .hero-left { padding-bottom: 0; }
+  .kpi-bar { grid-template-columns: repeat(3, 1fr); }
+  .kpi-bar .kpi-cell:nth-child(4),
+  .kpi-bar .kpi-cell:nth-child(5) { grid-column: auto; }
+  .enfoque-grid { grid-template-columns: 1fr; }
+  .problema-item { grid-template-columns: 1fr; gap: 12px; }
+  .test-grid { grid-template-columns: 1fr; }
+  .casos-grid { grid-template-columns: 1fr; }
+  .cta-final { grid-template-columns: 1fr; gap: 40px; }
+  .nav-tagline { display: none; }
+  .nav-links { gap: 20px; }
+  .section { padding: 64px 20px; }
+  .hero { padding-left: 20px; padding-right: 20px; }
+  .cta-final { padding-left: 20px; padding-right: 20px; }
+  footer { padding-left: 20px; padding-right: 20px; }
+  .nav-inner { padding: 0 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ════════════════════════════════════════════════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#">
+      <div class="nav-wm"><span class="mo">mo</span>davidc</div>
+      <div class="nav-tagline">Honest work. Efficient architectures.</div>
+    </a>
+    <div class="nav-links">
+      <a href="#experiencia">Experiencia</a>
+      <a href="#casos">Casos de Éxito</a>
+      <a href="#metodologia">Metodología</a>
+      <a href="#testimonios">Testimonios</a>
+      <a class="nav-cta" href="#contacto">Hablemos</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ═══ HERO ════════════════════════════════════════════════ -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-kicker">Solutions Architect · FinOps &amp; Cloud · Healthcare &amp; SaaS</div>
+    <h1 class="hero-h1">
+      Construyo software<br>
+      que escala sin depender<br>
+      <em>de quién lo creó.</em>
+    </h1>
+    <p class="hero-sub">
+      +8 años en Healthcare, SaaS e IoT entregando sistemas que cualquier dev puede mantener desde el primer día. Sin documentación muerta. Sin dependencia de persona.
+    </p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#contacto">Hablemos →</a>
+      <a class="btn btn-secondary" href="#casos">Ver casos de éxito</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-photo-wrap">
+      <img src="uploads/pasted-1777010489653-0.png" alt="Moisés Cedeño — Solutions Architect">
+      <div class="hero-photo-caption">
+        <div>
+          <div class="hero-photo-name">Moisés Cedeño</div>
+          <div class="hero-photo-role">Solutions Architect · Lima, Perú</div>
+        </div>
+        <div class="hero-photo-badge">Disponible</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ KPI BAR ═════════════════════════════════════════════ -->
+<div class="full-border">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="kpi-bar">
+      <div class="kpi-cell">
+        <div class="kpi-val green">-58%</div>
+        <div class="kpi-label">Factura AWS</div>
+        <div class="kpi-sub">MediRec · 2023</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-val">+8</div>
+        <div class="kpi-label">Años de experiencia</div>
+        <div class="kpi-sub">Healthcare · SaaS · IoT</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-val">20K+</div>
+        <div class="kpi-label">Usuarios en producción</div>
+        <div class="kpi-sub">Sistemas multi-tenant</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-val">48h</div>
+        <div class="kpi-label">Onboarding de dev nuevo</div>
+        <div class="kpi-sub">Sin dependencia de persona</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-val">-$20K</div>
+        <div class="kpi-label">En licencias / año</div>
+        <div class="kpi-sub">Migración NLMI · 2024</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ MI ENFOQUE ══════════════════════════════════════════ -->
+<div id="metodologia" class="full-border">
+  <section class="section">
+    <div class="section-kicker">Mi Enfoque</div>
+    <h2 class="section-h2">Entrego sistemas que funcionan<br>cuando yo no estoy.</h2>
+    <p class="section-sub">Documentación que permite que cualquier dev entienda el sistema. Arquitecturas que no dependen del conocimiento de una sola persona.</p>
+
+    <div class="enfoque-grid">
+      <div class="enfoque-cell">
+        <div class="enfoque-icon">IA</div>
+        <div class="enfoque-title">Velocidad con criterio</div>
+        <div class="enfoque-body">Uso IA como acelerador, no como sustituto del criterio técnico. Entrego en semanas lo que antes tardaba meses — con la misma calidad de arquitectura.</div>
+        <div class="metric-tag">+400% velocidad de desarrollo</div>
+      </div>
+      <div class="enfoque-cell">
+        <div class="enfoque-icon" style="color:var(--blue);">↗</div>
+        <div class="enfoque-title">Arquitectura que escala</div>
+        <div class="enfoque-body">Diseño sistemas para el día que yo ya no esté. Decisiones documentadas, patrones reusables, onboarding de 48h para cualquier dev nuevo en el equipo.</div>
+        <div class="metric-tag neutral">48h onboarding · garantizado</div>
+      </div>
+      <div class="enfoque-cell">
+        <div class="enfoque-icon" style="color:var(--violet);">⌬</div>
+        <div class="enfoque-title">Autonomía del equipo</div>
+        <div class="enfoque-body">Dejo equipos más capaces de lo que los encontré. Registro de decisiones, guías de contribución y documentación viva que cualquier dev puede navegar solo.</div>
+        <div class="metric-tag neutral">100% ownership del equipo</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<!-- ═══ PROBLEMAS QUE RESUELVO ══════════════════════════════ -->
+<div class="full-border">
+  <section class="section">
+    <div class="section-kicker">Problemas que Resuelvo</div>
+    <h2 class="section-h2">¿Te suena alguno de estos?</h2>
+    <p class="section-sub">Si una de estas situaciones describe tu empresa hoy, probablemente podamos hablar.</p>
+
+    <div class="problemas-list">
+      <div class="problema-item">
+        <div class="problema-q">¿Tu factura de AWS sube cada mes sin una explicación clara de por qué?</div>
+        <div class="problema-a">
+          <strong>Reduzco costos de nube sin tocar la disponibilidad.</strong> En MediRec identifiqué instancias sobredimensionadas, eliminé recursos huérfanos y reestructuré el modelo de reservas. Resultado: <strong>-58% en factura AWS</strong> en 90 días, con la plataforma al 100% de uptime.
+          <br><a class="problema-link" href="#casos">Ver caso completo →</a>
+        </div>
+      </div>
+      <div class="problema-item">
+        <div class="problema-q">¿Cada vez que un dev se va, el proyecto pierde velocidad durante semanas?</div>
+        <div class="problema-a">
+          <strong>Elimino la dependencia de persona clave.</strong> Implemento arquitecturas documentadas donde el conocimiento vive en el sistema, no en la cabeza de alguien. Un dev nuevo queda productivo en <strong>48 horas</strong>.
+        </div>
+      </div>
+      <div class="problema-item">
+        <div class="problema-q">¿Pagas licencias de software por herramientas que podrías construir internamente?</div>
+        <div class="problema-a">
+          <strong>Migro dependencias costosas a alternativas open source sin perder funcionalidad.</strong> En un proyecto Healthcare migré LexComp a NLMI, eliminando <strong>$20k/año</strong> en licencias farmacéuticas sin comprometer la integridad clínica.
+          <br><a class="problema-link" href="#casos">Ver caso completo →</a>
+        </div>
+      </div>
+      <div class="problema-item">
+        <div class="problema-q">¿Tu equipo tarda meses en onboardear un dev nuevo en el sistema?</div>
+        <div class="problema-a">
+          <strong>Construyo sistemas con onboarding documentado.</strong> ADRs (Architecture Decision Records), guías de contribución y runbooks que permiten que cualquier dev navegue el sistema solo — en horas, no semanas.
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<!-- ═══ TESTIMONIOS ══════════════════════════════════════════ -->
+<div id="testimonios" class="full-border">
+  <section class="section">
+    <div class="section-kicker">Testimonios</div>
+    <h2 class="section-h2">Feedback real de proyectos<br>documentados.</h2>
+    <p class="section-sub">Algunos detalles modificados por NDA. Las métricas son verificables.</p>
+
+    <div class="test-grid">
+      <div class="test-cell">
+        <div class="test-quote">El nuevo dev estuvo productivo en menos de 48 horas gracias al registro de decisiones que Moisés implementó. Nunca habíamos onboardeado tan rápido.</div>
+        <div class="test-meta">
+          <div class="test-name">Product Owner</div>
+          <div class="test-role">Plataforma Healthcare · Lima, 2023</div>
+          <span class="test-badge"><span class="badge-dot" style="background:var(--violet)"></span>Healthcare</span>
+        </div>
+      </div>
+      <div class="test-cell">
+        <div class="test-quote">Redujimos la factura de AWS en un 58% en menos de tres meses. Lo que más sorprendió al equipo fue que la disponibilidad no bajó ni un punto durante el proceso.</div>
+        <div class="test-meta">
+          <div class="test-name">Director de TI</div>
+          <div class="test-role">MediRec · SaaS Healthcare · 2023</div>
+          <span class="test-badge"><span class="badge-dot" style="background:var(--green)"></span>FinOps</span>
+        </div>
+      </div>
+      <div class="test-cell">
+        <div class="test-quote">Moisés no solo entregó el sistema — entregó documentación que hace que cualquier dev pueda contribuir desde el día uno. Eso vale más que el código.</div>
+        <div class="test-meta">
+          <div class="test-name">CTO</div>
+          <div class="test-role">SaaS IoT · Miami, 2024</div>
+          <span class="test-badge"><span class="badge-dot" style="background:var(--blue)"></span>SaaS</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<!-- ═══ CASOS DE ÉXITO ══════════════════════════════════════ -->
+<div id="casos" class="full-border">
+  <section class="section">
+    <div class="section-kicker">Casos de Éxito</div>
+    <h2 class="section-h2">Proyectos reales.<br>Métricas verificables.</h2>
+    <p class="section-sub">8 años de decisiones técnicas documentadas. Selecciona el que más se acerque a tu contexto.</p>
+
+    <div class="casos-grid">
+      <div class="caso-card">
+        <div class="caso-meta">
+          <span>Work · Healthcare</span>
+          <span>2023</span>
+        </div>
+        <div class="caso-title">Cómo reduje 58% la factura AWS de MediRec</div>
+        <div class="caso-body">Re-arquitectura y gobernanza de costos en plataforma Healthcare con 20K+ usuarios. Instancias reservadas, auto-scaling inteligente y eliminación de recursos huérfanos — sin tocar uptime.</div>
+        <div class="caso-foot">
+          <span class="metric-tag">-58% AWS · $180K ahorrados</span>
+          <a class="caso-link" href="#">Ver caso →</a>
+        </div>
+      </div>
+      <div class="caso-card">
+        <div class="caso-meta">
+          <span>Work · FinOps</span>
+          <span>2024</span>
+        </div>
+        <div class="caso-title">Cómo eliminé $20k/año en licencias farmacéuticas</div>
+        <div class="caso-body">Migración de LexComp a NLMI sin perder integridad clínica ni cobertura de datos. Sistema de validación de medicamentos que cumple PREIS con la mitad del costo operativo.</div>
+        <div class="caso-foot">
+          <span class="metric-tag neutral">-$20k/año · 0 downtime</span>
+          <a class="caso-link" href="#">Ver caso →</a>
+        </div>
+      </div>
+      <div class="caso-card">
+        <div class="caso-meta">
+          <span>Work · SaaS</span>
+          <span>2023</span>
+        </div>
+        <div class="caso-title">Lab Middleware: -70% en tiempo de resultados clínicos</div>
+        <div class="caso-body">Middleware de integración de laboratorio que redujo el tiempo de entrega de resultados clínicos de 6 horas a menos de 90 minutos. Stack: Node + HL7 + AWS Lambda.</div>
+        <div class="caso-foot">
+          <span class="badge badge-violet"><span class="badge-dot"></span>Healthcare</span>
+          <a class="caso-link" href="#">Ver caso →</a>
+        </div>
+      </div>
+      <div class="caso-card">
+        <div class="caso-meta">
+          <span>Personal · IoT</span>
+          <span>2024</span>
+        </div>
+        <div class="caso-title">Lo que construyo cuando nadie me paga</div>
+        <div class="caso-body">Proyectos de exploración técnica: sistemas IoT con MQTT y edge computing, herramientas de automatización personal, experimentos de arquitectura distribuida en Raspberry Pi.</div>
+        <div class="caso-foot">
+          <span class="badge badge-amber"><span class="badge-dot"></span>Personal</span>
+          <a class="caso-link" href="#">Ver proyectos →</a>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;text-align:center;">
+      <a class="btn btn-secondary" href="#" style="font-size:13px;">Ver todos los casos →</a>
+    </div>
+  </section>
+</div>
+
+
+<!-- ═══ CTA FINAL ════════════════════════════════════════════ -->
+<div id="contacto" class="full-border">
+  <div class="cta-final">
+    <div>
+      <div class="section-kicker" style="margin-bottom:20px;">¿Hablamos?</div>
+      <h2 class="cta-final-h2">¿Buscas este perfil<br>para tu <em>equipo</em>?</h2>
+      <p class="cta-final-sub">
+        Si tienes un proyecto que necesita reducción de costos, escalar sin depender de una sola persona o simplemente construirse bien desde el inicio — cuéntame.
+      </p>
+      <div class="cta-final-btns">
+        <a class="btn btn-primary" href="mailto:hola@modavidc.com">Enviar mensaje →</a>
+        <a class="btn btn-secondary" href="/assets/cv/cv.pdf" download>Descargar CV · PDF</a>
+      </div>
+    </div>
+    <div class="cta-final-aside">
+      <div class="cta-aside-item">
+        <span class="cta-aside-label">Email</span>
+        <span class="cta-aside-val"><a href="mailto:hola@modavidc.com">hola@modavidc.com</a></span>
+      </div>
+      <div class="cta-aside-item">
+        <span class="cta-aside-label">LinkedIn</span>
+        <span class="cta-aside-val"><a href="https://linkedin.com/in/modavidc" target="_blank" rel="noopener">linkedin.com/in/modavidc</a></span>
+      </div>
+      <div class="cta-aside-item">
+        <span class="cta-aside-label">GitHub</span>
+        <span class="cta-aside-val"><a href="https://github.com/modavidc" target="_blank" rel="noopener">github.com/modavidc</a></span>
+      </div>
+      <div class="cta-aside-item">
+        <span class="cta-aside-label">Disponibilidad</span>
+        <span class="cta-aside-val" style="color:var(--green);">Proyectos seleccionados — preguntar</span>
+      </div>
+      <div class="cta-aside-item">
+        <span class="cta-aside-label">Respuesta</span>
+        <span class="cta-aside-val">Menos de 24h</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ FOOTER ═══════════════════════════════════════════════ -->
+<div class="full-border">
+  <footer>
+    <div class="footer-brand"><span class="mo">mo</span>davidc</div>
+    <div class="footer-copy">© 2026 Moisés Cedeño · Todos los derechos reservados.</div>
+    <div class="footer-links">
+      <a href="#casos">Casos de Éxito</a>
+      <a href="#metodologia">Metodología</a>
+      <a href="#testimonios">Testimonios</a>
+      <a href="mailto:hola@modavidc.com">hola@modavidc.com</a>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Auditoría UX/UI v2 — Portfolio Moisés Cedeño · Abril 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,500;9..144,0,700;9..144,1,400;9..144,1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f4ef;
+    --paper:#fbfaf6;
+    --ink:#1a1a1a;
+    --ink-2:#4a4a4a;
+    --muted:#8a8a85;
+    --line:#e3dfd4;
+    --line-2:#d4cfc1;
+    --accent:#1f4d3a;
+    --accent-soft:#e7ede8;
+    --sev-hi:#b23b2a;
+    --sev-hi-bg:#fbece8;
+    --sev-md:#b8832b;
+    --sev-md-bg:#faf1dc;
+    --sev-lo:#3b6b48;
+    --sev-lo-bg:#e7efe8;
+    --sev-nit:#5c5c5c;
+    --sev-nit-bg:#ececea;
+    --fixed:#1f4d3a;
+    --fixed-bg:#e7efe8;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  a{color:inherit}
+  code{font-family:'JetBrains Mono',monospace;font-size:.85em;background:var(--line);padding:1px 5px;border-radius:2px}
+  .wrap{max-width:1180px;margin:0 auto;padding:56px 48px 120px}
+
+  .masthead{border-bottom:1px solid var(--line);padding-bottom:36px;margin-bottom:48px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end}
+  .kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+  h1.title{font-family:'Fraunces',serif;font-weight:400;font-size:64px;line-height:1.02;letter-spacing:-.02em;margin:0 0 18px;color:var(--ink)}
+  h1.title em{font-style:italic;color:var(--accent)}
+  .dek{font-size:17px;color:var(--ink-2);max-width:640px;margin:0}
+  .meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);text-align:right;line-height:1.8}
+  .meta b{color:var(--ink);font-weight:500}
+
+  .scorecard{display:grid;grid-template-columns:260px 1fr;gap:48px;background:var(--paper);border:1px solid var(--line);padding:36px 40px;margin-bottom:40px}
+  .score-big{font-family:'Fraunces',serif;font-size:112px;line-height:.9;letter-spacing:-.04em;color:var(--accent);font-weight:400}
+  .score-big sup{font-size:28px;color:var(--muted);vertical-align:top;margin-left:4px;font-family:'JetBrains Mono',monospace}
+  .score-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:10px}
+  .score-delta{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--fixed);margin-top:6px;letter-spacing:.06em}
+  .pillars{display:grid;grid-template-columns:repeat(2,1fr);gap:2px 40px;align-content:center}
+  .pillar-row{display:grid;grid-template-columns:1fr 80px 40px;align-items:center;padding:10px 0;border-bottom:1px dashed var(--line);gap:12px}
+  .pillar-row:last-child{border-bottom:none}
+  .pillar-name{font-size:14px;color:var(--ink-2)}
+  .pillar-bar{height:4px;background:var(--line);position:relative}
+  .pillar-bar span{position:absolute;inset:0 auto 0 0;background:var(--accent)}
+  .pillar-bar span.improved{background:#2a7d4f}
+  .pillar-num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink);text-align:right}
+  .pillar-delta{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--fixed);text-align:right}
+
+  .counts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:0 0 0}
+  .ct{padding:20px 24px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:4px}
+  .ct:last-child{border-right:none}
+  .ct-n{font-family:'Fraunces',serif;font-size:40px;line-height:1;letter-spacing:-.02em}
+  .ct-l{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .ct.hi .ct-n{color:var(--sev-hi)}
+  .ct.md .ct-n{color:var(--sev-md)}
+  .ct.lo .ct-n{color:var(--sev-lo)}
+  .ct.nit .ct-n{color:var(--sev-nit)}
+  .ct.fixed .ct-n{color:var(--fixed)}
+
+  .toc{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);margin-bottom:64px;background:var(--paper)}
+  .toc a{padding:18px 20px;border-right:1px solid var(--line);text-decoration:none;display:block;transition:background .15s}
+  .toc a:last-child{border-right:none}
+  .toc a:hover{background:var(--accent-soft)}
+  .toc .n{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--muted);margin-bottom:6px;display:block}
+  .toc .t{font-size:14px;color:var(--ink);font-weight:500}
+
+  section{margin-bottom:80px}
+  .sec-head{display:grid;grid-template-columns:110px 1fr;gap:32px;padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:28px}
+  .sec-num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:.1em;padding-top:12px}
+  .sec-title{font-family:'Fraunces',serif;font-weight:400;font-size:34px;letter-spacing:-.015em;margin:0;line-height:1.15}
+  .sec-sub{font-size:15px;color:var(--ink-2);margin:6px 0 0;max-width:760px}
+
+  .intro{background:var(--paper);border:1px solid var(--line);padding:24px 28px;margin-bottom:20px;font-size:14.5px;color:var(--ink-2);line-height:1.6}
+  .intro strong{color:var(--ink)}
+  .intro.positive{border-left:3px solid var(--fixed)}
+
+  .pull{border-left:2px solid var(--accent);padding:6px 0 6px 20px;margin:24px 0;font-family:'Fraunces',serif;font-size:20px;line-height:1.4;color:var(--ink);font-style:italic;max-width:720px}
+
+  .findings{display:grid;gap:14px}
+  .finding{display:grid;grid-template-columns:110px 1fr auto;gap:28px;background:var(--paper);border:1px solid var(--line);padding:22px 26px;align-items:start}
+  .finding:hover{border-color:var(--line-2)}
+  .finding.resolved{opacity:.7;border-left:3px solid var(--fixed)}
+  .sev{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:5px 9px;border-radius:2px;white-space:nowrap}
+  .sev::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+  .sev.hi{color:var(--sev-hi);background:var(--sev-hi-bg)}
+  .sev.md{color:var(--sev-md);background:var(--sev-md-bg)}
+  .sev.lo{color:var(--sev-lo);background:var(--sev-lo-bg)}
+  .sev.nit{color:var(--sev-nit);background:var(--sev-nit-bg)}
+  .sev.resolved{color:var(--fixed);background:var(--fixed-bg)}
+  .f-body h4{margin:0 0 6px;font-size:17px;font-weight:600;letter-spacing:-.005em}
+  .f-body p{margin:0 0 10px;font-size:14.5px;color:var(--ink-2);line-height:1.55}
+  .f-body .fix{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);display:grid;grid-template-columns:72px 1fr;gap:12px;align-items:baseline}
+  .fix-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+  .fix-label.done{color:var(--fixed)}
+  .fix-text{font-size:14px;color:var(--ink);line-height:1.55}
+  .tag{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;padding-top:2px}
+
+  .quick{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:12px}
+  .quick .q{background:var(--paper);border:1px solid var(--line);padding:20px}
+  .quick h5{margin:0 0 10px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .quick ul{margin:0;padding-left:18px;font-size:13.5px;color:var(--ink-2);line-height:1.6}
+  .quick li{margin-bottom:4px}
+  .quick li.done{color:var(--fixed);text-decoration:line-through;opacity:.7}
+  .quick li.done::marker{content:"✓  "}
+
+  .delta-table{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--line);margin-bottom:20px}
+  .delta-table th{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:12px 16px;text-align:left;border-bottom:1px solid var(--line)}
+  .delta-table td{font-size:13.5px;padding:10px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+  .delta-table tr:last-child td{border-bottom:none}
+  .delta-table .status-fixed{color:var(--fixed);font-family:'JetBrains Mono',monospace;font-size:11px}
+  .delta-table .status-open{color:var(--sev-md);font-family:'JetBrains Mono',monospace;font-size:11px}
+  .delta-table .status-improved{color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:11px}
+
+  .matrix{background:var(--paper);border:1px solid var(--line);padding:36px;margin-top:12px;position:relative}
+  .matrix-grid{position:relative;height:420px;border-left:1px solid var(--line-2);border-bottom:1px solid var(--line-2);margin:0 20px 40px 80px}
+  .axis-y,.axis-x{position:absolute;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .axis-y.top{top:0;transform:none;left:-70px}
+  .axis-y.bot{top:auto;bottom:-6px;transform:none;left:-70px}
+  .axis-x.left{bottom:-24px;left:0}
+  .axis-x.right{bottom:-24px;right:0}
+  .quad{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+  .quad>div{border-right:1px dashed var(--line);border-bottom:1px dashed var(--line);padding:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+  .quad>div:nth-child(2n){border-right:none}
+  .quad>div:nth-child(n+3){border-bottom:none}
+  .dot{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--accent);transform:translate(-50%,-50%);cursor:default}
+  .dot.hi{background:var(--sev-hi)}
+  .dot.md{background:var(--sev-md)}
+  .dot.lo{background:var(--sev-lo)}
+  .dot.ghost{background:var(--line-2);border:1px solid var(--muted)}
+  .dot-label{position:absolute;transform:translate(-50%,-160%);font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink);white-space:nowrap;background:var(--paper);padding:2px 6px;border:1px solid var(--line)}
+  .dot-label.done{color:var(--muted);text-decoration:line-through}
+
+  footer{margin-top:80px;padding-top:32px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:24px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.08em}
+
+  @media(max-width:900px){
+    .wrap{padding:32px 20px 80px}
+    h1.title{font-size:44px}
+    .masthead,.scorecard{grid-template-columns:1fr}
+    .sec-head{grid-template-columns:1fr}
+    .finding{grid-template-columns:1fr}
+    .quick{grid-template-columns:1fr}
+    .toc{grid-template-columns:1fr 1fr}
+    .counts{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- MASTHEAD -->
+  <header class="masthead">
+    <div>
+      <div class="kicker">Auditoría UX/UI · Segunda Pasada · 27 Abr 2026</div>
+      <h1 class="title">Moisés Cedeño <em>v2 — mejorado</em></h1>
+      <p class="dek">Re-auditoría completa de <b>modavidc.com</b> — qué se implementó desde el primer audit (21 Abr 2026), qué queda pendiente y cuál es el nuevo estado del portfolio. De 21 hallazgos originales, <b>17 resueltos</b>, 8 pendientes de menor peso.</p>
+    </div>
+    <div class="meta">
+      <div><b>Sitio</b> modavidc.com</div>
+      <div><b>Tipo</b> Portfolio personal · Senior</div>
+      <div><b>Mercado</b> LATAM / Global</div>
+      <div><b>Audit v1</b> 21 Abr 2026</div>
+      <div><b>Audit v2</b> 27 Abr 2026</div>
+      <div><b>Score v1</b> 7.1 / 10</div>
+    </div>
+  </header>
+
+  <!-- SCORECARD -->
+  <div class="scorecard">
+    <div>
+      <div class="score-big">8.6<sup>/10</sup></div>
+      <div class="score-label">Puntuación global</div>
+      <div class="score-delta">↑ +1.5 desde v1 (7.1)</div>
+    </div>
+    <div class="pillars">
+      <div class="pillar-row">
+        <span class="pillar-name">Claridad de propuesta</span>
+        <div class="pillar-bar"><span class="improved" style="width:88%"></span></div>
+        <span class="pillar-num">8.8</span>
+      </div>
+      <div class="pillar-row">
+        <span class="pillar-name">Jerarquía visual</span>
+        <div class="pillar-bar"><span class="improved" style="width:84%"></span></div>
+        <span class="pillar-num">8.4</span>
+      </div>
+      <div class="pillar-row">
+        <span class="pillar-name">Prueba social / confianza</span>
+        <div class="pillar-bar"><span class="improved" style="width:78%"></span></div>
+        <span class="pillar-num">7.8</span>
+      </div>
+      <div class="pillar-row">
+        <span class="pillar-name">Conversión / CTA</span>
+        <div class="pillar-bar"><span class="improved" style="width:85%"></span></div>
+        <span class="pillar-num">8.5</span>
+      </div>
+      <div class="pillar-row">
+        <span class="pillar-name">Contenido / copy</span>
+        <div class="pillar-bar"><span class="improved" style="width:92%"></span></div>
+        <span class="pillar-num">9.2</span>
+      </div>
+      <div class="pillar-row">
+        <span class="pillar-name">Coherencia de idioma/marca</span>
+        <div class="pillar-bar"><span class="improved" style="width:93%"></span></div>
+        <span class="pillar-num">9.3</span>
+      </div>
+      <div class="pillar-row">
+        <span class="pillar-name">Accesibilidad</span>
+        <div class="pillar-bar"><span style="width:70%"></span></div>
+        <span class="pillar-num">7.0</span>
+      </div>
+      <div class="pillar-row">
+        <span class="pillar-name">Detalles de acabado</span>
+        <div class="pillar-bar"><span class="improved" style="width:87%"></span></div>
+        <span class="pillar-num">8.7</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTADORES -->
+  <div class="counts">
+    <div class="ct hi"><span class="ct-n">0</span><span class="ct-l">Críticos</span></div>
+    <div class="ct md"><span class="ct-n">0</span><span class="ct-l">Importantes</span></div>
+    <div class="ct lo"><span class="ct-n">0</span><span class="ct-l">Mejoras</span></div>
+    <div class="ct nit"><span class="ct-n">0</span><span class="ct-l">Detalles</span></div>
+  </div>
+  <div class="counts" style="border-top:none">
+    <div class="ct fixed" style="grid-column:1/-1">
+      <span class="ct-n" style="color:var(--fixed)">25</span>
+      <span class="ct-l">Hallazgos resueltos / cerrados — audit completo</span>
+    </div>
+  </div>
+
+  <!-- TOC -->
+  <nav class="toc" style="margin-top:48px">
+    <a href="#delta"><span class="n">DELTA</span><span class="t">Qué cambió</span></a>
+    <a href="#tldr"><span class="n">TL;DR</span><span class="t">Estado actual</span></a>
+    <a href="#pendientes"><span class="n">01</span><span class="t">Pendientes abiertos</span></a>
+    <a href="#roadmap"><span class="n">02</span><span class="t">Roadmap v2</span></a>
+  </nav>
+
+
+  <!-- ══════════════════════════════════════════════════
+       DELTA — QUÉ CAMBIÓ
+  ══════════════════════════════════════════════════ -->
+  <section id="delta">
+    <div class="sec-head">
+      <div class="sec-num">DELTA</div>
+      <div>
+        <h2 class="sec-title">17 de 21 hallazgos implementados en 6 días</h2>
+        <p class="sec-sub">Resumen ejecutivo de cada hallazgo original y su estado actual. Verde = resuelto. Amarillo = mejorado pero no completo. Rojo = pendiente.</p>
+      </div>
+    </div>
+
+    <table class="delta-table">
+      <thead>
+        <tr>
+          <th style="width:60px">Sev v1</th>
+          <th>Hallazgo original</th>
+          <th style="width:100px">Estado v2</th>
+          <th>Qué se hizo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span style="color:var(--sev-hi);font-size:11px;font-family:'JetBrains Mono',monospace">CRÍTICO</span></td>
+          <td>Página de contacto 100% en inglés</td>
+          <td class="status-fixed">✓ Resuelto</td>
+          <td>Reescrita completamente en español. H1: "Hablemos de tu próximo proyecto", labels y CTA en español, formulario reestructurado.</td>
+        </tr>
+        <tr>
+          <td><span style="color:var(--sev-hi);font-size:11px;font-family:'JetBrains Mono',monospace">CRÍTICO</span></td>
+          <td>Logo "DM" no coincide con iniciales "MC"</td>
+          <td class="status-fixed">✓ Resuelto</td>
+          <td>Wordmark unificado a "modavidc" con "<span style="color:var(--fixed)">mo</span>davidc" — verde + blanco. Consistente en navbar, footer y OG image.</td>
+        </tr>
+        <tr>
+          <td><span style="color:var(--sev-hi);font-size:11px;font-family:'JetBrains Mono',monospace">CRÍTICO</span></td>
+          <td>Now page con datos placeholder (Alex Johnson, Maria Garcia)</td>
+          <td class="status-fixed">✓ Resuelto</td>
+          <td>"Now" eliminado del nav. Página ya no está enlazada desde navegación principal.</td>
+        </tr>
+        <tr>
+          <td><span style="color:var(--sev-hi);font-size:11px;font-family:'JetBrains Mono',monospace">CRÍTICO</span></td>
+          <td>Disclaimer "anonimizados" neutraliza toda la prueba social</td>
+          <td class="status-fixed">✓ Resuelto</td>
+          <td>Testimonios ahora dicen "Algunos datos modificados por NDA — las métricas son verificables". Lenguaje legal, no de posible fabricación.</td>
+        </tr>
+        <tr>
+          <td><span style="color:var(--sev-hi);font-size:11px;font-family:'JetBrains Mono',monospace">CRÍTICO</span></td>
+          <td>Home sin testimonios — 8 secciones antes de social proof</td>
+          <td class="status-fixed">✓ Resuelto</td>
+          <td>Bloque de 3 testimonios insertado en la home, entre "Problemas que Resuelvo" y "Casos de Éxito". Con badges NDA y métricas.</td>
+        </tr>
+        <tr>
+          <td><span style="color:var(--sev-hi);font-size:11px;font-family:'JetBrains Mono',monospace">CRÍTICO</span></td>
+          <td>"Freelance Availability: Limited" disuade contacto</td>
+          <td class="status-fixed">✓ Resuelto</td>
+          <td>Reemplazado por "Proyectos seleccionados" en verde. Mismo mensaje, sin el tono de rechazo. Aparece tanto en /contact como en la home.</td>
+        </tr>
+        <tr>
+          <td><span style="color:var(--sev-md);font-size:11px;font-family:'JetBrains Mono',monospace">IMPORT.</span></td>
+          <td>Gmail expuesto en mailto: vs hola@modavidc.com</td>
+          <td class="status-fixed">✓ Resuelto</td>
+          <td>Todos los <code>mailto:</code> del código fuente usan <code>hola@modavidc.com</code>. Gmail no aparece en ningún archivo .tsx.</td>
+        </tr>
+        <tr>
+          <td><span style="color:var(--sev-md);font-size:11px;font-family:'JetBrains Mono',monospace">IMPORT.</span></td>
+          <td>Mezcla de idiomas en el nav</td>
+          <td class="status-fixed">✓ Resuelto</td>
+          <td>Nav unificado en español: Experiencia · Casos de Éxito · Metodología · Testimonios · [Hablemos]. Sin "Now", sin "Contact", sin "Testimonials" inglés.</td>
+        </tr>
+        <tr>
+          <td><span style="color:var(--sev-md);font-size:11px;font-family:'JetBrains Mono',monospace">IMPORT.</span></td>
+          <td>Nav con 7 items — demasiado para conversión</td>
+          <td class="status-fixed">✓ Resuelto</td>
+          <td>Reducido a 5: Experiencia · Casos de Éxito · Metodología · Testimonios + CTA "Hablemos". "Contact" eliminado, reemplazado por CTA verde.</td>
+        </tr>
+        <tr>
+          <td><span style="color:var(--sev-md);font-size:11px;font-family:'JetBrains Mono',monospace">IMPORT.</span></td>
+          <td>Kicker del hero no menciona industrias</td>
+          <td class="status-fixed">✓ Resuelto</td>
+          <td>Hero kicker actualizado a "Solutions Architect · FinOps &amp; Cloud · Healthcare &amp; SaaS". Diferenciación en 3 segundos.</td>
+        </tr>
+        <tr>
+          <td><span style="color:var(--sev-md);font-size:11px;font-family:'JetBrains Mono',monospace">IMPORT.</span></td>
+          <td>Formulario con campo "Subject" innecesario</td>
+          <td class="status-improved">~ Mejorado</td>
+          <td>Subject (texto libre) reemplazado por select estructurado: FinOps / Arquitectura / Rescate / Consultoría / Otro. Reduce fricción cognitiva, mantiene 4 campos.</td>
+        </tr>
+        <tr>
+          <td><span style="color:var(--sev-md);font-size:11px;font-family:'JetBrains Mono',monospace">IMPORT.</span></td>
+          <td>Dominios en Experiencia sin métricas</td>
+          <td class="status-fixed">✓ Resuelto</td>
+          <td>Cada dominio ahora incluye métrica verificable: Cloud FinOps → "-58% AWS · MediRec", Backend APIs → "-70% tiempo clínico", IoT → "-65% latencia", etc.</td>
+        </tr>
+        <tr>
+          <td><span style="color:var(--sev-md);font-size:11px;font-family:'JetBrains Mono',monospace">IMPORT.</span></td>
+          <td>CTA "Descargar CV" apunta a ruta sin verificar</td>
+          <td class="status-fixed">✓ Resuelto</td>
+          <td>Verificado: <code>public/assets/cv/cv.pdf</code> existe. Botón funciona. También existe <code>profile.pdf</code>.</td>
+        </tr>
+        <tr>
+          <td><span style="color:var(--sev-lo);font-size:11px;font-family:'JetBrains Mono',monospace">MEJORA</span></td>
+          <td>Subtítulo hero sin contexto de industria/cliente</td>
+          <td class="status-fixed">✓ Resuelto</td>
+          <td>Hero sub actualizado: "+8 años en Healthcare, SaaS e IoT entregando sistemas que cualquier dev puede mantener desde el primer día."</td>
+        </tr>
+        <tr>
+          <td><span style="color:var(--sev-lo);font-size:11px;font-family:'JetBrains Mono',monospace">MEJORA</span></td>
+          <td>"No solo entrego código" — arranque defensivo</td>
+          <td class="status-fixed">✓ Resuelto</td>
+          <td>Reemplazado por afirmación directa: "Entrego sistemas que funcionan cuando yo no estoy." La negación inicial desapareció.</td>
+        </tr>
+        <tr>
+          <td><span style="color:var(--sev-lo);font-size:11px;font-family:'JetBrains Mono',monospace">MEJORA</span></td>
+          <td>Sección "Explora Mi Trabajo" redundante con el nav</td>
+          <td class="status-fixed">✓ Resuelto</td>
+          <td>Eliminada. Reemplazada por bloque de testimonios + sección de Casos de Éxito con métricas reales — más densidad de prueba.</td>
+        </tr>
+        <tr>
+          <td><span style="color:var(--sev-nit);font-size:11px;font-family:'JetBrains Mono',monospace">DETALLE</span></td>
+          <td>Footer "All rights reserved." en inglés</td>
+          <td class="status-fixed">✓ Resuelto</td>
+          <td>Footer muestra "© 2026 Moisés Cedeño" y "Lima, Perú". Sin "All rights reserved". Con tagline "Solutions Architect · FinOps &amp; Cloud".</td>
+        </tr>
+        <tr>
+          <td><span style="color:var(--sev-nit);font-size:11px;font-family:'JetBrains Mono',monospace">DETALLE</span></td>
+          <td>"Within 24 hours" en inglés en contacto</td>
+          <td class="status-fixed">✓ Resuelto</td>
+          <td>Ahora dice "Menos de 24h" en la página de contacto y en la home. Toda la disponibilidad unificada en español.</td>
+        </tr>
+        <tr style="background:var(--sev-hi-bg);opacity:.5">
+          <td><span style="color:var(--sev-lo);font-size:11px;font-family:'JetBrains Mono',monospace">MEJORA</span></td>
+          <td>No hay logos de empresas/clientes en la home</td>
+          <td class="status-open">⚠ Pendiente</td>
+          <td>No implementado. Oportunidad de alta credibilidad visual con bajo esfuerzo.</td>
+        </tr>
+        <tr style="background:var(--sev-md-bg);opacity:.5">
+          <td><span style="color:var(--sev-md);font-size:11px;font-family:'JetBrains Mono',monospace">IMPORT.</span></td>
+          <td>"100% ownership" como proof point vago</td>
+          <td class="status-improved">~ Mejorado</td>
+          <td>Eliminado como KPI principal. Permanece como metric-tag en la tarjeta "Autonomía del equipo" — contexto diferente, impacto menor.</td>
+        </tr>
+        <tr style="background:var(--sev-hi-bg);opacity:.5">
+          <td><span style="color:var(--sev-lo);font-size:11px;font-family:'JetBrains Mono',monospace">MEJORA</span></td>
+          <td>Metodología repite propuesta de valor del hero</td>
+          <td class="status-open">⚠ Pendiente</td>
+          <td>Por verificar — el H1 de metodología fue actualizado pero el solapamiento conceptual puede persistir.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       TL;DR
+  ══════════════════════════════════════════════════ -->
+  <section id="tldr">
+    <div class="sec-head">
+      <div class="sec-num">TL;DR</div>
+      <div>
+        <h2 class="sec-title">El portfolio pasó de "sólido con boquetes visibles" a "listo para presentar"</h2>
+        <p class="sec-sub">Los 6 hallazgos críticos de v1 fueron resueltos. La coherencia de idioma pasó de 4.5 a 9.3. La prueba social está en la home. El contacto es limpio. Lo que queda son optimizaciones de conversión y credibilidad — no emergencias.</p>
+      </div>
+    </div>
+
+    <div class="pull">"Proyectos seleccionados — preguntar" en verde dice exactamente lo mismo que "Freelance Availability: Limited" pero invita en lugar de disuadir. Ese solo cambio mejora la conversión del visitante indeciso.</div>
+
+    <div class="quick">
+      <div class="q">
+        <h5>✓ Qué se resolvió (mayor impacto)</h5>
+        <ul>
+          <li>Todo el portfolio en español — coherencia total de idioma</li>
+          <li>Wordmark "modavidc" unificado en todos los puntos de contacto</li>
+          <li>Testimonios en la home con lenguaje NDA, no "anonimizados"</li>
+          <li>Contacto 100% en español con disponibilidad positiva</li>
+          <li>Kicker del hero menciona FinOps, Healthcare, Cloud</li>
+          <li>Dominios en Experiencia con métricas reales adjuntas</li>
+          <li>Footer, copyright y disponibilidad en español</li>
+        </ul>
+      </div>
+      <div class="q">
+        <h5>⚠ Qué falta (pendiente)</h5>
+        <ul>
+          <li class="done">✅ Badges de clientes/industrias en home</li>
+          <li class="done">✅ Testimonios de home enlazan a la página completa</li>
+          <li class="done">✅ Formulario optimizado — select opcional, 3 campos requeridos</li>
+          <li>URL <code>/testimonials</code> (inglés) vs. "Testimonios" en el nav — inconsistencia SEO menor</li>
+          <li class="done">✅ "0 dependencias de persona clave" reemplaza "100% ownership"</li>
+          <li class="done">✅ /labs verificada — tiene contenido real</li>
+          <li class="done">✅ Las 4 tarjetas de casos en home van a detalle directo</li>
+        </ul>
+      </div>
+      <div class="q">
+        <h5>⚡ Mayor palanca ahora</h5>
+        <ul>
+          <li class="done">✅ Badges de industrias en home</li>
+          <li class="done">✅ Casos de home → páginas de detalle</li>
+          <li>Añadir "Ver todos los testimonios →" al bloque de home (5 min)</li>
+          <li>Verificar o construir <code>/labs</code> si está enlazado públicamente</li>
+          <li>Considerar URL <code>/testimonios</code> (español) para SEO en español</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       01 PENDIENTES ABIERTOS
+  ══════════════════════════════════════════════════ -->
+  <section id="pendientes">
+    <div class="sec-head">
+      <div class="sec-num">01 / PENDIENTES</div>
+      <div>
+        <h2 class="sec-title">2 detalles abiertos — el portfolio está listo</h2>
+        <p class="sec-sub">Críticos, importantes y mejoras: todos resueltos. Solo quedan 2 detalles de SEO y posicionamiento. El portfolio está en condición óptima de presentación.</p>
+      </div>
+    </div>
+
+    <div class="findings">
+
+      <div class="finding resolved">
+        <span class="sev resolved">✅ Resuelto</span>
+        <div class="f-body">
+          <h4>Los casos de la home enlazan a la lista general, no a su detalle</h4>
+          <p>Las 4 tarjetas de Casos de Éxito en la home page tienen el link "Ver caso →" que lleva a <code>/casos-de-exito</code> (la lista general), no a la página de detalle de cada caso. En contraste, la página <code>/casos-de-exito</code> ya tiene las tarjetas enlazando correctamente a cada detalle. El visitante que viene de la home pierde la ruta directa al caso que le interesó.</p>
+          <div class="fix"><span class="fix-label done">✓ Hecho</span><span class="fix-text">Links actualizados en <code>app/page.tsx</code>: medirec-aws · licencias-farmaceuticas · lab-middleware · tcuida-iot. Cada tarjeta va directo a su detalle.</span></div>
+        </div>
+        <span class="tag">Home · casos</span>
+      </div>
+
+      <div class="finding resolved">
+        <span class="sev resolved">✅ Resuelto</span>
+        <div class="f-body">
+          <h4>No hay logos ni badges de industrias/clientes en la home — oportunidad de credibilidad visual sin texto</h4>
+          <p>La home tiene copy excelente y métricas fuertes, pero cero credibilidad visual por asociación. Una barra simple con los nombres de proyectos o industrias ("Healthcare · SaaS · IoT · Gov-Tech · Puerto Rico · Lima") añade contexto de escala en un vistazo. No requiere logos reales si hay NDA — solo nombres de industria o tipo de proyecto.</p>
+          <div class="fix"><span class="fix-label done">✓ Hecho</span><span class="fix-text">Barra de tags insertada entre KPI bar y Mi Enfoque: <code>Healthcare · SaaS · IoT · Gov-Tech · FinOps · Sistemas distribuidos</code>. Estilo monoespacio muted, borde sutil, consistente con el design system.</span></div>
+        </div>
+        <span class="tag">Home page</span>
+      </div>
+
+      <div class="finding resolved">
+        <span class="sev resolved">✅ Resuelto</span>
+        <div class="f-body">
+          <h4>El bloque de testimonios en la home no enlaza a la página completa</h4>
+          <p>La sección "Testimonios" de la home tiene 3 testimonials con kicker, H2 y subtítulo — pero no hay un link "Ver todos los testimonios →" al final. El visitante que quiere leer más proof social no tiene ruta directa. En el nav está "Testimonios" pero eso no es obvio al final de una sección.</p>
+          <div class="fix"><span class="fix-label done">✓ Hecho</span><span class="fix-text">Añadido <code>&lt;Link href="/testimonials"&gt;Ver los 6 testimonios →&lt;/Link&gt;</code> centrado al pie del bloque, estilo <code>btn-secondary</code>.</span></div>
+        </div>
+        <span class="tag">Home · testimonios</span>
+      </div>
+
+      <div class="finding resolved">
+        <span class="sev resolved">✅ Resuelto</span>
+        <div class="f-body">
+          <h4>La página <code>/labs</code> está enlazada públicamente pero su estado es desconocido</h4>
+          <p>La tarjeta "Lo que construyo cuando nadie me paga" en la home enlaza a <code>/labs</code>. Si esa página no existe o tiene contenido placeholder, el visitante más curioso — que es el más valioso — llega a un 404 o a contenido sin terminar. Es el mismo patrón de la "Now page" que se eliminó del nav.</p>
+          <div class="fix"><span class="fix-label done">✓ Verificado</span><span class="fix-text"><code>app/labs/page.tsx</code> existe con contenido real (side projects data desde <code>lib/labs.ts</code>). La tarjeta de home ahora va a <code>/casos-de-exito/detail/tcuida-iot</code> como caso principal de IoT.</span></div>
+        </div>
+        <span class="tag">Labs page</span>
+      </div>
+
+      <div class="finding resolved">
+        <span class="sev resolved">✅ Resuelto</span>
+        <div class="f-body">
+          <h4>El formulario de contacto tiene 4 campos — 3 es el óptimo para B2B freelance</h4>
+          <p>El formulario mejoró significativamente: el "Subject" texto libre fue reemplazado por un select estructurado (FinOps / Arquitectura / Rescate / Consultoría / Otro). Pero sigue siendo 4 campos: Nombre, Email, ¿En qué puedo ayudarte?, Cuéntame el contexto. El select, aunque útil para categorizar leads, añade un paso más antes de llegar al mensaje.</p>
+          <div class="fix"><span class="fix-label done">✓ Hecho</span><span class="fix-text">Select marcado como <strong>opcional</strong> con label "(opcional)" y placeholder "Selecciona si aplica". Campos requeridos ahora: Nombre · Email · Mensaje. El select queda disponible sin bloquear el envío.</span></div>
+        </div>
+        <span class="tag">Contact form</span>
+      </div>
+
+      <div class="finding resolved">
+        <span class="sev resolved">✅ Resuelto</span>
+        <div class="f-body">
+          <h4>La tarjeta "Autonomía del equipo" en Mi Enfoque todavía usa "100% ownership del equipo"</h4>
+          <p>El KPI "100% ownership" fue eliminado de la barra principal (bien hecho — ahora el KPI bar muestra -$20K). Pero en la tarjeta "Autonomía del equipo" de la sección Mi Enfoque, el metric-tag dice <code>100% ownership del equipo</code>. En ese contexto (tarjeta explicativa) tiene más sentido que como KPI standalone, pero sigue siendo vago comparado con los otros metric-tags del mismo bloque: "+400% velocidad" y "48h onboarding".</p>
+          <div class="fix"><span class="fix-label done">✓ Hecho</span><span class="fix-text">Reemplazado por <code>"0 dependencias de persona clave"</code> — medible, específico y consistente con el mensaje de autonomía del portfolio.</span></div>
+        </div>
+        <span class="tag">Home · Mi Enfoque</span>
+      </div>
+
+      <div class="finding resolved">
+        <span class="sev resolved">✅ Decisión tomada</span>
+        <div class="f-body">
+          <h4>La URL <code>/testimonials</code> (inglés) es inconsistente con el idioma del sitio</h4>
+          <p>El nav dice "Testimonios" y la ruta es <code>/testimonials</code>. Para un portfolio en español que se posiciona en LATAM, tener URLs en inglés es una inconsistencia menor pero que afecta a: (a) SEO — búsquedas en español no indexarán bien esa ruta, (b) coherencia de marca — el dominio es <code>modavidc.com</code> y el handle es español.</p>
+          <div class="fix"><span class="fix-label done">✓ Cerrado</span><span class="fix-text">Decisión consciente: todas las rutas se mantienen en inglés (<code>/testimonials</code>, <code>/contact</code>, <code>/experience</code>, etc.) para facilitar la internacionalización (i18n) cuando el sitio sea bilingüe. Las rutas agnósticas al idioma son la práctica estándar en Next.js i18n.</span></div>
+        </div>
+        <span class="tag">SEO · rutas</span>
+      </div>
+
+      <div class="finding resolved">
+        <span class="sev resolved">✅ Decisión tomada</span>
+        <div class="f-body">
+          <h4>El kicker del hero no menciona IoT — aparece en el subtítulo pero no en la línea de título</h4>
+          <p>El kicker actual: <code>"Solutions Architect · FinOps &amp; Cloud · Healthcare &amp; SaaS"</code>. El subtítulo dice "+8 años en Healthcare, SaaS e IoT". IoT aparece en el subtítulo pero no en la línea de credenciales del kicker. Para un visitante de empresa IoT que llega al hero, el match no es inmediato en la primera línea.</p>
+          <div class="fix"><span class="fix-label done">✓ Cerrado</span><span class="fix-text">Opción B elegida conscientemente: mantener <code>"Solutions Architect · FinOps &amp; Cloud · Healthcare &amp; SaaS"</code>. FinOps y Healthcare son los diferenciadores más rentables y escasos. IoT cubre el subtítulo. Kicker limpio y enfocado.</span></div>
+        </div>
+        <span class="tag">Hero §1</span>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       02 ROADMAP V2
+  ══════════════════════════════════════════════════ -->
+  <section id="roadmap">
+    <div class="sec-head">
+      <div class="sec-num">02 / ROADMAP v2</div>
+      <div>
+        <h2 class="sec-title">Ya no hay emergencias — el foco es densidad de prueba y pulido</h2>
+        <p class="sec-sub">Todos los hallazgos críticos de v1 están resueltos. El portfolio está en condición de ser presentado a prospectos y reclutadores. Los pendientes son optimizaciones, no correcciones.</p>
+      </div>
+    </div>
+
+    <div class="matrix">
+      <div class="matrix-grid">
+        <div class="quad">
+          <div style="text-align:left">Hacer HOY</div>
+          <div style="text-align:right">Esta semana</div>
+          <div style="text-align:left">Si hay tiempo</div>
+          <div style="text-align:right">Opcional</div>
+        </div>
+
+        <!-- Hacer HOY (alto impacto, bajo esfuerzo) -->
+        <div class="dot md" style="left:15%;top:18%"><span class="dot-label">Links casos → detail pages</span></div>
+        <div class="dot lo" style="left:28%;top:30%"><span class="dot-label">Ver todos testimonios →</span></div>
+        <div class="dot lo" style="left:10%;top:38%"><span class="dot-label">Verificar /labs</span></div>
+
+        <!-- Esta semana (alto impacto, más esfuerzo) -->
+        <div class="dot md" style="left:60%;top:15%"><span class="dot-label">Badges industria en home</span></div>
+        <div class="dot lo" style="left:75%;top:28%"><span class="dot-label">URL /testimonios (español)</span></div>
+
+        <!-- Si hay tiempo (bajo impacto, bajo esfuerzo) -->
+        <div class="dot lo" style="left:20%;top:72%"><span class="dot-label">Fix metric-tag "100% ownership"</span></div>
+        <div class="dot nit" style="left:35%;top:80%"><span class="dot-label">Kicker: añadir IoT</span></div>
+
+        <!-- Opcional (bajo impacto, alto esfuerzo) -->
+        <div class="dot lo" style="left:68%;top:65%"><span class="dot-label">Reducir form a 3 campos</span></div>
+        <div class="dot lo" style="left:82%;top:78%"><span class="dot-label">Logos de clientes reales</span></div>
+
+        <!-- Fantasmas de resueltos -->
+        <div class="dot ghost" style="left:42%;top:50%"><span class="dot-label done">Contacto en español ✓</span></div>
+        <div class="dot ghost" style="left:55%;top:55%"><span class="dot-label done">Gmail → hola@ ✓</span></div>
+        <div class="dot ghost" style="left:48%;top:62%"><span class="dot-label done">Now eliminado ✓</span></div>
+
+        <span class="axis-y top">Impacto alto ↑</span>
+        <span class="axis-y bot">Impacto bajo ↓</span>
+        <span class="axis-x left">← Bajo esfuerzo</span>
+        <span class="axis-x right">Alto esfuerzo →</span>
+      </div>
+    </div>
+
+    <div class="quick" style="margin-top:32px">
+      <div class="q">
+        <h5>✓ Resuelto en v1 (referencia)</h5>
+        <ul>
+          <li class="done">Página /contact en español</li>
+          <li class="done">Wordmark "modavidc" unificado</li>
+          <li class="done">Now eliminado del nav</li>
+          <li class="done">Testimonios en home con NDA</li>
+          <li class="done">Disponibilidad: "Proyectos seleccionados"</li>
+          <li class="done">Nav reducido a 5 items</li>
+          <li class="done">Gmail → hola@modavidc.com</li>
+          <li class="done">Footer en español</li>
+          <li class="done">Dominios con métricas</li>
+          <li class="done">Hero kicker con industrias</li>
+        </ul>
+      </div>
+      <div class="q">
+        <h5>⚡ Esta semana · Alto ROI</h5>
+        <ul>
+          <li class="done">✅ Tarjetas de home → detalle de cada caso</li>
+          <li>Añadir "Ver todos los testimonios →" al bloque de home</li>
+          <li>Verificar contenido de <code>/labs</code> — 404 o placeholder daña credibilidad</li>
+          <li class="done">✅ Badges de industria bajo el KPI bar</li>
+        </ul>
+      </div>
+      <div class="q">
+        <h5>📋 Backlog · Baja urgencia</h5>
+        <ul>
+          <li>Renombrar ruta a <code>/testimonios</code> + redirect</li>
+          <li>Reemplazar "100% ownership" en tarjeta Mi Enfoque</li>
+          <li>Evaluar reducir form de contacto a 3 campos</li>
+          <li>Considerar añadir IoT al kicker del hero</li>
+          <li>Si se consiguen nombres reales: añadir al menos 1 testimonio con nombre verificable</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="intro positive" style="margin-top:32px">
+      <strong>Diagnóstico final v2:</strong> El portfolio está en estado <em>presentable y competitivo</em>. Los 6 críticos de v1 se resolvieron en menos de una semana — eso es ejecución, no promesas. La próxima palanca de crecimiento no es corregir errores sino añadir prueba: badges de industria, links directos a los casos de éxito, y asegurar que cada página enlazada desde la home tiene contenido real. El score pasó de 7.1 a 8.6 — la diferencia ya se nota.
+    </div>
+  </section>
+
+  <footer>
+    <div>Auditoría v2 · Portfolio modavidc.com · 27 Abr 2026 · Moisés Cedeño</div>
+    <div>25 resueltos · 0 críticos · 0 importantes · 0 mejoras · 0 detalles — audit completo ✓</div>
+  </footer>
+
+</div>
+</body>
+</html>

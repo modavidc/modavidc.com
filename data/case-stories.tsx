@@ -956,4 +956,140 @@ export const caseStories: Record<string, StoryStep[]> = {
       ),
     },
   ],
+
+  "surescripts-certification": [
+    {
+      title: "El obstáculo — recetas sin destino",
+      text: "abcEHR tenía módulo de ePrescribing listo, pero sin certificación Surescripts las recetas no llegaban a ninguna farmacia. 260K farmacias en la red USA, 0 accesibles. Los médicos usaban papel.",
+      svg: (
+        <svg width="100%" height="100%" viewBox="0 0 760 200">
+          <rect width="760" height="200" fill={BG}/>
+          <text x="30" y="18" fontFamily={MONO} fontSize="9" fill={T3} letterSpacing="2">ESTADO INICIAL · SIN CERTIFICACIÓN</text>
+          <rect x="30" y="35" width="160" height="110" rx="3" fill={BG2} stroke={B}/>
+          <text x="55" y="58" fontFamily={MONO} fontSize="9" fill={T3}>abcEHR</text>
+          <text x="48" y="76" fontFamily={MONO} fontSize="11" fontWeight="500" fill={T}>ePrescribing</text>
+          <line x1="50" y1="86" x2="170" y2="86" stroke={B} strokeWidth="1"/>
+          <text x="50" y="103" fontFamily={MONO} fontSize="8" fill={T3}>médico crea receta</text>
+          <text x="50" y="117" fontFamily={MONO} fontSize="8" fill={T3}>sin destino</text>
+          <line x1="192" y1="90" x2="240" y2="90" stroke={B2} strokeWidth="1.5" strokeDasharray="4,3"/>
+          <rect x="242" y="72" width="50" height="38" rx="3" fill={BG3} stroke={R} strokeWidth="1.5"/>
+          <text x="255" y="97" fontFamily={MONO} fontSize="22" fontWeight="500" fill={R}>✗</text>
+          <text x="243" y="122" fontFamily={MONO} fontSize="7" fill={R}>sin certificar</text>
+          <rect x="310" y="35" width="175" height="110" rx="3" fill={BG2} stroke={B}/>
+          <text x="335" y="58" fontFamily={MONO} fontSize="9" fill={T3}>Surescripts</text>
+          <text x="328" y="76" fontFamily={MONO} fontSize="11" fontWeight="500" fill={T3}>Red farmacias</text>
+          <line x1="328" y1="86" x2="465" y2="86" stroke={B} strokeWidth="1"/>
+          <text x="335" y="103" fontFamily={MONO} fontSize="8" fill={T3}>260,000+ farmacias</text>
+          <text x="335" y="117" fontFamily={MONO} fontSize="8" fill={T3}>USA · inaccesibles</text>
+          <rect x="510" y="35" width="220" height="110" rx="3" fill={BG2} stroke={B}/>
+          <text x="530" y="58" fontFamily={MONO} fontSize="9" fill={T3}>acceso real</text>
+          <text x="545" y="107" fontFamily={MONO} fontSize="52" fontWeight="500" fill={R}>0</text>
+          <text x="530" y="126" fontFamily={MONO} fontSize="8" fill={T3}>farmacias alcanzables</text>
+          <text x="530" y="139" fontFamily={MONO} fontSize="8" fill={T3}>recetas en papel</text>
+        </svg>
+      ),
+    },
+    {
+      title: "Los requisitos — sin atajos",
+      text: "Documentación fragmentada. Resource de integración dedicada (Rebecca Bell, luego Tara Collyard). mTLS, TLS 1.2+ con ciphers exactos, IP estática, FQDN específica, 7 tipos de transacciones, NCPDP 2017071. Timeline real: 3 años.",
+      svg: (
+        <svg width="100%" height="100%" viewBox="0 0 760 200">
+          <rect width="760" height="200" fill={BG}/>
+          <text x="30" y="18" fontFamily={MONO} fontSize="9" fill={T3} letterSpacing="2">REQUISITOS DE CERTIFICACIÓN</text>
+          <text x="30" y="36" fontFamily={MONO} fontSize="8" fill={T3} letterSpacing="1">SEGURIDAD Y CONECTIVIDAD</text>
+          {[
+            "mTLS · certificados cliente",
+            "TLS 1.2+ · ciphers ECDHE-RSA-AES256",
+            "IP estática · FQDN fija",
+            "HTTPS · puerto 443 específico",
+          ].map((item, i) => (
+            <g key={i}>
+              <circle cx="44" cy={51 + i * 28} r="8" fill={BG3} stroke={A} strokeWidth="1"/>
+              <text x="39" y={55 + i * 28} fontFamily={MONO} fontSize="8" fill={A}>○</text>
+              <text x="60" y={55 + i * 28} fontFamily={MONO} fontSize="9" fill={T2}>{item}</text>
+            </g>
+          ))}
+          <text x="390" y="36" fontFamily={MONO} fontSize="8" fill={T3} letterSpacing="1">TRANSACCIONES Y COMPLIANCE</text>
+          {[
+            "7 tipos de transacciones",
+            "NCPDP 2017071 compliance",
+            "testing entorno staging Surescripts",
+            "resource de integración dedicado",
+          ].map((item, i) => (
+            <g key={i}>
+              <circle cx="404" cy={51 + i * 28} r="8" fill={BG3} stroke={A} strokeWidth="1"/>
+              <text x="399" y={55 + i * 28} fontFamily={MONO} fontSize="8" fill={A}>○</text>
+              <text x="420" y={55 + i * 28} fontFamily={MONO} fontSize="9" fill={T2}>{item}</text>
+            </g>
+          ))}
+          <rect x="30" y="168" width="700" height="22" rx="2" fill={BG2} stroke={B}/>
+          <text x="44" y="183" fontFamily={MONO} fontSize="8" fill={T3}>timeline real ·</text>
+          <text x="136" y="183" fontFamily={MONO} fontSize="8" fill={A}>3+ años</text>
+          <text x="206" y="183" fontFamily={MONO} fontSize="8" fill={T3}>· Abr 2020 → Oct 2023 · no hay atajos en certificación regulatoria</text>
+        </svg>
+      ),
+    },
+    {
+      title: "7 transacciones — todas certificadas",
+      text: "Cada transacción: diseño, desarrollo, testing exhaustivo contra entorno Surescripts y aprobación individual. NewRx, RxRenewal, RxChange, CancelRx, Status, Error, Verify. 2020 a 2023.",
+      svg: (
+        <svg width="100%" height="100%" viewBox="0 0 760 200">
+          <rect width="760" height="200" fill={BG}/>
+          <text x="30" y="18" fontFamily={MONO} fontSize="9" fill={T3} letterSpacing="2">7 TRANSACCIONES · TODAS CERTIFICADAS</text>
+          {[
+            { name: "NewRx", sub: "receta nueva", x: 30 },
+            { name: "RxRenewal", sub: "renovación", x: 131 },
+            { name: "RxChange", sub: "cambio", x: 232 },
+            { name: "CancelRx", sub: "cancelar", x: 333 },
+            { name: "Status", sub: "estado", x: 434 },
+            { name: "Error", sub: "errores", x: 535 },
+            { name: "Verify", sub: "verificar", x: 636 },
+          ].map(({ name, sub, x }) => (
+            <g key={name}>
+              <rect x={x} y={28} width={94} height={80} rx="3" fill={GB} stroke={G} strokeWidth="1"/>
+              <text x={x + 47} y={50} fontFamily={MONO} fontSize="9" fontWeight="500" fill={G} textAnchor="middle">{name}</text>
+              <text x={x + 47} y={64} fontFamily={MONO} fontSize="7" fill={T3} textAnchor="middle">{sub}</text>
+              <text x={x + 47} y={94} fontFamily={MONO} fontSize="22" fill={G} textAnchor="middle">✓</text>
+            </g>
+          ))}
+          <rect x="30" y="122" width="700" height="58" rx="3" fill={BG2} stroke={B}/>
+          <text x="50" y="144" fontFamily={MONO} fontSize="9" fill={T3}>certificadas</text>
+          <text x="50" y="166" fontFamily={MONO} fontSize="26" fontWeight="500" fill={G}>7/7</text>
+          <line x1="132" y1="130" x2="132" y2="174" stroke={B} strokeWidth="1"/>
+          <text x="152" y="143" fontFamily={MONO} fontSize="8" fill={T2}>mTLS · TLS 1.2+ · ECDHE-RSA-AES256-SHA384</text>
+          <text x="152" y="158" fontFamily={MONO} fontSize="8" fill={T2}>NCPDP 2017071 · testing exhaustivo Surescripts</text>
+          <text x="152" y="171" fontFamily={MONO} fontSize="7" fill={T3}>EHR_INB_Test_Msgs · drug data validation · aprobación individual por transacción</text>
+          <line x1="540" y1="130" x2="540" y2="174" stroke={B} strokeWidth="1"/>
+          <text x="560" y="145" fontFamily={MONO} fontSize="8" fill={T3}>timeline</text>
+          <text x="560" y="162" fontFamily={MONO} fontSize="11" fontWeight="500" fill={G}>2020 → 2023</text>
+        </svg>
+      ),
+    },
+    {
+      title: "PR-21677 — 260K farmacias",
+      text: "Certificación oficial PR-21677 el 10/23/2023. 7/7 transacciones NCPDP SCRIPT 2017071 certificadas. 260K+ farmacias accesibles. Recertificación adicional completada en 22 días sin interrupciones.",
+      svg: (
+        <svg width="100%" height="100%" viewBox="0 0 760 200">
+          <rect width="760" height="200" fill={BG}/>
+          <rect x="30" y="22" width="270" height="150" rx="3" fill={BG2} stroke={B}/>
+          <text x="50" y="46" fontFamily={MONO} fontSize="9" fill={T3}>ANTES</text>
+          <text x="50" y="66" fontFamily={MONO} fontSize="11" fill={T}>0 farmacias</text>
+          <text x="50" y="98" fontFamily={MONO} fontSize="30" fontWeight="500" fill={R}>sin acceso</text>
+          <line x1="50" y1="110" x2="280" y2="110" stroke={B} strokeWidth="1"/>
+          <text x="50" y="127" fontFamily={MONO} fontSize="8" fill={T3}>recetas en papel</text>
+          <text x="50" y="142" fontFamily={MONO} fontSize="8" fill={T3}>sin trazabilidad digital</text>
+          <text x="50" y="157" fontFamily={MONO} fontSize="8" fill={T3}>sin audit trail</text>
+          <text x="310" y="107" fontFamily={MONO} fontSize="22" fill={B2} textAnchor="middle">→</text>
+          <rect x="340" y="22" width="390" height="150" rx="3" fill={GB} stroke={G} strokeWidth="1"/>
+          <text x="360" y="46" fontFamily={MONO} fontSize="9" fill={G}>CERTIFICADO · PR-21677</text>
+          <text x="360" y="66" fontFamily={MONO} fontSize="11" fill={T}>260,000+ farmacias</text>
+          <text x="360" y="98" fontFamily={MONO} fontSize="26" fontWeight="500" fill={G}>acceso completo</text>
+          <line x1="360" y1="110" x2="710" y2="110" stroke={GD} strokeWidth="1"/>
+          <text x="360" y="127" fontFamily={MONO} fontSize="8" fill={T3}>10/23/2023 · certificación oficial</text>
+          <text x="360" y="142" fontFamily={MONO} fontSize="8" fill={T3}>7/7 transacciones · mTLS · NCPDP 2017071</text>
+          <text x="360" y="157" fontFamily={MONO} fontSize="8" fill={G}>recertificación adicional: 22 días</text>
+        </svg>
+      ),
+    },
+  ],
 }

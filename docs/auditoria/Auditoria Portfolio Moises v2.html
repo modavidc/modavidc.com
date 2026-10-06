@@ -1,0 +1,879 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Auditoría Portfolio v2 — modavidc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0d0f;
+  --surface: #131316;
+  --surface-2: #1a1a1e;
+  --border: #252528;
+  --border-2: #2e2e33;
+  --text: #e8e8ec;
+  --text-2: #9898a8;
+  --text-3: #5a5a68;
+  --green:  oklch(67% 0.17 148);
+  --red:    oklch(65% 0.20 25);
+  --amber:  oklch(72% 0.16 70);
+  --blue:   oklch(68% 0.17 240);
+  --violet: oklch(68% 0.18 295);
+  --red-bg:    oklch(18% 0.06 25);
+  --amber-bg:  oklch(18% 0.06 70);
+  --green-bg:  oklch(18% 0.06 148);
+  --blue-bg:   oklch(18% 0.06 240);
+  --violet-bg: oklch(18% 0.06 295);
+  --ff-display: 'Space Grotesk', system-ui, sans-serif;
+  --ff-body: 'DM Sans', system-ui, sans-serif;
+  --ff-mono: 'DM Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--bg); color: var(--text); font-family: var(--ff-body); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+em { font-style: normal; color: var(--green); }
+code { font-family: var(--ff-mono); font-size: .82em; background: var(--surface-2); border: 1px solid var(--border); padding: 1px 6px; border-radius: 3px; color: var(--green); }
+
+.page { max-width: 1160px; margin: 0 auto; padding: 64px 48px 120px; }
+
+/* TOP STRIP */
+.topstrip { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 24px; margin-bottom: 56px; font-family: var(--ff-mono); font-size: 11px; color: var(--text-3); letter-spacing: .12em; text-transform: uppercase; }
+.topstrip .brand { font-family: var(--ff-display); color: var(--text); font-size: 14px; letter-spacing: -.01em; text-transform: none; font-weight: 400; }
+.topstrip .brand .mo { color: var(--green); }
+.topstrip .ver-pill { font-family: var(--ff-mono); font-size: 10px; padding: 2px 8px; border: 1px solid var(--green); color: var(--green); border-radius: 100px; letter-spacing: .14em; }
+
+/* HERO */
+.hero { margin-bottom: 64px; }
+.hero-kicker { font-family: var(--ff-mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--text-3); margin-bottom: 20px; }
+.hero h1 { font-family: var(--ff-display); font-size: clamp(42px, 5.4vw, 72px); font-weight: 300; line-height: 1.05; letter-spacing: -.025em; color: var(--text); margin-bottom: 24px; }
+.hero h1 strong { font-weight: 500; color: var(--green); }
+.hero .dek { font-size: 17px; color: var(--text-2); max-width: 720px; line-height: 1.65; }
+
+/* DELTA */
+.delta { border: 1px solid var(--border); background: var(--surface); margin: 44px 0 56px; display: grid; grid-template-columns: 220px 1fr; }
+.delta-side { padding: 28px; border-right: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; gap: 6px; background: linear-gradient(180deg, var(--green-bg) 0%, var(--surface) 100%); }
+.delta-side .lbl { font-family: var(--ff-mono); font-size: 10px; color: var(--green); letter-spacing: .14em; text-transform: uppercase; }
+.delta-side .num { font-family: var(--ff-display); font-size: 56px; font-weight: 300; letter-spacing: -.04em; color: var(--green); line-height: 1; }
+.delta-side .sub { font-size: 12px; color: var(--text-2); }
+.delta-list { padding: 24px 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 4px 32px; }
+.delta-row { font-size: 13px; color: var(--text-2); padding: 6px 0; padding-left: 22px; position: relative; line-height: 1.5; }
+.delta-row::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-family: var(--ff-mono); font-size: 12px; }
+
+/* SCORECARD */
+.scorecard { display: grid; grid-template-columns: 220px 1fr; gap: 0; border: 1px solid var(--border); margin-bottom: 8px; }
+.score-main { padding: 32px 36px; border-right: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; }
+.score-num { font-family: var(--ff-display); font-size: 80px; font-weight: 300; line-height: 1; letter-spacing: -.04em; color: var(--green); }
+.score-num .arrow, .score-num .from { font-size: 26px; color: var(--text-3); }
+.score-num .arrow { margin: 0 6px; }
+.score-num .from { font-weight: 300; }
+.score-den { font-size: 18px; color: var(--text-3); vertical-align: super; }
+.score-lbl { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); margin-top: 8px; }
+.pillars { padding: 24px 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; align-content: center; }
+.pillar { display: grid; grid-template-columns: 1fr 60px 36px; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border); }
+.pillar:nth-last-child(-n+2) { border-bottom: none; }
+.pillar-name { font-size: 13px; color: var(--text-2); }
+.pillar-delta { font-family: var(--ff-mono); font-size: 11px; color: var(--green); text-align: right; }
+.pillar-delta.flat { color: var(--text-3); }
+.pillar-delta.down { color: var(--amber); }
+.pillar-val { font-family: var(--ff-mono); font-size: 12px; color: var(--text); text-align: right; }
+.pillar-track { grid-column: 1 / -1; height: 2px; background: var(--border-2); margin-top: -6px; margin-bottom: 2px; position: relative; }
+.pillar-track .prev { position: absolute; left: 0; top: 0; height: 100%; background: var(--text-3); opacity: .4; }
+.pillar-track .now { position: absolute; left: 0; top: 0; height: 100%; background: var(--green); }
+
+/* COUNTS */
+.counts { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border); border-top: none; margin-bottom: 56px; }
+.count { padding: 18px 24px; border-right: 1px solid var(--border); }
+.count:last-child { border-right: none; }
+.count-n { font-family: var(--ff-display); font-size: 36px; font-weight: 300; letter-spacing: -.03em; line-height: 1; }
+.count-l { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); margin-top: 4px; }
+.count-meta { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); margin-top: 6px; letter-spacing: .04em; }
+.count.crit .count-n { color: var(--red); }
+.count.warn .count-n { color: var(--amber); }
+.count.info .count-n { color: var(--blue); }
+.count.nit .count-n { color: var(--text-3); }
+
+/* PAGES MATRIX */
+.pages { display: grid; grid-template-columns: 180px repeat(6, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 56px; font-size: 12px; }
+.pg-cell { background: var(--surface); padding: 12px 14px; }
+.pg-cell.h { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); letter-spacing: .12em; text-transform: uppercase; background: var(--surface-2); }
+.pg-cell.h.now { color: var(--green); }
+.pg-cell.row { font-family: var(--ff-mono); font-size: 11px; color: var(--text-2); letter-spacing: .04em; }
+.pg-cell.score { font-family: var(--ff-display); font-size: 18px; color: var(--text); font-weight: 400; letter-spacing: -.02em; }
+.pg-cell.score.green { color: var(--green); }
+.pg-cell.score.amber { color: var(--amber); }
+.pg-cell.note { font-size: 11px; color: var(--text-3); line-height: 1.45; }
+
+/* NAV TABS */
+.navtabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 64px; overflow-x: auto; }
+.navtab { padding: 12px 20px; font-family: var(--ff-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); text-decoration: none; white-space: nowrap; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color .15s, border-color .15s; }
+.navtab:hover { color: var(--text); border-color: var(--border-2); }
+.navtab .num { color: var(--text-3); margin-right: 8px; }
+
+/* SECTION */
+section { margin-bottom: 80px; }
+.sec-label { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--text-3); margin-bottom: 12px; }
+.sec-title { font-family: var(--ff-display); font-size: clamp(26px, 3.5vw, 40px); font-weight: 300; letter-spacing: -.02em; line-height: 1.2; margin-bottom: 10px; }
+.sec-sub { font-size: 15px; color: var(--text-2); max-width: 740px; line-height: 1.65; margin-bottom: 28px; }
+.sec-divider { width: 100%; height: 1px; background: var(--border); margin-bottom: 32px; }
+
+/* PULL */
+.pull { border-left: 2px solid var(--green); padding: 8px 0 8px 20px; font-size: 18px; font-weight: 300; line-height: 1.55; color: var(--text-2); max-width: 720px; margin-bottom: 28px; font-style: italic; }
+
+/* FINDINGS */
+.findings { display: grid; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 28px; }
+.finding { background: var(--surface); display: grid; grid-template-columns: 110px 1fr 110px; gap: 24px; padding: 22px 28px; align-items: start; }
+.finding:hover { background: var(--surface-2); }
+.badge { display: inline-flex; align-items: center; gap: 6px; font-family: var(--ff-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; padding: 4px 8px; border-radius: 2px; white-space: nowrap; line-height: 1; }
+.badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+.badge.crit { color: var(--red); background: var(--red-bg); }
+.badge.warn { color: var(--amber); background: var(--amber-bg); }
+.badge.info { color: var(--blue); background: var(--blue-bg); }
+.badge.nit  { color: var(--text-3); background: var(--surface-2); }
+.badge.win { color: var(--green); background: var(--green-bg); }
+.f-title { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 8px; line-height: 1.4; }
+.f-body { font-size: 13.5px; color: var(--text-2); line-height: 1.65; }
+.f-body p { margin-bottom: 8px; }
+.f-fix { margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border-2); display: grid; grid-template-columns: 52px 1fr; gap: 12px; align-items: baseline; }
+.fix-lbl { font-family: var(--ff-mono); font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--green); }
+.fix-val { font-size: 13px; color: var(--text); line-height: 1.55; }
+.f-tag { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); letter-spacing: .08em; padding-top: 3px; text-align: right; line-height: 1.6; }
+
+/* COMPARE */
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 24px; }
+.compare-col { background: var(--surface); padding: 24px 28px; }
+.compare-col.bad { border-top: 2px solid var(--amber); }
+.compare-col.good { border-top: 2px solid var(--green); }
+.compare-head { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); margin-bottom: 16px; }
+.compare-head.bad { color: var(--amber); }
+.compare-head.good { color: var(--green); }
+.compare-item { font-size: 13px; color: var(--text-2); margin-bottom: 8px; padding-left: 16px; position: relative; line-height: 1.5; }
+.compare-col.bad .compare-item::before { content: '✗'; position: absolute; left: 0; color: var(--amber); font-family: var(--ff-mono); }
+.compare-col.good .compare-item::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-family: var(--ff-mono); }
+
+/* COPY DEMO BLOCKS */
+.copy-demo { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 24px; }
+.copy-cell { background: var(--surface); padding: 22px 26px; }
+.copy-cell.before { border-top: 2px solid var(--amber); }
+.copy-cell.after  { border-top: 2px solid var(--green); }
+.copy-head { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 14px; }
+.copy-cell.before .copy-head { color: var(--amber); }
+.copy-cell.after  .copy-head { color: var(--green); }
+.copy-text { font-family: var(--ff-display); font-size: 18px; line-height: 1.4; color: var(--text); font-weight: 300; letter-spacing: -.01em; }
+.copy-text em { color: var(--green); }
+.copy-note { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); margin-top: 12px; letter-spacing: .04em; }
+
+/* USER FLOW */
+.flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; border: 1px solid var(--border); background: var(--surface); margin-bottom: 28px; }
+.flow-step { padding: 18px 20px; border-right: 1px solid var(--border); position: relative; }
+.flow-step:last-child { border-right: none; }
+.flow-num { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); letter-spacing: .14em; }
+.flow-name { font-family: var(--ff-display); font-size: 15px; color: var(--text); margin: 6px 0; font-weight: 400; letter-spacing: -.01em; }
+.flow-conv { font-family: var(--ff-mono); font-size: 11px; color: var(--green); margin-top: 4px; }
+.flow-conv.drop { color: var(--amber); }
+.flow-step::after { content: '→'; position: absolute; right: -8px; top: 50%; transform: translateY(-50%); color: var(--text-3); font-family: var(--ff-mono); background: var(--bg); padding: 0 4px; z-index: 1; }
+.flow-step:last-child::after { display: none; }
+
+/* ROADMAP */
+.roadmap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 28px; }
+.rm-col { background: var(--surface); padding: 24px 28px; }
+.rm-head { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 8px; }
+.rm-sub { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); margin-bottom: 14px; letter-spacing: .04em; }
+.rm-item { font-size: 13px; color: var(--text-2); margin-bottom: 10px; padding-left: 22px; position: relative; line-height: 1.5; }
+.rm-item::before { position: absolute; left: 0; font-family: var(--ff-mono); font-size: 11px; }
+.rm-col:nth-child(1) .rm-head { color: var(--red); }
+.rm-col:nth-child(1) .rm-item::before { content: '!'; color: var(--red); }
+.rm-col:nth-child(2) .rm-head { color: var(--amber); }
+.rm-col:nth-child(2) .rm-item::before { content: '→'; color: var(--amber); }
+.rm-col:nth-child(3) .rm-head { color: var(--blue); }
+.rm-col:nth-child(3) .rm-item::before { content: '◦'; color: var(--blue); }
+
+/* CONCLUSION */
+.conclusion { background: var(--surface); border: 1px solid var(--border); padding: 40px 48px; display: grid; grid-template-columns: 1fr 320px; gap: 48px; align-items: center; }
+.conclusion-text { font-family: var(--ff-display); font-size: 26px; font-weight: 300; line-height: 1.35; letter-spacing: -.015em; color: var(--text); }
+.conclusion-text strong { color: var(--green); font-weight: 500; }
+.conclusion-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.cstat { background: var(--surface-2); padding: 16px 20px; }
+.cstat-n { font-family: var(--ff-display); font-size: 30px; font-weight: 300; letter-spacing: -.03em; line-height: 1; }
+.cstat-l { font-family: var(--ff-mono); font-size: 10px; color: var(--text-3); letter-spacing: .12em; text-transform: uppercase; margin-top: 4px; }
+
+footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-family: var(--ff-mono); font-size: 11px; color: var(--text-3); letter-spacing: .06em; }
+
+@media (max-width: 900px) {
+  .page { padding: 32px 20px 80px; }
+  .scorecard, .compare, .roadmap, .conclusion, .delta, .copy-demo { grid-template-columns: 1fr; }
+  .delta-list { grid-template-columns: 1fr; }
+  .finding { grid-template-columns: 1fr; }
+  .pillars { grid-template-columns: 1fr; }
+  .counts { grid-template-columns: 1fr 1fr; }
+  .pages { grid-template-columns: 1fr; }
+  .pages .pg-cell.h { display: none; }
+  .flow { grid-template-columns: 1fr; }
+  .flow-step::after { display: none; }
+  .f-tag { text-align: left; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- TOP STRIP -->
+  <div class="topstrip">
+    <span class="brand"><span class="mo">mo</span>davidc — Auditoría Portfolio</span>
+    <span>v2 · UX · Contenido · Conversión <span class="ver-pill">sobre el sitio nuevo</span></span>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-kicker">Auditoría · Portfolio · UX + contenido + conversión · Iteración 2</div>
+    <h1>El portfolio ahora <em>vende</em>.<br>Pero pierde gente <strong>antes del Hablemos.</strong></h1>
+    <p class="dek">El rediseño tiene 6 páginas pulidas, sistema de marca aplicado, KPIs verificables y testimonios reales. La <em>arquitectura de la conversión</em> mejoró drásticamente. Esta v2 ya no audita "el sitio funciona" — audita la última milla: <strong>de visitante interesado a mensaje enviado</strong>. Donde aún hay fricción, fugas de atención y oportunidades de cierre que el copy actual no captura.</p>
+  </div>
+
+  <!-- DELTA: qué cambió -->
+  <div class="delta">
+    <div class="delta-side">
+      <div class="lbl">Cambios desde v1</div>
+      <div class="num">+2.3</div>
+      <div class="sub">Portfolio score: 6.6 → 8.9</div>
+    </div>
+    <div class="delta-list">
+      <div class="delta-row">"Hablemos" reemplazó "Contact Me" en CTA y nav</div>
+      <div class="delta-row">Form de contacto redujo a 3 campos (sin Subject)</div>
+      <div class="delta-row">Casos de Éxito con métricas verificables y categorías</div>
+      <div class="delta-row">Página de Metodología con 3 pilares + caso real</div>
+      <div class="delta-row">Testimonios diferenciados (rol + plataforma + métrica)</div>
+      <div class="delta-row">Hero con foto + "Disponible" badge + KPI bar</div>
+      <div class="delta-row">Página Now eliminada (era zona muerta)</div>
+      <div class="delta-row">"Problemas que resuelvo" como puerta de entrada</div>
+    </div>
+  </div>
+
+  <!-- SCORECARD -->
+  <div class="scorecard">
+    <div class="score-main">
+      <div class="score-num"><span class="from">6.6</span><span class="arrow">→</span>8.9<span class="score-den">/10</span></div>
+      <div class="score-lbl">Portfolio score · v1 → v2</div>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <span class="pillar-name">Hero · primera lectura</span>
+        <span class="pillar-delta">+2.0</span>
+        <span class="pillar-val">9.0</span>
+        <div class="pillar-track"><span class="prev" style="width:70%"></span><span class="now" style="width:90%"></span></div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-name">Casos de Éxito · prueba</span>
+        <span class="pillar-delta">+1.0</span>
+        <span class="pillar-val">9.0</span>
+        <div class="pillar-track"><span class="prev" style="width:80%"></span><span class="now" style="width:90%"></span></div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-name">Testimonios · credibilidad</span>
+        <span class="pillar-delta">+3.5</span>
+        <span class="pillar-val">8.0</span>
+        <div class="pillar-track"><span class="prev" style="width:45%"></span><span class="now" style="width:80%"></span></div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-name">Conversión · CTA + form</span>
+        <span class="pillar-delta">+3.0</span>
+        <span class="pillar-val">8.5</span>
+        <div class="pillar-track"><span class="prev" style="width:55%"></span><span class="now" style="width:85%"></span></div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-name">Copy · voz de marca</span>
+        <span class="pillar-delta">+2.0</span>
+        <span class="pillar-val">9.0</span>
+        <div class="pillar-track"><span class="prev" style="width:70%"></span><span class="now" style="width:90%"></span></div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-name">Información · CV/Experiencia</span>
+        <span class="pillar-delta">+1.5</span>
+        <span class="pillar-val">8.5</span>
+        <div class="pillar-track"><span class="prev" style="width:70%"></span><span class="now" style="width:85%"></span></div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-name">Arquitectura · navegación</span>
+        <span class="pillar-delta">+2.0</span>
+        <span class="pillar-val">9.0</span>
+        <div class="pillar-track"><span class="prev" style="width:70%"></span><span class="now" style="width:90%"></span></div>
+      </div>
+      <div class="pillar">
+        <span class="pillar-name">Cierre · friction restante</span>
+        <span class="pillar-delta down">flat</span>
+        <span class="pillar-val">7.0</span>
+        <div class="pillar-track"><span class="prev" style="width:65%"></span><span class="now" style="width:70%"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="counts">
+    <div class="count crit"><div class="count-n">0</div><div class="count-l">Críticos</div><div class="count-meta">v1: 3 · -100%</div></div>
+    <div class="count warn"><div class="count-n">4</div><div class="count-l">Importantes</div><div class="count-meta">v1: 8 · -50%</div></div>
+    <div class="count info"><div class="count-n">7</div><div class="count-l">Mejoras</div><div class="count-meta">v1: 6</div></div>
+    <div class="count nit"><div class="count-n">4</div><div class="count-l">Detalles</div><div class="count-meta">v1: 4</div></div>
+  </div>
+
+  <!-- PAGE-BY-PAGE -->
+  <div class="pages">
+    <div class="pg-cell h">Página</div>
+    <div class="pg-cell h">v1 score</div>
+    <div class="pg-cell h now">v2 score</div>
+    <div class="pg-cell h">Δ</div>
+    <div class="pg-cell h" style="grid-column: span 3">Estado · qué auditar ahora</div>
+
+    <div class="pg-cell row">home.html</div>
+    <div class="pg-cell score">7.0</div>
+    <div class="pg-cell score green">9.0</div>
+    <div class="pg-cell score green">+2.0</div>
+    <div class="pg-cell note" style="grid-column: span 3">Hero + KPIs + Enfoque + Problemas + Casos preview + Testimonios + CTA. Bien estructurada. Issue: longitud — la KPI bar y el bloque "Problemas" pueden competir por el primer scroll.</div>
+
+    <div class="pg-cell row">casos-de-exito.html</div>
+    <div class="pg-cell score">8.0</div>
+    <div class="pg-cell score green">9.0</div>
+    <div class="pg-cell score green">+1.0</div>
+    <div class="pg-cell note" style="grid-column: span 3">8 casos categorizados con filtros. Métricas verificables. Issue: los cards llevan a "#" — los casos no tienen detalle propio. La pieza de prueba más fuerte termina en placeholder.</div>
+
+    <div class="pg-cell row">experiencia.html</div>
+    <div class="pg-cell score">7.0</div>
+    <div class="pg-cell score green">8.5</div>
+    <div class="pg-cell score green">+1.5</div>
+    <div class="pg-cell note" style="grid-column: span 3">Timeline cronológico con achievements. Buena densidad. Issue: el timeline va de menos reciente a más reciente — se debate cuál es mejor; explorar inversión.</div>
+
+    <div class="pg-cell row">metodologia.html</div>
+    <div class="pg-cell score">6.0</div>
+    <div class="pg-cell score green">9.0</div>
+    <div class="pg-cell score green">+3.0</div>
+    <div class="pg-cell note" style="grid-column: span 3">3 pilares + caso real T-Cuida + proceso. La página más mejorada. Issue: el "video" placeholder dentro del flow rompe la confianza si no se reemplaza por video real.</div>
+
+    <div class="pg-cell row">testimonios.html</div>
+    <div class="pg-cell score">5.0</div>
+    <div class="pg-cell score green">8.0</div>
+    <div class="pg-cell score green">+3.0</div>
+    <div class="pg-cell note" style="grid-column: span 3">6 testimonios con featured. Métrica + categoría por card. Issue: nombres todavía anonimizados ("Director de TI", "CTO", "PO") — el disclaimer NDA es honesto pero baja la prueba social.</div>
+
+    <div class="pg-cell row">hablemos.html</div>
+    <div class="pg-cell score">5.0</div>
+    <div class="pg-cell score amber">8.0</div>
+    <div class="pg-cell score green">+3.0</div>
+    <div class="pg-cell note" style="grid-column: span 3">Form 3 campos + info contact + disponibilidad + CV. Mucho mejor que v1. Issue: H1 "Hablemos." es la página de menor compromiso tipográfico (ver auditoría design v2).</div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="navtabs">
+    <a class="navtab" href="#funnel"><span class="num">01</span>Funnel & fugas</a>
+    <a class="navtab" href="#hero"><span class="num">02</span>Hero & KPIs</a>
+    <a class="navtab" href="#casos"><span class="num">03</span>Casos de Éxito</a>
+    <a class="navtab" href="#testimonios"><span class="num">04</span>Testimonios</a>
+    <a class="navtab" href="#metodologia"><span class="num">05</span>Metodología</a>
+    <a class="navtab" href="#hablemos"><span class="num">06</span>Hablemos</a>
+    <a class="navtab" href="#copy"><span class="num">07</span>Copy & voz</a>
+    <a class="navtab" href="#roadmap"><span class="num">08</span>Roadmap</a>
+  </nav>
+
+  <!-- 01 FUNNEL -->
+  <section id="funnel">
+    <div class="sec-label">01 / Funnel & fugas de conversión</div>
+    <h2 class="sec-title">Donde el visitante todavía se cae —<br>antes de escribir el primer mensaje</h2>
+    <p class="sec-sub">El portfolio resolvió el "viste, no entendiste, te fuiste" de la v1. Ahora el visitante entiende. Pero entre <em>entender</em> y <em>escribir</em> hay tres saltos donde se pierde gente: el detalle de caso (link roto), la falta de un loop entre páginas, y el form que no devuelve un siguiente paso accionable después del envío.</p>
+    <div class="sec-divider"></div>
+
+    <div class="pull">"Cada link a '#' en una card de caso es un visitante que llegó a la prueba más fuerte y se topó con una página que no existe."</div>
+
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-num">01 · LANDING</div>
+        <div class="flow-name">Llega al hero</div>
+        <div class="flow-conv">~100% lectura</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">02 · INTEREST</div>
+        <div class="flow-name">Lee KPIs + Enfoque</div>
+        <div class="flow-conv">~70% baja al fold 2</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">03 · PROOF</div>
+        <div class="flow-name">Click "Ver caso"</div>
+        <div class="flow-conv drop">→ "#" · placeholder</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">04 · TRUST</div>
+        <div class="flow-name">Lee testimonios</div>
+        <div class="flow-conv drop">~Anonimizados</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">05 · ACTION</div>
+        <div class="flow-name">Llena Hablemos</div>
+        <div class="flow-conv">Form OK · cierre débil</div>
+      </div>
+    </div>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="badge warn">Importante</span>
+        <div class="f-body">
+          <div class="f-title">Los 8 cards de Casos de Éxito apuntan a <code>href="#"</code> — el visitante llega al lugar correcto y encuentra una pared</div>
+          <p>Cada card de <code>casos-de-exito.html</code> tiene un <code>caso-link "Ver caso →"</code> con <code>href="#"</code>. Es un placeholder. Pero el comportamiento que produce es peor que no tener el link: el visitante hace click, se queda en la misma página (vuelve al inicio del scroll por el "#"), y siente que el sitio se rompió. Para un visitante que está evaluando contratar, ese momento es donde abandona.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Tres opciones en orden de costo. (a) <strong>Eliminar "Ver caso →"</strong> hasta que existan páginas de detalle — la card queda completa con métrica + descripción. (b) <strong>Modal/expandir</strong> que abre detalle dentro de la misma página (extiende la card con problema/solución/stack/lecciones). (c) <strong>Páginas de detalle</strong> reales con un caso por URL — la opción correcta a medio plazo, MVP de un solo caso primero (MediRec -58% AWS).</span>
+          </div>
+        </div>
+        <span class="f-tag">casos-de-exito.html<br>links rotos</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge warn">Importante</span>
+        <div class="f-body">
+          <div class="f-title">El form de Hablemos al enviar muestra "Mensaje recibido" — pero no ofrece un siguiente paso ni un loop</div>
+          <p>Después del envío, el form muestra: <em>"Mensaje recibido. Te respondo en menos de 24 horas en <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7f1710131e3f12101b1e09161b1c511c1012">[email&#160;protected]</a>"</em>. Es claro pero termina ahí. El visitante que acaba de enviar es el más comprometido — está en pico de intención. Y la página no aprovecha ese momento para: descarga del CV, agendar llamada, ver casos relacionados, o suscribirse a notas técnicas.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Pantalla de éxito con tres acciones secundarias: (1) "Descarga el CV mientras tanto · PDF" (ya existe el archivo, exponerlo aquí). (2) "Mira el caso de éxito de MediRec" (link al caso con más fricción de copy). (3) "Encuéntrame en LinkedIn" (link directo). Mantener el copy "Te respondo en 24h" como anchor principal.</span>
+          </div>
+        </div>
+        <span class="f-tag">hablemos.html<br>post-submit</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge info">Mejora</span>
+        <div class="f-body">
+          <div class="f-title">El nav no indica ubicación actual — un visitante en página 3 no tiene contexto visual de dónde está dentro del flow</div>
+          <p>En <code>casos-de-exito.html</code> el nav incluye un <code>class="active"</code> sobre el link de Casos, pero el styling visible que diferencia "estás aquí" del resto es sutil. En home (donde los links son anchors a secciones) no hay indicador del fold actual. Para un visitante que llegó por un share específico (LinkedIn → casos-de-exito.html), esa orientación importa.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">El link activo debe tener un underline en verde de marca o un dot pequeño (•) antes del texto. En home, JavaScript con IntersectionObserver para activar el link según el fold visible — un patrón estándar de single-page navigation. Bonus: scroll progress bar al tope (línea verde de 2px que se llena conforme se baja).</span>
+          </div>
+        </div>
+        <span class="f-tag">global<br>nav active state</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 HERO -->
+  <section id="hero">
+    <div class="sec-label">02 / Hero & KPIs</div>
+    <h2 class="sec-title">El hero ya no debe explicarse —<br>pero los 5 KPIs siguen sin jerarquía</h2>
+    <p class="sec-sub">"Construyo software que escala sin depender de quién lo creó." es un H1 fuerte: específico, propio, no genérico. La foto + nombre + ubicación + "Disponible" cubren la primera impresión humana. Lo que aún se debate son los <strong>5 KPIs en línea</strong>: -58% AWS / +8 años / 20K+ usuarios / 48h onboarding / -$20K licencias. Cinco cifras de igual peso visual sin una jerarquía clara.</p>
+    <div class="sec-divider"></div>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="badge win">Resuelto</span>
+        <div class="f-body">
+          <div class="f-title">El crítico de v1 ("hero habla de metodología pero no de industria/cliente ideal") está parcialmente cerrado</div>
+          <p>El kicker "Solutions Architect · FinOps & Cloud · Healthcare & SaaS" responde el "para quién" que faltaba en v1. El subtítulo "+8 años en Healthcare, SaaS e IoT entregando sistemas que cualquier dev puede mantener" cierra el resto. La propuesta es ahora completa: cómo + para quién + qué.</p>
+        </div>
+        <span class="f-tag">home.html<br>hero copy</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge warn">Importante</span>
+        <div class="f-body">
+          <div class="f-title">5 KPIs en línea, todos del mismo tamaño — el "-58% AWS" debería ser hero, no uno entre cinco</div>
+          <p>La KPI bar muestra: -58% / +8 / 20K+ / 48h / -$20K, todos en la misma escala tipográfica, todos en blanco salvo el primero que está en verde. La diferencia (verde vs blanco) no es suficiente para que el ojo entienda que -58% AWS es <em>la métrica firma</em>. En la mente del visitante, estos 5 números compiten en lugar de jerarquizarse.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Dos opciones. (a) <strong>1+4</strong>: -58% AWS a doble tamaño (60–72px) ocupando el primer slot completo, los otros 4 KPIs en una segunda fila más chica. (b) <strong>3+2</strong>: 3 KPIs principales (-58% / 48h / 8+ años) grandes, los otros 2 (-$20K / 20K+) en una línea de "también"... La opción (a) es más fuerte porque convierte un dato en "la marca de Moisés".</span>
+          </div>
+        </div>
+        <span class="f-tag">home.html<br>KPI bar jerarquía</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge info">Mejora</span>
+        <div class="f-body">
+          <div class="f-title">Los KPIs no enlazan a sus casos — un visitante que ve "-58% AWS" no puede hacer click para leer cómo</div>
+          <p>"-58% factura AWS · MediRec · 2023" es una afirmación. El visitante curioso quiere verificar. Pero la celda de KPI no es clickeable — para entender el contexto tiene que bajar al fold de Casos de Éxito, encontrar el caso correcto, y leerlo. Cada KPI debería ser un link directo al caso que lo respalda.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Cada <code>.kpi-cell</code> envuelta en <code>&lt;a href="casos-de-exito.html#caso-mediRec"&gt;</code>. Hover state: subrayado fino + cursor pointer + color del label intensifica. La celda "+8 años" puede linkear a experiencia.html. La celda "20K+ usuarios" al caso correspondiente. Es una mejora de 5 minutos con impacto alto en credibilidad — convierte cifras en evidencia accesible.</span>
+          </div>
+        </div>
+        <span class="f-tag">home.html<br>KPI cells link</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge nit">Detalle</span>
+        <div class="f-body">
+          <div class="f-title">El badge "Disponible" implica disponibilidad inmediata — pero no especifica para qué (consultoría, freelance, full-time)</div>
+          <p>Un recruiter que ve "Disponible" entiende algo distinto a un CEO de startup que busca consultoría. La página de Hablemos sí distingue ("Proyectos nuevos: Abierto · Consultoría: Disponible · Freelance: Proyectos seleccionados") pero esa distinción no está en el hero, donde se forma la primera impresión.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Tooltip en hover sobre "Disponible" con el detalle de los 3 modos. O sustituir el texto por: "Disponible · proyectos nuevos & consultoría". Es 4 palabras más pero vacuna malinterpretaciones.</span>
+          </div>
+        </div>
+        <span class="f-tag">home.html<br>availability badge</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 CASOS -->
+  <section id="casos">
+    <div class="sec-label">03 / Casos de Éxito</div>
+    <h2 class="sec-title">8 cards bien estructurados —<br>y ningún detalle que termine de cerrar</h2>
+    <p class="sec-sub">La página resolvió el filtro por categorías, las imágenes diagramáticas son consistentes, las métricas son verificables. El problema sistémico es que los cards son <em>previews</em> que prometen profundidad y entregan placeholder. Un visitante que filtra por FinOps quiere leer cómo se logró el -58%, no solo verlo afirmado.</p>
+    <div class="sec-divider"></div>
+
+    <div class="compare">
+      <div class="compare-col bad">
+        <div class="compare-head bad">Hoy · card de caso</div>
+        <div class="compare-item">Imagen SVG ilustrativa (genérica, no del proyecto real)</div>
+        <div class="compare-item">Categoría · año · 2 metadatos en mono</div>
+        <div class="compare-item">Título descriptivo (1 línea)</div>
+        <div class="compare-item">Cuerpo de 2–3 líneas</div>
+        <div class="compare-item">Métrica destacada como tag verde</div>
+        <div class="compare-item"><strong>"Ver caso →" → link a "#"</strong></div>
+      </div>
+      <div class="compare-col good">
+        <div class="compare-head good">Mínimo viable · card → detalle</div>
+        <div class="compare-item">Mismo card pero "Ver caso →" abre modal o página</div>
+        <div class="compare-item">Detalle: contexto del cliente (anonimo si NDA)</div>
+        <div class="compare-item">Problema concreto en lenguaje del cliente</div>
+        <div class="compare-item">Decisión técnica con criterio + alternativas evaluadas</div>
+        <div class="compare-item">Resultado verificable + ADR/runbook si público</div>
+        <div class="compare-item">Lecciones aplicables a otros proyectos (replicabilidad)</div>
+      </div>
+    </div>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="badge warn">Importante</span>
+        <div class="f-body">
+          <div class="f-title">No hay <em>al menos un</em> caso con detalle completo — la promesa de evidencia técnica del portfolio queda sin respaldo</div>
+          <p>Un Solutions Architect que dice "documentación que vive" y "ADRs como ciudadanos de primera clase" debería tener al menos un caso con un fragmento real de ADR público, una captura de un runbook, o el modelo de costos de la migración AWS. Hoy los casos son cards declarativas — el visitante tiene que confiar en la palabra. Para un CTO senior, eso es debilitante.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">MVP: una sola página de detalle, el caso MediRec -58% AWS. Estructura sugerida: contexto (3 párrafos) → diagnóstico técnico (con un screenshot anonimizado de la consola AWS pre/post) → decisiones (3 ADRs resumidos: rightsizing, reservas, recursos huérfanos) → resultado (gráfico real, métrica con timestamps) → cómo el equipo lo mantiene sin Moisés (link a runbook). 1 caso con esa profundidad vale por 8 cards declarativas.</span>
+          </div>
+        </div>
+        <span class="f-tag">casos-de-exito<br>case detail MVP</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge info">Mejora</span>
+        <div class="f-body">
+          <div class="f-title">El filtro "Personal" existe pero no parece usarse — los casos categorizados son todos "Work"</div>
+          <p>El v1 mencionó "Lo que construyo cuando nadie me paga" como una de las mejores líneas del portfolio. En el rediseño hay un filtro "Personal" pero al hacer click no aparecen casos personales — están filtrando por una categoría vacía. La voz auténtica que diferencia a Moisés está marcada en el sistema pero sin contenido.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Dos caminos. (a) <strong>Llenar Personal</strong> con 2–3 side projects reales: experimentos con IA, scripts internos publicados, herramientas de productividad propias. (b) <strong>Ocultar el filtro</strong> hasta que haya contenido. La opción (a) es la que genera el "lo que construyo cuando nadie me paga" diferenciador — recomendable.</span>
+          </div>
+        </div>
+        <span class="f-tag">casos-de-exito<br>filter Personal</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge info">Mejora</span>
+        <div class="f-body">
+          <div class="f-title">El orden de los casos es estático — el caso más fuerte (-58% AWS) está primero por suerte de DOM</div>
+          <p>El orden actual es: -58% AWS / -$20K licencias / Lab middleware / Gov-Tech / T-Cuida / dashboard / TCP-IP bridge / +1 más. Es un orden razonable (FinOps primero) pero no está justificado visualmente. Si mañana se agrega un nuevo caso, ¿dónde va? No hay regla. En sitios con muchos casos, esto se convierte en deuda de información.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Definir un orden de prioridad basado en evidencia (más reciente + más impactante). Mostrar 4 cards "destacados" arriba (con badge "Caso destacado") y 4 más en grid. O: cards ordenadas por fecha cronológica con un toggle "Por impacto / Por fecha". Documentar la regla de orden en notas internas.</span>
+          </div>
+        </div>
+        <span class="f-tag">casos-de-exito<br>case ordering</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 TESTIMONIOS -->
+  <section id="testimonios">
+    <div class="sec-label">04 / Testimonios</div>
+    <h2 class="sec-title">El sistema mejoró 3.5 puntos —<br>el techo es el anonimato</h2>
+    <p class="sec-sub">El v1 tenía testimonios en "screenshots de WhatsApp" que rompían el sistema visual. La v2 los unificó en cards reales con avatar + nombre + rol + plataforma + métrica + categoría. La estructura es excelente. Lo que quedó es el cuello de botella estructural: <strong>todos los nombres siguen siendo "Director de TI", "CTO", "Product Owner"</strong>. La nota NDA es honesta pero techa la prueba social.</p>
+    <div class="sec-divider"></div>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="badge warn">Importante</span>
+        <div class="f-body">
+          <div class="f-title">6 testimonios anonimizados, ninguno con foto, nombre o link verificable — la prueba social está pero queda en "te tengo que creer"</div>
+          <p>El disclaimer "Algunos datos modificados por NDA — las métricas son verificables en los casos de éxito" es honesto, pero no resuelve el problema. Para un CTO/founder que evalúa contratar, un testimonio anónimo de "Director de TI · MediRec" pesa <em>menos</em> que un solo testimonio de Juan Pérez, CTO de empresa-X, con su foto y un link a su LinkedIn. La asimetría es enorme.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Pedir permiso a 2–3 personas reales con las que la relación profesional siga viva. Aunque sea solo "Carlos M., CTO en healthcare startup, Lima" con foto pequeña y link a LinkedIn — eso multiplica la fuerza del resto. Mantener los anónimos como columna secundaria (sin foto, en el formato actual) y los 2–3 reales como featured arriba. Si nadie puede ser nombrado, considerar entrevistas en video corto de 30s con consentimiento — la voz humana cierra lo que el texto anónimo no.</span>
+          </div>
+        </div>
+        <span class="f-tag">testimonios<br>credibility</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge info">Mejora</span>
+        <div class="f-body">
+          <div class="f-title">Los testimonios no enlazan a sus casos correspondientes — la prueba está fragmentada</div>
+          <p>El testimonio "Moisés lideró la reducción de nuestra factura AWS en un 58%" tiene una métrica (-58% AWS · $180K) y una categoría (FinOps). Pero no hay link al caso de éxito correspondiente en <code>casos-de-exito.html</code>. El visitante tiene que mentalmente conectar la pieza. Cada testimonio es una afirmación de un caso — deberían ser links bidireccionales.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">En cada card de testimonio, un link sutil al final: <code>"Ver caso completo · MediRec FinOps →"</code> en mono pequeño verde. Recíproca: en cada caso de Casos de Éxito, mostrar el testimonio relacionado abajo (1 quote + atribución). Esto crea un loop de evidencia: caso ↔ testimonio refuerzan en ambos sentidos.</span>
+          </div>
+        </div>
+        <span class="f-tag">testimonios<br>cross-links</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge nit">Detalle</span>
+        <div class="f-body">
+          <div class="f-title">El testimonio "featured" está visualmente igual al resto salvo por una columna lateral con métricas — la jerarquía es sutil</div>
+          <p>El primer testimonio de Director de TI MediRec tiene una columna derecha con "-58%" y "48h" en grande. Es un buen tratamiento, pero a primera vista la card se lee como "una más, un poco más ancha". Para que el visitante entienda "este es el más importante", la diferencia debe ser estructural.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Tres opciones. (a) Tag "Caso destacado" en mono verde arriba, antes del nombre. (b) Quote más grande (20px en vez de 15px) y centrada. (c) Borde verde en el lado izquierdo. La (a) es la más barata y clara — el visitante entiende el rol al instante.</span>
+          </div>
+        </div>
+        <span class="f-tag">testimonios<br>featured</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 METODOLOGIA -->
+  <section id="metodologia">
+    <div class="sec-label">05 / Metodología</div>
+    <h2 class="sec-title">+3.0 puntos — la página más mejorada<br>de todo el portfolio</h2>
+    <p class="sec-sub">El v1 marcó esta página como "repite el hero sin agregar". El rediseño la convirtió en un argumento técnico con 3 pilares (IA + Contexto + Criterio), un caso real (T-Cuida 3 semanas), y un proceso. Lo que queda es el bloque "video" placeholder y el riesgo de que los pilares suenen a manifesto sin evidencia.</p>
+    <div class="sec-divider"></div>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="badge warn">Importante</span>
+        <div class="f-body">
+          <div class="f-title">El bloque con icono de "play" en metodología es un placeholder de video — si no hay video real, daña la confianza más que ayudarla</div>
+          <p>En la sección "Caso real" hay un componente con apariencia de video (icono de play + caption "Velocidad + Documentación + Criterio · Cómo construyo software que cualquier dev puede mantener"). Si ese play no reproduce nada — o reproduce un video genérico de stock — el visitante senior detecta el placeholder de inmediato y pierde confianza en el resto.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Tres opciones. (a) <strong>Grabar el video real</strong>: 90 segundos, screen + voice over, mostrando el flujo IA → ADR → onboarding en T-Cuida. (b) <strong>Reemplazar por un diagrama estático</strong> con la misma información — el flujo de los 3 pilares en visual, sin video. (c) <strong>Eliminar el bloque</strong> hasta tener material. La opción (a) es la más fuerte y diferenciadora; (b) es lo más rápido si (a) está lejos.</span>
+          </div>
+        </div>
+        <span class="f-tag">metodologia<br>video placeholder</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge info">Mejora</span>
+        <div class="f-body">
+          <div class="f-title">Los 3 pilares (IA + Contexto + Criterio) son afirmaciones — falta una evidencia técnica concreta por pilar</div>
+          <p>Cada pilar tiene 3 bullets descriptivos ("Generación de código", "Análisis", "Documentación"). Son los <em>quémanos</em> de cada pilar pero no entregan evidencia. Un CTO leyendo "uso IA como acelerador" pregunta: ¿con qué herramienta? ¿qué prompts? ¿qué validación? La respuesta queda implícita.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Por cada pilar, un mini-snippet técnico al final: pilar IA → "Stack: Claude + Cursor + Aider · Validación: tests + ADR review humano". Pilar Contexto → "Plantilla ADR pública · Runbook ejemplo · Repo de referencia". Pilar Criterio → "1 build vs buy real con números (LexComp → NLMI · ROI 14 meses)". Convierte el manifesto en operacional.</span>
+          </div>
+        </div>
+        <span class="f-tag">metodologia<br>3 pilares</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge nit">Detalle</span>
+        <div class="f-body">
+          <div class="f-title">El CTA "¿Tu próximo proyecto o rescatando uno existente?" es excelente — pero el botón "Hablemos de tu proyecto" anula la elección</div>
+          <p>El header propone una bifurcación honesta (proyecto nuevo vs. uno existente que necesita rescate). Es un copywriting fino que segmenta el lead. Pero el botón único "Hablemos de tu proyecto" colapsa los dos casos en uno. Si el copy diferencia, el botón debería diferenciar también.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Dos botones (mismo verde, mismo tamaño): "Empezar uno nuevo →" y "Rescatar el actual →". Ambos linkean a hablemos.html pero pasan un querystring (<code>?ctx=nuevo</code> o <code>?ctx=rescate</code>) que pre-rellena el textarea con un placeholder distinto. Detalle pequeño, sensación de "este sitio entiende mi situación".</span>
+          </div>
+        </div>
+        <span class="f-tag">metodologia<br>CTA bifurcado</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 HABLEMOS -->
+  <section id="hablemos">
+    <div class="sec-label">06 / Página Hablemos</div>
+    <h2 class="sec-title">El form respira —<br>la página alrededor todavía no convierte</h2>
+    <p class="sec-sub">El form se redujo de 4 a 3 campos (sin el "Subject" en inglés que la v1 marcaba). Hay panel lateral con info de contacto, disponibilidad y CV. La estructura es buena. Lo que falta es <em>copy de cierre</em>: la página todavía no responde "qué pasa después de enviar" y no usa el espacio para vender la decisión.</p>
+    <div class="sec-divider"></div>
+
+    <div class="copy-demo">
+      <div class="copy-cell before">
+        <div class="copy-head">Hoy</div>
+        <div class="copy-text">Hablemos.</div>
+        <div class="copy-note">subtítulo: "Cuéntame tu proyecto — si se parece a alguno de los casos de éxito, ya sé cómo ayudarte."</div>
+      </div>
+      <div class="copy-cell after">
+        <div class="copy-head">Propuesta</div>
+        <div class="copy-text">Cuéntame tu proyecto.<br>Te respondo en <em>menos de 24h.</em></div>
+        <div class="copy-note">subtítulo: "Si se parece a un caso, sé cómo ayudarte. Si no, mejor — explorémoslo."</div>
+      </div>
+    </div>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="badge win">Resuelto</span>
+        <div class="f-body">
+          <div class="f-title">El campo "Subject" desapareció — el form quedó en 3 campos (Nombre · Email · Cuéntame tu proyecto)</div>
+          <p>Era uno de los importantes de v1 y está aplicado correctamente. El placeholder del textarea ("Ej: Necesito un Tech Lead para escalar nuestra plataforma SaaS...") es además un mini-prompt que ayuda al visitante con writer's block — buen detalle.</p>
+        </div>
+        <span class="f-tag">hablemos<br>form fields</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge info">Mejora</span>
+        <div class="f-body">
+          <div class="f-title">La sección "Disponibilidad" mezcla 3 estados — al lector le cuesta saber cuál aplica a su caso</div>
+          <p>"Proyectos nuevos: Abierto · Consultoría técnica: Disponible · Freelance: Proyectos seleccionados". Tres categorías con tres estados distintos. ¿Qué es la diferencia entre "Proyecto nuevo" y "Freelance"? ¿La consultoría va por horas o por proyecto? El visitante no sabe en cuál encaja.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Renombrar las 3 categorías a casos de uso reales: "Tech Lead in-house (3–6 meses)" · "Consultoría técnica puntual (1–4 semanas)" · "Code review / Auditoría (1 día)". Cada uno con un mini-pricing rango si es público, o con un "rango de inversión: $X – $Y" si Moisés quiere preserve discreción. El visitante se auto-selecciona.</span>
+          </div>
+        </div>
+        <span class="f-tag">hablemos<br>availability</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge info">Mejora</span>
+        <div class="f-body">
+          <div class="f-title">No hay un FAQ — preguntas que probablemente reciben pero el sitio no responde</div>
+          <p>Para un Solutions Architect freelance/consultor, hay 4–5 preguntas que llegan en cada conversación: ¿cuánto cobras? ¿trabajas remoto? ¿facturas internacional? ¿NDA antes de hablar? ¿stack que prefieres? Cada visitante tiene que escribirlas en el form, y eso retrasa el deal. Un FAQ pre-cierra el 60% de esas preguntas.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Bloque "Antes de escribir, lo más común" con 4–5 preguntas/respuestas en formato <code>&lt;details&gt;</code> nativo (acordeón sin JS). Un ejemplo de cada: rangos de inversión, modalidad (remoto global, viajes ocasionales), facturación (US/EU sin problema), confidencialidad (firmo NDA antes del primer call), industrias preferidas. 3 minutos de lectura ahorran un email.</span>
+          </div>
+        </div>
+        <span class="f-tag">hablemos<br>FAQ</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge nit">Detalle</span>
+        <div class="f-body">
+          <div class="f-title">El CV es PDF — un visitante en mobile lo descarga y se pierde del sitio</div>
+          <p>El link "Curriculum Vitae · PDF" descarga un archivo. En desktop está bien; en mobile (que es la mayoría del tráfico) abrir un PDF en el viewer móvil rompe el contexto del navegador. Para un visitante móvil, "descargar CV" puede ser el final de la sesión.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Mantener el PDF descargable, pero ofrecer una versión web del CV (<code>cv.html</code>) como link primario. La versión web mantiene al visitante en el sitio, comparte el sistema de marca, es scrolleable en mobile, y tiene un botón "Descargar PDF" al final. Tener ambas formas es estándar para CVs profesionales en 2026.</span>
+          </div>
+        </div>
+        <span class="f-tag">hablemos<br>CV format</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 COPY -->
+  <section id="copy">
+    <div class="sec-label">07 / Copy & voz</div>
+    <h2 class="sec-title">La voz es el activo más fuerte —<br>quedan dos zonas con copy genérico</h2>
+    <p class="sec-sub">"Honest work. Efficient architectures.", "Construyo software que escala sin depender de quién lo creó", "Entrego sistemas que funcionan cuando yo no estoy" — son líneas propias, específicas, no genéricas. Las dos zonas donde el copy todavía suena a template son los nombres de roles en testimonios y los body copy de "Mi Enfoque".</p>
+    <div class="sec-divider"></div>
+
+    <div class="copy-demo">
+      <div class="copy-cell before">
+        <div class="copy-head">Mi Enfoque · hoy</div>
+        <div class="copy-text" style="font-size:15px;line-height:1.6">Uso IA como acelerador, no como sustituto del criterio técnico. Entrego en semanas lo que antes tardaba meses — con la misma calidad de arquitectura.</div>
+        <div class="copy-note">3 bloques con copy similar — "uso X como Y, no como Z"</div>
+      </div>
+      <div class="copy-cell after">
+        <div class="copy-head">Propuesta · más concreto</div>
+        <div class="copy-text" style="font-size:15px;line-height:1.6">En T-Cuida usé Claude para generar el primer ADR completo en 90 minutos. Antes tardaba una semana. La velocidad sin criterio es ruido — combinarlas es lo que entregamos.</div>
+        <div class="copy-note">Específico · proyecto · número · contraste implícito</div>
+      </div>
+    </div>
+
+    <div class="findings">
+      <div class="finding">
+        <span class="badge info">Mejora</span>
+        <div class="f-body">
+          <div class="f-title">Los 3 bloques de "Mi Enfoque" usan la misma estructura retórica — "uso X como Y, no como Z"</div>
+          <p>"Uso IA como acelerador, no como sustituto." / "Diseño sistemas para el día que yo ya no esté." / "Dejo equipos más capaces de lo que los encontré." La intención es buena (cada bloque define una postura) pero los tres comparten el mismo molde retórico. En lugar de 3 ideas distintas, suena a "3 maneras de decir lo mismo".</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Variar la estructura: bloque 1 puede ser una historia ("En T-Cuida, IA generó el primer ADR en 90 minutos"). Bloque 2 puede ser una regla ("Cada proyecto entrega un ADR por decisión arquitectónica — sin excepción"). Bloque 3 puede ser un compromiso ("48h después de mi salida, un dev nuevo está productivo. Si no, no facturo el último mes."). Cada uno con voz distinta — la diversidad de tono comunica más que la uniformidad.</span>
+          </div>
+        </div>
+        <span class="f-tag">home<br>Mi Enfoque copy</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge info">Mejora</span>
+        <div class="f-body">
+          <div class="f-title">"Problemas que Resuelvo" funciona — pero termina sin un cierre tipo "¿no es ninguno de estos?"</div>
+          <p>La sección lista 4 problemas (factura AWS, dev que se va, licencias caras, onboarding lento). Es un buen self-selection device. Pero termina sin escapar para casos que no encajan exactamente en esos 4. Un visitante con un problema distinto (ej: "tengo un monolito y no sé si refactorizar") puede pensar "Moisés solo hace estos 4 casos, mi caso no entra".</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Después de los 4 problemas, una línea de cierre: <em>"¿Tu caso no es ninguno de estos? Cuéntamelo igual — los problemas más interesantes son los que no encajan en categorías."</em> + botón a Hablemos. Convierte la lista de "estoy en o fuera" a "estoy en, o tengo algo más interesante todavía". Mantiene el tono auténtico del sitio.</span>
+          </div>
+        </div>
+        <span class="f-tag">home<br>Problemas escape</span>
+      </div>
+
+      <div class="finding">
+        <span class="badge nit">Detalle</span>
+        <div class="f-body">
+          <div class="f-title">Los nombres de roles en testimonios usan jerga corporativa — "Director de TI", "Product Owner", "Coordinador IoT"</div>
+          <p>Los roles formales son técnicamente correctos pero suenan a CV genérico. "Tech Lead", "Product Lead", "IoT Lead" se sienten más actuales y específicos. La jerga "Director de TI" puede sonar a empresa tradicional, lo cual no se alinea con el tono "FinOps + Healthcare + SaaS startup" del resto del sitio.</p>
+          <div class="f-fix">
+            <span class="fix-lbl">Fix</span>
+            <span class="fix-val">Decisión menor pero acumulativa: revisar los 6 roles y modernizar donde aplique. "Director de TI" → "Tech Lead" si la persona real así se llama. "Product Owner" → "Product Lead". Mantener "CTO" y "Gerente de Operaciones" si son los títulos reales (no inventar). El criterio: usar el nombre que la persona usaría en su LinkedIn hoy.</span>
+          </div>
+        </div>
+        <span class="f-tag">testimonios<br>role copy</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 ROADMAP -->
+  <section id="roadmap">
+    <div class="sec-label">08 / Roadmap hacia v3</div>
+    <h2 class="sec-title">Qué cerrar para que el portfolio convierta</h2>
+    <p class="sec-sub">Tres tracks ordenados por impacto en conversión. La columna izquierda son las fugas concretas (links rotos, post-submit muerto). La del medio, mejoras de prueba social y self-selection. La derecha, evolución hacia un portfolio que cierra solo.</p>
+    <div class="sec-divider"></div>
+
+    <div class="roadmap">
+      <div class="rm-col">
+        <div class="rm-head">Esta semana · alta prioridad</div>
+        <div class="rm-sub">Fugas · conversión inmediata</div>
+        <div class="rm-item">Casos de Éxito: 1 caso con detalle real (MediRec -58% AWS)</div>
+        <div class="rm-item">"Ver caso →" sin destino: eliminar o llevar a modal</div>
+        <div class="rm-item">Form post-submit: 3 acciones secundarias (CV / caso / LinkedIn)</div>
+        <div class="rm-item">KPI bar con jerarquía 1+4 (-58% AWS protagonista)</div>
+        <div class="rm-item">Cada KPI cell linkea a su caso correspondiente</div>
+        <div class="rm-item">Filter "Personal" — eliminar o llenar con side projects</div>
+      </div>
+      <div class="rm-col">
+        <div class="rm-head">Próximas dos semanas</div>
+        <div class="rm-sub">Prueba social · self-selection</div>
+        <div class="rm-item">2–3 testimonios con nombre + foto + LinkedIn (pedir permiso)</div>
+        <div class="rm-item">Testimonios linkean a casos correspondientes</div>
+        <div class="rm-item">Disponibilidad: renombrar a casos de uso reales con duración</div>
+        <div class="rm-item">FAQ con 4–5 preguntas frecuentes en Hablemos</div>
+        <div class="rm-item">CV en versión web + descargable PDF</div>
+        <div class="rm-item">Línea de cierre en "Problemas que Resuelvo"</div>
+        <div class="rm-item">Reescribir 3 bloques de "Mi Enfoque" con estructura variada</div>
+        <div class="rm-item">CTA bifurcado en metodología (proyecto nuevo / rescate)</div>
+      </div>
+      <div class="rm-col">
+        <div class="rm-head">v3 · siguiente iteración</div>
+        <div class="rm-sub">Sistema · cierra solo</div>
+        <div class="rm-item">Páginas de detalle para los 8 casos (1 por mes mínimo)</div>
+        <div class="rm-item">Video real de 90s en metodología (T-Cuida case study)</div>
+        <div class="rm-item">Loop bidireccional caso ↔ testimonio en ambas páginas</div>
+        <div class="rm-item">Snippets técnicos por pilar (stack, ejemplos, ADR público)</div>
+        <div class="rm-item">Nav active state con IntersectionObserver en home</div>
+        <div class="rm-item">Mini-blog "lo que aprendo" — 1 nota técnica por mes</div>
+        <div class="rm-item">Booking directo (Cal.com / Calendly) además del form</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONCLUSION -->
+  <div class="conclusion">
+    <div class="conclusion-text">
+      La v1 era un sitio que tenía que ser entendido.<br>
+      La v2 es un sitio que <strong>entiende al visitante</strong> — falta darle el último empujón al que ya quiere escribir.
+    </div>
+    <div class="conclusion-stats">
+      <div class="cstat"><div class="cstat-n" style="color:var(--green)">+2.3</div><div class="cstat-l">Score · v1 → v2</div></div>
+      <div class="cstat"><div class="cstat-n" style="color:var(--green)">−3</div><div class="cstat-l">Críticos cerrados</div></div>
+      <div class="cstat"><div class="cstat-n">15</div><div class="cstat-l">Hallazgos restantes</div></div>
+      <div class="cstat"><div class="cstat-n">~5</div><div class="cstat-l">Días para roadmap 1</div></div>
+    </div>
+  </div>
+
+  <footer>
+    <span><span style="font-family:var(--ff-display);color:var(--text)"><span style="color:var(--green)">mo</span>davidc</span> · Auditoría Portfolio · v2</span>
+    <span>Abr 2026 · UX · contenido · conversión</span>
+  </footer>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>
