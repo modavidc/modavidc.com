@@ -18,9 +18,13 @@ yarn-error.log*
 
 # env files
 .env*
+!.env.example
 
 # vercel
 .vercel
+
+# design reference handoff (not part of the production build)
+/design-handoff/
 
 # typescript
 *.tsbuildinfo
