@@ -1,380 +1,159 @@
-import type { Metadata } from "next"
-import Link from "next/link"
+"use client"
 
-export const metadata: Metadata = {
-  title: "Experiencia",
-  description: "De full-stack a Tech Lead en 8 años. Trayectoria en Healthcare, SaaS e IoT con métricas reales: -58% AWS, -$20K/yr en licencias, 20K+ usuarios en producción.",
-  openGraph: {
-    title: "Experiencia · Moisés Cedeño · Tech Lead",
-    description: "8 años de decisiones técnicas documentadas en Healthcare, SaaS e IoT. Métricas verificables en cada rol.",
-    url: "https://modavidc.com/experiencia",
-  },
-  alternates: { canonical: "/experiencia" },
-}
+import { useLang } from "@/lib/lang"
+import { Nav } from "@/components/nav"
+import { Cierre } from "@/components/cierre"
+import { experienciaContent } from "@/content/experiencia"
 
 export default function ExperienciaPage() {
+  const { lang } = useLang()
+  const t = experienciaContent[lang]
+  const roles = t.roles.map((r, i) => ({
+    ...r,
+    idx: i,
+    num: "0" + (i + 1),
+    present: !!r.present,
+    inset: i * 12 + "px",
+    layerN: (lang === "es" ? "piso_0" : "floor_0") + (i + 1),
+    file: r.short.toLowerCase().replace(/[^a-z]/g, "") + ".diff",
+    count: r.diff.length,
+    stackStr: r.stack.map((s) => "'" + s + "'").join(", "),
+    diff: r.diff.map((d, k) => ({ ...d, ln1: k * 2 + 1, ln2: k * 2 + 2 })),
+  }))
+  const floorsDesc = roles.slice().reverse()
+
   return (
-    <>
-      <div className="page-header">
-        <div className="section-kicker">Experiencia</div>
-        <h1 className="page-h1">
-          De full-stack a<br />
-          <em>Tech Lead.</em>
-        </h1>
-        <p className="page-sub">
-          8+ años construyendo sistemas que escalan en Healthcare, SaaS e IoT. Cada rol añadió una capa: velocidad técnica, luego arquitectura, luego criterio de negocio.
-        </p>
-        <div style={{display:'flex', gap:'12px', flexWrap:'wrap', marginTop:'24px'}}>
-          <Link href="/contact" className="btn btn-primary">Hablemos →</Link>
-          <a className="btn btn-secondary" href="/assets/cv/cv.pdf" download>Descargar CV · PDF</a>
+    <div className="container">
+      <Nav active="exp" />
+
+      <header data-stagger="" style={{ padding: "clamp(56px,8vw,110px) 0 40px" }}>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: "'JetBrains Mono',monospace", fontSize: 13, fontWeight: 600, color: "var(--accent-ink)", background: "var(--card)", border: "1px solid var(--line)", boxShadow: "var(--shadow)", borderRadius: 999, padding: "8px 16px" }}>
+          ~/moises $ git log --career<span style={{ width: 8, height: 15, background: "var(--accent)", animation: "blink 1s steps(1) infinite" }} />
         </div>
-      </div>
-
-      <div className="page-wrap">
-
-        <section className="page-section">
-          <div className="section-kicker">Trayectoria</div>
-          <h2 className="section-h2">Roles que construyeron el criterio</h2>
-          <p className="section-sub">De la implementación al diseño de sistemas, con métricas reales en cada etapa.</p>
-
-          <div className="timeline">
-
-            <div className="tl-entry is-current">
-              <div className="tl-date">
-                <span className="tl-years">2023 → presente</span>
-                <span className="tl-period current">2+ años</span>
-                <div className="tl-dot"></div>
-              </div>
-              <div className="tl-card">
-                <div className="tl-card-head">
-                  <div>
-                    <div className="tl-role">Tech Lead</div>
-                    <div className="tl-company">Plataforma Healthcare · SaaS · Lima, Perú</div>
-                  </div>
-                  <span className="status-badge status-current">Actual</span>
-                </div>
-                <p className="tl-body">
-                  Liderazgo técnico de equipo de 6 devs en plataforma de salud con 20K+ usuarios activos. Responsable de arquitectura cloud, FinOps y cultura de documentación. Primer rol donde el impacto medible supera el código escrito directamente.
-                </p>
-                <ul className="tl-achievements">
-                  <li>Redujo la factura AWS en <strong>-58%</strong> ($180K anuales) en 90 días mediante re-arquitectura de instancias y eliminación de recursos huérfanos, sin afectar uptime.</li>
-                  <li>Implementó un sistema de ADRs (Architecture Decision Records) que llevó el onboarding de nuevos devs de 3 semanas a <strong>48 horas</strong>.</li>
-                  <li>Migró de LexComp a NLMI eliminando <strong>$20K/año en licencias</strong> farmacéuticas sin pérdida de integridad clínica.</li>
-                  <li>Implementó CI/CD completo + observabilidad: de 0 a <strong>100% de cobertura de deploys</strong> auditables.</li>
-                  <li>Logró cumplimiento regulatorio PREIS en tiempo récord para sistema de resultados de laboratorio.</li>
-                </ul>
-                <div className="tl-metrics">
-                  <span className="metric-inline">-58% AWS · $180K</span>
-                  <span className="metric-inline">48h onboarding</span>
-                  <span className="metric-inline">-$20K/año licencias</span>
-                </div>
-                <div className="tl-tags">
-                  <span className="cat-badge cat-green"><span className="dot"></span>FinOps</span>
-                  <span className="cat-badge cat-violet"><span className="dot"></span>Healthcare</span>
-                  <span className="cat-badge cat-blue"><span className="dot"></span>SaaS</span>
-                  <span className="tag">AWS</span>
-                  <span className="tag">Node.js</span>
-                  <span className="tag">PostgreSQL</span>
-                  <span className="tag">Docker</span>
-                  <span className="tag">Terraform</span>
-                  <span className="tag">HL7 / FHIR</span>
-                </div>
-              </div>
+        <h1 style={{ margin: "26px 0 0", fontSize: "clamp(52px,8.4vw,128px)", fontWeight: 800, lineHeight: 0.9, letterSpacing: "-.06em", maxWidth: "12ch" }}>
+          {t.h1a} <span style={{ color: "var(--accent)" }}>{t.h1b}</span>
+        </h1>
+        <p style={{ margin: "28px 0 0", fontSize: "clamp(18px,2vw,21px)", color: "var(--muted)", maxWidth: "44ch" }}>{t.lead}</p>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 34 }}>
+          {t.stats.map((s) => (
+            <div key={s.l} style={{ display: "flex", alignItems: "baseline", gap: 10, padding: "14px 20px", borderRadius: 18, background: "var(--surface)" }}>
+              <b style={{ fontSize: 28, fontWeight: 800, letterSpacing: "-.04em", color: "var(--fg)" }}>{s.n}</b>
+              <span style={{ fontSize: 14, color: "var(--muted)" }}>{s.l}</span>
             </div>
+          ))}
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 40, fontSize: 14, fontWeight: 600, color: "var(--muted)" }}>
+          <span className="ms" style={{ fontSize: 18, color: "var(--accent)" }}>touch_app</span>{t.hint}
+        </div>
+      </header>
 
-            <div className="tl-entry">
-              <div className="tl-date">
-                <span className="tl-years">2021 → 2023</span>
-                <span className="tl-period">2 años</span>
-                <div className="tl-dot"></div>
-              </div>
-              <div className="tl-card">
-                <div className="tl-card-head">
-                  <div>
-                    <div className="tl-role">Solutions Architect</div>
-                    <div className="tl-company">Empresa Gov-Tech · Puerto Rico</div>
-                  </div>
-                  <span className="status-badge status-past">2021–2023</span>
+      <section data-scrolly="" style={{ position: "relative", height: "560vh" }}>
+        <div style={{ position: "sticky", top: 0, height: "100vh", display: "grid", gridTemplateColumns: "170px minmax(0,1fr) minmax(0,1.08fr)", gap: "12px 40px", alignItems: "center", alignContent: "center", overflow: "hidden", paddingTop: 84 }}>
+
+          <div data-meter="" style={{ alignSelf: "center", display: "flex", flexDirection: "column", gap: 10, padding: 18, borderRadius: 28, background: "var(--card)", border: "1px solid var(--line)", boxShadow: "var(--shadow)" }}>
+            <div style={{ position: "relative", height: 54, borderRadius: 14, background: "#030604", border: "1px solid rgba(127,214,160,.18)", boxShadow: "inset 0 0 24px rgba(61,190,114,.15)", overflow: "hidden", marginBottom: 6 }}>
+              {roles.map((r) => (
+                <div key={r.idx} data-ghost={r.idx} style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", fontFamily: "'JetBrains Mono',monospace", color: "#9CFFC3", textShadow: "0 0 12px rgba(127,214,160,.8)", opacity: 0, transition: "opacity .35s, transform .45s cubic-bezier(.2,.7,.2,1)" }}>
+                  <b style={{ fontSize: 20, lineHeight: 1 }}>▲ {r.num}</b>
+                  <span style={{ fontSize: 10, letterSpacing: ".1em", opacity: 0.8 }}>{r.y}</span>
                 </div>
-                <p className="tl-body">
-                  Diseño de arquitectura para sistemas de gobierno digital. Primer rol con responsabilidad completa de decisiones técnicas de principio a fin, stack, infraestructura, patrones de integración y seguridad. Trabajo directo con stakeholders no técnicos.
-                </p>
-                <ul className="tl-achievements">
-                  <li>Arquitectó un sistema multi-tenant que hoy sirve a <strong>+20K usuarios</strong> de servicios públicos de salud.</li>
-                  <li>Construyó una API de integración con <strong>25+ laboratorios externos</strong> que redujo el tiempo de entrega de resultados clínicos de 5 días a <strong>4 horas</strong>, procesando 40K+ órdenes al mes.</li>
-                  <li>Lideró la migración de infraestructura on-premise a cloud en <strong>2 meses</strong> con cero downtime visible al usuario final.</li>
-                  <li>Implementó autenticación federada y auditoría completa de acceso para cumplir con regulaciones de datos gubernamentales.</li>
-                </ul>
-                <div className="tl-metrics">
-                  <span className="metric-inline">20K+ usuarios</span>
-                  <span className="metric-inline">40K+ órdenes lab/mes</span>
-                  <span className="metric-inline neutral">2 meses · 0 downtime</span>
-                </div>
-                <div className="tl-tags">
-                  <span className="cat-badge cat-violet"><span className="dot"></span>Healthcare</span>
-                  <span className="tag">AWS</span>
-                  <span className="tag">Node.js</span>
-                  <span className="tag">React</span>
-                  <span className="tag">Redis</span>
-                  <span className="tag">HL7</span>
-                  <span className="tag">OAuth 2.0</span>
-                  <span className="tag">Gov-Tech</span>
-                </div>
-              </div>
+              ))}
             </div>
-
-            <div className="tl-entry">
-              <div className="tl-date">
-                <span className="tl-years">2019 → 2021</span>
-                <span className="tl-period">2 años</span>
-                <div className="tl-dot"></div>
-              </div>
-              <div className="tl-card">
-                <div className="tl-card-head">
-                  <div>
-                    <div className="tl-role">Integration Engineer</div>
-                    <div className="tl-company">Startup SaaS · Panamá / Miami</div>
-                  </div>
-                  <span className="status-badge status-past">2019–2021</span>
-                </div>
-                <p className="tl-body">
-                  Diseño y desarrollo de integraciones entre sistemas heterogéneos: ERP, dispositivos IoT, APIs de terceros y plataformas de mensajería clínica. Rol que definió el enfoque en arquitecturas orientadas a eventos y sistemas distribuidos.
-                </p>
-                <ul className="tl-achievements">
-                  <li>Construyó el backbone de integración de una plataforma SaaS IoT que conecta <strong>+1,500 dispositivos</strong> en tiempo real.</li>
-                  <li>Implementó un sistema de eventos con MQTT + AWS IoT Core que redujo la latencia de telemetría en <strong>-65%</strong>.</li>
-                  <li>Diseñó el primer ADK (API Developer Kit) de la empresa, adoptado por <strong>3 clientes enterprise</strong> en el primer trimestre.</li>
-                </ul>
-                <div className="tl-metrics">
-                  <span className="metric-inline neutral">1,500+ dispositivos</span>
-                  <span className="metric-inline">-65% latencia IoT</span>
-                </div>
-                <div className="tl-tags">
-                  <span className="cat-badge cat-amber"><span className="dot"></span>IoT</span>
-                  <span className="cat-badge cat-blue"><span className="dot"></span>SaaS</span>
-                  <span className="tag">MQTT</span>
-                  <span className="tag">AWS IoT</span>
-                  <span className="tag">Node.js</span>
-                  <span className="tag">Python</span>
-                  <span className="tag">Kafka</span>
-                  <span className="tag">REST / GraphQL</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="tl-entry">
-              <div className="tl-date">
-                <span className="tl-years">2016 → 2019</span>
-                <span className="tl-period">3 años</span>
-                <div className="tl-dot"></div>
-              </div>
-              <div className="tl-card">
-                <div className="tl-card-head">
-                  <div>
-                    <div className="tl-role">Full-Stack Developer</div>
-                    <div className="tl-company">Agencia de producto digital · Lima, Perú</div>
-                  </div>
-                  <span className="status-badge status-past">2016–2019</span>
-                </div>
-                <p className="tl-body">
-                  Desarrollo full-stack para productos digitales de clientes en retail, fintech y salud. Primera exposición a sistemas con carga real de usuarios y primeros patrones de arquitectura escalable. Base técnica que define el resto de la trayectoria.
-                </p>
-                <ul className="tl-achievements">
-                  <li>Desarrolló y mantuvo 6 productos digitales en producción simultáneamente, aprendió a priorizar técnicamente bajo presión real.</li>
-                  <li>Primera experiencia con sistemas de salud: plataforma de gestión de citas médicas con <strong>+3K usuarios</strong> activos.</li>
-                  <li>Adoptó las primeras prácticas de documentación técnica, patrón que luego escalaría en todos los roles posteriores.</li>
-                </ul>
-                <div className="tl-tags">
-                  <span className="tag">JavaScript</span>
-                  <span className="tag">React</span>
-                  <span className="tag">Node.js</span>
-                  <span className="tag">MySQL</span>
-                  <span className="tag">PHP</span>
-                  <span className="tag">AWS EC2</span>
-                </div>
-              </div>
-            </div>
-
+            <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10, letterSpacing: ".14em", color: "var(--muted)", textAlign: "center", marginBottom: 4 }}>{t.elevator}</div>
+            {floorsDesc.map((f) => (
+              <button key={f.idx} type="button" data-goto={f.idx} data-floorbtn={f.idx} style={{ appearance: "none", margin: 0, font: "inherit", textAlign: "left", width: "100%", background: "transparent", boxSizing: "border-box", cursor: "pointer", display: "flex", alignItems: "center", gap: 12, padding: "11px 14px", borderRadius: 16, border: "1px solid var(--line)", color: "var(--fg)", transition: "background .3s, color .3s, box-shadow .3s, border-color .3s" }}>
+                <span style={{ flex: "none", width: 30, height: 30, borderRadius: "50%", border: "1.5px solid currentColor", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'JetBrains Mono',monospace", fontWeight: 700, fontSize: 12 }}>{f.num}</span>
+                <span style={{ minWidth: 0, lineHeight: 1.15 }}>
+                  <b style={{ display: "block", fontSize: 13 }}>{f.y}</b>
+                  <small style={{ fontSize: 11, opacity: 0.75, whiteSpace: "nowrap" }}>{f.short}</small>
+                </span>
+              </button>
+            ))}
           </div>
-        </section>
 
-        <section className="page-section">
-          <div className="section-kicker">Dominios de un Tech Lead</div>
-          <h2 className="section-h2">Qué resuelvo, y con qué resultado probado</h2>
-          <p className="section-sub">No son categorías de skills. Son áreas donde hay decisiones tomadas, sistemas entregados y métricas reales.</p>
-
-          <div className="dominios-grid">
-
-            <div className="dominio-card">
-              <div className="dominio-head">
-                <div className="dominio-title">Cloud FinOps</div>
-                <span className="metric-inline">-58% AWS · MediRec</span>
+          <div data-stage="" style={{ position: "relative", height: "min(70vh,600px)", perspective: 1800, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            {roles.map((r) => (
+              <div key={r.idx} data-ghost={r.idx} aria-hidden="true" style={{ position: "absolute", left: 0, right: 0, top: "4%", textAlign: "center", fontSize: "clamp(120px,15vw,230px)", fontWeight: 800, letterSpacing: "-.07em", lineHeight: 1, color: "transparent", WebkitTextStroke: "1.5px color-mix(in srgb,var(--accent) 35%,transparent)", opacity: 0, transition: "opacity .5s, transform .7s cubic-bezier(.2,.7,.2,1)", pointerEvents: "none" }}>
+                {r.y}
               </div>
-              <div className="dominio-skills">
-                <span className="tag">AWS Cost Explorer</span>
-                <span className="tag">Reserved Instances</span>
-                <span className="tag">Terraform</span>
-                <span className="tag">Auto Scaling</span>
-              </div>
-              <div className="dominio-body">Gobernanza de costos cloud con tagging, rightsizing y automatización de apagado de recursos ociosos. Resultado documentado: $180K ahorrados en un año.</div>
-            </div>
-
-            <div className="dominio-card">
-              <div className="dominio-head">
-                <div className="dominio-title">Backend APIs &amp; Microservicios</div>
-                <span className="metric-inline">40K+ órdenes/mes</span>
-              </div>
-              <div className="dominio-skills">
-                <span className="tag">Node.js</span>
-                <span className="tag">REST / GraphQL</span>
-                <span className="tag">Kafka</span>
-                <span className="tag">PostgreSQL</span>
-                <span className="tag">Redis</span>
-              </div>
-              <div className="dominio-body">APIs de alta disponibilidad para plataformas con miles de usuarios. API de integración con 25+ laboratorios que redujo el tiempo de entrega de resultados de 5 días a 4 horas.</div>
-            </div>
-
-            <div className="dominio-card">
-              <div className="dominio-head">
-                <div className="dominio-title">Healthcare &amp; Regulatorio</div>
-                <span className="metric-inline neutral">PREIS · HIPAA</span>
-              </div>
-              <div className="dominio-skills">
-                <span className="tag">HL7 / FHIR</span>
-                <span className="tag">NLMI</span>
-                <span className="tag">LexComp</span>
-                <span className="tag">Auditoría clínica</span>
-              </div>
-              <div className="dominio-body">Sistemas que cumplen regulaciones de datos clínicos en LATAM y Puerto Rico. Migración de sistemas farmacéuticos propietarios a alternativas open sin perder cobertura de datos.</div>
-            </div>
-
-            <div className="dominio-card">
-              <div className="dominio-head">
-                <div className="dominio-title">IoT &amp; Sistemas distribuidos</div>
-                <span className="metric-inline">-65% latencia · 1,500 devs</span>
-              </div>
-              <div className="dominio-skills">
-                <span className="tag">MQTT</span>
-                <span className="tag">AWS IoT Core</span>
-                <span className="tag">Edge computing</span>
-                <span className="tag">Raspberry Pi</span>
-              </div>
-              <div className="dominio-body">Arquitecturas event-driven para telemetría en tiempo real. Backbone de integración para plataformas con 1,500+ dispositivos conectados.</div>
-            </div>
-
-            <div className="dominio-card">
-              <div className="dominio-head">
-                <div className="dominio-title">Documentación &amp; Onboarding</div>
-                <span className="metric-inline">48h onboarding</span>
-              </div>
-              <div className="dominio-skills">
-                <span className="tag">ADRs</span>
-                <span className="tag">Runbooks</span>
-                <span className="tag">C4 Model</span>
-                <span className="tag">Notion / Confluence</span>
-              </div>
-              <div className="dominio-body">Sistemas de documentación viva: Architecture Decision Records, guías de contribución y runbooks que reducen la curva de onboarding de semanas a horas.</div>
-            </div>
-
-            <div className="dominio-card">
-              <div className="dominio-head">
-                <div className="dominio-title">Liderazgo técnico</div>
-                <span className="metric-inline neutral">Equipos de 4–8 devs</span>
-              </div>
-              <div className="dominio-skills">
-                <span className="tag">Code reviews</span>
-                <span className="tag">RFC / RFC-light</span>
-                <span className="tag">Roadmap técnico</span>
-                <span className="tag">1:1s</span>
-              </div>
-              <div className="dominio-body">Liderazgo de equipos con ownership real: decisiones de arquitectura, roadmap técnico, cultura de calidad y procesos de revisión sin burocracia.</div>
-            </div>
-
-            <div className="dominio-card">
-              <div className="dominio-head">
-                <div className="dominio-title">Entrega &amp; Delivery</div>
-                <span className="metric-inline neutral">2 meses · 0 downtime</span>
-              </div>
-              <div className="dominio-skills">
-                <span className="tag">CI/CD</span>
-                <span className="tag">GitHub Actions</span>
-                <span className="tag">Docker</span>
-                <span className="tag">Observabilidad</span>
-              </div>
-              <div className="dominio-body">Migración de infraestructura on-premise a cloud en tiempo récord sin downtime. CI/CD completo con observabilidad desde el primer sprint.</div>
-            </div>
-
-            <div className="dominio-card">
-              <div className="dominio-head">
-                <div className="dominio-title">Negocio &amp; stakeholders</div>
-                <span className="metric-inline neutral">ROI documentado</span>
-              </div>
-              <div className="dominio-skills">
-                <span className="tag">Decisiones de build vs. buy</span>
-                <span className="tag">Estimaciones técnicas</span>
-                <span className="tag">Comunicación ejecutiva</span>
-              </div>
-              <div className="dominio-body">Decisiones técnicas con criterio de negocio: cuándo migrar una librería de terceros, cuándo construir internamente, cómo comunicar impacto en términos de ROI a audiencias no técnicas.</div>
-            </div>
-
-            <div className="dominio-card">
-              <div className="dominio-head">
-                <div className="dominio-title">IA aplicada al desarrollo</div>
-                <span className="metric-inline">+400% velocidad</span>
-              </div>
-              <div className="dominio-skills">
-                <span className="tag">Cursor / Claude</span>
-                <span className="tag">Prompt engineering</span>
-                <span className="tag">Revisión de output</span>
-                <span className="tag">Flujos augmentados</span>
-              </div>
-              <div className="dominio-body">IA como acelerador de desarrollo con criterio: entrega en semanas lo que antes tardaba meses, sin delegar el juicio técnico a la herramienta.</div>
-            </div>
-
-          </div>
-        </section>
-
-        <section className="page-section">
-          <div className="section-kicker">En números</div>
-          <h2 className="section-h2">8 años de decisiones, documentadas</h2>
-          <p className="section-sub">Métricas de impacto directo, verificables en los casos de éxito.</p>
-
-          <div className="kpi-strip">
-            <div className="kpi-cell">
-              <div className="kpi-val green">-58%</div>
-              <div className="kpi-label">Reducción factura AWS</div>
-              <div className="kpi-sub">MediRec · 2023</div>
-            </div>
-            <div className="kpi-cell">
-              <div className="kpi-val">48h</div>
-              <div className="kpi-label">Onboarding documentado</div>
-              <div className="kpi-sub">Sin dependencia de persona</div>
-            </div>
-            <div className="kpi-cell">
-              <div className="kpi-val">20K+</div>
-              <div className="kpi-label">Usuarios en producción</div>
-              <div className="kpi-sub">Sistemas multi-tenant</div>
-            </div>
-            <div className="kpi-cell">
-              <div className="kpi-val">-$20K</div>
-              <div className="kpi-label">En licencias / año</div>
-              <div className="kpi-sub">Migración NLMI · 2024</div>
+            ))}
+            <div data-stack="" style={{ position: "relative", width: "min(250px,22vw)", height: "min(250px,22vw)", translate: "0 90px", transformStyle: "preserve-3d", transform: "rotateX(58deg) rotateZ(-44deg)" }}>
+              <div aria-hidden="true" style={{ position: "absolute", inset: "-90%", transform: "translateZ(-40px)", backgroundImage: "linear-gradient(color-mix(in srgb,var(--fg) 10%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--fg) 10%,transparent) 1px,transparent 1px)", backgroundSize: "28px 28px", WebkitMaskImage: "radial-gradient(closest-side,#000 20%,transparent)", maskImage: "radial-gradient(closest-side,#000 20%,transparent)" }} />
+              <div aria-hidden="true" style={{ position: "absolute", inset: "-10%", transform: "translateZ(-39px)", background: "radial-gradient(closest-side,rgba(10,40,22,.28),transparent)", filter: "blur(12px)" }} />
+              {roles.map((r) => (
+                <div key={r.idx} data-slab={r.idx} data-goto={r.idx} title={r.org} style={{ position: "absolute", inset: r.inset, transformStyle: "preserve-3d", willChange: "transform", cursor: "pointer" }}>
+                  <div style={{ position: "absolute", inset: 0, background: "var(--top,var(--card))", color: "var(--ink,var(--fg))", border: "1px solid color-mix(in srgb,var(--fg) 10%,transparent)", borderRadius: 6, boxShadow: "var(--glow,none)", padding: "14px 16px", display: "flex", flexDirection: "column", justifyContent: "space-between", transition: "background .4s, color .4s, box-shadow .4s" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", gap: 8, fontFamily: "'JetBrains Mono',monospace", fontSize: 11, fontWeight: 600, opacity: 0.8 }}>
+                      <span>{r.layerN}</span>
+                      {r.present && (
+                        <span style={{ display: "inline-flex", alignItems: "center", gap: 5 }}>
+                          <span style={{ width: 7, height: 7, borderRadius: "50%", background: "currentColor" }} />{t.now}
+                        </span>
+                      )}
+                    </div>
+                    <div>
+                      <div style={{ fontSize: "clamp(28px,3.2vw,42px)", fontWeight: 800, letterSpacing: "-.05em", lineHeight: 1 }}>{r.y}</div>
+                      <div style={{ fontSize: 13, fontWeight: 700, marginTop: 3 }}>{r.short}</div>
+                    </div>
+                  </div>
+                  <div aria-hidden="true" style={{ position: "absolute", left: 0, top: "100%", width: "100%", height: 36, transformOrigin: "top", transform: "rotateX(-90deg)", background: "var(--side,var(--line))", padding: "9px 10px", transition: "background .4s" }}>
+                    <div style={{ height: "100%", background: "repeating-linear-gradient(90deg,var(--win,transparent) 0 10px,transparent 10px 18px)", transition: "background .4s" }} />
+                  </div>
+                  <div aria-hidden="true" style={{ position: "absolute", right: "100%", top: 0, width: 36, height: "100%", transformOrigin: "right", transform: "rotateY(-90deg)", background: "var(--side2,var(--line))", padding: "10px 9px", transition: "background .4s" }}>
+                    <div style={{ height: "100%", background: "repeating-linear-gradient(180deg,var(--win,transparent) 0 10px,transparent 10px 18px)", transition: "background .4s" }} />
+                  </div>
+                  {r.present && (
+                    <div aria-hidden="true" style={{ position: "absolute", left: "calc(50% - 1.5px)", bottom: "50%", width: 3, height: 110, borderRadius: 2, background: "linear-gradient(var(--fg),var(--accent))", transformOrigin: "bottom center", transform: "rotateX(-90deg)" }}>
+                      <div style={{ position: "absolute", left: "50%", top: -10, width: 20, height: 20, marginLeft: -10, borderRadius: "50%", background: "var(--accent)", animation: "beacon 1.6s ease-out infinite" }} />
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
 
-          <div className="cta-band">
-            <div>
-              <h3 className="cta-band-h">¿Buscas este perfil<br />para tu <em>equipo</em>?</h3>
-              <p className="cta-band-sub">Si necesitas un Tech Lead que deje el sistema en mejor estado del que lo encontró, cuéntame el proyecto. Disponible para in-house, consultoría o audit puntual.</p>
-            </div>
-            <div className="cta-band-btns">
-              <Link href="/contact" className="btn btn-primary">Hablemos →</Link>
-              <a className="btn btn-secondary" href="/assets/cv/cv.pdf" download>Descargar CV · PDF</a>
-            </div>
+          <div data-panelbox="" style={{ position: "relative", height: "clamp(440px,68vh,580px)" }}>
+            {roles.map((r) => (
+              <article key={r.idx} data-panel={r.idx} style={{ position: "absolute", inset: 0, opacity: 0, transition: "opacity .5s ease, transform .7s cubic-bezier(.2,.7,.2,1)", display: "flex", flexDirection: "column", justifyContent: "center", gap: 14 }}>
+                <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 13, fontWeight: 600, color: "var(--accent-ink)" }}>{r.layerN} · {r.layer}</div>
+                <div>
+                  <h2 style={{ margin: 0, fontSize: "clamp(30px,3.4vw,46px)", fontWeight: 800, letterSpacing: "-.045em", lineHeight: 1, color: "var(--fg)" }}>{r.role}</h2>
+                  <div style={{ fontSize: 15, color: "var(--muted)", marginTop: 8 }}>{r.org} · {r.years} · {r.place}</div>
+                </div>
+                <div style={{ marginTop: 6, borderRadius: 20, background: "#050B07", border: "1px solid rgba(127,214,160,.18)", boxShadow: "0 40px 80px -30px rgba(10,30,18,.55), inset 0 1px 0 rgba(255,255,255,.05)", overflow: "hidden", fontFamily: "'JetBrains Mono',monospace", fontSize: 13, lineHeight: 1.55 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 7, padding: "11px 16px", borderBottom: "1px solid rgba(255,255,255,.06)", background: "rgba(255,255,255,.03)" }}>
+                    <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#FF5F57" }} />
+                    <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#FEBC2E" }} />
+                    <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#28C840" }} />
+                    <span style={{ marginLeft: 10, color: "var(--band-muted)", fontSize: 12 }}>{r.file}</span>
+                    <span style={{ marginLeft: "auto", fontSize: 12 }}>
+                      <b style={{ color: "#7FD6A0" }}>+{r.count}</b> <b style={{ color: "#FF8A80" }}>−{r.count}</b>
+                    </span>
+                  </div>
+                  <div style={{ padding: "8px 0 12px" }}>
+                    {r.diff.map((d) => (
+                      <div key={d.ln1}>
+                        <div style={{ display: "grid", gridTemplateColumns: "42px 20px minmax(0,1fr)", padding: "2px 16px 2px 0", background: "rgba(255,95,87,.08)", color: "#FFB4AE" }}>
+                          <span style={{ textAlign: "right", paddingRight: 10, color: "rgba(255,255,255,.22)" }}>{d.ln1}</span><span>−</span><span>{d.m}</span>
+                        </div>
+                        <div style={{ display: "grid", gridTemplateColumns: "42px 20px minmax(0,1fr)", padding: "2px 16px 2px 0", background: "rgba(61,190,114,.14)", color: "#C2F7D5", marginBottom: 4, boxShadow: "inset 3px 0 0 #3DBE72" }}>
+                          <span style={{ textAlign: "right", paddingRight: 10, color: "rgba(255,255,255,.22)" }}>{d.ln2}</span>
+                          <span style={{ color: "#7FD6A0", fontWeight: 700 }}>+</span><span>{d.p}</span>
+                        </div>
+                      </div>
+                    ))}
+                    <div style={{ padding: "10px 16px 0 62px", color: "var(--band-muted)" }}>
+                      <span style={{ color: "#C792EA" }}>const</span> stack = [<span style={{ color: "#FFD580" }}>{r.stackStr}</span>]
+                    </div>
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-      </div>
-    </>
+      <Cierre />
+    </div>
   )
 }
