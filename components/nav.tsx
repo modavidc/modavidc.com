@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
 import { useLang } from "@/lib/lang"
 import { navContent, navPages, type NavActive } from "@/content/nav"
@@ -8,8 +9,10 @@ import { navContent, navPages, type NavActive } from "@/content/nav"
 export function Nav({ active }: { active: NavActive }) {
   const { lang, toggle } = useLang()
   const { resolvedTheme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
   const t = navContent[lang]
-  const isDark = resolvedTheme === "dark"
+  const isDark = mounted && resolvedTheme === "dark"
 
   return (
     <nav
