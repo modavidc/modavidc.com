@@ -1,4 +1,6 @@
 
+Cotizador (referencia de diseño): https://digitalspace.pe/cotizar/
+
 Platzi: https://platzi.com/p/modavidc/edit/
 Github: 
 Web: modavidc.com
