@@ -8,7 +8,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 # Instalar dependencias basadas en el gestor de paquetes preferido
-COPY package.json pnpm-lock.yaml* ./
+COPY package.json pnpm-lock.yaml* pnpm-workspace.yaml* ./
 RUN \
   if [ -f pnpm-lock.yaml ]; then \
     npm install -g pnpm && pnpm install --frozen-lockfile; \
