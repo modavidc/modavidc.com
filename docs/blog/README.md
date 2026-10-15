@@ -1,5 +1,9 @@
 # Blog Setup - modavidc.com
 
+> Nota (octubre 2026): la ruta `/blog` se quitó del sitio en el rediseño. Este documento
+> describe cómo estaba armada cuando existía. El contenido de los artículos sigue acá por si
+> se retoma el blog más adelante.
+
 ## Overview
 
 A blog system launched May 12, 2026, respecting the branding system defined in `/docs/design/branding/branding.html`.
