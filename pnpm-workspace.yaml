@@ -1,0 +1,7 @@
+onlyBuiltDependencies:
+  - unrs-resolver
+
+# El pnpm del entorno sandbox usa su propia clave de aprobación; se deja
+# junto a la estándar de arriba para que ambos entornos instalen sin bloqueo.
+allowBuilds:
+  unrs-resolver: true
