@@ -1,15 +1,14 @@
 # modavidc.com, Estado (14 octubre 2026)
 
-Amarillo: el rediseño está terminado y verificado en local, pero no se ha pusheado ni desplegado.
+Amarillo: rediseño terminado, repo curado y `v0.3.0` pusheado. Falta el deploy a producción.
 
 ## Últimas 3 cosas
-1. Rediseño completo sobre `/design-handoff` terminado: 5 rutas nuevas, tokens claro/oscuro, ES/EN, build y lint limpios.
-2. Bug de hidratación en el toggle de idioma/tema (`components/nav.tsx`) encontrado y corregido.
-3. Raíz del repo reorganizada: `.md` sueltos movidos a `docs/`, archivos y trackers obsoletos del diseño anterior eliminados.
+1. Rediseño completo sobre `/design-handoff` terminado y pusheado a `origin/v0.3.0`: 5 rutas nuevas, tokens claro/oscuro, ES/EN, build y lint limpios.
+2. Repo curado: raíz reorganizada dentro de `docs/`, 2 notas personales destrackeadas, solo quedan CV y configs estándar.
+3. Bug de hidratación en el toggle de idioma/tema (`components/nav.tsx`) encontrado y corregido.
 
 ## Hoy / lo inmediato
 - Confirmar con Moisés: el link "Ver sitio" de Solito en `/productos` (apunta a `#`).
-- Decidir qué hacer con el contenido personal ya pusheado en `origin/main`/`origin/v0.2.0` (ver bloqueos).
 
 ## Sigue en agenda (sin fecha fija)
 - Verificación visual en 375px/768px con una herramienta de navegador real.
@@ -17,7 +16,7 @@ Amarillo: el rediseño está terminado y verificado en local, pero no se ha push
 - Fase 6: verificar SSL en producción y publicar el link.
 
 ## Bloqueos
-- `docs/personal/values-es.md`, `docs/personal/work-ethic-es.md` y el CV real ya están pusheados en GitHub (`origin/main`, `origin/v0.2.0`), de antes del `.gitignore` actual. Purgarlo del historial requiere force-push; depende de que Moisés decida si lo hace.
+- Ninguno activo. `docs/personal/values-es.md`, `docs/personal/work-ethic-es.md` y el CV real siguen en el historial ya pusheado de `origin/main`/`origin/v0.2.0` (de antes del `.gitignore` actual); Moisés decidió dejarlo así por ahora, no se reescribe historia.
 
 ## Detalle y contexto
 - Histórico completo de checkpoints: `docs/planning/BITACORA.md`
