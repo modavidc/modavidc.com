@@ -1,315 +1,234 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
-import { Mail, Linkedin, Github, MessageCircle, Send } from "lucide-react"
+import { useLang } from "@/lib/lang"
+import { Nav } from "@/components/nav"
+import { Cierre } from "@/components/cierre"
+import { inicioContent } from "@/content/inicio"
 
 export default function Home() {
+  const { lang } = useLang()
+  const t = inicioContent[lang]
+
   return (
-    <>
-      {/* ═══ HERO ════════════════════════════════════════════════ */}
-      <div className="hero">
-        <div className="hero-left">
-          <div className="hero-kicker">Tech Lead · Arquitecto de Soluciones · AWS &amp; FinOps</div>
-          <h1 className="hero-h1">
-            Lidero equipos. Construyo software<br />
-            acelerado por IA<br />
-            <em>con criterio e intención.</em>
+    <div className="container">
+      <Nav active="inicio" />
+
+      <header
+        data-spot=""
+        style={{
+          position: "relative",
+          minHeight: "calc(100vh - 90px)",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,440px),1fr))",
+          gap: 56,
+          alignItems: "center",
+          padding: "20px 0 80px",
+          background: "radial-gradient(640px circle at var(--mx,78%) var(--my,40%), var(--soft), transparent 70%)",
+        }}
+      >
+        <div>
+          <div data-reveal="" style={{ fontSize: 14, fontWeight: 700, lineHeight: 1.45, letterSpacing: ".01em", color: "var(--accent-ink)", maxWidth: "46ch" }}>
+            {t.eyebrow}
+          </div>
+          <h1 data-stagger="" data-delay="120" style={{ margin: "20px 0 0", fontSize: "clamp(52px,7.6vw,116px)", fontWeight: 800, lineHeight: 0.92, letterSpacing: "-.055em" }}>
+            <span style={{ display: "block" }}>{t.h1a}</span>
+            <span style={{ display: "block", color: "var(--accent)" }}>{t.h1b}</span>
           </h1>
-          <p className="hero-sub">
-            +8 años en software, los últimos 3 como Tech Lead en Healthcare, SaaS e IoT. La IA acelera, pero yo pongo el criterio, la intención y la experiencia. Resultados comprobados: -58% en costos AWS, $20k/yr menos en licencias y equipos que escalan.
+          <p data-reveal="" data-delay="380" style={{ margin: "30px 0 0", fontSize: "clamp(18px,2vw,21px)", color: "var(--muted)", maxWidth: "36ch" }}>
+            {t.lead}
           </p>
-          <div className="hero-ctas">
-            <Link className="btn btn-primary" href="/contact">Hablemos →</Link>
-            <Link className="btn btn-secondary" href="/casos-de-exito">Ver casos de éxito</Link>
+          <div data-reveal="" data-delay="500" style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 22, marginTop: 36 }}>
+            <a data-magnetic="" href="mailto:hola@modavidc.com" style={{ display: "inline-flex", alignItems: "center", gap: 8, borderRadius: 999, background: "var(--accent)", color: "#fff", padding: "16px 26px", fontSize: 16, fontWeight: 700, textDecoration: "none", boxShadow: "0 14px 30px rgba(30,125,71,.32)" }}>
+              {t.heroCta} <span className="ms">arrow_forward</span>
+            </a>
+            <Link href="/sobre-mi" style={{ fontWeight: 700, fontSize: 16, textDecoration: "none" }}>{t.heroCta2}</Link>
           </div>
         </div>
 
-        <div className="hero-right">
-          <div className="hero-photo-wrap">
-            <Image
-              src="/assets/profile/moises_cedeno.png"
-              alt="Moisés Cedeño — Tech Lead"
-              width={360}
-              height={480}
-              priority
-              style={{ width: "100%", height: "auto" }}
-            />
-            <div className="hero-photo-caption">
-              <div>
-                <div className="hero-photo-name">Moisés Cedeño</div>
-                <div className="hero-photo-role">Tech Lead · AWS & FinOps</div>
+        <div data-reveal="" data-delay="200" data-y="60" style={{ justifySelf: "center", width: "100%", maxWidth: 520 }}>
+          <div data-tilt="12" style={{ position: "relative", transformStyle: "preserve-3d", aspectRatio: "1/1.08", width: "100%" }}>
+            <div style={{ position: "absolute", left: "30%", top: "4%", width: "64%", height: "76%", borderRadius: 30, overflow: "hidden", background: "var(--surface)", boxShadow: "var(--shadow)" }}>
+              <Image src="/assets/profile/moises.png" alt="Moisés Cedeño" fill style={{ objectFit: "cover" }} priority />
+            </div>
+            <div style={{ position: "absolute", left: 0, top: "13%", width: "38%", transform: "translateZ(70px)" }}>
+              <div style={{ animation: "bob 7s ease-in-out -1.5s infinite" }}>
+                <div style={{ padding: 12, borderRadius: 22, background: "var(--card)", boxShadow: "var(--shadow)", display: "grid", gap: 10 }}>
+                  <div style={{ aspectRatio: "4/3", borderRadius: 14, background: "var(--soft)", display: "grid", placeItems: "center" }}>
+                    <span className="ms" style={{ fontSize: "clamp(40px,6vw,64px)", color: "var(--accent)" }}>smart_toy</span>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, fontWeight: 700 }}>
+                    <span style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--accent)", animation: "pulse 1.6s ease-in-out infinite", flex: "none" }} />
+                    {t.floatC}
+                  </div>
+                </div>
               </div>
-              <div style={{ fontFamily: "var(--ff-mono)", fontSize: "9px", color: "var(--green)", letterSpacing: ".16em", textTransform: "uppercase" }}>Criterio · Contexto · Intención</div>
+            </div>
+            <div style={{ position: "absolute", left: "8%", top: "58%", width: "50%", transform: "translateZ(120px)" }}>
+              <div style={{ animation: "bob 7s ease-in-out -4s infinite" }}>
+                <div style={{ padding: 12, borderRadius: 22, background: "var(--card)", boxShadow: "var(--shadow)", display: "grid", gap: 10 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12, fontWeight: 700, color: "var(--muted)" }}>
+                    <span className="ms" style={{ fontSize: 18, color: "var(--accent)" }}>check_circle</span>{t.floatE}
+                  </div>
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 8 }}>
+                    <div style={{ aspectRatio: "1/1", borderRadius: 12, background: "var(--bg)", display: "grid", placeItems: "center", padding: 6 }}>
+                      <Image src="/assets/badges/badge-clf.png" alt="AWS Certified Cloud Practitioner" width={48} height={48} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+                    </div>
+                    <div style={{ aspectRatio: "1/1", borderRadius: 12, background: "var(--bg)", display: "grid", placeItems: "center", padding: 6 }}>
+                      <Image src="/assets/badges/badge-aif.png" alt="AWS Certified AI Practitioner" width={48} height={48} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style={{ position: "absolute", left: "66%", top: "68%", width: "25%", aspectRatio: "1/1", transform: "translateZ(150px)" }}>
+              <div style={{ animation: "bob 7s ease-in-out -2.5s infinite" }}>
+                <div style={{ aspectRatio: "1/1", borderRadius: "50%", background: "var(--card)", border: "5px solid var(--accent)", boxShadow: "var(--shadow)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center" }}>
+                  <span style={{ fontWeight: 800, fontSize: "clamp(22px,3vw,32px)", letterSpacing: "-.04em", lineHeight: 1 }}>−58%</span>
+                  <span style={{ fontSize: 11, fontWeight: 700, color: "var(--muted)", marginTop: 2 }}>{t.floatA}</span>
+                </div>
+              </div>
+            </div>
+            <div style={{ position: "absolute", right: "-3%", top: "10%", transform: "translateZ(140px)" }}>
+              <div style={{ animation: "bob 7s ease-in-out -3s infinite" }}>
+                <div style={{ padding: "10px 16px", borderRadius: 999, background: "var(--band)", color: "var(--band-fg)", fontWeight: 700, fontSize: 14, boxShadow: "var(--shadow)", display: "flex", alignItems: "center", gap: 8, whiteSpace: "nowrap" }}>
+                  <span className="ms" style={{ color: "var(--band-accent)", fontSize: 20 }}>check_circle</span>{t.floatB}
+                </div>
+              </div>
+            </div>
+            <div style={{ position: "absolute", left: "4%", top: "2%", transform: "translateZ(90px)" }}>
+              <div style={{ animation: "bob 7s ease-in-out -0.6s infinite" }}>
+                <div style={{ width: 54, height: 54, borderRadius: "50%", background: "var(--accent)", color: "#fff", display: "grid", placeItems: "center", boxShadow: "var(--shadow)" }}>
+                  <span className="ms" style={{ fontSize: 28 }}>trending_down</span>
+                </div>
+              </div>
+            </div>
+            <div style={{ position: "absolute", right: "-5%", top: "50%", transform: "translateZ(160px)" }}>
+              <div style={{ animation: "bob 7s ease-in-out -5s infinite" }}>
+                <div style={{ width: 58, height: 58, borderRadius: "50%", background: "var(--band)", color: "var(--band-accent)", display: "grid", placeItems: "center", boxShadow: "var(--shadow)" }}>
+                  <span className="ms" style={{ fontSize: 30 }}>hub</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </header>
 
+      <section style={{ padding: "clamp(90px,14vw,180px) 0", borderTop: "1px solid var(--line)" }}>
+        <div data-reveal="" style={{ fontSize: 13, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--accent-ink)", marginBottom: 28 }}>
+          {t.stEyebrow}
+        </div>
+        <p style={{ margin: 0, fontSize: "clamp(30px,4.4vw,60px)", fontWeight: 700, letterSpacing: "-.035em", lineHeight: 1.12, maxWidth: "24ch" }}>
+          <span
+            data-fill=""
+            style={{
+              color: "transparent",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              backgroundImage: "linear-gradient(var(--fg),var(--fg)),linear-gradient(color-mix(in srgb,var(--fg) 16%,transparent),color-mix(in srgb,var(--fg) 16%,transparent))",
+              backgroundSize: "0% 100%,100% 100%",
+              backgroundRepeat: "no-repeat",
+            }}
+          >
+            {t.statement}
+          </span>
+        </p>
+      </section>
 
-      {/* ═══ KPI BAR ═════════════════════════════════════════════ */}
-      <div className="full-border">
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div className="kpi-bar">
-            <div className="kpi-cell">
-              <div className="kpi-val green">-58%</div>
-              <div className="kpi-label">Factura AWS</div>
-              <div className="kpi-sub">MediRec · 2023</div>
+      <section data-scrolly="" style={{ position: "relative", height: "340vh", borderTop: "1px solid var(--line)" }}>
+        <div style={{ position: "sticky", top: 0, height: "100vh", display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,400px),1fr))", gap: "24px 48px", alignItems: "center", overflow: "hidden" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 26 }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, maxWidth: 420 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--accent-ink)" }}>{t.resEyebrow}</div>
+              <div style={{ display: "flex", gap: 6 }}>
+                {t.cases.map((c) => (
+                  <span key={c.where} data-dot="" style={{ height: 8, width: 8, borderRadius: 4, background: "var(--line)", transition: "width .4s, background .4s" }} />
+                ))}
+              </div>
             </div>
-            <div className="kpi-cell">
-              <div className="kpi-val green">-$20K</div>
-              <div className="kpi-label">En licencias / año</div>
-              <div className="kpi-sub">Migración NLMI · 2024</div>
+            <div style={{ position: "relative", height: "clamp(260px,38vh,340px)" }}>
+              {t.cases.map((c, i) => (
+                <div key={c.where} data-panel={i} style={{ position: "absolute", inset: 0, opacity: 0, transition: "opacity .5s ease, transform .7s cubic-bezier(.2,.7,.2,1)" }}>
+                  <div style={{ fontSize: 14, fontWeight: 600, color: "var(--muted)" }}>{c.where}</div>
+                  <div style={{ fontWeight: 800, fontSize: "clamp(72px,10vw,140px)", letterSpacing: "-.06em", lineHeight: 0.95, color: "var(--accent)", marginTop: 6 }}>{c.metric}</div>
+                  <div style={{ fontSize: "clamp(20px,2.2vw,26px)", fontWeight: 700, letterSpacing: "-.02em", marginTop: 10 }}>{c.label}</div>
+                  <p style={{ margin: "10px 0 0", color: "var(--muted)", maxWidth: "40ch" }}>{c.line}</p>
+                </div>
+              ))}
             </div>
-            <div className="kpi-cell">
-              <div className="kpi-val green">40K+</div>
-              <div className="kpi-label">Órdenes de laboratorio/mes</div>
-              <div className="kpi-sub">ORES API · 2022</div>
-            </div>
-            <div className="kpi-cell">
-              <div className="kpi-val">20K+</div>
-              <div className="kpi-label">Usuarios en producción</div>
-              <div className="kpi-sub">Sistemas multi-tenant</div>
-            </div>
-            <div className="kpi-cell">
-              <div className="kpi-val green">&lt;0.2%</div>
-              <div className="kpi-label">Error rate bajo carga</div>
-              <div className="kpi-sub">T-Cuida · 20K usuarios validados</div>
+            <div style={{ display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap" }}>
+              <div style={{ height: 3, width: 200, background: "var(--line)", borderRadius: 2, overflow: "hidden" }}>
+                <div data-progress="" style={{ height: "100%", background: "var(--accent)", transformOrigin: "left", transform: "scaleX(0)" }} />
+              </div>
+              <Link href="/casos" style={{ display: "inline-flex", alignItems: "center", gap: 6, fontWeight: 700, textDecoration: "none" }}>
+                {t.resLink} <span className="ms">arrow_forward</span>
+              </Link>
             </div>
           </div>
-        </div>
-      </div>
-
-
-      {/* ═══ INDUSTRY TAGS ══════════════════════════════════════ */}
-      <div style={{ borderBottom: "1px solid var(--border)", background: "var(--bg)" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "20px 48px", display: "flex", alignItems: "center", gap: "32px", flexWrap: "wrap" }}>
-          <span style={{ fontFamily: "var(--ff-mono)", fontSize: "9px", color: "var(--text-3)", letterSpacing: ".18em", textTransform: "uppercase", whiteSpace: "nowrap" }}>Industrias</span>
-          <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", alignItems: "center" }}>
-            {["SaaS", "IoT", "Gov-Tech", "FinOps", "AWS", "Sistemas distribuidos"].map(tag => (
-              <span key={tag} style={{ fontFamily: "var(--ff-mono)", fontSize: "10px", color: "var(--text-3)", letterSpacing: ".08em", padding: "3px 10px", border: "1px solid var(--border)", borderRadius: "2px" }}>{tag}</span>
+          <div style={{ position: "relative", height: "min(62vh,540px)", perspective: 1500, transformStyle: "preserve-3d" }}>
+            {t.cases.map((c, i) => (
+              <article key={c.where} data-card={i} style={{ position: "absolute", left: "50%", top: "50%", translate: "-50% -50%", width: "min(380px,82vw)", padding: 30, borderRadius: 30, background: "var(--card)", border: "1px solid var(--line)", boxShadow: "var(--shadow)", display: "flex", flexDirection: "column", gap: 22, willChange: "transform" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 13, fontWeight: 700, color: "var(--muted)" }}>
+                  <span>{c.where}</span>
+                  <span style={{ color: "var(--accent-ink)" }}>0{i + 1}</span>
+                </div>
+                <div style={{ fontSize: 26, fontWeight: 800, letterSpacing: "-.03em", lineHeight: 1.1 }}>{c.title}</div>
+                <div style={{ display: "grid", gap: 14 }}>
+                  <div>
+                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: 13, color: "var(--muted)", marginBottom: 6 }}>
+                      <span>{t.before}</span><b style={{ color: "var(--fg)" }}>{c.beforeV}</b>
+                    </div>
+                    <div style={{ height: 12, borderRadius: 6, background: "color-mix(in srgb,var(--fg) 14%,transparent)" }} />
+                  </div>
+                  <div>
+                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: 13, color: "var(--muted)", marginBottom: 6 }}>
+                      <span>{t.after}</span><b style={{ color: "var(--accent-ink)" }}>{c.afterV}</b>
+                    </div>
+                    <div style={{ height: 12, borderRadius: 6, background: "var(--surface)" }}>
+                      <div style={{ height: "100%", width: c.afterW, minWidth: 12, borderRadius: 6, background: "var(--accent)" }} />
+                    </div>
+                  </div>
+                </div>
+                <div style={{ fontWeight: 800, fontSize: 56, letterSpacing: "-.05em", lineHeight: 1, color: "var(--accent)" }}>{c.metric}</div>
+              </article>
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* ═══ MI ENFOQUE ══════════════════════════════════════════ */}
-      <div id="metodologia" className="full-border">
-        <section className="section">
-          <div className="section-kicker">Mi Enfoque</div>
-          <h2 className="section-h2">Cómo convierto criterio técnico<br />en resultados medibles.</h2>
-          <p className="section-sub">No es solo escribir buen código. Es tomar las decisiones correctas en el momento correcto y liderar el equipo para ejecutarlas.</p>
-
-          <div className="enfoque-grid">
-            <div className="enfoque-cell">
-              <div className="enfoque-icon" style={{ color: "var(--blue)" }}>↗</div>
-              <div className="enfoque-title">Liderazgo técnico con impacto</div>
-              <div className="enfoque-body">Defino la arquitectura, priorizo la deuda técnica y conecto las decisiones de ingeniería con el negocio. Lidero equipos para que entreguen más y mejor, no solo más rápido.</div>
-              <span className="metric-tag neutral">3 años como Tech Lead · SaaS & IoT</span>
-            </div>
-            <div className="enfoque-cell">
-              <div className="enfoque-icon">IA</div>
-              <div className="enfoque-title">IA con criterio e intención</div>
-              <div className="enfoque-body">Uso IA para acelerar entrega sin sacrificar arquitectura. La herramienta no reemplaza el criterio, lo amplifica. El contexto y la intención siempre los pongo yo.</div>
-              <span className="metric-tag">+8 años de criterio técnico detrás</span>
-            </div>
-            <div className="enfoque-cell">
-              <div className="enfoque-icon" style={{ color: "var(--violet)" }}>⌬</div>
-              <div className="enfoque-title">Resultados que se miden</div>
-              <div className="enfoque-body">-58% en factura AWS, $20k/yr menos en licencias farmacéuticas. Cada decisión técnica tiene un impacto en el negocio — y ese impacto se mide.</div>
-              <span className="metric-tag">Resultados comprobados · Healthcare & SaaS</span>
-            </div>
-          </div>
-        </section>
-      </div>
-
-
-      {/* ═══ PROBLEMAS QUE RESUELVO ══════════════════════════════ */}
-      <div className="full-border">
-        <section className="section">
-          <div className="section-kicker">Problemas que Resuelvo</div>
-          <h2 className="section-h2">¿Te suena alguno de estos?</h2>
-          <p className="section-sub">Si una de estas situaciones describe tu empresa hoy, probablemente podamos hablar.</p>
-
-          <div className="problemas-list">
-            <div className="problema-item">
-              <div className="problema-q">¿Tu factura AWS sube cada mes sin que nadie sepa exactamente por qué?</div>
-              <div className="problema-a">
-                <strong>Gobierno de costos cloud sin tocar la disponibilidad.</strong> En MediRec identifiqué instancias sobredimensionadas, eliminé recursos huérfanos y reestructuré el modelo de reservas. Resultado: <strong>-58% en factura AWS</strong> en 90 días, plataforma al 100% de uptime.
-                <br /><Link className="problema-link" href="/casos-de-exito/detail/medirec-aws">Ver caso completo →</Link>
+      <section style={{ padding: "110px 0", borderTop: "1px solid var(--line)" }}>
+        <div data-reveal="" style={{ fontSize: 13, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--accent-ink)" }}>{t.servEyebrow}</div>
+        <h2 data-reveal="" data-delay="80" style={{ margin: "14px 0 0", fontSize: "clamp(36px,5vw,64px)", fontWeight: 800, letterSpacing: "-.045em", lineHeight: 1, maxWidth: "16ch" }}>{t.servTitle}</h2>
+        <div data-stagger="" data-delay="150" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,250px),1fr))", gap: 18, marginTop: 48 }}>
+          {t.services.map((s, i) => (
+            <article key={s.title} data-tilt="9" data-glow="" style={{ background: "var(--surface)", borderRadius: 30, padding: 30, display: "flex", flexDirection: "column", gap: 12, minHeight: 300 }}>
+              <div style={{ width: 52, height: 52, borderRadius: 16, background: "var(--soft)", color: "var(--accent-ink)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 28 }}>
+                <span className="ms">{s.icon}</span>
               </div>
-            </div>
-            <div className="problema-item">
-              <div className="problema-q">¿Pagas licencias de software que podrías eliminar sin perder funcionalidad?</div>
-              <div className="problema-a">
-                <strong>Migro dependencias costosas a alternativas sin comprometer el producto.</strong> Migré LexComp a NLMI en un sistema Healthcare crítico, eliminando <strong>$20k/año</strong> en licencias farmacéuticas con cero pérdida de integridad clínica.
-                <br /><Link className="problema-link" href="/casos-de-exito/detail/licencias-farmaceuticas">Ver caso completo →</Link>
-              </div>
-            </div>
-            <div className="problema-item">
-              <div className="problema-q">¿Tu plataforma funciona pero sabes que es frágil y nadie quiere tocarla?</div>
-              <div className="problema-a">
-                <strong>Re-arquitecturo sistemas frágiles sin detener la operación.</strong> Identifico los puntos de quiebre, priorizo la deuda técnica con criterio de negocio y construyo una base sólida para escalar — sin reescribir todo desde cero.
-                <br /><Link className="problema-link" style={{ color: "var(--red)", opacity: 0.7 }} href="/contact">Caso en proceso · Hablemos →</Link>
-              </div>
-            </div>
-            <div className="problema-item">
-              <div className="problema-q">¿Tu infraestructura cloud creció sin orden y hoy nadie sabe qué hay en producción?</div>
-              <div className="problema-a">
-                <strong>Estandarizo infraestructura con IaC y visibilidad real.</strong> Implemento Infrastructure as Code, elimino recursos huérfanos y dejo una arquitectura que cualquier ingeniero puede entender y operar desde el primer día.
-                <br /><Link className="problema-link" style={{ color: "var(--red)", opacity: 0.7 }} href="/contact">Caso en proceso · Hablemos →</Link>
-              </div>
-            </div>
-          </div>
-          <div style={{ marginTop: "32px", paddingTop: "24px", borderTop: "1px solid var(--border)", textAlign: "center" }}>
-            <p style={{ color: "var(--text-3)", fontFamily: "var(--ff-mono)", fontSize: "12px", marginBottom: "12px" }}>¿Tu problema no está aquí? Descríbemelo.</p>
-            <Link className="btn btn-primary" href="/contact">Hablemos →</Link>
-          </div>
-        </section>
-      </div>
-
-
-      {/* ═══ TESTIMONIOS ══════════════════════════════════════════ */}
-      <div id="testimonios" className="full-border">
-        <section className="section">
-          <div className="section-kicker">Testimonios</div>
-          <h2 className="section-h2">Feedback real de proyectos<br />documentados.</h2>
-          <p className="section-sub">Algunos detalles modificados por NDA. Las métricas son verificables.</p>
-
-          <div className="test-grid">
-            <div className="test-cell">
-              <div className="test-quote">El nuevo dev estuvo productivo en menos de 48 horas gracias al registro de decisiones que Moisés implementó. Nunca habíamos onboardeado tan rápido.</div>
-              <div className="test-meta">
-                <div className="test-name">Product Owner</div>
-                <div className="test-role">Plataforma Healthcare · Lima, 2023</div>
-                <span className="cat-badge cat-violet"><span className="dot" />Healthcare</span>
-              </div>
-            </div>
-            <div className="test-cell">
-              <div className="test-quote">Redujimos la factura de AWS en un 58% en menos de tres meses. Lo que más sorprendió al equipo fue que la disponibilidad no bajó ni un punto durante el proceso.</div>
-              <div className="test-meta">
-                <div className="test-name">Director de TI</div>
-                <div className="test-role">MediRec · SaaS Healthcare · 2023</div>
-                <span className="cat-badge cat-green"><span className="dot" />FinOps</span>
-              </div>
-            </div>
-            <div className="test-cell">
-              <div className="test-quote">Moisés no solo entregó el sistema — entregó documentación que hace que cualquier dev pueda contribuir desde el día uno. Eso vale más que el código.</div>
-              <div className="test-meta">
-                <div className="test-name">CTO</div>
-                <div className="test-role">SaaS IoT · Miami, 2024</div>
-                <span className="cat-badge cat-blue"><span className="dot" />SaaS</span>
-              </div>
-            </div>
-          </div>
-
-          <div style={{ marginTop: "20px", textAlign: "center" }}>
-            <Link className="btn btn-secondary" href="/testimonials" style={{ fontSize: "13px" }}>Ver los 11 testimonios →</Link>
-          </div>
-        </section>
-      </div>
-
-
-      {/* ═══ CASOS DE ÉXITO ══════════════════════════════════════ */}
-      <div id="casos" className="full-border">
-        <section className="section">
-          <div className="section-kicker">Casos de Éxito</div>
-          <h2 className="section-h2">Proyectos reales.<br />Métricas verificables.</h2>
-          <p className="section-sub">8 años de decisiones técnicas documentadas. Selecciona el que más se acerque a tu contexto.</p>
-
-          <div className="casos-grid">
-            <div className="caso-card">
-              <div className="caso-meta">
-                <span>Work · Healthcare</span>
-                <span>2023</span>
-              </div>
-              <div className="caso-title">Cómo reduje 58% la factura AWS de MediRec</div>
-              <div className="caso-body">Re-arquitectura y gobernanza de costos en plataforma Healthcare con 20K+ usuarios. Instancias reservadas, auto-scaling inteligente y eliminación de recursos huérfanos — sin tocar uptime.</div>
-              <div className="caso-foot">
-                <span className="metric-tag">-58% AWS · $180K ahorrados</span>
-                <Link className="caso-link" href="/casos-de-exito/detail/medirec-aws">Ver caso →</Link>
-              </div>
-            </div>
-            <div className="caso-card">
-              <div className="caso-meta">
-                <span>Work · FinOps</span>
-                <span>2024</span>
-              </div>
-              <div className="caso-title">Cómo eliminé $20k/año en licencias farmacéuticas</div>
-              <div className="caso-body">Migración de LexComp a NLMI sin perder integridad clínica ni cobertura de datos. Sistema de validación de medicamentos que cumple PREIS con la mitad del costo operativo.</div>
-              <div className="caso-foot">
-                <span className="metric-tag neutral">-$20k/año · 0 downtime</span>
-                <Link className="caso-link" href="/casos-de-exito/detail/licencias-farmaceuticas">Ver caso →</Link>
-              </div>
-            </div>
-            <div className="caso-card">
-              <div className="caso-meta">
-                <span>Work · Healthcare</span>
-                <span>2022</span>
-              </div>
-              <div className="caso-title">Cómo automaticé 40K órdenes de laboratorio al mes</div>
-              <div className="caso-body">API centralizada en Laravel que conecta doctores con 25+ laboratorios externos. El doctor crea la orden, el lab la ve en minutos, el resultado vuelve automático. De 5 días a 4 horas.</div>
-              <div className="caso-foot">
-                <span className="metric-tag">De 5 días a 4h · 40K+ órdenes/mes</span>
-                <Link className="caso-link" href="/casos-de-exito/detail/ores-laboratory-api">Ver caso →</Link>
-              </div>
-            </div>
-            <div className="caso-card">
-              <div className="caso-meta">
-                <span>Personal · IoT</span>
-                <span>2024</span>
-              </div>
-              <div className="caso-title">Lo que construyo cuando nadie me paga</div>
-              <div className="caso-body">Proyectos de exploración técnica: sistemas IoT con MQTT y edge computing, herramientas de automatización personal, experimentos de arquitectura distribuida en Raspberry Pi.</div>
-              <div className="caso-foot">
-                <span className="cat-badge cat-amber"><span className="dot" />Personal</span>
-                <Link className="caso-link" href="/labs">Ver proyectos →</Link>
-              </div>
-            </div>
-          </div>
-
-          <div style={{ marginTop: "20px", textAlign: "center" }}>
-            <Link className="btn btn-secondary" href="/casos-de-exito" style={{ fontSize: "13px" }}>Ver todos los casos →</Link>
-          </div>
-        </section>
-      </div>
-
-
-      {/* ═══ CTA FINAL ════════════════════════════════════════════ */}
-      <div id="contacto" className="full-border">
-        <div className="cta-final">
-          <div>
-            <div className="section-kicker" style={{ marginBottom: "20px" }}>¿Hablamos?</div>
-            <h2 className="cta-final-h2">¿Tienes un problema<br />técnico que <em>resolver</em>?</h2>
-            <p className="cta-final-sub">
-              Si tu plataforma AWS está fuera de control, tu infraestructura creció sin orden o necesitas criterio técnico real en tu equipo, cuéntamelo.
-            </p>
-            <div className="cta-final-btns">
-              <Link className="btn btn-primary" href="/contact">Hablemos →</Link>
-            </div>
-          </div>
-          <div className="cta-final-aside">
-            <div className="cta-aside-item">
-              <span className="cta-aside-label"><MessageCircle size={13} style={{ display: "inline", marginRight: "6px", verticalAlign: "middle" }} />WhatsApp</span>
-              <span className="cta-aside-val"><a href="https://wa.me/51938804597" target="_blank" rel="noopener">+51 938 804 597</a></span>
-            </div>
-            <div className="cta-aside-item">
-              <span className="cta-aside-label"><Send size={13} style={{ display: "inline", marginRight: "6px", verticalAlign: "middle" }} />Telegram</span>
-              <span className="cta-aside-val"><a href="https://t.me/modavidc" target="_blank" rel="noopener">@modavidc</a></span>
-            </div>
-            <div className="cta-aside-item">
-              <span className="cta-aside-label"><Mail size={13} style={{ display: "inline", marginRight: "6px", verticalAlign: "middle" }} />Email</span>
-              <span className="cta-aside-val"><a href="mailto:moisesdavidaaron@gmail.com?subject=Consulta%20Tech%20Lead&body=Hola%20Mois%C3%A9s%2C%0A%0Avi%20tu%20portfolio%20y%20me%20gustar%C3%ADa%20hablar%20sobre...">moisesdavidaaron@gmail.com</a></span>
-            </div>
-            <div className="cta-aside-item">
-              <span className="cta-aside-label"><Linkedin size={13} style={{ display: "inline", marginRight: "6px", verticalAlign: "middle" }} />LinkedIn</span>
-              <span className="cta-aside-val"><a href="https://linkedin.com/in/modavidc" target="_blank" rel="noopener">linkedin.com/in/modavidc</a></span>
-            </div>
-            <div className="cta-aside-item">
-              <span className="cta-aside-label"><Github size={13} style={{ display: "inline", marginRight: "6px", verticalAlign: "middle" }} />GitHub</span>
-              <span className="cta-aside-val"><a href="https://github.com/modavidc" target="_blank" rel="noopener">github.com/modavidc</a></span>
-            </div>
-          </div>
+              <div style={{ marginTop: "auto", fontSize: 13, fontWeight: 700, color: "var(--muted)" }}>0{i + 1}</div>
+              <h3 style={{ margin: 0, fontSize: 25, fontWeight: 800, letterSpacing: "-.03em", lineHeight: 1.12 }}>{s.title}</h3>
+              <p style={{ margin: 0, color: "var(--muted)", fontSize: 16 }}>{s.desc}</p>
+            </article>
+          ))}
         </div>
-      </div>
-    </>
+      </section>
+
+      <section data-reveal="" data-y="60" style={{ position: "relative", overflow: "hidden", background: "var(--band)", color: "var(--band-fg)", borderRadius: "clamp(26px,4vw,44px)", padding: "clamp(40px,7vw,90px)", display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-end", gap: 30 }}>
+        <div aria-hidden="true" data-parallax="0.18" style={{ position: "absolute", right: "-2%", top: "-10%", fontSize: "clamp(220px,34vw,460px)", fontWeight: 800, letterSpacing: "-.08em", lineHeight: 1, color: "var(--band-tile)", pointerEvents: "none" }}>S/</div>
+        <div style={{ position: "relative" }}>
+          <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--band-accent)" }}>{t.sencEyebrow}</div>
+          <h2 style={{ margin: "14px 0 0", fontSize: "clamp(40px,5.6vw,72px)", fontWeight: 800, letterSpacing: "-.05em", lineHeight: 0.98, color: "#fff" }}>
+            Solito.<br /><span style={{ color: "var(--band-accent)" }}>{t.sencTag}</span>
+          </h2>
+          <p style={{ margin: "20px 0 0", color: "var(--band-muted)", maxWidth: "40ch" }}>{t.sencDesc}</p>
+        </div>
+        <a data-magnetic="" href="/productos" style={{ position: "relative", display: "inline-flex", alignItems: "center", gap: 8, borderRadius: 999, background: "var(--band-accent)", color: "var(--band)", padding: "16px 26px", fontSize: 16, fontWeight: 700, textDecoration: "none" }}>
+          {t.sencLink} <span className="ms">arrow_forward</span>
+        </a>
+      </section>
+
+      <Cierre />
+    </div>
   )
 }
