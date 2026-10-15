@@ -1,19 +1,17 @@
 # modavidc.com, Estado (15 octubre 2026)
 
-Amarillo: deploy en marcha en el servidor, dos bugs de build encontrados y corregidos.
+Verde: sitio rediseñado, desplegado y verificado en producción con SSL.
 
 ## Últimas 3 cosas
-1. `v0.3.0` pusheado a `origin/v0.3.0`; repo curado y rediseño verificado en local.
-2. Deploy iniciado en el servidor Vultr, falló el build de Docker por `unrs-resolver` bloqueado (pnpm 10+ exige aprobar scripts de instalación nativos).
-3. Corregidos dos bugs reales de Docker: faltaba declarar `unrs-resolver` como build permitido (`pnpm-workspace.yaml`) y el Dockerfile no copiaba ese archivo al stage de `deps`, así que pnpm nunca lo veía.
+1. Deploy en Vultr exitoso tras corregir 2 bugs de build de Docker (pnpm build-script approval + COPY faltante de `pnpm-workspace.yaml`).
+2. Verificadas las 5 rutas en `https://modavidc.com` cargando bien con SSL: `/`, `/sobre-mi`, `/experiencia`, `/casos`, `/productos`.
+3. Las 6 fases del plan original quedaron cerradas: contenido, repo curado, push, decisión de evidencia, deploy, verificación en producción.
 
 ## Hoy / lo inmediato
-- Esperando que Moisés corra de nuevo `git pull` + `docker-compose ... up -d --build` en el servidor con el fix pusheado.
-- Confirmar con Moisés: el link "Ver sitio" de Solito en `/productos` (apunta a `#`).
+- Confirmar con Moisés: el link "Ver sitio" de Solito en `/productos` sigue apuntando a `#`.
 
 ## Sigue en agenda (sin fecha fija)
-- Verificación visual en 375px/768px con una herramienta de navegador real.
-- Fase 6: verificar SSL en producción y publicar el link, una vez el build pase.
+- Verificación visual en 375px/768px con una herramienta de navegador real (nunca confirmada con dispositivo real).
 
 ## Bloqueos
 - Ninguno activo. `docs/personal/*.md` y el CV siguen en el historial ya pusheado de `origin/main`/`origin/v0.2.0`; Moisés decidió dejarlo así por ahora.
