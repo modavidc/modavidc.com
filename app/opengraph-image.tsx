@@ -8,7 +8,7 @@ export const contentType = "image/png"
 export const dynamic = "force-dynamic"
 
 export default async function OGImage() {
-  const fontBold = await readFile(join(process.cwd(), "app", "_og", "schibsted-grotesk-800.woff2"))
+  const fontBold = await readFile(join(process.cwd(), "public", "fonts", "schibsted-grotesk-800.woff2"))
 
   const band = "#0A140D"
   const fg = "#E4ECE5"
