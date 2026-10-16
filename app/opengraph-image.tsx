@@ -1,25 +1,14 @@
 import { ImageResponse } from "next/og"
+import { readFile } from "node:fs/promises"
+import { join } from "node:path"
 
-export const runtime = "edge"
 export const alt = "Moisés Cedeño · Tech Lead & Consultor · AWS, FinOps & Agentic AI"
 export const size = { width: 1200, height: 630 }
 export const contentType = "image/png"
-
-async function loadSchibstedGrotesk(weight: number) {
-  const css = await fetch(
-    `https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@${weight}&display=swap`,
-    { headers: { "User-Agent": "Mozilla/5.0 (compatible; Chrome/120)" } }
-  ).then((r) => r.text())
-  const url = css.match(/src: url\((.+?)\) format\('woff2'\)/)?.[1]
-  if (!url) throw new Error("Font URL not found")
-  return fetch(url).then((r) => r.arrayBuffer())
-}
+export const dynamic = "force-dynamic"
 
 export default async function OGImage() {
-  const [fontBody, fontBold] = await Promise.all([
-    loadSchibstedGrotesk(500),
-    loadSchibstedGrotesk(800),
-  ])
+  const fontBold = await readFile(join(process.cwd(), "app", "_og", "schibsted-grotesk-800.woff2"))
 
   const band = "#0A140D"
   const fg = "#E4ECE5"
@@ -36,7 +25,7 @@ export default async function OGImage() {
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          fontFamily: "'Schibsted Grotesk', sans-serif",
+          fontFamily: "Schibsted Grotesk, sans-serif",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "48px 72px 0" }}>
@@ -44,7 +33,7 @@ export default async function OGImage() {
             <div style={{ width: 36, height: 36, borderRadius: 10, background: accent, color: band, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15, fontWeight: 800 }}>MC</div>
             <span style={{ color: fg, fontSize: 24, fontWeight: 800, letterSpacing: "-1px" }}>modavidc</span>
           </div>
-          <span style={{ color: muted, fontSize: 14, fontWeight: 500, letterSpacing: "2px" }}>MODAVIDC.COM</span>
+          <span style={{ color: muted, fontSize: 14, fontWeight: 800, letterSpacing: "2px" }}>MODAVIDC.COM</span>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", flex: 1, padding: "48px 72px 0", justifyContent: "center" }}>
@@ -64,7 +53,7 @@ export default async function OGImage() {
           ].map((kpi, i) => (
             <div key={kpi.label} style={{ display: "flex", flexDirection: "column", flex: 1, padding: "28px 32px", borderRight: i < 3 ? `1px solid ${tile}` : "none" }}>
               <div style={{ color: accent, fontSize: 34, fontWeight: 800, letterSpacing: "-1.5px", lineHeight: 1, marginBottom: 6 }}>{kpi.val}</div>
-              <div style={{ color: muted, fontSize: 10, fontWeight: 500, letterSpacing: "1.5px" }}>{kpi.label}</div>
+              <div style={{ color: muted, fontSize: 10, fontWeight: 800, letterSpacing: "1.5px" }}>{kpi.label}</div>
             </div>
           ))}
         </div>
@@ -72,10 +61,7 @@ export default async function OGImage() {
     ),
     {
       ...size,
-      fonts: [
-        { name: "Schibsted Grotesk", data: fontBody, style: "normal", weight: 500 },
-        { name: "Schibsted Grotesk", data: fontBold, style: "normal", weight: 800 },
-      ],
+      fonts: [{ name: "Schibsted Grotesk", data: fontBold, style: "normal", weight: 800 }],
     }
   )
 }
