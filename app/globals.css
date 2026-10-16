@@ -123,13 +123,6 @@ a:hover { color: var(--accent); }
 @keyframes drift { 0%, 100% { translate: 0 0; opacity: .5 } 50% { translate: 0 8px; opacity: 1 } }
 @keyframes fin { from { opacity: 0 } to { opacity: 1 } }
 
-/* ── view transitions (page nav) ──────────────────────────────────── */
-@view-transition { navigation: auto; }
-::view-transition-old(root) { animation: .35s cubic-bezier(.4, 0, .2, 1) both vtout; }
-::view-transition-new(root) { animation: .6s cubic-bezier(.2, .7, .2, 1) both vtin; }
-@keyframes vtout { to { opacity: 0; transform: translateY(-14px); filter: blur(6px) } }
-@keyframes vtin { from { opacity: 0; transform: translateY(28px); filter: blur(10px) } }
-
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after { animation: none !important; transition: none !important; }
 }
