@@ -28,9 +28,9 @@ export const sobreMiContent = {
     ],
     offEyebrow: "Fuera del trabajo", offTitle: "Lo que hago cuando nadie me paga.",
     off: [
-      { mark: "S/", bg: "#D33F2B", fg: "#FAF6F1", h: "Solito", d: "Gastos que se registran solos.", href: "/productos" },
-      { mark: "G", bg: "#25A35A", fg: "#fff", h: "Grupero", d: "La radiografía de tus grupos de WhatsApp.", href: "/productos" },
-      { mark: "E", bg: "#2B2620", fg: "#EFEAE1", h: "El Estoico", d: "Estoicismo como práctica diaria. Y sí, lo practico.", href: "/productos" },
+      { mark: "S/", bg: "#D33F2B", fg: "#FAF6F1", h: "Solito", d: "Gastos que se registran solos.", href: "/products" },
+      { mark: "G", bg: "#25A35A", fg: "#fff", h: "Grupero", d: "La radiografía de tus grupos de WhatsApp.", href: "/products" },
+      { mark: "E", bg: "#2B2620", fg: "#EFEAE1", h: "El Estoico", d: "Estoicismo como práctica diaria. Y sí, lo practico.", href: "/products" },
     ],
   },
   en: {
@@ -62,9 +62,9 @@ export const sobreMiContent = {
     ],
     offEyebrow: "Outside work", offTitle: "What I do when nobody's paying.",
     off: [
-      { mark: "S/", bg: "#D33F2B", fg: "#FAF6F1", h: "Solito", d: "Expenses that log themselves.", href: "/productos" },
-      { mark: "G", bg: "#25A35A", fg: "#fff", h: "Grupero", d: "An X-ray of your WhatsApp groups.", href: "/productos" },
-      { mark: "E", bg: "#2B2620", fg: "#EFEAE1", h: "El Estoico", d: "Stoicism as a daily practice. And yes, I practice it.", href: "/productos" },
+      { mark: "S/", bg: "#D33F2B", fg: "#FAF6F1", h: "Solito", d: "Expenses that log themselves.", href: "/products" },
+      { mark: "G", bg: "#25A35A", fg: "#fff", h: "Grupero", d: "An X-ray of your WhatsApp groups.", href: "/products" },
+      { mark: "E", bg: "#2B2620", fg: "#EFEAE1", h: "El Estoico", d: "Stoicism as a daily practice. And yes, I practice it.", href: "/products" },
     ],
   },
 }

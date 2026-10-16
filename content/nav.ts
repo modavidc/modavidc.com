@@ -4,10 +4,10 @@ export const navContent = {
 }
 
 export const navPages = [
-  ["sobre", "/sobre-mi"],
-  ["exp", "/experiencia"],
-  ["casos", "/casos"],
-  ["prod", "/productos"],
+  ["sobre", "/about"],
+  ["exp", "/experience"],
+  ["casos", "/cases"],
+  ["prod", "/products"],
 ] as const
 
 export type NavActive = "inicio" | "sobre" | "exp" | "casos" | "prod"

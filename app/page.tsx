@@ -43,7 +43,7 @@ export default function Home() {
             <a data-magnetic="" href="mailto:hola@modavidc.com" style={{ display: "inline-flex", alignItems: "center", gap: 8, borderRadius: 999, background: "var(--accent)", color: "#fff", padding: "16px 26px", fontSize: 16, fontWeight: 700, textDecoration: "none", boxShadow: "0 14px 30px rgba(30,125,71,.32)" }}>
               {t.heroCta} <span className="ms">arrow_forward</span>
             </a>
-            <Link href="/sobre-mi" style={{ fontWeight: 700, fontSize: 16, textDecoration: "none" }}>{t.heroCta2}</Link>
+            <Link href="/about" style={{ fontWeight: 700, fontSize: 16, textDecoration: "none" }}>{t.heroCta2}</Link>
           </div>
         </div>
 
@@ -161,7 +161,7 @@ export default function Home() {
               <div style={{ height: 3, width: 200, background: "var(--line)", borderRadius: 2, overflow: "hidden" }}>
                 <div data-progress="" style={{ height: "100%", background: "var(--accent)", transformOrigin: "left", transform: "scaleX(0)" }} />
               </div>
-              <Link href="/casos" style={{ display: "inline-flex", alignItems: "center", gap: 6, fontWeight: 700, textDecoration: "none" }}>
+              <Link href="/cases" style={{ display: "inline-flex", alignItems: "center", gap: 6, fontWeight: 700, textDecoration: "none" }}>
                 {t.resLink} <span className="ms">arrow_forward</span>
               </Link>
             </div>
@@ -223,7 +223,7 @@ export default function Home() {
           </h2>
           <p style={{ margin: "20px 0 0", color: "var(--band-muted)", maxWidth: "40ch" }}>{t.sencDesc}</p>
         </div>
-        <a data-magnetic="" href="/productos" style={{ position: "relative", display: "inline-flex", alignItems: "center", gap: 8, borderRadius: 999, background: "var(--band-accent)", color: "var(--band)", padding: "16px 26px", fontSize: 16, fontWeight: 700, textDecoration: "none" }}>
+        <a data-magnetic="" href="/products" style={{ position: "relative", display: "inline-flex", alignItems: "center", gap: 8, borderRadius: 999, background: "var(--band-accent)", color: "var(--band)", padding: "16px 26px", fontSize: 16, fontWeight: 700, textDecoration: "none" }}>
           {t.sencLink} <span className="ms">arrow_forward</span>
         </a>
       </section>
