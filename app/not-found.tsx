@@ -3,10 +3,10 @@
 import Link from "next/link"
 
 const links = [
-  { href: "/casos", label: "Casos de éxito" },
-  { href: "/experiencia", label: "Experiencia" },
-  { href: "/sobre-mi", label: "Sobre mí" },
-  { href: "/productos", label: "Productos" },
+  { href: "/cases", label: "Casos de éxito" },
+  { href: "/experience", label: "Experiencia" },
+  { href: "/about", label: "Sobre mí" },
+  { href: "/products", label: "Productos" },
 ]
 
 export default function NotFound() {

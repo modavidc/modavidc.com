@@ -30,6 +30,14 @@ const nextConfig = {
   compress: true,
   poweredByHeader: false,
   generateEtags: false,
+  async redirects() {
+    return [
+      { source: '/sobre-mi', destination: '/about', permanent: true },
+      { source: '/experiencia', destination: '/experience', permanent: true },
+      { source: '/casos', destination: '/cases', permanent: true },
+      { source: '/productos', destination: '/products', permanent: true },
+    ]
+  },
   async headers() {
     return [
       {
