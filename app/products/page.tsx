@@ -124,11 +124,17 @@ export default function ProductosPage() {
                   ))}
                 </div>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 6 }}>
-                  {a.stores.map((s) => (
-                    <a key={s.l} href={s.href} style={{ display: "inline-flex", alignItems: "center", gap: 8, borderRadius: 14, padding: "12px 18px", fontSize: 15, fontWeight: 700, textDecoration: "none", background: s.bg, color: s.fg, border: `1.5px solid ${s.bd}` }}>
-                      {s.l} <span className="ms" style={{ fontSize: 18 }}>north_east</span>
-                    </a>
-                  ))}
+                  {a.stores.map((s) =>
+                    s.href === "#" ? (
+                      <span key={s.l} style={{ display: "inline-flex", alignItems: "center", gap: 8, borderRadius: 14, padding: "12px 18px", fontSize: 15, fontWeight: 700, background: "var(--surface)", color: "var(--muted)", border: "1.5px solid var(--line)" }}>
+                        {s.l}
+                      </span>
+                    ) : (
+                      <a key={s.l} href={s.href} style={{ display: "inline-flex", alignItems: "center", gap: 8, borderRadius: 14, padding: "12px 18px", fontSize: 15, fontWeight: 700, textDecoration: "none", background: s.bg, color: s.fg, border: `1.5px solid ${s.bd}` }}>
+                        {s.l} <span className="ms" style={{ fontSize: 18 }}>north_east</span>
+                      </a>
+                    )
+                  )}
                 </div>
               </article>
             ))}
