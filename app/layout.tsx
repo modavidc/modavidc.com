@@ -39,19 +39,34 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://modavidc.com/#person",
+        name: "Moisés Cedeño",
+        url: "https://modavidc.com/about",
+        image: "https://modavidc.com/assets/profile/moises.webp",
+        jobTitle: "Tech Lead y arquitecto de soluciones",
+        sameAs: ["https://www.linkedin.com/in/modavidc/", "https://github.com/modavidc"],
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://modavidc.com/#website",
+        name: "Moisés Cedeño",
+        url: "https://modavidc.com/",
+        inLanguage: ["es", "en"],
+        publisher: { "@id": "https://modavidc.com/#person" },
+      },
+    ],
+  }
+
   return (
     <html lang="es" suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap"
-        />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0..1,0&icon_names=arrow_downward,arrow_forward,check,check_circle,cloud,co_present,dark_mode,description,format_quote,groups,hub,light_mode,location_on,mail,north_east,person,smart_toy,touch_app,trending_down&display=block"
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
+        <link rel="preload" href="/fonts/schibsted-grotesk-variable.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
       </head>
       <body>
         <ThemeProvider attribute="data-theme" defaultTheme="system" enableSystem storageKey="modavidc-theme">

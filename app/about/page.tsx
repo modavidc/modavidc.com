@@ -30,7 +30,7 @@ export default function SobreMiPage() {
         <div style={{ justifySelf: "center", width: "100%", maxWidth: 460 }}>
           <div data-tilt="12" style={{ position: "relative", transformStyle: "preserve-3d", padding: "24px 24px 40px" }}>
             <div style={{ aspectRatio: "4/5", borderRadius: 0, overflow: "hidden", background: "var(--surface)", boxShadow: "var(--shadow)", border: "8px solid var(--card)" }}>
-              <Image src="/assets/profile/moises.png" alt="Moisés Cedeño" width={460} height={575} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              <Image src="/assets/profile/moises.webp" alt="Moisés Cedeño" width={460} height={575} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
             </div>
             <div style={{ position: "absolute", left: -6, top: "12%", transform: "translateZ(80px)" }}>
               <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "10px 16px", borderRadius: 999, background: "var(--card)", boxShadow: "var(--shadow)", fontWeight: 700, fontSize: 14, animation: "bob 6s ease-in-out infinite" }}>

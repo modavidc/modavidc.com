@@ -123,7 +123,7 @@ export function Cierre() {
               background: "var(--card)",
             }}
           >
-            <Image src="/assets/profile/moises.png" alt="" width={38} height={38} style={{ borderRadius: "50%", objectFit: "cover" }} />
+            <Image src="/assets/profile/moises.webp" alt="" width={38} height={38} style={{ borderRadius: "50%", objectFit: "cover" }} />
             <div style={{ minWidth: 0, lineHeight: 1.25 }}>
               <div style={{ fontSize: 12, color: "var(--muted)" }}>{t.to}</div>
               <b style={{ fontSize: 15 }}>hola@modavidc.com</b>

@@ -1,0 +1,19 @@
+# Moisés Cedeño
+
+> Tech Lead and solutions architect focused on healthcare software, cloud cost optimization, SaaS, and AI agents in production.
+
+Moisés Cedeño is a software engineer based in Lima, Peru. He leads technical work across healthcare integrations, cloud architecture, FinOps, and applied AI. The site is available in Spanish and English.
+
+## Main pages
+
+- [Home](https://modavidc.com/): Overview of services, selected results, and ways to get in touch.
+- [About](https://modavidc.com/about): Background, working principles, education, and certifications.
+- [Experience](https://modavidc.com/experience): Professional experience and technical leadership roles.
+- [Case studies](https://modavidc.com/cases): Project context, decisions, and measured outcomes.
+- [Products](https://modavidc.com/products): Independent apps and software projects.
+
+## Contact and profiles
+
+- Email: hola@modavidc.com
+- [LinkedIn](https://www.linkedin.com/in/modavidc/)
+- [GitHub](https://github.com/modavidc)

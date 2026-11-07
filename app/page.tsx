@@ -50,7 +50,7 @@ export default function Home() {
         <div style={{ justifySelf: "center", width: "100%", maxWidth: 520 }}>
           <div data-tilt="12" style={{ position: "relative", transformStyle: "preserve-3d", aspectRatio: "1/1.08", width: "100%" }}>
             <div style={{ position: "absolute", left: "30%", top: "4%", width: "64%", height: "76%", borderRadius: 0, overflow: "hidden", background: "var(--surface)", boxShadow: "var(--shadow)" }}>
-              <Image src="/assets/profile/moises.png" alt="Moisés Cedeño" fill style={{ objectFit: "cover" }} priority />
+              <Image src="/assets/profile/moises.webp" alt="Moisés Cedeño" fill style={{ objectFit: "cover" }} priority />
             </div>
             <div style={{ position: "absolute", left: 0, top: "13%", width: "38%", transform: "translateZ(70px)" }}>
               <div style={{ animation: "bob 7s ease-in-out -1.5s infinite" }}>
@@ -198,7 +198,7 @@ export default function Home() {
         <figure style={{ margin: 0, display: "flex", flexDirection: "column", gap: 20 }}>
           <h2 style={{ margin: 0, fontSize: "clamp(28px,3.4vw,44px)", fontWeight: 800, letterSpacing: "-.04em", lineHeight: 1.05, maxWidth: "22ch" }}>{t.figTitle}</h2>
           <Image
-            src="/assets/evidence/surescripts-cert--aws-architecture.png"
+            src="/assets/evidence/surescripts-cert--aws-architecture.webp"
             alt={t.figAlt}
             width={1536}
             height={1024}
