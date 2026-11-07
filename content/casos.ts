@@ -1,11 +1,11 @@
 export const casosContent = {
   es: {
     h1a: "Resultados que", h1b: "se notan en la factura.", lead: "Problemas reales en salud y SaaS. Resultados medidos en producción, no en una presentación.",
-    agEyebrow: "Agentic AI en producción", agTitle: "Cuatro agentes corriendo en MediRec.", agLead: "Con el mismo criterio de costo que uso en infraestructura: diseño la solución de libro y después decido con números si se justifica.",
+    agTitle: "Cuatro agentes corriendo en MediRec.", agLead: "Con el mismo criterio de costo que uso en infraestructura: diseño la solución de libro y después decido con números si se justifica.",
     atlas: { name: "MediAtlas", role: "Agente de conocimiento", desc: "Responde preguntas sobre documentación, procesos y conocimiento interno con RAG sobre Amazon Bedrock. Nació como mi capstone del cohort Agentic AI on AWS (BeSA, Batch 10).", aH: "Completa", aV: "~$350/mes", aD: "Bedrock Agent + RAG administrado", bH: "Económica", bV: "~$5–20/mes", bD: "Mismos guardrails, sin vector store", pick: "Elegida", why: "Con 9 documentos, la económica alcanza. Decidido con números, no por dogma." },
     agents: [
       { name: "MediScribe", role: "Agente clínico", desc: "Ayuda al médico con notas SOAP, extracción de información clínica e imágenes, y validaciones de documentación." },
-      { name: "MediGuide", role: "Agente del paciente", desc: "Traduce, explica y guía al paciente durante su interacción con MediRec." },
+      { name: "MediGuide", role: "Agente del paciente", desc: "Acompaña al paciente durante su paso por MediRec y le explica en su idioma lo que no entiende." },
       { name: "MediGuard", role: "Vigilancia farmacológica", desc: "Supervisa la base de medicamentos y mantiene MediNLM sincronizado con la NLM." },
     ],
     end: "Esto mismo puede pasar en tu sistema.", more: "también: API de vacunas con PREIS (Gobierno de Puerto Rico) · panel de emergencias T-Cuida, 3 → 1 min",
@@ -40,11 +40,11 @@ export const casosContent = {
   },
   en: {
     h1a: "Results that", h1b: "show up on the bill.", lead: "Real problems in healthcare and SaaS. Results measured in production, not in a slide deck.",
-    agEyebrow: "Agentic AI in production", agTitle: "Four agents running at MediRec.", agLead: "Same cost discipline I use for infrastructure: design the textbook solution, then decide with numbers whether it pays off.",
+    agTitle: "Four agents running at MediRec.", agLead: "Same cost discipline I use for infrastructure: design the textbook solution, then decide with numbers whether it pays off.",
     atlas: { name: "MediAtlas", role: "Knowledge agent", desc: "Answers questions about documentation, processes and internal knowledge using RAG on Amazon Bedrock. Started as my capstone for the Agentic AI on AWS cohort (BeSA, Batch 10).", aH: "Full", aV: "~$350/mo", aD: "Bedrock Agent + managed RAG", bH: "Lean", bV: "~$5–20/mo", bD: "Same guardrails, no vector store", pick: "Chosen", why: "With 9 documents, lean is enough. Decided with numbers, not dogma." },
     agents: [
       { name: "MediScribe", role: "Clinical agent", desc: "Helps doctors with SOAP notes, clinical data and image extraction, and documentation checks." },
-      { name: "MediGuide", role: "Patient agent", desc: "Translates, explains and guides patients through their time in MediRec." },
+      { name: "MediGuide", role: "Patient agent", desc: "Walks patients through their time in MediRec and explains in their own language whatever they don't follow." },
       { name: "MediGuard", role: "Drug surveillance", desc: "Watches the drug database and keeps MediNLM in sync with the NLM." },
     ],
     end: "The same can happen in your system.", more: "also: PREIS vaccine API (Government of Puerto Rico) · T-Cuida emergency dashboard, 3 → 1 min",

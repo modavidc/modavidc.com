@@ -19,8 +19,8 @@ export default function ProductosPage() {
     <div className="container">
       <Nav active="prod" />
 
-      <header data-stagger="" style={{ padding: "clamp(48px,7vw,100px) 0 30px" }}>
-        <div style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: "'JetBrains Mono',monospace", fontSize: 13, fontWeight: 600, color: "var(--accent-ink)", background: "var(--card)", border: "1px solid var(--line)", boxShadow: "var(--shadow)", borderRadius: 999, padding: "8px 16px" }}>
+      <header style={{ padding: "clamp(48px,7vw,100px) 0 30px" }}>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: "'JetBrains Mono',monospace", fontSize: 13, fontWeight: 600, color: "var(--accent-ink)", background: "var(--card)", border: "1px solid var(--line)", borderRadius: 999, padding: "8px 16px" }}>
           ~/moises $ ls ~/apps<span style={{ width: 8, height: 15, background: "var(--accent)", animation: "blink 1s steps(1) infinite" }} />
         </div>
         <h1 style={{ margin: "26px 0 0", fontSize: "clamp(52px,8vw,124px)", fontWeight: 800, lineHeight: 0.9, letterSpacing: "-.06em", maxWidth: "13ch" }}>
@@ -93,7 +93,7 @@ export default function ProductosPage() {
 
                 <div style={{ position: "absolute", left: 12, right: 12, bottom: 12, zIndex: 4, display: "flex", justifyContent: "space-around", padding: 12, borderRadius: 30, background: "rgba(255,255,255,.55)", backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)", border: "1px solid rgba(255,255,255,.7)" }}>
                   {apps.map((a) => (
-                    <button key={a.name} type="button" data-goto={a.idx} data-appicon={a.idx} aria-label={a.name} style={{ appearance: "none", margin: 0, padding: 0, border: 0, cursor: "pointer", width: 50, height: 50, borderRadius: 15, background: a.bg, color: a.fg, fontWeight: 800, fontSize: a.fs, letterSpacing: "-.04em", display: "flex", alignItems: "center", justifyContent: "center", transition: "transform .45s cubic-bezier(.3,1.4,.5,1), box-shadow .4s" }}>
+                    <button key={a.name} type="button" data-goto={a.idx} data-appicon={a.idx} aria-label={a.name} style={{ appearance: "none", margin: 0, padding: 0, border: 0, cursor: "pointer", width: 50, height: 50, borderRadius: 15, background: a.bg, color: a.fg, fontWeight: 800, fontSize: a.fs, letterSpacing: "-.04em", display: "flex", alignItems: "center", justifyContent: "center", transition: "transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease-out" }}>
                       {a.mark}
                     </button>
                   ))}
@@ -126,11 +126,11 @@ export default function ProductosPage() {
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 6 }}>
                   {a.stores.map((s) =>
                     s.href === "#" ? (
-                      <span key={s.l} style={{ display: "inline-flex", alignItems: "center", gap: 8, borderRadius: 14, padding: "12px 18px", fontSize: 15, fontWeight: 700, background: "var(--surface)", color: "var(--muted)", border: "1.5px solid var(--line)" }}>
+                      <span key={s.l} style={{ display: "inline-flex", alignItems: "center", gap: 8, borderRadius: 999, padding: "12px 18px", fontSize: 15, fontWeight: 700, background: "var(--surface)", color: "var(--muted)", border: "1.5px solid var(--line)" }}>
                         {s.l}
                       </span>
                     ) : (
-                      <a key={s.l} href={s.href} style={{ display: "inline-flex", alignItems: "center", gap: 8, borderRadius: 14, padding: "12px 18px", fontSize: 15, fontWeight: 700, textDecoration: "none", background: s.bg, color: s.fg, border: `1.5px solid ${s.bd}` }}>
+                      <a key={s.l} href={s.href} style={{ display: "inline-flex", alignItems: "center", gap: 8, borderRadius: 999, padding: "12px 18px", fontSize: 15, fontWeight: 700, textDecoration: "none", background: s.bg, color: s.fg, border: `1.5px solid ${s.bd}` }}>
                         {s.l} <span className="ms" style={{ fontSize: 18 }}>north_east</span>
                       </a>
                     )

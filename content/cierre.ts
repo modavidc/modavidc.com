@@ -1,6 +1,6 @@
 export const cierreContent = {
   es: {
-    eyebrow: "Hablemos", a: "¿Construyes algo", b: "difícil?",
+    a: "¿Construyes algo", b: "difícil?",
     sub: "Me gusta hacer cosas difíciles, sobre todo si hay que llevarlas a producción, mantenerlas y justificar cuánto cuestan. Si es con AWS, FinOps o IA aplicada, escríbeme el problema en dos líneas.",
     to: "Para", open: "Disponible", about: "¿Sobre qué?", problem: "El problema, en dos líneas",
     ph: "Ej: nuestra factura de AWS se duplicó este año y nadie sabe por qué.", send: "Enviar correo", or: "O búscame en",
@@ -8,7 +8,7 @@ export const cierreContent = {
     topics: ["Agentes de IA", "Costos cloud", "Integraciones", "Tech Lead", "Otro"],
   },
   en: {
-    eyebrow: "Let's talk", a: "Building something", b: "hard?",
+    a: "Building something", b: "hard?",
     sub: "I like hard things, especially when they have to run in production, stay maintainable and justify their cost. If it's AWS, FinOps or applied AI, send me the problem in two lines.",
     to: "To", open: "Available", about: "What's it about?", problem: "The problem, in two lines",
     ph: "E.g. our AWS bill doubled this year and nobody knows why.", send: "Send email", or: "Or find me on",

@@ -26,8 +26,8 @@ export default function ExperienciaPage() {
     <div className="container">
       <Nav active="exp" />
 
-      <header data-stagger="" style={{ padding: "clamp(56px,8vw,110px) 0 40px" }}>
-        <div style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: "'JetBrains Mono',monospace", fontSize: 13, fontWeight: 600, color: "var(--accent-ink)", background: "var(--card)", border: "1px solid var(--line)", boxShadow: "var(--shadow)", borderRadius: 999, padding: "8px 16px" }}>
+      <header style={{ padding: "clamp(56px,8vw,110px) 0 40px" }}>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 10, fontFamily: "'JetBrains Mono',monospace", fontSize: 13, fontWeight: 600, color: "var(--accent-ink)", background: "var(--card)", border: "1px solid var(--line)", borderRadius: 999, padding: "8px 16px" }}>
           ~/moises $ git log --career<span style={{ width: 8, height: 15, background: "var(--accent)", animation: "blink 1s steps(1) infinite" }} />
         </div>
         <h1 style={{ margin: "26px 0 0", fontSize: "clamp(52px,8.4vw,128px)", fontWeight: 800, lineHeight: 0.9, letterSpacing: "-.06em", maxWidth: "12ch" }}>
@@ -36,7 +36,7 @@ export default function ExperienciaPage() {
         <p style={{ margin: "28px 0 0", fontSize: "clamp(18px,2vw,21px)", color: "var(--muted)", maxWidth: "44ch" }}>{t.lead}</p>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 34 }}>
           {t.stats.map((s) => (
-            <div key={s.l} style={{ display: "flex", alignItems: "baseline", gap: 10, padding: "14px 20px", borderRadius: 18, background: "var(--surface)" }}>
+            <div key={s.l} style={{ display: "flex", alignItems: "baseline", gap: 10, padding: "14px 20px", borderRadius: 0, background: "var(--surface)" }}>
               <b style={{ fontSize: 28, fontWeight: 800, letterSpacing: "-.04em", color: "var(--fg)" }}>{s.n}</b>
               <span style={{ fontSize: 14, color: "var(--muted)" }}>{s.l}</span>
             </div>
@@ -50,8 +50,8 @@ export default function ExperienciaPage() {
       <section data-scrolly="" style={{ position: "relative", height: "560vh" }}>
         <div style={{ position: "sticky", top: 0, height: "100vh", display: "grid", gridTemplateColumns: "170px minmax(0,1fr) minmax(0,1.08fr)", gap: "12px 40px", alignItems: "center", alignContent: "center", overflow: "hidden", paddingTop: 84 }}>
 
-          <div data-meter="" style={{ alignSelf: "center", display: "flex", flexDirection: "column", gap: 10, padding: 18, borderRadius: 28, background: "var(--card)", border: "1px solid var(--line)", boxShadow: "var(--shadow)" }}>
-            <div style={{ position: "relative", height: 54, borderRadius: 14, background: "#030604", border: "1px solid rgba(127,214,160,.18)", boxShadow: "inset 0 0 24px rgba(61,190,114,.15)", overflow: "hidden", marginBottom: 6 }}>
+          <div data-meter="" style={{ alignSelf: "center", display: "flex", flexDirection: "column", gap: 10, padding: 18, borderRadius: 0, background: "var(--card)", border: "1px solid var(--line)" }}>
+            <div style={{ position: "relative", height: 54, borderRadius: 0, background: "#030604", border: "1px solid rgba(127,214,160,.18)", boxShadow: "inset 0 0 24px rgba(61,190,114,.15)", overflow: "hidden", marginBottom: 6 }}>
               {roles.map((r) => (
                 <div key={r.idx} data-ghost={r.idx} style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", fontFamily: "'JetBrains Mono',monospace", color: "#9CFFC3", textShadow: "0 0 12px rgba(127,214,160,.8)", opacity: 0, transition: "opacity .35s, transform .45s cubic-bezier(.2,.7,.2,1)" }}>
                   <b style={{ fontSize: 20, lineHeight: 1 }}>▲ {r.num}</b>
@@ -61,7 +61,7 @@ export default function ExperienciaPage() {
             </div>
             <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10, letterSpacing: ".14em", color: "var(--muted)", textAlign: "center", marginBottom: 4 }}>{t.elevator}</div>
             {floorsDesc.map((f) => (
-              <button key={f.idx} type="button" data-goto={f.idx} data-floorbtn={f.idx} style={{ appearance: "none", margin: 0, font: "inherit", textAlign: "left", width: "100%", background: "transparent", boxSizing: "border-box", cursor: "pointer", display: "flex", alignItems: "center", gap: 12, padding: "11px 14px", borderRadius: 16, border: "1px solid var(--line)", color: "var(--fg)", transition: "background .3s, color .3s, box-shadow .3s, border-color .3s" }}>
+              <button key={f.idx} type="button" data-goto={f.idx} data-floorbtn={f.idx} style={{ appearance: "none", margin: 0, font: "inherit", textAlign: "left", width: "100%", background: "transparent", boxSizing: "border-box", cursor: "pointer", display: "flex", alignItems: "center", gap: 12, padding: "11px 14px", borderRadius: 0, border: "1px solid var(--line)", color: "var(--fg)", transition: "background .3s, color .3s, box-shadow .3s, border-color .3s" }}>
                 <span style={{ flex: "none", width: 30, height: 30, borderRadius: "50%", border: "1.5px solid currentColor", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'JetBrains Mono',monospace", fontWeight: 700, fontSize: 12 }}>{f.num}</span>
                 <span style={{ minWidth: 0, lineHeight: 1.15 }}>
                   <b style={{ display: "block", fontSize: 13 }}>{f.y}</b>
@@ -82,7 +82,7 @@ export default function ExperienciaPage() {
               <div aria-hidden="true" style={{ position: "absolute", inset: "-10%", transform: "translateZ(-39px)", background: "radial-gradient(closest-side,rgba(10,40,22,.28),transparent)", filter: "blur(12px)" }} />
               {roles.map((r) => (
                 <div key={r.idx} data-slab={r.idx} data-goto={r.idx} title={r.org} style={{ position: "absolute", inset: r.inset, transformStyle: "preserve-3d", willChange: "transform", cursor: "pointer" }}>
-                  <div style={{ position: "absolute", inset: 0, background: "var(--top,var(--card))", color: "var(--ink,var(--fg))", border: "1px solid color-mix(in srgb,var(--fg) 10%,transparent)", borderRadius: 6, boxShadow: "var(--glow,none)", padding: "14px 16px", display: "flex", flexDirection: "column", justifyContent: "space-between", transition: "background .4s, color .4s, box-shadow .4s" }}>
+                  <div style={{ position: "absolute", inset: 0, background: "var(--top,var(--card))", color: "var(--ink,var(--fg))", border: "1px solid color-mix(in srgb,var(--fg) 10%,transparent)", borderRadius: 0, boxShadow: "var(--glow,none)", padding: "14px 16px", display: "flex", flexDirection: "column", justifyContent: "space-between", transition: "background .4s, color .4s, box-shadow .4s" }}>
                     <div style={{ display: "flex", justifyContent: "space-between", gap: 8, fontFamily: "'JetBrains Mono',monospace", fontSize: 11, fontWeight: 600, opacity: 0.8 }}>
                       <span>{r.layerN}</span>
                       {r.present && (
@@ -103,7 +103,7 @@ export default function ExperienciaPage() {
                     <div style={{ height: "100%", background: "repeating-linear-gradient(180deg,var(--win,transparent) 0 10px,transparent 10px 18px)", transition: "background .4s" }} />
                   </div>
                   {r.present && (
-                    <div aria-hidden="true" style={{ position: "absolute", left: "calc(50% - 1.5px)", bottom: "50%", width: 3, height: 110, borderRadius: 2, background: "linear-gradient(var(--fg),var(--accent))", transformOrigin: "bottom center", transform: "rotateX(-90deg)" }}>
+                    <div aria-hidden="true" style={{ position: "absolute", left: "calc(50% - 1.5px)", bottom: "50%", width: 3, height: 110, borderRadius: 0, background: "linear-gradient(var(--fg),var(--accent))", transformOrigin: "bottom center", transform: "rotateX(-90deg)" }}>
                       <div style={{ position: "absolute", left: "50%", top: -10, width: 20, height: 20, marginLeft: -10, borderRadius: "50%", background: "var(--accent)", animation: "beacon 1.6s ease-out infinite" }} />
                     </div>
                   )}
@@ -120,7 +120,7 @@ export default function ExperienciaPage() {
                   <h2 style={{ margin: 0, fontSize: "clamp(30px,3.4vw,46px)", fontWeight: 800, letterSpacing: "-.045em", lineHeight: 1, color: "var(--fg)" }}>{r.role}</h2>
                   <div style={{ fontSize: 15, color: "var(--muted)", marginTop: 8 }}>{r.org} · {r.years} · {r.place}</div>
                 </div>
-                <div style={{ marginTop: 6, borderRadius: 20, background: "#050B07", border: "1px solid rgba(127,214,160,.18)", boxShadow: "0 40px 80px -30px rgba(10,30,18,.55), inset 0 1px 0 rgba(255,255,255,.05)", overflow: "hidden", fontFamily: "'JetBrains Mono',monospace", fontSize: 13, lineHeight: 1.55 }}>
+                <div style={{ marginTop: 6, borderRadius: 0, background: "#050B07", border: "1px solid rgba(127,214,160,.18)", boxShadow: "inset 0 1px 0 rgba(255,255,255,.05)", overflow: "hidden", fontFamily: "'JetBrains Mono',monospace", fontSize: 13, lineHeight: 1.55 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 7, padding: "11px 16px", borderBottom: "1px solid rgba(255,255,255,.06)", background: "rgba(255,255,255,.03)" }}>
                     <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#FF5F57" }} />
                     <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#FEBC2E" }} />

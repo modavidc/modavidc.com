@@ -20,7 +20,7 @@ export function DiagramaCasoLabs() {
 
   return (
     <div style={{ padding: "32px 24px", display: "flex", justifyContent: "center" }}>
-      <figure style={{ margin: 0, width: "100%", maxWidth: 1040, background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 32, padding: "clamp(20px,3vw,36px)", display: "flex", flexDirection: "column", gap: 18 }}>
+      <figure style={{ margin: 0, width: "100%", maxWidth: 1040, background: "var(--surface)", border: "1px solid var(--line)", borderRadius: 0, padding: "clamp(20px,3vw,36px)", display: "flex", flexDirection: "column", gap: 18 }}>
         <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "10px 18px", fontFamily: "'JetBrains Mono',monospace", fontSize: 13, fontWeight: 600, color: "var(--muted)" }}>
           <span style={{ color: "var(--accent-ink)" }}>caso_03</span><span>{t.where}</span>
           <button

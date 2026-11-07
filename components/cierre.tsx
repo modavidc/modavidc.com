@@ -20,10 +20,9 @@ export function Cierre() {
         style={{
           marginTop: 110,
           padding: "clamp(28px,5vw,64px)",
-          borderRadius: "clamp(28px,4vw,48px)",
+          borderRadius: 0,
           background: "var(--card)",
           border: "1px solid var(--line)",
-          boxShadow: "var(--shadow)",
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,400px),1fr))",
           gap: "clamp(36px,5vw,64px)",
@@ -48,10 +47,7 @@ export function Cierre() {
 
         <div style={{ position: "relative", display: "flex", flexDirection: "column", gap: 28 }}>
           <div>
-            <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--accent-ink)" }}>
-              {t.eyebrow}
-            </div>
-            <h2 style={{ margin: "14px 0 0", fontSize: "clamp(40px,5.4vw,72px)", fontWeight: 800, letterSpacing: "-.055em", lineHeight: 0.95 }}>
+            <h2 style={{ margin: 0, fontSize: "clamp(40px,5.4vw,72px)", fontWeight: 800, letterSpacing: "-.055em", lineHeight: 0.95 }}>
               {t.a} <span style={{ color: "var(--accent)" }}>{t.b}</span>
             </h2>
           </div>
@@ -70,7 +66,7 @@ export function Cierre() {
                     alignItems: "center",
                     gap: 10,
                     padding: "14px 16px",
-                    borderRadius: 16,
+                    borderRadius: 0,
                     background: "var(--bg)",
                     border: "1px solid var(--line)",
                     fontSize: 15,
@@ -94,7 +90,7 @@ export function Cierre() {
                       justifyContent: "center",
                       fontSize: 15,
                       opacity: 0,
-                      transition: "opacity .35s, transform .45s cubic-bezier(.3,1.6,.5,1)",
+                      transition: "opacity .35s, transform .4s cubic-bezier(.2,.7,.2,1)",
                     }}
                   >
                     <span className="ms" style={{ fontSize: 15 }}>check</span>
@@ -111,10 +107,9 @@ export function Cierre() {
           data-tilt="4"
           style={{
             position: "relative",
-            borderRadius: 28,
+            borderRadius: 0,
             background: "var(--bg)",
             border: "1px solid var(--line)",
-            boxShadow: "0 1px 0 rgba(255,255,255,.7) inset, 0 40px 80px -30px rgba(10,40,22,.45)",
             overflow: "hidden",
           }}
         >
@@ -197,7 +192,7 @@ export function Cierre() {
                 style={{
                   width: "100%",
                   resize: "none",
-                  borderRadius: 16,
+                  borderRadius: 0,
                   border: "1.5px solid var(--line)",
                   background: "var(--card)",
                   color: "var(--fg)",
@@ -216,7 +211,7 @@ export function Cierre() {
                 alignItems: "center",
                 justifyContent: "center",
                 gap: 10,
-                borderRadius: 18,
+                borderRadius: 999,
                 background: "var(--accent)",
                 color: "#fff",
                 padding: "17px 24px",

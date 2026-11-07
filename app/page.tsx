@@ -29,17 +29,17 @@ export default function Home() {
         }}
       >
         <div>
-          <div data-reveal="" style={{ fontSize: 14, fontWeight: 700, lineHeight: 1.45, letterSpacing: ".01em", color: "var(--accent-ink)", maxWidth: "46ch" }}>
+          <div style={{ fontSize: 14, fontWeight: 700, lineHeight: 1.45, letterSpacing: ".01em", color: "var(--accent-ink)", maxWidth: "46ch" }}>
             {t.eyebrow}
           </div>
           <h1 data-stagger="" data-delay="120" style={{ margin: "20px 0 0", fontSize: "clamp(52px,7.6vw,116px)", fontWeight: 800, lineHeight: 0.92, letterSpacing: "-.055em" }}>
             <span style={{ display: "block" }}>{t.h1a}</span>
             <span style={{ display: "block", color: "var(--accent)" }}>{t.h1b}</span>
           </h1>
-          <p data-reveal="" data-delay="380" style={{ margin: "30px 0 0", fontSize: "clamp(18px,2vw,21px)", color: "var(--muted)", maxWidth: "36ch" }}>
+          <p style={{ margin: "30px 0 0", fontSize: "clamp(18px,2vw,21px)", color: "var(--muted)", maxWidth: "36ch" }}>
             {t.lead}
           </p>
-          <div data-reveal="" data-delay="500" style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 22, marginTop: 36 }}>
+          <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 22, marginTop: 36 }}>
             <a data-magnetic="" href="mailto:hola@modavidc.com" style={{ display: "inline-flex", alignItems: "center", gap: 8, borderRadius: 999, background: "var(--accent)", color: "#fff", padding: "16px 26px", fontSize: 16, fontWeight: 700, textDecoration: "none", boxShadow: "0 14px 30px rgba(30,125,71,.32)" }}>
               {t.heroCta} <span className="ms">arrow_forward</span>
             </a>
@@ -47,19 +47,19 @@ export default function Home() {
           </div>
         </div>
 
-        <div data-reveal="" data-delay="200" data-y="60" style={{ justifySelf: "center", width: "100%", maxWidth: 520 }}>
+        <div style={{ justifySelf: "center", width: "100%", maxWidth: 520 }}>
           <div data-tilt="12" style={{ position: "relative", transformStyle: "preserve-3d", aspectRatio: "1/1.08", width: "100%" }}>
-            <div style={{ position: "absolute", left: "30%", top: "4%", width: "64%", height: "76%", borderRadius: 30, overflow: "hidden", background: "var(--surface)", boxShadow: "var(--shadow)" }}>
+            <div style={{ position: "absolute", left: "30%", top: "4%", width: "64%", height: "76%", borderRadius: 0, overflow: "hidden", background: "var(--surface)", boxShadow: "var(--shadow)" }}>
               <Image src="/assets/profile/moises.png" alt="Moisés Cedeño" fill style={{ objectFit: "cover" }} priority />
             </div>
             <div style={{ position: "absolute", left: 0, top: "13%", width: "38%", transform: "translateZ(70px)" }}>
               <div style={{ animation: "bob 7s ease-in-out -1.5s infinite" }}>
-                <div style={{ padding: 12, borderRadius: 22, background: "var(--card)", boxShadow: "var(--shadow)", display: "grid", gap: 10 }}>
-                  <div style={{ aspectRatio: "4/3", borderRadius: 14, background: "var(--soft)", display: "grid", placeItems: "center" }}>
+                <div style={{ padding: 12, borderRadius: 0, background: "var(--card)", boxShadow: "var(--shadow)", display: "grid", gap: 10 }}>
+                  <div style={{ aspectRatio: "4/3", borderRadius: 0, background: "var(--soft)", display: "grid", placeItems: "center" }}>
                     <span className="ms" style={{ fontSize: "clamp(40px,6vw,64px)", color: "var(--accent)" }}>smart_toy</span>
                   </div>
                   <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, fontWeight: 700 }}>
-                    <span style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--accent)", animation: "pulse 1.6s ease-in-out infinite", flex: "none" }} />
+                    <span style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--accent)", flex: "none" }} />
                     {t.floatC}
                   </div>
                 </div>
@@ -67,15 +67,15 @@ export default function Home() {
             </div>
             <div style={{ position: "absolute", left: "8%", top: "58%", width: "50%", transform: "translateZ(120px)" }}>
               <div style={{ animation: "bob 7s ease-in-out -4s infinite" }}>
-                <div style={{ padding: 12, borderRadius: 22, background: "var(--card)", boxShadow: "var(--shadow)", display: "grid", gap: 10 }}>
+                <div style={{ padding: 12, borderRadius: 0, background: "var(--card)", boxShadow: "var(--shadow)", display: "grid", gap: 10 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12, fontWeight: 700, color: "var(--muted)" }}>
                     <span className="ms" style={{ fontSize: 18, color: "var(--accent)" }}>check_circle</span>{t.floatE}
                   </div>
                   <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 8 }}>
-                    <div style={{ aspectRatio: "1/1", borderRadius: 12, background: "var(--bg)", display: "grid", placeItems: "center", padding: 6 }}>
+                    <div style={{ aspectRatio: "1/1", borderRadius: 0, background: "var(--bg)", display: "grid", placeItems: "center", padding: 6 }}>
                       <Image src="/assets/badges/badge-clf.png" alt="AWS Certified Cloud Practitioner" width={48} height={48} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
                     </div>
-                    <div style={{ aspectRatio: "1/1", borderRadius: 12, background: "var(--bg)", display: "grid", placeItems: "center", padding: 6 }}>
+                    <div style={{ aspectRatio: "1/1", borderRadius: 0, background: "var(--bg)", display: "grid", placeItems: "center", padding: 6 }}>
                       <Image src="/assets/badges/badge-aif.png" alt="AWS Certified AI Practitioner" width={48} height={48} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
                     </div>
                   </div>
@@ -116,7 +116,7 @@ export default function Home() {
       </header>
 
       <section style={{ padding: "clamp(90px,14vw,180px) 0", borderTop: "1px solid var(--line)" }}>
-        <div data-reveal="" style={{ fontSize: 13, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--accent-ink)", marginBottom: 28 }}>
+        <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--accent-ink)", marginBottom: 28 }}>
           {t.stEyebrow}
         </div>
         <p style={{ margin: 0, fontSize: "clamp(30px,4.4vw,60px)", fontWeight: 700, letterSpacing: "-.035em", lineHeight: 1.12, maxWidth: "24ch" }}>
@@ -143,7 +143,7 @@ export default function Home() {
               <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--accent-ink)" }}>{t.resEyebrow}</div>
               <div style={{ display: "flex", gap: 6 }}>
                 {t.cases.map((c) => (
-                  <span key={c.where} data-dot="" style={{ height: 8, width: 8, borderRadius: 4, background: "var(--line)", transition: "width .4s, background .4s" }} />
+                  <span key={c.where} data-dot="" style={{ height: 8, width: 8, borderRadius: 999, background: "var(--line)", transition: "width .4s, background .4s" }} />
                 ))}
               </div>
             </div>
@@ -158,7 +158,7 @@ export default function Home() {
               ))}
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap" }}>
-              <div style={{ height: 3, width: 200, background: "var(--line)", borderRadius: 2, overflow: "hidden" }}>
+              <div style={{ height: 3, width: 200, background: "var(--line)", borderRadius: 0, overflow: "hidden" }}>
                 <div data-progress="" style={{ height: "100%", background: "var(--accent)", transformOrigin: "left", transform: "scaleX(0)" }} />
               </div>
               <Link href="/cases" style={{ display: "inline-flex", alignItems: "center", gap: 6, fontWeight: 700, textDecoration: "none" }}>
@@ -168,25 +168,22 @@ export default function Home() {
           </div>
           <div style={{ position: "relative", height: "min(62vh,540px)", perspective: 1500, transformStyle: "preserve-3d" }}>
             {t.cases.map((c, i) => (
-              <article key={c.where} data-card={i} style={{ position: "absolute", left: "50%", top: "50%", translate: "-50% -50%", width: "min(380px,82vw)", padding: 30, borderRadius: 30, background: "var(--card)", border: "1px solid var(--line)", boxShadow: "var(--shadow)", display: "flex", flexDirection: "column", gap: 22, willChange: "transform" }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 13, fontWeight: 700, color: "var(--muted)" }}>
-                  <span>{c.where}</span>
-                  <span style={{ color: "var(--accent-ink)" }}>0{i + 1}</span>
-                </div>
+              <article key={c.where} data-card={i} style={{ position: "absolute", left: "50%", top: "50%", translate: "-50% -50%", width: "min(380px,82vw)", padding: 30, borderRadius: 0, background: "var(--card)", border: "1px solid var(--line)", display: "flex", flexDirection: "column", gap: 22, willChange: "transform" }}>
+                <div style={{ fontSize: 13, fontWeight: 700, color: "var(--muted)" }}>{c.where}</div>
                 <div style={{ fontSize: 26, fontWeight: 800, letterSpacing: "-.03em", lineHeight: 1.1 }}>{c.title}</div>
                 <div style={{ display: "grid", gap: 14 }}>
                   <div>
                     <div style={{ display: "flex", justifyContent: "space-between", fontSize: 13, color: "var(--muted)", marginBottom: 6 }}>
                       <span>{t.before}</span><b style={{ color: "var(--fg)" }}>{c.beforeV}</b>
                     </div>
-                    <div style={{ height: 12, borderRadius: 6, background: "color-mix(in srgb,var(--fg) 14%,transparent)" }} />
+                    <div style={{ height: 12, borderRadius: 0, background: "color-mix(in srgb,var(--fg) 14%,transparent)" }} />
                   </div>
                   <div>
                     <div style={{ display: "flex", justifyContent: "space-between", fontSize: 13, color: "var(--muted)", marginBottom: 6 }}>
                       <span>{t.after}</span><b style={{ color: "var(--accent-ink)" }}>{c.afterV}</b>
                     </div>
-                    <div style={{ height: 12, borderRadius: 6, background: "var(--surface)" }}>
-                      <div style={{ height: "100%", width: c.afterW, minWidth: 12, borderRadius: 6, background: "var(--accent)" }} />
+                    <div style={{ height: 12, borderRadius: 0, background: "var(--surface)" }}>
+                      <div style={{ height: "100%", width: c.afterW, minWidth: 12, borderRadius: 0, background: "var(--accent)" }} />
                     </div>
                   </div>
                 </div>
@@ -197,28 +194,40 @@ export default function Home() {
         </div>
       </section>
 
+      <section style={{ padding: "clamp(70px,10vw,120px) 0", borderTop: "1px solid var(--line)" }}>
+        <figure style={{ margin: 0, display: "flex", flexDirection: "column", gap: 20 }}>
+          <h2 style={{ margin: 0, fontSize: "clamp(28px,3.4vw,44px)", fontWeight: 800, letterSpacing: "-.04em", lineHeight: 1.05, maxWidth: "22ch" }}>{t.figTitle}</h2>
+          <Image
+            src="/assets/evidence/surescripts-cert--aws-architecture.png"
+            alt={t.figAlt}
+            width={1536}
+            height={1024}
+            sizes="(max-width: 1160px) 100vw, 1112px"
+            style={{ width: "100%", height: "auto", display: "block", border: "1px solid var(--line)", background: "#fff" }}
+          />
+          <figcaption style={{ margin: 0, color: "var(--muted)", fontSize: 16, maxWidth: "70ch" }}>{t.figCap}</figcaption>
+        </figure>
+      </section>
+
       <section style={{ padding: "110px 0", borderTop: "1px solid var(--line)" }}>
-        <div data-reveal="" style={{ fontSize: 13, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--accent-ink)" }}>{t.servEyebrow}</div>
-        <h2 data-reveal="" data-delay="80" style={{ margin: "14px 0 0", fontSize: "clamp(36px,5vw,64px)", fontWeight: 800, letterSpacing: "-.045em", lineHeight: 1, maxWidth: "16ch" }}>{t.servTitle}</h2>
-        <div data-stagger="" data-delay="150" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,250px),1fr))", gap: 18, marginTop: 48 }}>
-          {t.services.map((s, i) => (
-            <article key={s.title} data-tilt="9" data-glow="" style={{ background: "var(--surface)", borderRadius: 30, padding: 30, display: "flex", flexDirection: "column", gap: 12, minHeight: 300 }}>
-              <div style={{ width: 52, height: 52, borderRadius: 16, background: "var(--soft)", color: "var(--accent-ink)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 28 }}>
+        <h2 style={{ margin: 0, fontSize: "clamp(36px,5vw,64px)", fontWeight: 800, letterSpacing: "-.045em", lineHeight: 1, maxWidth: "16ch" }}>{t.servTitle}</h2>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,250px),1fr))", gap: 18, marginTop: 48 }}>
+          {t.services.map((s) => (
+            <article key={s.title} data-tilt="9" data-glow="" style={{ background: "var(--surface)", borderRadius: 0, padding: 30, display: "flex", flexDirection: "column", gap: 12, minHeight: 300 }}>
+              <div style={{ width: 52, height: 52, borderRadius: 0, background: "var(--soft)", color: "var(--accent-ink)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 28 }}>
                 <span className="ms">{s.icon}</span>
               </div>
-              <div style={{ marginTop: "auto", fontSize: 13, fontWeight: 700, color: "var(--muted)" }}>0{i + 1}</div>
-              <h3 style={{ margin: 0, fontSize: 25, fontWeight: 800, letterSpacing: "-.03em", lineHeight: 1.12 }}>{s.title}</h3>
+              <h3 style={{ margin: "6px 0 0", fontSize: 25, fontWeight: 800, letterSpacing: "-.03em", lineHeight: 1.12 }}>{s.title}</h3>
               <p style={{ margin: 0, color: "var(--muted)", fontSize: 16 }}>{s.desc}</p>
             </article>
           ))}
         </div>
       </section>
 
-      <section data-reveal="" data-y="60" style={{ position: "relative", overflow: "hidden", background: "var(--band)", color: "var(--band-fg)", borderRadius: "clamp(26px,4vw,44px)", padding: "clamp(40px,7vw,90px)", display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-end", gap: 30 }}>
+      <section style={{ position: "relative", overflow: "hidden", background: "var(--band)", color: "var(--band-fg)", borderRadius: 0, padding: "clamp(40px,7vw,90px)", display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-end", gap: 30 }}>
         <div aria-hidden="true" data-parallax="0.18" style={{ position: "absolute", right: "-2%", top: "-10%", fontSize: "clamp(220px,34vw,460px)", fontWeight: 800, letterSpacing: "-.08em", lineHeight: 1, color: "var(--band-tile)", pointerEvents: "none" }}>S/</div>
         <div style={{ position: "relative" }}>
-          <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--band-accent)" }}>{t.sencEyebrow}</div>
-          <h2 style={{ margin: "14px 0 0", fontSize: "clamp(40px,5.6vw,72px)", fontWeight: 800, letterSpacing: "-.05em", lineHeight: 0.98, color: "#fff" }}>
+          <h2 style={{ margin: 0, fontSize: "clamp(40px,5.6vw,72px)", fontWeight: 800, letterSpacing: "-.05em", lineHeight: 0.98, color: "#fff" }}>
             Solito.<br /><span style={{ color: "var(--band-accent)" }}>{t.sencTag}</span>
           </h2>
           <p style={{ margin: "20px 0 0", color: "var(--band-muted)", maxWidth: "40ch" }}>{t.sencDesc}</p>
